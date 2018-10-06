@@ -1,0 +1,17 @@
+.container{
+    min-height: 100vh;
+}
+
+.line{
+    direction: ltr;
+    line-height:100%
+}
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  

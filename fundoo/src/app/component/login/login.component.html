@@ -1,0 +1,75 @@
+
+<!-- <a routerLink='/login'></a>
+<div fxLayout="coloumn">
+  <div fxFlex=20% fxLayoutGap=10%>
+</div>
+<div fxLayout="row">
+  <div fxFlex=25% fxLayoutGap=10%></div>
+</div>
+<div>
+    <mat-card>
+    <div>LOGIN PAGE</div>
+    <form Name="LOGIN FORM">
+      <div>
+        <p>
+          <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input id="username" matInput formControlName="username" placeholder="Enter your Email">
+        </mat-form-field>
+        </p>
+        <P>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input id="password" matInput formControlName="password" placeholder="Enter your password">
+        </mat-form-field>
+      </P>
+        <button mat-button type="submit">LOGIN</button>
+      </div>
+    </form>
+  </mat-card>
+  </div>
+</div> -->
+<a routerLink='/login'></a>
+<div class="container"
+fxLayout="column"
+fxLayout.xs="column"
+fxLayoutAlign="center"
+fxLayoutGap="0px"
+fxLayoutGap.xs="0">
+<div fxFlex="0 1 90px"></div>
+<div fxLayout.xs="column" fxFlex>
+
+ <div fxFlex="35%"></div>
+ <div fxFlex>
+    <mat-card>
+        <form Name="LOGIN FORM">
+        <h3 align="center">GOOGLE</h3>
+        <div align="center">Sign in</div><br>
+        <div align="center">Continue to Gmail</div>
+        <div>
+            <p>
+              <mat-form-field>
+              <mat-label>Username</mat-label>
+              <input  class="line" id="username" matInput formControlName="username" placeholder="Enter your Email">
+            </mat-form-field>
+            </p>
+            <P>
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input id="password" matInput formControlName="password" placeholder="Enter your password">
+            </mat-form-field>
+          </P>
+          <a href="">Forgot Password?</a><br><br>
+          <a href="">Create Account</a><br><br>
+          <div class="button">
+             <a mat-flat-button routerLink=".">Next</a>
+            </div><br>
+
+          </div>
+        </form>
+      </mat-card>
+ </div>
+ <div fxFlex="35%" fxFlexOrder="3"></div>
+</div>
+<div fxFlex="0 1 90px" fxFlexOrder="3"></div>
+</div>

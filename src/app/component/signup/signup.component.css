@@ -1,0 +1,30 @@
+.box{
+    min-height: 100vh;
+}
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 90%;
+    margin-right: 20%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .button-row button,
+  .button-row a {
+    margin-right: 100px;
+  }
+  .next{
+      margin-right:50px;
+  }
+  .card{
+    width:40%;
+  } 
+  .select{
+    background-color: lightcoral;
+  }
+  .notselect{
+    background-color:lavender;
+  }

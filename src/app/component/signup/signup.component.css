@@ -24,7 +24,13 @@
   } 
   .select{
     background-color: lightcoral;
+    text-align: center;
+    margin-left:7%;
+    margin-right:5%;
   }
   .notselect{
-    background-color:lavender;
+    background-color:lightgoldenrodyellow;
+    text-align:center;
+    margin-left:5%;
+    margin-right:7% 
   }

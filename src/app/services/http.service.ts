@@ -10,4 +10,10 @@ export class SignupService {
   getdata(value){
     return this.http.get(this.URL+'/'+value);
   }
+  httpPost(value,body){
+    return this.http.post(this.URL+'/'+value,body);
+}
+dataStore(user){
+  return this.http.get(this.URL+'/'+user);
+}
 }

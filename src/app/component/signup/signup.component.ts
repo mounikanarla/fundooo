@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SignupService } from '../../services/http.service'
+import { SignupService } from '../../services/http.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-signup',
@@ -11,14 +13,25 @@ import { SignupService } from '../../services/http.service'
 export class SignupComponent implements OnInit {
   hide = true;
   public card = [];
-  registerForm: FormGroup;
-    submitted = false;
+  
+  model: any = {
+    "firstName": "",
+    "lastName": "",
+    "phoneNumber": "7536982410",
+    "service": "",
+    "createdDate": "2018-10-09T06:35:12.617Z",
+    "modifiedDate": "2018-10-09T06:35:12.617Z",
+    "username": "",
+    "email": "",
+    "emailVerified": true,
+    "password": ""
 
-  // show=true;
-  constructor(private signservice: SignupService) { }
+  }
+  show = true;
+  constructor(private signservice: SignupService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    
+
     let obs = this.signservice.getdata("user/service");
     obs.subscribe((response) => {
       var data = response["data"];
@@ -31,13 +44,15 @@ export class SignupComponent implements OnInit {
       }
       console.log(this.card);
     })
-     this.signservice.dataStore("user")
-    .subscribe((response) => {
-      console.log(response);
-    }
+    this.signservice.dataStore("user")
+      .subscribe((response) => {
+        console.log(response);
+      }
 
-  )
-}
+      )
+  }
+
+
   display(data) {
 
     this.service = data.name;
@@ -53,9 +68,35 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  public service;
-  model: any = {};
+  public service:any;
   signup() {
+    // // if(this.model.firstName.length == 0 || this.model.laststName.length == 0 || this.model.email.length == 0 || this.model.password.length == 0)
+    // //  {
+    // //    console.log("data printed");
+    // //   this.snackBar.open("Enter all the details", "data", {
+    // //     duration: 2000,
+
+    // //   });
+    // //   return;
+    //  }
+     if(this.service.length==0)
+    {
+      this.snackBar.open("Click on service card", "false", {
+        duration: 2000,
+
+      });
+      return;
+    }
+     if(this.model.password!=this.model.confirmpassword)
+    {
+      console.log(this.model.password)
+      console.log(this.model.confirmpassword)
+      this.snackBar.open("password is not matched", "correct the password", {
+        duration: 2000,
+      
+      });
+      return;
+    }
     this.signservice.httpPost("/user/userSignUp", {
       "firstName": this.model.firstName,
       "lastName": this.model.lastName,
@@ -68,16 +109,25 @@ export class SignupComponent implements OnInit {
       "emailVerified": true,
       "password": this.model.password
     }).subscribe((response) => {
-      console.log("successful")
+
+      console.log("successful");
+      this.snackBar.open("Signup successful", "Ok", {
+        duration: 2000,
+      });
+
       console.log(response);
-      },
+    },
       (error) => {
-        console.log("error happened");
-        console.log(error);
-      }
-    )
-     console.log(this.model);
-     console.log(this.service);
-    
+        this.snackBar.open("Enter the details", "Error", {
+          duration: 2000,
+
+        });
+      })
+
+    console.log(this.model);
+    console.log(this.service);
+
+
+  }
 }
-}
+

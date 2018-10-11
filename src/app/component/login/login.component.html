@@ -1,33 +1,36 @@
 <div class="container" fxLayout="column" fxLayoutGap="5%">
   <div fxFlex="20%"></div>
-  <div fxLayout="row" >
-      <div fxFlex="33%"></div>
-      <div fxFlex.lg="34%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%">
-        <mat-card>
-          <h3 fxLayoutAlign="center">BRIDGE LABZ</h3>
-          <div fxLayoutAlign="center">Sign in</div><br>
-          <div fxLayoutAlign="center">Continue to Gmail</div><br>
-          <div>
-            <form class="example-form">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Enter your Email">
-              </mat-form-field><br>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  <div fxLayout="row">
+    <div fxFlex="33%"></div>
+    <div fxFlex.lg="34%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%">
+      <mat-card>
+        <h3 fxLayoutAlign="center">BRIDGE LABZ</h3>
+        <div fxLayoutAlign="center">Sign in</div><br>
+        <div fxLayoutAlign="center">Continue to Gmail</div><br>
+        <div>
+          <!-- Form login start -->
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Enter your Email" [formControl]="email" required>
+              <mat-error *ngIf="email.invalid">{{ ngOnInit()}}</mat-error>
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 
-              </mat-form-field>
-            </form>
-            <br>
-            <a href="">Forgot Password?</a><br><br>
-            <a href="/signup">Create Account</a><br><br>
-            <div class="button">
-              <a mat-flat-button routerLink=".">Next</a>
-            </div><br>
-          </div>
-        </mat-card>
-      </div>
-      <div fxFlex="33%" fxFlexOrder="3"></div>
+            </mat-form-field>
+          </form>
+          <!-- Form ends-->
+          <br>
+          <a href="">Forgot Password?</a><br><br>
+          <a href="/signup">Create Account</a><br><br>
+          <div class="button">
+            <a mat-flat-button (click)=login()>Next</a>
+          </div><br>
+        </div>
+      </mat-card>
     </div>
-    <div fxFlex="20%" fxFlexOrder="3"></div>
+    <div fxFlex="33%" fxFlexOrder="3"></div>
   </div>
+  <div fxFlex="20%" fxFlexOrder="3"></div>
+</div>

@@ -27,6 +27,7 @@ export class SignupComponent implements OnInit {
     "password": ""
 
   }
+  public service:any
   show = true;
   constructor(private signservice: SignupService, public snackBar: MatSnackBar) { }
 
@@ -67,18 +68,8 @@ export class SignupComponent implements OnInit {
 
     }
   }
-
-  public service:any;
   signup() {
-    // // if(this.model.firstName.length == 0 || this.model.laststName.length == 0 || this.model.email.length == 0 || this.model.password.length == 0)
-    // //  {
-    // //    console.log("data printed");
-    // //   this.snackBar.open("Enter all the details", "data", {
-    // //     duration: 2000,
-
-    // //   });
-    // //   return;
-    //  }
+    
      if(this.service.length==0)
     {
       this.snackBar.open("Click on service card", "false", {

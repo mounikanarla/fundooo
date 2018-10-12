@@ -1,0 +1,39 @@
+<div class="container" fxLayout="column" fxLayoutGap="5%">
+    <div fxFlex="20%"></div>
+    <div fxLayout="row">
+      <div fxFlex="33%"></div>
+      <div fxFlex.lg="34%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%">
+        <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+        <mat-card>
+          <h3 fxLayoutAlign="center"></h3>
+          <div fxLayoutAlign="center">FORGOT PASSWORD</div><br>
+          <div fxLayoutAlign="center">Continue to Gmail</div><br>
+          <div>
+            <!-- Form login start -->
+            <mat-form-field>
+                <input name=password #password="ngModel" [(ngModel)]="model.password" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+                    matInput placeholder="Password" [type]="hide ? 'password' : 'text'" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,12}$"
+                    required>
+                <mat-error *ngIf="f.submitted && password.invalid">
+                    <mat-error *ngIf="password.errors.required">
+                        Password is required
+                    </mat-error>
+                    <mat-error *ngIf="password.errors.pattern">
+                    </mat-error>
+                </mat-error>
+
+            </mat-form-field>
+            <!-- Form ends-->
+            <br>
+            <div class="button">
+              <a routerLink="/login" >Login Page</a>
+              <a class="reset" mat-flat-button (click)= reset()>NEXT</a>
+           </div><br>
+          </div>
+        </mat-card>
+        </form>
+      </div>
+      <div fxFlex="33%" fxFlexOrder="3"></div>
+    </div>
+    <div fxFlex="20%" fxFlexOrder="3"></div>
+  </div>

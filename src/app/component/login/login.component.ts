@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
               '';
   }
 login(){
-let obs=this.loginservice.httpPost("/user/login", {
+let obs=this.loginservice.httpPost("user/login", {
   "email": this.model.email,
   "password": this.model.password,
 

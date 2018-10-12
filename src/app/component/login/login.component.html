@@ -3,6 +3,7 @@
   <div fxLayout="row">
     <div fxFlex="33%"></div>
     <div fxFlex.lg="34%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%">
+      <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
       <mat-card>
         <h3 fxLayoutAlign="center">BRIDGE LABZ</h3>
         <div fxLayoutAlign="center">Sign in</div><br>
@@ -11,24 +12,38 @@
           <!-- Form login start -->
           <form class="example-form">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter your Email" [formControl]="email" required>
-              <mat-error *ngIf="email.invalid">{{ ngOnInit()}}</mat-error>
+                <input name=email #email="ngModel" matInput placeholder="Email Id" [(ngModel)]="model.email" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$" required>              
+                <mat-error *ngIf="f.submitted && email.invalid">
+                    <mat-error *ngIf="email.errors.required">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="email.errors.pattern">
+                        Email is not valid
+                    </mat-error>
+                </mat-error>
             </mat-form-field><br>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+              <input name="password" #password="ngModel" [(ngModel)]="model.password" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required>
+              <mat-error *ngIf="f.submitted && password.invalid">
+                  <mat-error *ngIf="password.errors.required">
+                      Password is required
+                  </mat-error>
+                  </mat-error>
               <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 
             </mat-form-field>
           </form>
           <!-- Form ends-->
           <br>
-          <a href="">Forgot Password?</a><br><br>
+          <a href="/forgotPassword">Forgot Password?</a><br><br>
           <a href="/signup">Create Account</a><br><br>
           <div class="button">
             <a mat-flat-button (click)=login()>Next</a>
           </div><br>
         </div>
       </mat-card>
+      </form>
     </div>
     <div fxFlex="33%" fxFlexOrder="3"></div>
   </div>

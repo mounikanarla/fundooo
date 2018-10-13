@@ -17,8 +17,14 @@ import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import{NavbarComponent} from './component/navbar/navbar.component'
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { ResetComponent } from './component/reset/reset.component';
+import { TopBarComponent } from './component/top-bar/top-bar.component';
+
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatListModule } from '@angular/material';
 
 
 
@@ -29,6 +35,8 @@ import { ResetComponent } from './component/reset/reset.component';
     SignupComponent,
     ForgotPasswordComponent,
     ResetComponent,
+    TopBarComponent,
+    NavbarComponent
     
   ],
   imports: [
@@ -46,7 +54,10 @@ import { ResetComponent } from './component/reset/reset.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,
+    LayoutModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

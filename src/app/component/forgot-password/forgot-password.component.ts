@@ -15,8 +15,16 @@ model:any={
 
   ngOnInit() {
   }
+
   forgotPass()
   {
+  if(this.model.email.length==0)
+    {
+      this.snackBar.open("failed","Enter Email", {
+        duration: 2000,
+      });
+      return;
+    }
     console.log("fgjggh");
     this.forgotPassword.httpPost("user/reset",{
       "email":this.model.email

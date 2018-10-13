@@ -19,13 +19,13 @@ export class ResetComponent implements OnInit {
   public id = this.route.snapshot.params.id
   reset(){
     console.log("inn");
-    // if(this.model.password != this.model.confpassword)
-    // {
-    //   this.snackBar.open("failed","passwords are not matching", {
-    //     duration: 2000,
-    //   });
-    //   return;
-    // }
+    if(this.model.password.length==0)
+    {
+      this.snackBar.open("failed","Enter Password", {
+        duration: 2000,
+      });
+      return;
+    }
     var body={ 
       "newPassword": this.model.password
     }

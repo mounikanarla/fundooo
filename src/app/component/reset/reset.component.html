@@ -6,11 +6,11 @@
         <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
         <mat-card>
           <h3 fxLayoutAlign="center"></h3>
-          <div fxLayoutAlign="center">FORGOT PASSWORD</div><br>
+          <div fxLayoutAlign="center">RESET PASSWORD</div><br>
           <div fxLayoutAlign="center">Continue to Gmail</div><br>
           <div>
             <!-- Form login start -->
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
                 <input name=password #password="ngModel" [(ngModel)]="model.password" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
                     matInput placeholder="Password" [type]="hide ? 'password' : 'text'" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,12}$"
                     required>

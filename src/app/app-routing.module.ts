@@ -12,7 +12,9 @@ const routes: Routes = [
   {path:  'signup',component: SignupComponent},
   {path: 'forgotPassword',component: ForgotPasswordComponent},
   {path:'resetpassword/:id', component:ResetComponent},
-  {path:'topBar',component:TopBarComponent},
+  {path:'topBar',component:TopBarComponent,children:[
+    {path:'',component:NavbarComponent}
+  ]},
   {path:'navbar',component:NavbarComponent},
 
    { path: '', redirectTo:  'login', pathMatch:  'full' }

@@ -1,0 +1,13 @@
+.conatainer-fluid{
+    background-color:lightsalmon;
+    height: 60px;
+    text-align: center;
+}
+.container{
+    background-color:lightgray;
+    height:50px;
+}
+#btn{
+    text-align: end;
+    margin-top: 10px;
+}

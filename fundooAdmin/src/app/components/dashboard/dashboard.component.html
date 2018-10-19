@@ -1,12 +1,15 @@
+<!-- top-bar starts -->
 <div class="conatainer-fluid">
     <div class="row">
         <div class="col"></div>
         <div class="col">
-            <h3> FUNDOO ADMIN </h3>
+            <h3 style="margin-top:15px;"> FUNDOO ADMIN </h3>
         </div>
-        <div class="col" id="btn"><button id="button">Logout</button></div>
+        <div class="col" id="btn"><button id="btn">Logout</button></div>
     </div>
 </div>
+<!-- top-bar ends -->
+<!-- Array of cards starts -->
 <div class="row">
     <div class="col-xs-1 col-sm-2 col-md-2 col-lg-3"></div>
 
@@ -15,19 +18,45 @@
     </div>
     <div class="col-xs-1 col-sm-2 col-md-2 col-lg-3"></div>
 </div>
-    <div class="container-fluid" style="overflow-x:auto; background-color:bg-info">
-        <div class="col-xs-12">
-            <table class="table table-striped" id=example style='background-color:bg-info'>
-                <thead>
-                    <tr>
-                        <th scope="col">SNO</th>
-                        <th scope="col">FirstName</th>
-                        <th scope="col">LastName</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Service</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
+<!-- Array of cards ends -->
+<!-- Datatable Starts -->
+<div class="container-fluid" style="overflow-x:auto; background-color:bg-info">
+    <div class="col-xs-12">
+        <table class="table table-striped" id=example style='text-align: center;'>
+            <thead style='background-color:lightseagreen;text-align: center;'>
+                <tr>
+                    <th scope="col">SNO</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">UserPopUp</th>
+                </tr>
+            </thead>
+        </table>
     </div>
+</div>
+<!-- DataTable ends -->
+<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+         <!-- Modal content-->
+          <div class="modal-content" >
+            <div class="modal-header" style='background-color:rgb(118, 233, 233)'>
+              <label class="modal-title" id="FullName"></label>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style='background-color:lightgray'>
+              <label id="FirstName"></label><br>
+              <label id="lastName"></label><br>
+              <label id="email"></label><br>
+              <label id="service"></label><br>
+              <label id="createdDate"></label>
+            </div>
+            <div class="modal-footer" style='background-color:rgb(118, 233, 233)'>
+              <button type="button" class="btn btn-default" style='background-color:lightgoldenrodyellow' data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     

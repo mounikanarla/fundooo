@@ -6,11 +6,13 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     AdminLoginComponent,
     DashboardComponent
+
   ],
   imports: [
     BrowserModule,

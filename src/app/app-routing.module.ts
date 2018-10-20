@@ -12,8 +12,8 @@ const routes: Routes = [
   {path:  'signup',component: SignupComponent},
   {path: 'forgotPassword',component: ForgotPasswordComponent},
   {path:'resetpassword/:id', component:ResetComponent},
-  {path:'topBar',component:TopBarComponent,children:[
-    {path:'',component:NavbarComponent}
+  {path:'navbar',component:NavbarComponent,children:[
+    {path:'',component:TopBarComponent}
   ]},
   {path:'navbar',component:NavbarComponent},
 

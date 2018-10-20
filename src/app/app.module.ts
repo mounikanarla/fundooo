@@ -25,6 +25,8 @@ import { TopBarComponent } from './component/top-bar/top-bar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 
@@ -57,7 +59,8 @@ import { MatListModule } from '@angular/material';
     MatSnackBarModule,
     MatSidenavModule,
     LayoutModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

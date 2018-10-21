@@ -26,6 +26,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
+import { NavbaroneComponent } from './component/navbarone/navbarone.component';
 
 
 
@@ -38,7 +39,8 @@ import {MatMenuModule} from '@angular/material/menu';
     ForgotPasswordComponent,
     ResetComponent,
     TopBarComponent,
-    NavbarComponent
+    NavbarComponent,
+    NavbaroneComponent
     
   ],
   imports: [

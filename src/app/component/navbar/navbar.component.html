@@ -1,6 +1,8 @@
+
 <div fxFlex>
   <div fxLayout="coloumn wrap">
-      
+      <mat-sidenav-container>
+
     <mat-toolbar color="primary" fxLayout="row" position="fixed">
 
       <div ngStyle.xs="padding-right: 8px" ngStyle.sm="padding-right: 10px" ngStyle.md="padding-right: 12px" ngStyle.xs="padding-right: 15px">
@@ -18,7 +20,8 @@
       <div fxHide.xs="true" fxHide.sm="true">
           <span><i  class="material-icons" style="color:black;  position:absolute; margin-top:8px; margin-left:70px;">search</i> </span>
           <input class=searchbar type=text matInput placeholder="search" style="padding-left:20%;">
-    <!-- </div>
+    </div>
+          <!-- </div>
       <div class="icon1">
         <div style="display: inline"><span class="refresh"><i class="material-icons">refresh</i></span></div>
         <div  style="display: inline" fxHide.xs="true"><span class="view"><i class="material-icons">view_stream</i></span></div>
@@ -48,12 +51,10 @@
           
         </span></div>
 
-      </div>
 
 
     </mat-toolbar>
    
-    <mat-sidenav-container class="sidenav-container">
 
       
       <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -86,7 +87,7 @@
         </mat-nav-list>
         <hr>
       </mat-sidenav>
-        <mat-sidenav-content class="root">
+        <mat-sidenav-content class="root" position="fixed">
         <router-outlet></router-outlet>
       </mat-sidenav-content>
 

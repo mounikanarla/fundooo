@@ -1,0 +1,84 @@
+<div fxFlex>
+  <div fxLayout="column">
+           <mat-toolbar color="primary" position="fixed">
+              <div fxLayout="row" fxFlex="20%">
+              <!-- <div fxLayout="row" fxFlex="100%"> -->
+              <div fxFlex.lg="40%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%">
+              <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+                <mat-icon style="color:black" aria-label="Side nav toggle icon">menu</mat-icon>
+              </button>
+              </div>
+              <div fxHide.xs="true" fxHide.sm="true">
+                  <span style="color:black;font-family:Bookman, URW Bookman L, serif; margin-left:10px;">Fundoo</span>
+              </div>
+              <div fxFlex.lg="60%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%">
+                  <span style="color:black;font-family:Bookman, URW Bookman L, serif; margin-left:10px;">Keep</span>
+                </div>
+               <!-- </div> -->
+               </div>
+           <div fxLayout="row" fxFlex="60%">
+          
+            <span><i  class="material-icons" style="color:black;  position:absolute; margin-top:8px">search</i> </span>
+          <input class=searchbar type=text matInput placeholder="search"  style="padding-left:30px;" fxHide.xs="true" fxHide.sm="true">
+          </div>
+          <div fxLayout="row" fxFlex="20%">
+          <div fxLayout="row" fxFlex="100%">
+              <div fxFlex.lg="33%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%">
+                <span style="color:black;"><mat-icon>refresh</mat-icon></span>
+              </div>
+              <div fxFlex.lg="55%" fxFlex.md="70%" fxHide.xs="true" fxHide.sm="true">
+              <span style="color:black;"><mat-icon>view_stream</mat-icon></span>
+              </div>
+              <div fxFlex.lg="12%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%">
+                  <div style="color:black"><span><button mat-icon-button [matMenuTriggerFor]="account_circle">
+                      <mat-icon>account_circle</mat-icon>
+                    </button>
+                    <mat-menu #account_circle="matMenu" class>
+
+                    <mat-card>
+                      <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>gjgghkhj</mat-card-title>
+                        <mat-card-subtitle>eergerui</mat-card-subtitle>
+                      </mat-card-header>
+                    </mat-card>
+                    </mat-menu>
+                  </span></div>             
+                 </div>
+          </div>
+          </div> 
+          </mat-toolbar>
+          <mat-sidenav-container class="sidenav-container">
+          <mat-sidenav
+          #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+          <mat-nav-list>
+              <a mat-list-item href="#"><img src="../../../assets/notes.svg"><span class="notes">Notes</span></a>
+              <a mat-list-item href="#"><img src="../../../assets/remainder.svg"><span class="remainder">Reminders</span></a>
+          </mat-nav-list>
+            <hr>
+    
+            <div class="label">
+              <a mat-list-item>Labels<button class="edit">Edit</button></a></div>
+            <mat-nav-list>
+              <a mat-list-item href="#"><img src="../../../assets/label.svg"><span class="remainder">Create New Label</span></a>
+            </mat-nav-list>
+            <hr>
+            <mat-nav-list>
+              <a mat-list-item href="#"><img src="../../../assets/archive.svg"><span class="notes">Archive</span></a>
+              <a mat-list-item href="#"><img src="../../../assets/trash.svg"><span class="remainder">Trash</span></a>
+            </mat-nav-list>
+            <hr>
+            <mat-nav-list>
+              <a mat-list-item href="#"><img src="../../../assets/settings.svg"><span class="notes">Settings</span></a>
+              <a mat-list-item href="#"><img src="../../../assets/feedback.svg"><span class="remainder">Send Feedback</span></a>
+              <a mat-list-item href="#"><img src="../../../assets/help.svg"><span class="notes">Help</span></a>
+              <a mat-list-item href="#"><img src="../../../assets/download.svg"><span class="remainder">App Downloads</span></a>
+              <a mat-list-item href="#"><img src="../../../assets/keyboard.svg"><span class="remainder">Keyboard Shortcuts</span></a>
+            </mat-nav-list>
+             </mat-sidenav>
+            <mat-sidenav-content style="position:fixed">
+               <app-top-bar></app-top-bar>
+            </mat-sidenav-content>
+ </mat-sidenav-container>
+</div>
+</div>

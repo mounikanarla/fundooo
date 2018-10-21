@@ -6,17 +6,17 @@ import { ForgotPasswordComponent } from './component/forgot-password/forgot-pass
 import { ResetComponent } from './component/reset/reset.component';
 import{ TopBarComponent } from './component/top-bar/top-bar.component';
 import{ NavbarComponent } from './component/navbar/navbar.component';
-
+import { NavbaroneComponent } from './component/navbarone/navbarone.component';
 const routes: Routes = [
   {path:  'login',component:  LoginComponent},
   {path:  'signup',component: SignupComponent},
   {path: 'forgotPassword',component: ForgotPasswordComponent},
   {path:'resetpassword/:id', component:ResetComponent},
-  {path:'navbar',component:NavbarComponent,children:[
-    {path:'',component:TopBarComponent}
-  ]},
   {path:'navbar',component:NavbarComponent},
-
+  {path:'navbarone',component:NavbaroneComponent},
+{path:'navbarone',component:NavbaroneComponent,children:[
+  {path:'',component:TopBarComponent,outlet:'nameiii'}
+]},
    { path: '', redirectTo:  'login', pathMatch:  'full' }
   ]
 @NgModule({

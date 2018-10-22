@@ -14,7 +14,11 @@ export class NavbaroneComponent {
     .pipe(
       map(result => result.matches)
     );
-    
+    profileclick: boolean = false;
+
   constructor(private breakpointObserver: BreakpointObserver) {}
+  profile(){
+    this.profileclick= !this.profileclick; 
+}
   
   }

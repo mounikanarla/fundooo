@@ -27,6 +27,16 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 import { NavbaroneComponent } from './component/navbarone/navbarone.component';
+import { NotesComponent } from './component/notes/notes.component';
+import { ReminderComponent } from './component/reminder/reminder.component';
+import { CollaboratorComponent } from './component/collaborator/collaborator.component';
+import { ChangecolorComponent } from './component/changecolor/changecolor.component';
+import { ImageComponent } from './component/image/image.component';
+import { ArchieveComponent } from './component/archieve/archieve.component';
+import { MoreComponent } from './component/more/more.component';
+import { UndoComponent } from './component/undo/undo.component';
+import { RedoComponent } from './component/redo/redo.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 
 
@@ -40,7 +50,17 @@ import { NavbaroneComponent } from './component/navbarone/navbarone.component';
     ResetComponent,
     TopBarComponent,
     NavbarComponent,
-    NavbaroneComponent
+    NavbaroneComponent,
+    NotesComponent,
+    ReminderComponent,
+    CollaboratorComponent,
+    ChangecolorComponent,
+    ImageComponent,
+    ArchieveComponent,
+    MoreComponent,
+    UndoComponent,
+    RedoComponent,
+    ProfileComponent,
     
   ],
   imports: [

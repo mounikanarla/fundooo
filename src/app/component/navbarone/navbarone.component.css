@@ -56,3 +56,15 @@ input:focus{
   font-size:15px;
 }
 
+.example-card {
+  max-width: 300px;
+  margin-left:78%;
+  /* margin-bottom:60%; */
+  /* position:relative; */
+z-index: 10;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}

@@ -7,6 +7,10 @@ import { ResetComponent } from './component/reset/reset.component';
 import{ TopBarComponent } from './component/top-bar/top-bar.component';
 import{ NavbarComponent } from './component/navbar/navbar.component';
 import { NavbaroneComponent } from './component/navbarone/navbarone.component';
+import { NotesComponent } from './component/notes/notes.component';
+import { ProfileComponent } from './component/profile/profile.component';
+
+
 const routes: Routes = [
   {path:  'login',component:  LoginComponent},
   {path:  'signup',component: SignupComponent},
@@ -15,7 +19,9 @@ const routes: Routes = [
   {path:'navbar',component:NavbarComponent},
   {path:'navbarone',component:NavbaroneComponent},
 {path:'navbarone',component:NavbaroneComponent,children:[
-  {path:'',component:TopBarComponent,outlet:'nameiii'}
+  {path:'',component:TopBarComponent},
+  {path:'notes',component:NotesComponent},
+  {path:'profile',component:ProfileComponent}
 ]},
    { path: '', redirectTo:  'login', pathMatch:  'full' }
   ]

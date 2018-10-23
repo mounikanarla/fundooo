@@ -58,13 +58,37 @@ input:focus{
 
 .example-card {
   max-width: 300px;
-  margin-left:78%;
+  /* margin-left:78%; */
   /* margin-bottom:60%; */
-  /* position:relative; */
-z-index: 10;
+  position:absolute;
+  z-index: 10;
+  top:65px;
+  right:2px;
 }
 
 .example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
   background-size: cover;
+  background-color:navy;
+}
+.letter{
+  color:aliceblue;
+  margin-left:10.5px;
+  font-size:30px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-top:10%;
+  
+}
+.account{
+  width:40px;
+  height:30px;
+  margin-right:20px;
+}
+.word{
+  margin-bottom:30%;
+}
+.mat-fab .mat-button-wrapper {
+  padding: 16px 0;
+  display: inline-block;
+  line-height: 0px;
 }

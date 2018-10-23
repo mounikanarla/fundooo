@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { SignupService } from '../../services/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +15,20 @@ export class LoginComponent implements OnInit {
     email:'',
     password:''
   }
-  constructor(private loginservice: SignupService,public snackBar : MatSnackBar) { }
+  constructor(private loginservice: SignupService,public snackBar : MatSnackBar,public router:Router) { }
   email = new FormControl('', [Validators.required, Validators.email]);
   ngOnInit() {
       return this.email.hasError('required') ? 'You must enter a value' :
           this.email.hasError('email') ? 'Not a valid email' :
               '';
   }
+  // logout(){
+  //   console.log('click');
+  // }
 login(){
+  // if (localStorage.getItem('id')) {
+  //   this.router.navigate(['home']);
+  // }
 let obs=this.loginservice.httpPost("user/login", {
   "email": this.model.email,
   "password": this.model.password,
@@ -29,6 +36,12 @@ let obs=this.loginservice.httpPost("user/login", {
 });
 obs.subscribe((response) => {
    console.log("login successfull")
+   localStorage.setItem('id',response["id"]);
+   localStorage.setItem('firstName',response["firstName"]);
+   localStorage.setItem('lastName',response["lastName"]);
+   localStorage.setItem('email',response["email"]);
+
+   this.router.navigate(['home']);
    this.snackBar.open("login succesfull", "ok", {
     duration: 2000,
   });

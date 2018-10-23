@@ -1,11 +1,17 @@
 .card{
-    width:700px;
+    width:500px;
+    /* height:50px; */
     margin-top:5%;
+    /* height:fit-content; */
+    /* position: relative; */
+    /* left: 300px; */
 
 }
 .notecard{
-    width:40%;
+    width:500px;
     margin-top:5%;
+    /* right: 300px; */
+    /* position: absolute; */
 
 }
 .textbar{

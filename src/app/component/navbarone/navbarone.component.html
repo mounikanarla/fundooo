@@ -30,7 +30,8 @@
               <span style="color:black;"><mat-icon>view_stream</mat-icon></span>
               </div>
               <div fxFlex.lg="12%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%">
-                <span style="color:black; position:fixed;"><mat-icon   (click)="profile()">account_circle</mat-icon></span>
+                <span class="word" style="color:black; position:fixed;  line-height: 0px;
+                "><button mat-fab color="primary" class="account" (click)="profile()">{{firstName[0] | uppercase }}</button></span>
               </div>
           </div>
           </div> 
@@ -64,29 +65,27 @@
               <a mat-list-item href="#"><img src="../../../assets/keyboard.svg"><span class="remainder">Keyboard Shortcuts</span></a>
             </mat-nav-list>
              </mat-sidenav>
-            <mat-sidenav-content style="position:fixed;width:100%;width: fill-available">
-               
-      
-              <router-outlet></router-outlet>
-              </mat-sidenav-content>
+            <mat-sidenav-content style="width:80%;position:fixed">
+            <router-outlet></router-outlet>
+            </mat-sidenav-content>
 
  </mat-sidenav-container>
 </div>
 
 <mat-card class="example-card"  *ngIf=profileclick  style="position:fixed;">
     <mat-card-header >
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Narla Mounika</mat-card-title>
-      <mat-card-subtitle>nmounika358@gmail.com</mat-card-subtitle>
-    </mat-card-header>
+      <div mat-card-avatar  class="example-header-image"><span class="letter">{{firstName[0] | uppercase }}</span></div>
+      <mat-card-title>{{firstName}}&nbsp;{{lastName}}</mat-card-title><br>
+      <mat-card-subtitle>{{email}}</mat-card-subtitle>
+    </mat-card-header><br>
     <mat-card-content>
         <h3  style="color:navy;" fxLayoutAlign="center">FUNDOO ACCOUNT</h3>
       </mat-card-content>
-    <div>   
+    <div>   <br>
       <mat-card-footer>
        <!-- <mat-card-actions> -->
         <button mat-button>SignIn</button>
-        <span style="margin-left:20%;"><button mat-button>Logout</button></span>
+        <span style="margin-left:10%;"><button mat-button (click)= logout()>Logout</button></span>
     <!-- </mat-card-actions> -->
   </mat-card-footer>
   </div>

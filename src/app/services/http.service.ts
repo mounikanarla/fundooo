@@ -36,4 +36,25 @@ export class SignupService {
       }
       return formBody.join('&')
   }
+  logoutPost(value,token){
+    var body:any={}
+    const logoutOptions={
+    headers:new HttpHeaders({
+      'Content-Type':'application/x-www-form-urlencoded',
+      'Authorization':token
+    })
+  };
+    return this.http.post(this.URL+'/'+value,body,logoutOptions)
+  }
+  getnote(value,token){
+    // return this.http.get(this.URL + '/' +value,token);
+    const dataOptions={
+      headers:new HttpHeaders({
+        'Content-Type':'application/x-www-form-urlencoded',
+        'Authorization':token
+      })
+    };
+    return this.http.get(this.URL + '/' +value,dataOptions);
+
+}
 }

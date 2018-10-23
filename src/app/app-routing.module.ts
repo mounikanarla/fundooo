@@ -9,6 +9,7 @@ import{ NavbarComponent } from './component/navbar/navbar.component';
 import { NavbaroneComponent } from './component/navbarone/navbarone.component';
 import { NotesComponent } from './component/notes/notes.component';
 import { ProfileComponent } from './component/profile/profile.component';
+import { HomeComponent } from './component/home/home.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'resetpassword/:id', component:ResetComponent},
   {path:'navbar',component:NavbarComponent},
   {path:'navbarone',component:NavbaroneComponent},
+  {path:'home',component:HomeComponent},
 {path:'navbarone',component:NavbaroneComponent,children:[
   {path:'',component:TopBarComponent},
   {path:'notes',component:NotesComponent},

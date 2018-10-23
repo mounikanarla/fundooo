@@ -37,6 +37,7 @@ import { MoreComponent } from './component/more/more.component';
 import { UndoComponent } from './component/undo/undo.component';
 import { RedoComponent } from './component/redo/redo.component';
 import { ProfileComponent } from './component/profile/profile.component';
+import { HomeComponent } from './component/home/home.component';
 
 
 
@@ -61,6 +62,7 @@ import { ProfileComponent } from './component/profile/profile.component';
     UndoComponent,
     RedoComponent,
     ProfileComponent,
+    HomeComponent,
     
   ],
   imports: [

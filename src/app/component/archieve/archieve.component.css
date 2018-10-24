@@ -1,0 +1,6 @@
+.archive{
+    opacity: 0.5;
+}
+.archive:hover{
+    opacity:1;
+}

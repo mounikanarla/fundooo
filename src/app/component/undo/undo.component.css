@@ -1,3 +1,6 @@
 .undo{
     opacity:0.5;
 }
+.undo:hover{
+    opacity:1;
+}

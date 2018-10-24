@@ -1,0 +1,6 @@
+.more{
+    opacity:0.5;
+}
+.more:hover{
+    opacity:1;
+}

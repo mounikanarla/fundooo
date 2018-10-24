@@ -23,15 +23,16 @@
           </div>
           <div fxLayout="row" fxFlex="20%">
           <div fxLayout="row" fxFlex="100%">
-              <div fxFlex.lg="33%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%">
+              <div fxFlex.lg="30%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%">
                 <span style="color:black;"><mat-icon>refresh</mat-icon></span>
               </div>
-              <div fxFlex.lg="55%" fxFlex.md="70%" fxHide.xs="true" fxHide.sm="true">
-              <span style="color:black;"><mat-icon>view_stream</mat-icon></span>
+              <div fxFlex.lg="50%" fxFlex.md="70%" fxHide.xs="true" fxHide.sm="true">
+              <span style="color:black;margin-top:40px;"><mat-icon>view_stream</mat-icon></span>
               </div>
-              <div fxFlex.lg="12%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%">
-                <span class="word" style="color:black; position:fixed;  line-height: 0px;
-                "><button mat-fab color="primary" class="account" (click)="profile()">{{firstName[0] | uppercase }}</button></span>
+              <div fxFlex.lg="20%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%">
+                <!-- <span class="word" style=" position:fixed;  line-height: 0px;"> -->
+                  <button mat-fab color="primary" class="account" (click)="profile()" style="margin-bottom:20%">{{firstName[0] | uppercase }}</button>
+                <!-- </span> -->
               </div>
           </div>
           </div> 
@@ -65,7 +66,7 @@
               <a mat-list-item href="#"><img src="../../../assets/keyboard.svg"><span class="remainder">Keyboard Shortcuts</span></a>
             </mat-nav-list>
              </mat-sidenav>
-            <mat-sidenav-content style="width:80%;position:fixed">
+            <mat-sidenav-content style="width:-webkit-fill-available;position:fixed">
             <router-outlet></router-outlet>
             </mat-sidenav-content>
 
@@ -85,7 +86,7 @@
       <mat-card-footer>
        <!-- <mat-card-actions> -->
         <button mat-button>SignIn</button>
-        <span style="margin-left:10%;"><button mat-button (click)= logout()>Logout</button></span>
+        <span  style="margin-left:10%;"><button mat-button (click)= logout()>Logout</button></span>
     <!-- </mat-card-actions> -->
   </mat-card-footer>
   </div>

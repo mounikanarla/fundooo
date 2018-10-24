@@ -1,3 +1,6 @@
 .redo{
     opacity:0.5;
 }
+.redo:hover{
+    opacity:1;
+}

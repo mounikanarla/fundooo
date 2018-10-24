@@ -10,6 +10,8 @@ import { NavbaroneComponent } from './component/navbarone/navbarone.component';
 import { NotesComponent } from './component/notes/notes.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
+import { AuthGuard } from './component/_guard/auth.guard';
+import { ParentComponent } from './component/parent/parent.component';
 
 
 const routes: Routes = [
@@ -19,12 +21,16 @@ const routes: Routes = [
   {path:'resetpassword/:id', component:ResetComponent},
   {path:'navbar',component:NavbarComponent},
   {path:'navbarone',component:NavbaroneComponent},
-  {path:'home',component:HomeComponent},
-{path:'navbarone',component:NavbaroneComponent,children:[
-  {path:'',component:TopBarComponent},
-  {path:'notes',component:NotesComponent},
-  {path:'profile',component:ProfileComponent}
-]},
+  {path:'home',component:HomeComponent,canActivate:[AuthGuard],children:[
+    {path:'',redirectTo:'notes',pathMatch:'full'},
+    {path:'notes',component:ParentComponent},
+    {path:'profile',component:ProfileComponent}
+  ]},
+// {path:'navbarone',component:NavbaroneComponent,children:[
+//   {path:'',component:TopBarComponent},
+//   {path:'notes',component:NotesComponent},
+//   {path:'profile',component:ProfileComponent}
+// ]},
    { path: '', redirectTo:  'login', pathMatch:  'full' }
   ]
 @NgModule({

@@ -1,0 +1,39 @@
+<!--  <div fxFlex fxLayout="row wrap" fxLayoutWrap fxLayout.xs="column" fxLayout.sm="column"  fxLayoutGap="30px" > -->
+  
+  <div fxLayout="row wrap" >
+    <!-- <div fxLayout="column" fxFlex=100%> -->
+      <div fxFlex="12%"></div>
+      <div fxFlex="76%" fxLayout="row wrap" fxLayoutGap="10px">
+       <mat-card class="example-card" *ngFor='let index of newData' style="word-wrap: break-word">
+    <mat-card-header>
+      <mat-card-title placeholder="Title">
+            {{index.title }}
+      </mat-card-title>
+      <!-- <mat-card-subtitle></mat-card-subtitle> -->
+    </mat-card-header>
+    
+    <mat-card-content > 
+        {{index.description}}
+    </mat-card-content>
+     
+   
+   <mat-card-actions>
+      
+      <span class=invisible>
+        <app-reminder></app-reminder>
+        <app-collaborator></app-collaborator>
+        <app-changecolor></app-changecolor>
+        <app-image></app-image>
+        <app-archieve></app-archieve>
+        <app-more></app-more>
+        <app-undo></app-undo>
+        <app-redo></app-redo>        
+    </span>
+  
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div fxFlex="12%"></div>
+<!-- </div> -->
+</div>
+ 

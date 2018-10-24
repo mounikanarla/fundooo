@@ -38,6 +38,8 @@ import { UndoComponent } from './component/undo/undo.component';
 import { RedoComponent } from './component/redo/redo.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
+import { AddnoteComponent } from './component/addnote/addnote.component';
+import { ParentComponent } from './component/parent/parent.component';
 
 
 
@@ -63,6 +65,8 @@ import { HomeComponent } from './component/home/home.component';
     RedoComponent,
     ProfileComponent,
     HomeComponent,
+    AddnoteComponent,
+    ParentComponent,
     
   ],
   imports: [

@@ -1,3 +1,6 @@
 .remain{
     opacity:0.5;
 }
+.remain:hover{
+    opacity:1;
+}

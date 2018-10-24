@@ -1,22 +1,23 @@
 <!-- <p>
   notes works!
 </p> -->
-
+<div fxLayout="column" fxFlex=100%>
+<div  fxFlex=20% >
 <div fxLayoutAlign="center center" fxFlex=100%>
 
  <div fxLayout="row">
      <mat-card class="card" *ngIf="press"  (click)=toggleChild() >
-    <div fxFlex=70%>
+    <div fxFlex="70%">
         Take a note...
     </div>
-    <div fxFlex=30%>
-        <div fxLayout="row" fxFlex=40%>
+    <div fxFlex="30%">
+        <div fxLayout="row" fxFlex="40%">
         <mat-icon style="opacity: 0.5;">list</mat-icon>
         </div>
-        <div  fxFlex=40%>
+        <div  fxFlex="40%">
         <mat-icon style="opacity: 0.5;">insert_photo</mat-icon>
         </div>
-        <div fxFlex=25%>
+        <div fxFlex="25%">
         <mat-icon>edit</mat-icon>
         </div>
     </div>
@@ -24,7 +25,6 @@
     </mat-card>
 </div>
 <div *ngIf=!press>
-    
     <div fxLayout="row">
         <mat-card class="notecard">
             <div fxLayout="row">       
@@ -53,11 +53,18 @@
                     </div>
              <div fxFlex=15% class="button">  
                  <div>
-                <button mat-button (click)=notes() >CLOSE</button>
+                <button mat-button (click)="notes()">CLOSE</button>
             </div>
             </div>
         </div>
         </mat-card>
+
     </div>
+
 </div> 
+</div>
+</div>
+<div>
+<app-addnote></app-addnote>
+</div>
 </div>

@@ -1,17 +1,17 @@
 .example-card{
     margin-top:10px;
     display: flex;
-  flex-direction: column;
-  margin-left:30px;
+    flex-direction: column;
+    margin-left:30px;
     padding-right:30px;
-   position:relative;
-
-
+    height:auto;
+    height:min-content;
+    border-radius: 10px;
+   
 }
 mat-card-content{
     width:150px;
    position:relative;
-   /* height: auto;  */
 }
 .invisible{
     opacity:0

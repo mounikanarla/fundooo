@@ -25,9 +25,14 @@
     </mat-card>
 </div>
 <div *ngIf=!press>
-    <div fxLayout="row">
+    <div fxLayout="row" fxFlex=100%>
         <mat-card class="notecard">
-            <div fxLayout="row">       
+        <div fxLayout="column" fxFlex=100%>
+
+            <div  fxFlex=20%>
+        <mat-card-header>
+
+            <div fxLayout="row" fxFlex=100%>       
                 <div fxFlex=95%>
                     <div data-text="Title" id="title" contenteditable="true" class="title">
                      <!-- <mat-card-header>Title</mat-card-header> -->
@@ -37,11 +42,19 @@
                     <a mat-list-item href="#" ><img src="../../../assets/pin.svg"></a>
                 </div>
             
-            </div><br>
+            </div>
+        </mat-card-header>
+    </div>
+    <div fxFlex=65%>
+        <mat-card-content>
             <div data-text="Type your text" id="description" contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note" class="textbar" tabindex="0" spellcheck="true"></div>
-        
+        </mat-card-content>
+    </div>
+    <div fxFlex=15%>
+        <mat-card-actions>
+
             <div fxLayout="row"  class="icons">
-                    <div fxFlex=85% fxLayoutGap="20px">
+                    <div fxFlex=80% fxLayoutGap="20px">
                     <app-reminder></app-reminder>
                     <app-collaborator></app-collaborator>
                     <app-changecolor></app-changecolor>
@@ -51,16 +64,18 @@
                     <app-undo></app-undo>
                     <app-redo></app-redo>
                     </div>
-             <div fxFlex=15% class="button">  
+             <div fxFlex=20% class="button">  
                  <div>
                 <button mat-button (click)="notes()">CLOSE</button>
             </div>
             </div>
         </div>
+    </mat-card-actions>
+</div>
+</div>
         </mat-card>
 
     </div>
-
 </div> 
 </div>
 </div>

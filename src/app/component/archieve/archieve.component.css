@@ -1,6 +1,13 @@
 .archive{
     opacity: 0.5;
+    cursor: pointer;
+
 }
 .archive:hover{
     opacity:1;
+    cursor: pointer;
+
 }
+/* .tooltip{
+    padding-left:20px;
+} */

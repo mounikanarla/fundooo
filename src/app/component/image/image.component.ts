@@ -11,5 +11,7 @@ export class ImageComponent implements OnInit {
 
   ngOnInit() {
   }
-
+deletePost(){
+  
+}
 }

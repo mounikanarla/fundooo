@@ -57,4 +57,28 @@ export class SignupService {
     return this.http.get(this.URL + '/' +value,dataOptions);
 
 }
+delPost(value,data,access_token){
+  const options={
+  headers:new HttpHeaders({
+    'Content-Type':'application/json',
+    'Authorization':access_token
+  })
+};
+  return this.http.post(this.URL+'/'+value,data,options)
 }
+colorPost(value,data,access_token){
+  const colorOption={
+    headers:new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization':access_token
+    })
+  };
+    return this.http.post(this.URL+'/'+value,data,colorOption)
+
+}
+
+
+}
+
+
+

@@ -1,85 +1,73 @@
-<!-- <p>
-  notes works!
-</p> -->
 <div fxLayout="column" fxFlex=100%>
-<div  fxFlex=20% >
-<div fxLayoutAlign="center center" fxFlex=100%>
-
- <div fxLayout="row">
-     <mat-card class="card" *ngIf="press"  (click)=toggleChild() >
-    <div fxFlex="70%">
-        Take a note...
-    </div>
-    <div fxFlex="30%">
-        <div fxLayout="row" fxFlex="40%">
-        <mat-icon style="opacity: 0.5;">list</mat-icon>
-        </div>
-        <div  fxFlex="40%">
-        <mat-icon style="opacity: 0.5;">insert_photo</mat-icon>
-        </div>
-        <div fxFlex="25%">
-        <mat-icon>edit</mat-icon>
-        </div>
-    </div>
-
-    </mat-card>
-</div>
-<div *ngIf=!press>
-    <div fxLayout="row" fxFlex=100%>
-        <mat-card class="notecard">
-        <div fxLayout="column" fxFlex=100%>
-
-            <div  fxFlex=20%>
-        <mat-card-header>
-
-            <div fxLayout="row" fxFlex=100%>       
-                <div fxFlex=95%>
-                    <div data-text="Title" id="title" contenteditable="true" class="title">
-                     <!-- <mat-card-header>Title</mat-card-header> -->
+    <div  fxFlex=20% >
+        <div fxLayoutAlign="center center" fxFlex=100%>
+            <div fxLayout="row">
+                <mat-card class="card" *ngIf="press"  (click)=toggleChild() >
+                    <div fxFlex="70%">
+                        Take a note...
                     </div>
-                </div>
-                <div fxFlex=5% style="opacity: 0.5;">
-                    <a mat-list-item href="#" ><img src="../../../assets/pin.svg"></a>
-                </div>
-            
-            </div>
-        </mat-card-header>
-    </div>
-    <div fxFlex=65%>
-        <mat-card-content>
-            <div data-text="Type your text" id="description" contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note" class="textbar" tabindex="0" spellcheck="true"></div>
-        </mat-card-content>
-    </div>
-    <div fxFlex=15%>
-        <mat-card-actions>
-
-            <div fxLayout="row"  class="icons">
-                    <div fxFlex=80% fxLayoutGap="20px">
-                    <app-reminder></app-reminder>
-                    <app-collaborator></app-collaborator>
-                    <app-changecolor></app-changecolor>
-                    <app-image></app-image>
-                    <app-archieve></app-archieve>
-                    <app-more></app-more>
-                    <app-undo></app-undo>
-                    <app-redo></app-redo>
+                    <div fxFlex="30%">
+                        <div fxLayout="row" fxFlex="40%">
+                            <mat-icon style="opacity: 0.5;">list</mat-icon>
+                        </div>
+                        <div  fxFlex="40%">
+                            <mat-icon style="opacity: 0.5;">insert_photo</mat-icon>
+                        </div>
+                        <div fxFlex="20%">
+                            <mat-icon>edit</mat-icon>
+                        </div>
                     </div>
-             <div fxFlex=20% class="button">  
-                 <div>
-                <button mat-button (click)="notes()">CLOSE</button>
+                </mat-card>
             </div>
-            </div>
+            <div *ngIf=!press>
+                <div fxLayout="row" fxFlex=100%>
+                    <mat-card class="notecard">
+                        <div fxLayout="column" fxFlex=100%>
+                            <div  fxFlex=20%>
+                                <mat-card-header>
+                                    <div fxLayout="row" fxFlex=100%>       
+                                        <div fxFlex=95%>
+                                            <div data-text="Title" id="title" contenteditable="true" class="title"></div> 
+                                        </div>
+                                        <div fxFlex=5% style="opacity: 0.5;">
+                                            <a mat-list-item href="#" ><img src="../../../assets/pin.svg"></a>
+                                        </div>
+                                    </div>
+                                </mat-card-header>
+                            </div>
+                            <div fxFlex=65%>
+                                <mat-card-content>
+                                    <div data-text="Type your text" id="description" contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note" class="textbar" tabindex="0" spellcheck="true"></div>
+                                </mat-card-content>
+                            </div>
+                            <div fxFlex=15%>
+                                <mat-card-actions>
+                                    <div fxLayout="row"  class="icons">
+                                        <div fxFlex=80% fxLayoutGap="20px">
+                                            <app-reminder></app-reminder>
+                                            <app-collaborator></app-collaborator>
+                                            <app-changecolor></app-changecolor>
+                                            <app-image></app-image>
+                                            <app-archieve></app-archieve>
+                                            <app-more></app-more>
+                                            <app-undo></app-undo>
+                                            <app-redo></app-redo>
+                                        </div>
+                                        <div fxFlex=20% class="button">
+                                            <div>
+                                                <button mat-button (click)="notes()">CLOSE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-card-actions>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div> 
         </div>
-    </mat-card-actions>
-</div>
-</div>
-        </mat-card>
-
     </div>
-</div> 
-</div>
-</div>
-<div>
-<app-addnote></app-addnote>
-</div>
+    <div>
+        <app-addnote></app-addnote>
+    </div>
 </div>

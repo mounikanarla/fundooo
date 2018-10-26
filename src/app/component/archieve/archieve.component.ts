@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SignupService } from '../../services/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -9,35 +9,34 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ArchieveComponent implements OnInit {
 
-  constructor(private httpService: SignupService,public snackBar : MatSnackBar) { }
+  constructor(private httpService: SignupService, public snackBar: MatSnackBar) { }
 
-  @Input()  noteid;
-  @Output() archiveEmit = new EventEmitter();  
-  token=localStorage.getItem('id');
-public body:any={}
+  @Input() noteid;
+  @Output() eventEmit = new EventEmitter();
+  token = localStorage.getItem('id');
+  public body: any = {}
   ngOnInit() {
   }
-  archive(){
+  archive() {
     console.log(this.noteid)
-    var array=[]
+    var array = []
     array.push(this.noteid)
-    this.httpService.colorPost("notes/archiveNotes", this.body ={
+    this.httpService.colorPost("notes/archiveNotes", this.body = {
       "isArchived": true,
-      "noteIdList":array
+      "noteIdList": array
 
-  },this.token).subscribe((response) =>{
-   
-  // console.log(  this.onEmit.emit() )
-    console.log("successful",response);
-    this.snackBar.open("Archived", "ok", {
-      duration: 2000,
-    });
-    this.archiveEmit.emit({}) ;
-  },
-  (error)=>{
-    console.log("error",error);
+    }, this.token).subscribe((response) => {
+      console.log("successful", response);
+      this.eventEmit.emit({});
+      console.log(this.eventEmit.emit({}))
+      this.snackBar.open("Archived", "ok", {
+        duration: 2000,
+      });
+    },
+      (error) => {
+        console.log("error", error);
 
-  })
+      })
   }
 }
 

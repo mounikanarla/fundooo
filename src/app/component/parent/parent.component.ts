@@ -9,8 +9,8 @@ import { SignupService } from '../../services/http.service';
 export class ParentComponent implements OnInit {
 
   constructor(private httpService: SignupService) { }
-public array=[]
-token=localStorage.getItem('id');
+  public array=[]
+  token=localStorage.getItem('id');
 
   ngOnInit() {
     this.getCard();
@@ -21,7 +21,7 @@ token=localStorage.getItem('id');
       this.getCard();
     }
   }
-    getCard(){
+  getCard(){
       this.httpService.getnote("notes/getNotesList",this.token).subscribe(data=>{
         this.array=[];
 
@@ -31,27 +31,23 @@ token=localStorage.getItem('id');
         for(var i=length-1;i>=0;i--)
         {
           console.log(data['data'].data.length);
-          if(data['data'].data[i].isDeleted==false){
+          if(data['data'].data[i].isDeleted==false && data['data'].data[i].isArchived==false){
         this.array.push(data['data'].data[i]);
       }
         }
         console.log("array",this.array);
     })
   }
-    delete(event){
-      if(event){
+  emit(event){
+    if(event){
       this.getCard();
-      }
     }
-    colour(event){
-      if(event){
-        this.getCard();
-        }
-    }
-    archive(event){
-      console.log(event)
-      if(event){
-        this.getCard();
-      }
-    }
+  }
+  // colour(event){
+  //   if(event){
+  //     this.getCard();
+  //   }
+  // }
+  
+    
 }

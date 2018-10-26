@@ -12,8 +12,8 @@ export class ChangecolorComponent implements OnInit {
   token=localStorage.getItem('id');
 
   @Input()  colorid;
-public body:any={}
-  @Output() onEmit = new EventEmitter();  
+  public body:any={}
+  @Output() eventEmit = new EventEmitter();  
   ngOnInit() {
   }
   changeColor(color){
@@ -23,16 +23,13 @@ public body:any={}
     this.httpService.colorPost("notes/changesColorNotes", this.body ={
       "color":color,
       "noteIdList":array
-
-  },this.token).subscribe((response) =>{
-   
-  // console.log(  this.onEmit.emit() )
+    },this.token).subscribe((response) =>{
+    // console.log(  this.onEmit.emit() )
     console.log("successful",response);
-    this.onEmit.emit({}) ;
+    this.eventEmit.emit({});
   },
-  (error)=>{
+    (error)=>{
     console.log("error",error);
-
-  })
+    })
   }
 }

@@ -17,11 +17,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import{NavbarComponent} from './component/navbar/navbar.component'
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { ResetComponent } from './component/reset/reset.component';
-import { TopBarComponent } from './component/top-bar/top-bar.component';
-
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material';
@@ -40,6 +37,10 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
 import { AddnoteComponent } from './component/addnote/addnote.component';
 import { ParentComponent } from './component/parent/parent.component';
+import { MainArchiveComponent } from './component/main-archive/main-archive.component';
+import { TrashComponent } from './component/trash/trash.component';
+import { UpdateComponent } from './component/update/update.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -51,8 +52,6 @@ import { ParentComponent } from './component/parent/parent.component';
     SignupComponent,
     ForgotPasswordComponent,
     ResetComponent,
-    TopBarComponent,
-    NavbarComponent,
     NavbaroneComponent,
     NotesComponent,
     ReminderComponent,
@@ -67,6 +66,9 @@ import { ParentComponent } from './component/parent/parent.component';
     HomeComponent,
     AddnoteComponent,
     ParentComponent,
+    MainArchiveComponent,
+    TrashComponent,
+    UpdateComponent,
     
   ],
   imports: [
@@ -88,9 +90,11 @@ import { ParentComponent } from './component/parent/parent.component';
     MatSidenavModule,
     LayoutModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[AddnoteComponent,UpdateComponent]
 })
 export class AppModule { }

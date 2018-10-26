@@ -4,10 +4,11 @@
     flex-direction: column;
     margin-left:30px;
     padding-right:30px;
-    height:auto;
+    /* height:auto; */
     height:min-content;
     border-radius: 10px;
-   
+    word-wrap: break-word;
+    /* width:200px; */
 }
 mat-card-content{
     width:150px;

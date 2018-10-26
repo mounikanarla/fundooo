@@ -13,23 +13,17 @@ export class NotesComponent implements OnInit {
 
   constructor(private getService: SignupService, public route: ActivatedRoute, public router: Router) { }
   private press: boolean = true;
-  // private express: boolean = true;
   @Output() onNewEntryAdded = new EventEmitter();
-  //  public newObject: string;
-
-
   public title;
   public description;
   public isPinned = false;
   private id = localStorage.getItem('id');
   public body: any = {}
-
   ngOnInit() {
   }
   toggleChild() {
     this.press = !this.press;
   }
-  
   notes() {
     this.title = document.getElementById("title").textContent;
     this.description = document.getElementById("description").textContent;

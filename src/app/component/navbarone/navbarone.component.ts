@@ -16,12 +16,14 @@ export class NavbaroneComponent {
     .pipe(
       map(result => result.matches)
     );
+  
   profileclick: boolean = false;
   private id = localStorage.getItem('id');
   public firstName = localStorage.getItem('firstName');
   public lastName = localStorage.getItem('lastName');
   public email = localStorage.getItem('email');
   constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router) { }
+  
   profile() {
     this.profileclick = !this.profileclick;
   }

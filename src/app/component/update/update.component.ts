@@ -14,7 +14,7 @@ export class UpdateComponent implements OnInit {
   // public body: any = {}
   public id;
   public color;
-
+  public bgcolor=this.data.color;
   ngOnInit() {
   }
   constructor(private getService: SignupService,
@@ -22,7 +22,7 @@ export class UpdateComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data:any) {}
     @Output() eventEmit = new EventEmitter();  
     @Input() colorid
-  onClick(): void {
+    onClick(): void {
     this.dialogRef.close();
     this.update();
   }
@@ -38,6 +38,8 @@ update(){
     "color":this.color
   }, this.token).subscribe((response) => {
     console.log("successful", response);
+    this.eventEmit.emit({});
+
     console.log(this.id);
       console.log(response);
   },
@@ -46,7 +48,10 @@ update(){
     }
   )
 }
+emit(event){
 
+  this.bgcolor=event
+}
    
    
 }

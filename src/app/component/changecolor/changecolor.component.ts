@@ -10,16 +10,28 @@ export class ChangecolorComponent implements OnInit {
 
   constructor(private httpService: SignupService) { }
   token=localStorage.getItem('id');
+/*
+  * @description: @INPUT AND @Output are decorators used to bind the data
+  * @Input function is get the card Id
+  * @Output function is emiting the event from the archive
+  */
+//  public bgcolor="#FFFFFF"
 
   @Input()  colorid;
   public body:any={}
   @Output() eventEmit = new EventEmitter();  
   ngOnInit() {
   }
+  /*
+  * @description: changeColor() is used to get the colour when the button of the colour is clicked
+  */
   changeColor(color){
+    // color=this.bgcolor;
+    this.eventEmit.emit(color);
     console.log(this.colorid)
     var array=[]
     array.push(this.colorid)
+    // posting the clicked colour and id of cards into array
     this.httpService.colorPost("notes/changesColorNotes", this.body ={
       "color":color,
       "noteIdList":array

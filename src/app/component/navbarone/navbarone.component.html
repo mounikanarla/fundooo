@@ -14,17 +14,17 @@
           <span style="color:black;font-family:Bookman, URW Bookman L, serif; margin-left:10px;">Keep</span>
         </div>
       </div>
-      <div fxLayout="row" fxFlex="60%">
-        <span><i class="material-icons" style="color:black;  position:absolute; margin-top:8px">search</i> </span>
+      <div fxLayout="row" fxFlex="60%" >
+        <span><i class="material-icons" style="color:black;  position:fixed; margin-top:8px">search</i> </span>
         <input class=searchbar type=text matInput placeholder="search" style="padding-left:30px;" fxHide.xs="true" fxHide.sm="true">
       </div>
       <div fxLayout="row" fxFlex="20%">
         <div fxLayout="row" fxFlex="100%">
-          <div fxFlex.lg="30%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%">
-            <span style="color:black;"><mat-icon>refresh</mat-icon></span>
+          <div fxFlex.lg="30%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%" fxLayoutAlign="center">
+            <span style="color:black; margin-top:20px;"><mat-icon>refresh</mat-icon></span>
           </div>
-          <div fxFlex.lg="50%" fxFlex.md="70%" fxHide.xs="true" fxHide.sm="true">
-            <span style="color:black;margin-top:40px;"><mat-icon>view_stream</mat-icon></span>
+          <div fxFlex.lg="50%" fxFlex.md="70%" fxHide.xs="true" fxHide.sm="true" fxLayoutAlign="center">
+            <span style="color:black;margin-top:20px;"><mat-icon>view_stream</mat-icon></span>
           </div>
           <div fxFlex.lg="20%" fxFlex.md="15%" fxFlex.sm="50%" fxFlex.xs="50%">
             <button mat-fab color="primary" class="account" (click)="profile()" style="margin-bottom:20%">{{firstName[0]
@@ -78,7 +78,7 @@
     <div>
       <mat-card-footer>
         <button mat-button>SignIn</button>
-        <span style="margin-left:10%;"><button mat-button (click)=l ogout()>Logout</button></span>
+        <span style="margin-left:10%;"><button mat-button (click)=logout()>Logout</button></span>
       </mat-card-footer>
     </div>
   </mat-card>

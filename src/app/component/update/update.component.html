@@ -1,6 +1,6 @@
-<div > 
+<div> 
     <div fxLayout="row" fxFlex=100%>
-        <div class="notecard" [ngStyle]="{'background-color':data.color}">
+        <mat-card class="notecard" [ngStyle]="{'background-color':bgcolor}">
             <div fxLayout="column" fxFlex=100%>
                 <div  fxFlex=20%>
                     <!-- <mat-card-header> -->
@@ -28,8 +28,8 @@
                                 <app-collaborator></app-collaborator>
                                 <app-changecolor [colorid]=data.id (eventEmit)="emit($event)"></app-changecolor>
                                 <app-image></app-image>
-                                <app-archieve></app-archieve>
-                                <app-more></app-more>
+                                <app-archieve [noteid]=data.id (eventEmit)="emit($event)"></app-archieve>
+                                <app-more [noteid]=data.id (eventEmit)="emit($event)"></app-more>
                                 <!-- <app-undo></app-undo>
                                 <app-redo></app-redo> -->
                             </div>
@@ -42,6 +42,6 @@
                     <!-- </mat-card-actions> -->
                 </div>
             </div>
-          </div>
+        </mat-card>
     </div>
 </div> 

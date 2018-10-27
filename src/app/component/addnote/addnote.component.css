@@ -1,21 +1,21 @@
 .example-card{
-    margin-top:10px;
+    margin-top:8px;
     display: flex;
     flex-direction: column;
     margin-left:30px;
     padding-right:30px;
-    /* height:auto; */
+    height:auto;
     height:min-content;
     border-radius: 10px;
     word-wrap: break-word;
-    /* width:200px; */
+    width:auto;
 }
 mat-card-content{
     width:150px;
    position:relative;
 }
 .invisible{
-    opacity:0
+    opacity:0;
 }
 .invisible:hover{
     opacity:1

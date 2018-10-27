@@ -2,8 +2,8 @@
      height:200px;
     width:500px;
     margin-top:30%; 
-    right: 300px; 
-    margin-top:10px;
+    /* right: 300px;  */
+    margin-top:0px;
     display: flex;
     flex-direction: column;
     height:auto;
@@ -39,4 +39,23 @@
 }
 .action{
     margin-top:30px;
+}
+::ng-deep .mat-dialog-container {
+    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+    display: block;
+    padding: 0px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow: auto;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    max-height: inherit;
+    /* padding:10px 10px 10px 10px; */
+    margin-top:10px;
+}
+.mat-dialog-container {
+    background: #fff;
+    color: rgba(0,0,0,.87);
 }

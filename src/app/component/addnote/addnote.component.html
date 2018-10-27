@@ -1,15 +1,21 @@
 <div fxLayout="row wrap">
-  <div fxFlex="12%"></div>
-  <div fxFlex="76%" fxLayout="row wrap" fxLayoutGap="10px">
+  <div fxFlex="5%"></div>
+  <div fxFlex="90%" fxLayout="row wrap" fxLayoutGap="10px">
+    <!-- mat-card starts -->
     <mat-card  class="example-card" *ngFor='let index of newData' [ngStyle]="{'background-color':index.color}">
+      <!--Title printing starts -->
       <mat-card-header (click)="openDialog(index)">
         <mat-card-title placeholder="Title" >
           {{index.title }}
         </mat-card-title>
       </mat-card-header>
+       <!--Title printing Ends -->
+       <!-- Description Printing starts -->
       <mat-card-content (click)="openDialog(index)" >
         {{index.description}}
       </mat-card-content>
+      <!-- Description Printing Ends -->
+      <!-- Icon Print Starts -->
       <mat-card-actions>
         <span class=invisible>
           <app-reminder></app-reminder>
@@ -22,8 +28,10 @@
           <!-- <app-redo></app-redo> -->
         </span>
       </mat-card-actions>
+      <!-- Icon printing Ends -->
     </mat-card>
+    <!-- matcard Ends -->
   </div>
-  <div fxFlex="12%"></div>
+  <div fxFlex="5%"></div>
   <!-- </div> -->
 </div>

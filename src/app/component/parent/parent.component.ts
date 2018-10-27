@@ -21,13 +21,16 @@ export class ParentComponent implements OnInit {
       this.getCard();
     }
   }
+  /*
+  * @description:getcard() is used to get the card data from database and it is prionting it in the array
+  */
   getCard(){
       this.httpService.getnote("notes/getNotesList",this.token).subscribe(data=>{
         this.array=[];
 
         console.log("get cards list successfull",data);
         var length=data['data'].data.length;
-
+        // Loop is initialized to the cards list in the reverse order 
         for(var i=length-1;i>=0;i--)
         {
           console.log(data['data'].data.length);
@@ -43,11 +46,5 @@ export class ParentComponent implements OnInit {
       this.getCard();
     }
   }
-  // colour(event){
-  //   if(event){
-  //     this.getCard();
-  //   }
-  // }
-  
-    
+ 
 }

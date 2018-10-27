@@ -9,26 +9,30 @@ import { Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
   hide="true";
   model:any={
     email:'',
     password:''
   }
+
   constructor(private loginservice: SignupService,public snackBar : MatSnackBar,public router:Router) { }
   email = new FormControl('', [Validators.required, Validators.email]);
+  token = localStorage.getItem('id');
+
   ngOnInit() {
+    if(this.token!=null){
+      this.router.navigateByUrl('/home/notes');
+    }
       return this.email.hasError('required') ? 'You must enter a value' :
           this.email.hasError('email') ? 'Not a valid email' :
               '';
+  
   }
-  // logout(){
-  //   console.log('click');
-  // }
+  
 login(){
-  // if (localStorage.getItem('id')) {
-  //   this.router.navigate(['home']);
-  // }
+  
 let obs=this.loginservice.httpPost("user/login", {
   "email": this.model.email,
   "password": this.model.password,

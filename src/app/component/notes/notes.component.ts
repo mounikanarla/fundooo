@@ -13,36 +13,54 @@ export class NotesComponent implements OnInit {
 
   constructor(private getService: SignupService, public route: ActivatedRoute, public router: Router) { }
   private press: boolean = true;
+  @Output() eventEmit = new EventEmitter();  
+
   @Output() onNewEntryAdded = new EventEmitter();
   public title;
   public description;
+  // public cardid=this.id;
   public isPinned = false;
   private id = localStorage.getItem('id');
   public body: any = {}
+  public bgcolor="#FFFFFF"
   ngOnInit() {
   }
   toggleChild() {
     this.press = !this.press;
   }
+  /*
+  * @description: notes() is used to post the data that are getting from the user
+  */
   notes() {
+   var color=this.bgcolor;
+   this.bgcolor='#ffffff'
+
     this.title = document.getElementById("title").textContent;
     this.description = document.getElementById("description").textContent;
     this.press = !this.press;
+    
     console.log(this.title);
     console.log(this.description);
     console.log(this.id);
+    // this.onNewEntryAdded.emit({});
+  
+    // post the data by passing the parameters
     this.getService.dataPost("notes/addnotes", this.body = {
       "title": this.title,
       "description": this.description,
       "labelIdList": "",
       "checklist": "",
-      "isPinned": false
+      "isPinned": false,
+      "color": color
     }, this.id).subscribe((response) => {
+      // If the response is true then the data will be emitted
       console.log("successful", response);
       console.log(this.id);
       this.getService.getnote("notes/getNotesList", this.id).subscribe((response) => {
         console.log(response);
         this.onNewEntryAdded.emit({});
+        this.eventEmit.emit({});
+
       })
 
     },
@@ -53,4 +71,8 @@ export class NotesComponent implements OnInit {
     )
 
   }
+  emit(event){
+    this.bgcolor=event;
+  }
+     
 }

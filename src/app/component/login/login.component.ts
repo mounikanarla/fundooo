@@ -44,7 +44,7 @@ obs.subscribe((response) => {
    localStorage.setItem('firstName',response["firstName"]);
    localStorage.setItem('lastName',response["lastName"]);
    localStorage.setItem('email',response["email"]);
-
+  localStorage.setItem('userId',response["userId"])
    this.router.navigate(['home']);
    this.snackBar.open("login succesfull", "ok", {
     duration: 2000,

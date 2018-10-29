@@ -27,7 +27,7 @@ export class UpdateComponent implements OnInit {
     this.update();
   }
 update(){
-  this.title = document.getElementById("title").innerHTML;
+    this.title = document.getElementById("title").innerHTML;
     this.description = document.getElementById("description").innerHTML;
     this.id=this.data.id;
     this.color=this.data.color

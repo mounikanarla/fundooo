@@ -41,6 +41,7 @@ import { MainArchiveComponent } from './component/main-archive/main-archive.comp
 import { TrashComponent } from './component/trash/trash.component';
 import { UpdateComponent } from './component/update/update.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { AddlabelComponent } from './component/addlabel/addlabel.component';
 
 
 
@@ -69,6 +70,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MainArchiveComponent,
     TrashComponent,
     UpdateComponent,
+    AddlabelComponent,
     
   ],
   imports: [
@@ -95,6 +97,8 @@ import {MatDialogModule} from '@angular/material/dialog';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddnoteComponent,UpdateComponent]
+  entryComponents:[AddnoteComponent,UpdateComponent,NavbaroneComponent,AddlabelComponent]
+  
+
 })
 export class AppModule { }

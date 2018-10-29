@@ -13,6 +13,7 @@ import { ParentComponent } from './component/parent/parent.component';
 import { MainArchiveComponent } from './component/main-archive/main-archive.component';
 import { TrashComponent } from './component/trash/trash.component';
 import { UpdateComponent } from './component/update/update.component';
+import { AddlabelComponent } from './component/addlabel/addlabel.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
     {path:'notes',component:ParentComponent},
     {path:'profile',component:ProfileComponent},
     {path:'archive',component:MainArchiveComponent},
-    {path:'trash',component:TrashComponent}
+    {path:'trash',component:TrashComponent},
+    // {path:'addlabel',component: AddlabelComponent }
   ]},
   { path: '', redirectTo:  'login', pathMatch:  'full' }
 ]

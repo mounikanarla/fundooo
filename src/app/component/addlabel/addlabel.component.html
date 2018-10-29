@@ -1,0 +1,34 @@
+<div fxLayout="column" fxFlex=100% fxLayoutAlign="center" class="labelbox">
+<div fxFlex=20%>
+<h1  mat-dialog-title>Edit labels</h1>
+</div>
+<div fxFlex=15% style="margin-top:10px">
+ <div fxLayoutGap="space-between" fxLayoutAlign="row" mat-dialog-content>
+   <div fxLayout="row" fxFlex=100%>
+    <div fxFlex=15%><mat-icon>clear</mat-icon></div>    
+    <div fxFlex=70% data-text="Create New Label" id="label" contenteditable="true" class="label" # @ViewChild()></div> 
+    <div fxFlex=15%><mat-icon>done</mat-icon></div>
+  </div>
+  </div>
+</div>
+<div fxFlex=50%>
+<div  *ngFor="let labell of labelArray">
+      <div fxLayout="row" fxFlex=100%>
+          <div fxFlex=15%>   
+            <span><mat-icon (click)=delete(labell.id)>delete</mat-icon></span>
+          </div>
+          <div fxFlex=70%>   
+            <span>{{labell.label}}</span>
+          </div>
+          <div fxFlex=15%>
+             <span style="margin-left:50px;"><mat-icon (click)=update(labell.id)>edit</mat-icon></span>
+          </div>
+  </div>
+</div>
+</div>
+  <div fxFlex=15%>
+  <button mat-button  class="button" (click)="onClose()">Done</button>
+  </div>
+  
+ 
+</div>

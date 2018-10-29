@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { SignupService } from '../../services/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatDialog} from '@angular/material';
+import { AddlabelComponent } from '../../component/addlabel/addlabel.component';
 
 @Component({
   selector: 'app-navbarone',
@@ -22,7 +24,7 @@ export class NavbaroneComponent {
   public firstName = localStorage.getItem('firstName');
   public lastName = localStorage.getItem('lastName');
   public email = localStorage.getItem('email');
-  constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router) { }
+  constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router,public dialog: MatDialog) { }
   
   profile() {
     this.profileclick = !this.profileclick;
@@ -48,5 +50,14 @@ export class NavbaroneComponent {
         });
       }
     )
+  }
+  addlabel() {/**addlabel() method to open the add-label dialog box when it is clicked */
+    this.dialog.open(AddlabelComponent, {/**open dialog  */
+      data: {
+        
+        panelClass: 'myapp-no-padding-dialog'
+  
+      }
+    });
   }
 }

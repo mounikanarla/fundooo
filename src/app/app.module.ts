@@ -42,6 +42,7 @@ import { TrashComponent } from './component/trash/trash.component';
 import { UpdateComponent } from './component/update/update.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddlabelComponent } from './component/addlabel/addlabel.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -93,7 +94,7 @@ import { AddlabelComponent } from './component/addlabel/addlabel.component';
     LayoutModule,
     MatListModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

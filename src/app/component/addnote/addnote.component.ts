@@ -34,6 +34,7 @@ export class AddnoteComponent implements OnInit {
     console.log(event)
     if(event){
       this.eventEmit.emit({});
+
     }
   }
   openDialog(note): void {
@@ -48,4 +49,5 @@ export class AddnoteComponent implements OnInit {
 
     });
   }
+  
 }

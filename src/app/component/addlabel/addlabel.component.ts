@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject,ElementRef,ViewChild } from '@angular/core';
+import { Component, OnInit,Inject,ElementRef,ViewChild,Output, EventEmitter } from '@angular/core';
 import { SignupService } from '../../services/http.service';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
@@ -8,19 +8,37 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./addlabel.component.css']
 })
 export class AddlabelComponent implements OnInit {
- 
-  constructor(
+constructor(
     public dialogRef: MatDialogRef<AddlabelComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:any ,private httpService: SignupService,) {}
+  @Inject(MAT_DIALOG_DATA) public data:any ,private httpService: SignupService) {}
   @ViewChild('myLabel') myLabel:ElementRef;
+  @ViewChild('myUpdate') myUpdate:ElementRef;
+  @Output() eventEmit = new EventEmitter();  
+
+  press: boolean = true;
+  // editlabel:boolean=true;
+  editClick=false;
+  editLabel;
+  editId;
+  editDoneIcon=true;
+  editable=false;
     ngOnInit() {
     this.getLabels();
   }
+  toggleChild() {
+    this.press=!this.press;
+    
+  }
 
   onClose():void{
-this.dialogRef.close();
-this.addLabel()
-this.getLabels();
+  this.dialogRef.close();
+  this.addLabel()
+  this.getLabels();
+  }
+  onClick():void{
+    this.addLabel()
+    this.getLabels();
+    this.myLabel.nativeElement.innerHTML=null;
   }
   public label;
   public labelArray=[];
@@ -50,6 +68,7 @@ getLabels(){
         // console.log(this.labelArray.push(response['data'].details[i].length));
         }
       }
+      this.eventEmit.emit({});
       console.log(this.labelArray,"Label array printing successsss ");
     },
     error=>{
@@ -59,7 +78,7 @@ getLabels(){
 }
 delete(labelId){
   console.log(labelId)
-  this.httpService.deleteLabel("/noteLabels/"+labelId+"/deleteNoteLabel")
+  this.httpService.deleteLabel("/noteLabels/"+labelId+"/deleteNoteLabel",localStorage.getItem('id'))
   .subscribe((response) =>{
     console.log("Deleted data",response);
     this.getLabels();
@@ -67,22 +86,41 @@ delete(labelId){
     console.log(error);
   });
 }
+edit(labelId){
+  this.editClick=true;
+  this.editId=labelId.id;
+  this.editLabel=labelId.label;
+  this.editDoneIcon=false;
+  this.editable=true;
+ 
+}
 
 update(labelId){ 
-  var label=this.myLabel.nativeElement.innerHTML;
-  console.log(label)
-  this.httpService.delPost("/noteLabels/"+labelId+"/updateNoteLabel",
+  this.editClick=false;
+  this.editDoneIcon=true;
+  this.editable=false;
+  console.log("edit function");
+  console.log(labelId)
+  console.log(this.myUpdate.nativeElement.innerHTML)
+  // var str=this.myUpdate.nativeElement.innerHTML
+  this.httpService.delPost("noteLabels/"+labelId.id+"/updateNoteLabel",
   {
-    "label":label
+    "label":this.myUpdate.nativeElement.innerHTML,
+    "isDeleted":false,
+    "id":labelId.id,
+    "userId":localStorage.getItem("userId")
   },localStorage.getItem('id'))
   .subscribe((response) =>{
+    // this.labelArray=[];
     this.getLabels();
     console.log(response);
   },(error) => {
     console.log(error);
   });
 }
-
+// emit(event){
+//   this.getLabels();
+// }
 
 }
 

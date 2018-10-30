@@ -13,7 +13,18 @@
        <!-- Description Printing starts -->
       <mat-card-content (click)="openDialog(index)" >
         {{index.description}}
+        <!-- {{index.label}} -->
       </mat-card-content>
+      
+      <div *ngFor="let i of index.noteLabels">
+          <mat-chip-list selected>
+            <mat-chip>
+              {{i.label}}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      
+
       <!-- Description Printing Ends -->
       <!-- Icon Print Starts -->
       <mat-card-actions>
@@ -23,7 +34,7 @@
           <app-changecolor [colorid]=index.id (eventEmit)="emit($event)"></app-changecolor>
           <app-image></app-image>
           <app-archieve [noteid]=index.id (eventEmit)="emit($event)"></app-archieve>
-          <app-more [noteid]=index.id (eventEmit)="emit($event)"></app-more>
+          <app-more [noteid]=index.id (eventEmit)="emit($event)" ></app-more>
           <!-- <app-undo></app-undo> -->
           <!-- <app-redo></app-redo> -->
         </span>

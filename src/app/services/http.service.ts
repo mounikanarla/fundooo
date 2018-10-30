@@ -10,9 +10,9 @@ export class SignupService {
   getdata(value) {
     return this.http.get(this.URL + '/' + value);
   }
-  deleteLabel(path)
+  deleteLabel(path,body)
   {
-    return this.http.delete(this.URL + '/' + path);
+    return this.http.delete(this.URL + '/' + path,body);
   }
   httpPost(value, body) {
     return this.http.post(this.URL + '/' + value, body);

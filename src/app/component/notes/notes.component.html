@@ -1,7 +1,9 @@
 <div fxLayout="column" fxFlex.lg="50%" fxFlex.md="70%" fxFlex.sm="100%" fxFlex.xs="100%">
     <div  fxFlex=20% >
-        <div fxLayoutAlign="center center" fxFlex=100%>
-            <div fxLayout="row">
+        <!-- <div fxLayout fxFlex=100%> -->
+            <div fxLayout="row" fxLayoutAlign="center center" fxFlex=100%>
+                <div fxFlex=25%></div>
+                <div fxFlex=50%>
                 <mat-card class="card" *ngIf="press"  (click)=toggleChild() >
                     <div fxFlex="70%">
                         Take a note...
@@ -19,8 +21,12 @@
                     </div>
                 </mat-card>
             </div>
+            <div fxFlex=25%></div>
+            <!-- </div> -->
+        </div>
+    </div>
             <div *ngIf=!press>
-                <div fxLayout="row" fxFlex.lg="50%" fxFlex.md="70%" fxFlex.sm="100%" fxFlex.xs="100%">
+                <div fxLayout="row" fxFlex.lg="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%">
                     <mat-card class="notecard" [ngStyle]="{'background-color':bgcolor}">
                         <div fxLayout="column" fxFlex=100%>
                             <div  fxFlex=20%>
@@ -41,6 +47,8 @@
                                 </mat-card-content>
                             </div>
                             <div fxFlex=15%>
+                                   
+                                      
                                 <mat-card-actions>
                                     <div fxLayout="row"  class="icons">
                                         <div fxFlex=80% fxLayoutGap="20px">
@@ -49,7 +57,7 @@
                                             <app-changecolor (eventEmit)="emit($event)"></app-changecolor>
                                             <app-image></app-image>
                                             <app-archieve></app-archieve>
-                                            <app-more></app-more>
+                                            <app-more  (eventEmitLabel)="eventEmitLabel($event)"></app-more>
                                             <!-- <app-undo></app-undo>
                                             <app-redo></app-redo> -->
                                         </div>
@@ -65,8 +73,8 @@
                     </mat-card>
                 </div>
             </div> 
-        </div>
-    </div>
+       
+   
     <div>
         <app-addnote></app-addnote>
     </div>

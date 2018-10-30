@@ -22,7 +22,8 @@ export class NotesComponent implements OnInit {
   public isPinned = false;
   private id = localStorage.getItem('id');
   public body: any = {}
-  public bgcolor="#FFFFFF"
+  public bgcolor="#FFFFFF";
+  public label="";
   ngOnInit() {
   }
   toggleChild() {
@@ -48,10 +49,10 @@ export class NotesComponent implements OnInit {
     this.getService.dataPost("notes/addnotes", this.body = {
       "title": this.title,
       "description": this.description,
-      "labelIdList": "",
       "checklist": "",
       "isPinned": false,
-      "color": color
+      "color": color,
+      "labelIdList":JSON.stringify(this.arraylabel)
     }, this.id).subscribe((response) => {
       // If the response is true then the data will be emitted
       console.log("successful", response);
@@ -73,6 +74,13 @@ export class NotesComponent implements OnInit {
   }
   emit(event){
     this.bgcolor=event;
+
   }
-     
+  public arraylabel=[]
+// eventEmitLabel(event){
+//     // this.arraylabel.push(event);
+//     console.log(event);
+//   }
+
+  
 }

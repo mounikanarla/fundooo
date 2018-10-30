@@ -19,3 +19,14 @@
     outline:none;
     font-size: 18px;
 }
+.button{
+    margin-top:10%;
+    margin-left:70%;
+}
+.lock:hover .icon-unlock,
+.lock .icon-lock {
+    display: none;
+}
+.lock:hover .icon-lock {
+    display: inline;
+}

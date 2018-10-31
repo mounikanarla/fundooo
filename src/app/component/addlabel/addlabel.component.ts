@@ -118,9 +118,6 @@ update(labelId){
     console.log(error);
   });
 }
-// emit(event){
-//   this.getLabels();
-// }
 
 }
 

@@ -15,16 +15,13 @@
         {{index.description}}
         <!-- {{index.label}} -->
       </mat-card-content>
-      
+      <mat-chip-list>
       <div *ngFor="let i of index.noteLabels">
-          <mat-chip-list selected>
-            <mat-chip>
-              {{i.label}}
-            </mat-chip>
-          </mat-chip-list>
-        </div>
-      
-
+        <mat-chip *ngIf="!i.isDeleted">{{i.label}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      </div>
+    </mat-chip-list>
       <!-- Description Printing Ends -->
       <!-- Icon Print Starts -->
       <mat-card-actions>
@@ -34,7 +31,7 @@
           <app-changecolor [colorid]=index.id (eventEmit)="emit($event)"></app-changecolor>
           <app-image></app-image>
           <app-archieve [noteid]=index.id (eventEmit)="emit($event)"></app-archieve>
-          <app-more [noteid]=index.id (eventEmit)="emit($event)" ></app-more>
+          <app-more [noteid]=index (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)"></app-more>
           <!-- <app-undo></app-undo> -->
           <!-- <app-redo></app-redo> -->
         </span>

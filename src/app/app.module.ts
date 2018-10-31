@@ -43,6 +43,7 @@ import { UpdateComponent } from './component/update/update.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddlabelComponent } from './component/addlabel/addlabel.component';
 import {MatChipsModule} from '@angular/material/chips';
+import { SearchPipe } from './search.pipe';
 
 
 
@@ -72,6 +73,7 @@ import {MatChipsModule} from '@angular/material/chips';
     TrashComponent,
     UpdateComponent,
     AddlabelComponent,
+    SearchPipe,
     
   ],
   imports: [

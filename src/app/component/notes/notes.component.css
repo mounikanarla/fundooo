@@ -1,15 +1,15 @@
 .card{
     width:500px;
     /* height:50px; */
-    margin-top:25%;
-    /* height:fit-content; */
-    /* position: relative; */
+    margin-top:15%;
+    /* height:fit-content;  */
+     position: relative;
     /* left: 300px; */
 
 }
 .notecard{
     width:500px;
-    /* margin-top:33%; */
+    margin-top:1.5%;
     /* right: 300px; */
     /* position: absolute; */
     /* padding-left: 17px; */

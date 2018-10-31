@@ -20,7 +20,7 @@ export class AddnoteComponent implements OnInit {
   */
   @Input()  newData;
   @Output() eventEmit = new EventEmitter();
- 
+ @Output() 
   /*
   * @description:ngOnInit is used for all the initialization/declaration and avoid stuff to work in the 
   */
@@ -48,6 +48,13 @@ export class AddnoteComponent implements OnInit {
       this.eventEmit.emit({});
 
     });
+
   }
-  
+   labelEmit(event){
+    console.log(event)
+    if(event){
+      this.eventEmit.emit({});
+
+    }
+  }
 }

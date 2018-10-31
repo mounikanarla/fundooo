@@ -77,10 +77,10 @@ export class NotesComponent implements OnInit {
 
   }
   public arraylabel=[]
-// eventEmitLabel(event){
-//     // this.arraylabel.push(event);
-//     console.log(event);
-//   }
+eventEmitLabel(event){
+    this.arraylabel.push(event);
+    console.log(event);
+  }
 
   
 }

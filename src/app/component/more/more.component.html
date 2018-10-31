@@ -8,13 +8,15 @@
     <mat-menu #addLabel="matMenu" >
     <span>Label Note</span>
     <div (click)=" $event.stopPropagation();">
-    <input  matInput placeholder="search" class="searchicon">
+    <input  matInput placeholder="search" class="searchicon" [(ngModel)]="query">
     <mat-icon>search</mat-icon>
     </div>
-    <div  *ngFor="let label of array">
-        <span (click)=" $event.stopPropagation();"><mat-checkbox (click)="addChecklabel(label)"></mat-checkbox>{{ label.label }}</span>
-    </div>
-  
+    <div  *ngFor="let label of array | search: query">
+        <input (click)=" $event.stopPropagation();"><mat-checkbox (click)="$event.stopPropagation(); addChecklabel(label)" {[ngModel]}="label.isChecked==true"></mat-checkbox>
+        <input (click)=" $event.stopPropagation();"><mat-checkbox (click)="$event.stopPropagation(); removelabel(label)" {[ngModel]}="label.isChecked==false"></mat-checkbox>
+        <div> {{ label.label }}</div>
+
+      </div>
     </mat-menu>
     <button mat-menu-item>Show CheckBox</button>
   </mat-menu>

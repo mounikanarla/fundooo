@@ -18,14 +18,16 @@ export class NavbaroneComponent {
     .pipe(
       map(result => result.matches)
     );
-  
+  public array=[];
   profileclick: boolean = false;
   private id = localStorage.getItem('id');
   public firstName = localStorage.getItem('firstName');
   public lastName = localStorage.getItem('lastName');
   public email = localStorage.getItem('email');
   constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router,public dialog: MatDialog) { }
-  
+  ngOnInit(){
+    this.checkLabel();
+  }
   profile() {
     this.profileclick = !this.profileclick;
   }
@@ -60,4 +62,21 @@ export class NavbaroneComponent {
       }
     });
   }
+  checkLabel() {
+    this.logoutService.getnote("noteLabels/getNoteLabelList",localStorage.getItem('id')).subscribe(
+        response=>{
+          this.array=[];
+          console.log(response['data'].details);
+          for(var i=0;i<(response['data'].details).length;i++){
+            if(response['data'].details[i].isDeleted == false){
+            this.array.push(response['data'].details[i])
+            }
+          }
+          console.log(this.array,"Label array printing successsss ");
+        },
+        error=>{
+          console.log("error in get LABELS",error);
+        }
+      )
+    }
 }

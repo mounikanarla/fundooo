@@ -84,3 +84,10 @@ input:focus{
   display: inline-block;
   line-height: 24px;
 }
+.printlabel{
+  margin-left:20px;
+  margin-top:15px;
+}
+/* .labelicon{
+  /* margin-top:50px; */
+/* } */

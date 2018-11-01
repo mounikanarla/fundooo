@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog} from '@angular/material';
 import { AddlabelComponent } from '../../component/addlabel/addlabel.component';
+import { DataServiceService } from '../../data-service.service';
 
 @Component({
   selector: 'app-navbarone',
@@ -18,15 +19,22 @@ export class NavbaroneComponent {
     .pipe(
       map(result => result.matches)
     );
+  searchInput:any
   public array=[];
   profileclick: boolean = false;
   private id = localStorage.getItem('id');
   public firstName = localStorage.getItem('firstName');
   public lastName = localStorage.getItem('lastName');
   public email = localStorage.getItem('email');
-  constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router,public dialog: MatDialog) { }
+  constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router,public dialog: MatDialog,private data: DataServiceService) { }
   ngOnInit(){
     this.checkLabel();
+    // this.data.currentMessage.subscribe(message => this.message = message)
+
+  }
+  clicksearch(){
+    console.log('in')
+    this.router.navigate(['/home/search']);
   }
   profile() {
     this.profileclick = !this.profileclick;
@@ -78,5 +86,8 @@ export class NavbaroneComponent {
           console.log("error in get LABELS",error);
         }
       )
+    }
+    newMessage() {
+      this.data.changeMessage(this.searchInput)
     }
 }

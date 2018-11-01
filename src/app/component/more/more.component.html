@@ -12,11 +12,9 @@
     <mat-icon>search</mat-icon>
     </div>
     <div  *ngFor="let label of array | search: query">
-        <input (click)=" $event.stopPropagation();"><mat-checkbox (click)="$event.stopPropagation(); addChecklabel(label)" {[ngModel]}="label.isChecked==true"></mat-checkbox>
-        <input (click)=" $event.stopPropagation();"><mat-checkbox (click)="$event.stopPropagation(); removelabel(label)" {[ngModel]}="label.isChecked==false"></mat-checkbox>
-        <div> {{ label.label }}</div>
-
-      </div>
+        <mat-checkbox (click)="$event.stopPropagation(); addChecklabel(label)" [(ngModel)]="label.isChecked">{{ label.label }}</mat-checkbox>
+        <!-- <input (click)=" $event.stopPropagation();"><mat-checkbox (click)="$event.stopPropagation(); removelabel(label)" *ngIf="label.isChecked==false"></mat-checkbox> -->
+    </div>
     </mat-menu>
     <button mat-menu-item>Show CheckBox</button>
   </mat-menu>

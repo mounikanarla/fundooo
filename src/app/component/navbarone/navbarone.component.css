@@ -44,11 +44,11 @@ input:focus{
    border:none;
    height:20px;
    width:50px;
-    margin-left:110px;
+    margin-left:98px;
     margin-right:20px;
 }
 .label{
-  padding-top:10px;
+  /* padding-top:10px; */
   margin-left:20px;
   font-size:15px;
 }
@@ -88,6 +88,6 @@ input:focus{
   margin-left:20px;
   margin-top:15px;
 }
-/* .labelicon{
-  /* margin-top:50px; */
-/* } */
+.display{
+  margin-bottom:20px;
+}

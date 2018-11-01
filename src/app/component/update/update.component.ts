@@ -52,6 +52,10 @@ emit(event){
 
   this.bgcolor=event
 }
-   
+label=[]
+eventEmitLabel(event) {
+  this.label=event
+
+}
    
 }

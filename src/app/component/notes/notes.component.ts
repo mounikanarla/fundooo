@@ -70,17 +70,38 @@ export class NotesComponent implements OnInit {
 
       }
     )
-
   }
+  
   emit(event){
     this.bgcolor=event;
 
   }
   public arraylabel=[]
-eventEmitLabel(event){
-    this.arraylabel.push(event);
+  public labelevent=[]
+  eventEmitLabel(event){
     console.log(event);
+    if(this.labelevent.indexOf(event)<0){
+    this.labelevent.push(event);
+    this.arraylabel.push(event.id);
+  }
+  else{
+    this.arraylabel.splice(this.arraylabel.indexOf(event),1)
+    this.labelevent.splice(this.labelevent.indexOf(event),1)
+  }
   }
 
-  
+  removelabel(index,label)
+  {
+    // this.accepted = true;
+    console.log(index.id)
+    console.log(label.id);
+    this.getService.logoutPost("notes/"+index.id+"/addLabelToNotes/"+label.id+"/remove",localStorage.getItem('id'))
+    .subscribe((response)=>{
+      console.log("checklist added"+response)
+      this.eventEmit.emit({});},
+    (error)=>{
+      console.log("error occured"+error)
+    }
+  )
+  }
 }

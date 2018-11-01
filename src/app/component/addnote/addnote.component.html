@@ -2,7 +2,7 @@
   <div fxFlex="5%"></div>
   <div fxFlex="90%" fxLayout="row wrap" fxLayoutGap="10px">
     <!-- mat-card starts -->
-    <mat-card  class="example-card" *ngFor='let index of newData' [ngStyle]="{'background-color':index.color}">
+    <mat-card  class="example-card" *ngFor='let index of newData | search:searchInput' [ngStyle]="{'background-color':index.color}">
       <!--Title printing starts -->
       <mat-card-header (click)="openDialog(index)">
         <mat-card-title placeholder="Title" >
@@ -16,9 +16,9 @@
         <!-- {{index.label}} -->
       </mat-card-content>
       <mat-chip-list>
-      <div *ngFor="let i of index.noteLabels">
-        <mat-chip *ngIf="!i.isDeleted">{{i.label}}
-        <mat-icon matChipRemove>cancel</mat-icon>
+      <div *ngFor="let label of index.noteLabels">
+        <mat-chip *ngIf="!label.isDeleted">{{label.label}}
+        <mat-icon matChipRemove (click)="removelabel(index,label)">cancel</mat-icon>
       </mat-chip>
       </div>
     </mat-chip-list>
@@ -30,8 +30,8 @@
           <app-collaborator></app-collaborator>
           <app-changecolor [colorid]=index.id (eventEmit)="emit($event)"></app-changecolor>
           <app-image></app-image>
-          <app-archieve [noteid]=index.id (eventEmit)="emit($event)"></app-archieve>
-          <app-more [noteid]=index (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)"></app-more>
+          <app-archieve [noteid]=index (eventEmit)="emit($event)"></app-archieve>
+          <app-more [noteid]=index (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
           <!-- <app-undo></app-undo> -->
           <!-- <app-redo></app-redo> -->
         </span>

@@ -30,7 +30,7 @@ export class ArchieveComponent implements OnInit {
   archive() {
     console.log(this.noteid)
     var array = []
-    array.push(this.noteid)
+    array.push(this.noteid.id)
     //posting the data into archive notes by using the post service
     this.httpService.colorPost("notes/archiveNotes", this.body = {
       "isArchived": true,

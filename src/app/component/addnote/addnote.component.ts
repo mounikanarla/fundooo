@@ -19,8 +19,9 @@ export class AddnoteComponent implements OnInit {
   * @description: @INPUT AND @Output are decorators used to bind the data
   */
   @Input()  newData;
+  @Input() searchInput;
   @Output() eventEmit = new EventEmitter();
- @Output() 
+//  @Output() 
   /*
   * @description:ngOnInit is used for all the initialization/declaration and avoid stuff to work in the 
   */
@@ -56,5 +57,19 @@ export class AddnoteComponent implements OnInit {
       this.eventEmit.emit({});
 
     }
+  }
+  removelabel(index,label)
+  {
+    // this.accepted = true;
+    console.log(index)
+    console.log(label);
+    this.httpService.logoutPost("notes/"+index.id+"/addLabelToNotes/"+label.id+"/remove",localStorage.getItem('id'))
+    .subscribe((response)=>{
+      console.log("checklist added"+response)
+      this.eventEmit.emit({});},
+    (error)=>{
+      console.log("error occured"+error)
+    }
+  )
   }
 }

@@ -3,7 +3,7 @@
         <!-- <div fxLayout fxFlex=100%> -->
             <div fxLayout="row" fxLayoutAlign="center center" fxFlex=100%>
                 <div fxFlex=25%></div>
-                <div fxFlex=50%>
+                <div fxFlex=50% fxLayoutAlign="center center">
                 <mat-card class="card" *ngIf="press"  (click)=toggleChild() >
                     <div fxFlex="70%">
                         Take a note...
@@ -45,6 +45,13 @@
                                 <mat-card-content>
                                     <div data-text="Type your text" id="description" contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note" class="textbar" ></div>
                                 </mat-card-content>
+                                <mat-chip-list>
+                                        <div *ngFor="let index of labelevent">
+                                          <mat-chip *ngIf="!index.isDeleted">{{index.label}}
+                                          <mat-icon matChipRemove (click)="removelabel(index,label)">cancel</mat-icon>
+                                        </mat-chip>
+                                        </div>
+                                </mat-chip-list>
                             </div>
                             <div fxFlex=15%>
                                 <mat-card-actions>
@@ -55,7 +62,7 @@
                                             <app-changecolor (eventEmit)="emit($event)"></app-changecolor>
                                             <app-image></app-image>
                                             <app-archieve></app-archieve>
-                                            <app-more (eventEmit)="emit($event)"></app-more>
+                                            <app-more (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
                                             <!-- <app-undo></app-undo>
                                             <app-redo></app-redo> -->
                                         </div>

@@ -14,6 +14,7 @@ import { MainArchiveComponent } from './component/main-archive/main-archive.comp
 import { TrashComponent } from './component/trash/trash.component';
 import { UpdateComponent } from './component/update/update.component';
 import { AddlabelComponent } from './component/addlabel/addlabel.component';
+import { SearchComponent } from './component/search/search.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
     {path:'profile',component:ProfileComponent},
     {path:'archive',component:MainArchiveComponent},
     {path:'trash',component:TrashComponent},
+    {path:'search',component:SearchComponent}
     // {path:'addlabel',component: AddlabelComponent }
   ]},
   { path: '', redirectTo:  'login', pathMatch:  'full' }

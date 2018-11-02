@@ -1,5 +1,5 @@
 <span data-toggle="tooltip" title="Remind me">
   <button mat-icon-button>
-    <mat-icon class="remain"><img src="../../../assets/remainder.svg"></mat-icon>
+    <mat-icon class="remain" *ngIf="!isDeleted"><img src="../../../assets/remainder.svg"></mat-icon>
   </button>
 </span>

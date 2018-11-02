@@ -15,6 +15,7 @@ export class UpdateComponent implements OnInit {
   public id;
   public color;
   public bgcolor=this.data.color;
+  public label;
   ngOnInit() {
   }
   constructor(private getService: SignupService,
@@ -52,9 +53,9 @@ emit(event){
 
   this.bgcolor=event
 }
-label=[]
+labelarray=[]
 eventEmitLabel(event) {
-  this.label=event
+  this.labelarray=event
 
 }
    

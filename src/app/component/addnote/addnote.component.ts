@@ -26,7 +26,10 @@ export class AddnoteComponent implements OnInit {
   * @description:ngOnInit is used for all the initialization/declaration and avoid stuff to work in the 
   */
   ngOnInit() {
-    console.log(this.newData)
+    if(this.newData != null && this.newData.isDeleted==true)
+    {
+
+    }
   }
   /*
   * @description : emit(event) is used to emit the event coming from child component at the time of action
@@ -35,6 +38,7 @@ export class AddnoteComponent implements OnInit {
     console.log(event)
     if(event){
       this.eventEmit.emit({});
+      console.log("event2",this.eventEmit.emit({}));
 
     }
   }
@@ -56,6 +60,12 @@ export class AddnoteComponent implements OnInit {
     if(event){
       this.eventEmit.emit({});
 
+    }
+  }
+  eventEmitLabel(event){
+    if(event){
+    this.eventEmit.emit(event)
+    // console.log("event2",event);
     }
   }
   removelabel(index,label)

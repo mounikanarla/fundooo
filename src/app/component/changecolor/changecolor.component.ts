@@ -20,7 +20,12 @@ export class ChangecolorComponent implements OnInit {
   @Input()  colorid;
   public body:any={}
   @Output() eventEmit = new EventEmitter();  
+  public isDeleted=false;
+
   ngOnInit() {
+    if(this.colorid!= undefined && this.colorid.isDeleted == true){
+      this.isDeleted=true
+    }
   }
   /*
   * @description: changeColor() is used to get the colour when the button of the colour is clicked
@@ -30,7 +35,7 @@ export class ChangecolorComponent implements OnInit {
     this.eventEmit.emit(color);
     console.log(this.colorid)
     var array=[]
-    array.push(this.colorid)
+    array.push(this.colorid.id)
     // posting the clicked colour and id of cards into array
     this.httpService.colorPost("notes/changesColorNotes", this.body ={
       "color":color,

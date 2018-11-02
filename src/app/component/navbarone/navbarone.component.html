@@ -46,9 +46,12 @@
         <div class="label">
           <a mat-list-item>Labels<button class="edit" (click)=addlabel()>Edit</button></a>
         </div>
-        <div *ngFor="let list of array" class="printlabel">
-         <span class="display"> <mat-icon class="material-icons" >label</mat-icon> {{ list.label }}</span>
+        <mat-nav-list>
+          <div *ngFor="let list of array" class="printlabel">
+          <a mat-list-item routerLink="/home/label/{{ list.label }}" routerLinkActive="active"> <mat-icon class="material-icons" class="space">label_outline</mat-icon><span class="display">{{ list.label }}</span></a>
         </div>
+      </mat-nav-list>
+
         <mat-nav-list>
           <a mat-list-item (click)=addlabel()><img src="../../../assets/label.svg"><span class="remainder">Create New Label</span></a>
         </mat-nav-list>

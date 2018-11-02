@@ -1,6 +1,6 @@
 <span data-toggle="tooltip" title="more">
     <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon  class="colour">color_lens</mat-icon>
+        <mat-icon  class="colour" *ngIf="!isDeleted">color_lens</mat-icon>
     </button>
     <mat-menu #menu="matMenu" class="menu">
         <div fxLayout="column" fxFlex=100%>

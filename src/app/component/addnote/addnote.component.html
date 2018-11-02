@@ -26,12 +26,12 @@
       <!-- Icon Print Starts -->
       <mat-card-actions>
         <span class=invisible>
-          <app-reminder></app-reminder>
-          <app-collaborator></app-collaborator>
-          <app-changecolor [colorid]=index.id (eventEmit)="emit($event)"></app-changecolor>
-          <app-image></app-image>
-          <app-archieve [noteid]=index (eventEmit)="emit($event)"></app-archieve>
-          <app-more [noteid]=index (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
+          <app-reminder [noteid]=index></app-reminder>
+          <app-collaborator [noteid]=index></app-collaborator>
+          <app-changecolor [colorid]=index (eventEmit)="emit($event)"></app-changecolor>
+          <app-image [noteid]=index></app-image>
+          <app-archieve [noteid]=index (eventEmit)="emit($event)" [Archive]= index.isArchived></app-archieve>
+          <app-more [noteid]=index  (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)" [deleted]=index.isDeleted></app-more>
           <!-- <app-undo></app-undo> -->
           <!-- <app-redo></app-redo> -->
         </span>

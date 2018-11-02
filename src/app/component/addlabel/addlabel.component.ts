@@ -118,7 +118,12 @@ update(labelId){
     console.log(error);
   });
 }
-
+// eventEmitLabel(event){
+//   if(event){
+//   this.eventEmit.emit(event)
+//   console.log(event);
+//   }
+// }
 }
 
 

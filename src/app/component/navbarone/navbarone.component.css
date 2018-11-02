@@ -85,9 +85,9 @@ input:focus{
   line-height: 24px;
 }
 .printlabel{
-  margin-left:20px;
+  margin-left:5px;
   margin-top:15px;
 }
-.display{
-  margin-bottom:20px;
+.space{
+  margin-right:20px;
 }

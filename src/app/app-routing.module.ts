@@ -15,6 +15,7 @@ import { TrashComponent } from './component/trash/trash.component';
 import { UpdateComponent } from './component/update/update.component';
 import { AddlabelComponent } from './component/addlabel/addlabel.component';
 import { SearchComponent } from './component/search/search.component';
+import { LabelclickComponent } from './component/labelclick/labelclick.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
     {path:'profile',component:ProfileComponent},
     {path:'archive',component:MainArchiveComponent},
     {path:'trash',component:TrashComponent},
-    {path:'search',component:SearchComponent}
+    {path:'search',component:SearchComponent},
+    {path:'label/:params',component:LabelclickComponent}
     // {path:'addlabel',component: AddlabelComponent }
   ]},
   { path: '', redirectTo:  'login', pathMatch:  'full' }

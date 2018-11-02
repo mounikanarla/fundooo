@@ -1,5 +1,5 @@
 <span data-toggle="tooltip" title="Collaborator">
   <button mat-icon-button>
-    <mat-icon  class="collab">person_add</mat-icon>
+    <mat-icon  class="collab" *ngIf="!isDeleted">person_add</mat-icon>
   </button>
 </span>

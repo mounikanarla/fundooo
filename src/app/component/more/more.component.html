@@ -1,11 +1,13 @@
 <span data-toggle="tooltip" title="more">
   <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon class="more">more_vert</mat-icon>
+    <mat-icon class="more" *ngIf="!isDeleted">more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu" class="menu">
-    <button (click)=delData() mat-menu-item>Delete Note</button>
+    <button (click)=delData(true) *ngIf="!deleted" mat-menu-item>Delete Note</button>
+    <button (click)=delData(false) *ngIf="deleted" mat-menu-item>Restore Note</button>
+
     <button mat-menu-item [matMenuTriggerFor]="addLabel" (click)=" $event.stopPropagation();">Add Label</button>
-    <mat-menu #addLabel="matMenu" >
+    <mat-menu #addLabel="matMenu">
     <span>Label Note</span>
     <div (click)=" $event.stopPropagation();">
     <input  matInput placeholder="search" class="searchicon" [(ngModel)]="query">
@@ -19,4 +21,5 @@
     <button mat-menu-item>Show CheckBox</button>
   </mat-menu>
 </span>
+
 

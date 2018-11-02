@@ -13,21 +13,28 @@ export class TrashComponent implements OnInit {
   token = localStorage.getItem('id');
 
   ngOnInit() {
-      this.httpService.getnote("notes/getTrashNotesList", this.token).subscribe(data => {
-        this.array = [];
-  
-        console.log("get cards list successfull", data);
-        var length = data['data'].data.length;
-  
-        for (var i = length - 1; i >= 0; i--) {
-          console.log(data['data'].data.length);
-          {
-            this.array.push(data['data'].data[i]);
-          }
-        }
-        console.log("archive array", this.array);
-      })
-    }
-  
+      this.trash();
+  }
+trash(){
+  this.httpService.getnote("notes/getTrashNotesList", this.token).subscribe(data => {
+    this.array = [];
 
+    console.log("get cards list successfull", data);
+    var length = data['data'].data.length;
+
+    for (var i = length - 1; i >= 0; i--) {
+      console.log(data['data'].data.length);
+      {
+        this.array.push(data['data'].data[i]);
+      }
+    }
+    console.log("archive array", this.array);
+  })
+}
+emit(event){
+  console.log(event)
+  if(event){
+    this.trash();
+  }
+}
 }

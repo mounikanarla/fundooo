@@ -8,6 +8,7 @@ import { SignupService } from '../../services/http.service';
 })
 
 export class MoreComponent implements OnInit {
+  show: boolean = true;
   token = localStorage.getItem('id');
   public body: any = {}
   public array = [];
@@ -16,27 +17,31 @@ export class MoreComponent implements OnInit {
   public notearray = [];
   constructor(private httpService: SignupService) { }
   @Input() noteid
+  @Input() deleted
   @Output() eventEmit = new EventEmitter();
 
   @Output() eventEmitLabel = new EventEmitter();
   accepted: Boolean;
+  public isDeleted=false;
   ngOnInit() {
     this.checkLabel();
-    // console.log(this.noteid.noteLabels)
-    // console.log(this.noteid[i].noteLabels.length)
+    if(this.noteid!=undefined && this.noteid.isDeleted==true){
+      this.isDeleted==true
+    }
+    console.log(this.deleted)
     if (this.noteid != null) {
       for (var i = 0; i < this.noteid.noteLabels.length; i++) {
         this.notearray.push(this.noteid.noteLabels);
       }
-      // console.log(this.notearray);
     }
+    // this.delData(this.flag)
   }
-  delData() {
+  delData(flag) {
     console.log(this.noteid)
     var array = []
     array.push(this.noteid.id)
     this.httpService.delPost("notes/trashNotes", this.body = {
-      "isDeleted": true,
+      "isDeleted": flag,
       "noteIdList": array
     }, this.token).subscribe((response) => {
       this.eventEmit.emit({});
@@ -63,7 +68,7 @@ export class MoreComponent implements OnInit {
           }
         }
       }
-        console.log(this.array, "Label array printing successsss ");
+        // console.log(this.array, "Label array printing successsss ");
       },
       error => {
         console.log("error in get LABELS", error);
@@ -76,12 +81,13 @@ export class MoreComponent implements OnInit {
     // console.log(this.eventEmitLabel.emit(label))
 
     if (this.noteid != null && label.isChecked == null) {
-      // console.log(label.isChecked)
+      // this.eventEmit.emit({});
 
-      this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/add", localStorage.getItem('id'))
+    this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/add", localStorage.getItem('id'))
         .subscribe((response) => {
           console.log("checklist added", response);
           this.eventEmit.emit({});
+          console.log("event1",this.eventEmit.emit({}));
 
         },
           (error) => {
@@ -90,6 +96,8 @@ export class MoreComponent implements OnInit {
         )
     }
     if (this.noteid != null && label.isChecked == true) {
+      // this.eventEmit.emit({});
+
       this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
         .subscribe((response) => {
           console.log("checklist added" + response)
@@ -101,4 +109,5 @@ export class MoreComponent implements OnInit {
         )
     }
   }
+ 
 }

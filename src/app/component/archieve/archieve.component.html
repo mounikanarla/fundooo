@@ -1,5 +1,6 @@
-<span data-toggle="tooltip" title="Archive" class="tooltip">
+<span data-toggle="tooltip" title="{{!Archive ? 'Archive': 'UnArchive'}}" class="tooltip">
   <button mat-icon-button>
-    <mat-icon  class="archive" (click)=archive()>archive</mat-icon>
+    <mat-icon class="archive" (click)=archive(true) *ngIf="!Archive && !isDeleted">archive</mat-icon>
+    <mat-icon class="archive" (click)=archive(false) *ngIf="Archive && isDeleted">unarchive</mat-icon>
   </button>
 </span>

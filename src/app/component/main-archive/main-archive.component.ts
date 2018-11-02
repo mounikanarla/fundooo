@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { SignupService } from '../../services/http.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class MainArchiveComponent implements OnInit {
   constructor(private httpService: SignupService) { }
   public archiveArray = []
   token = localStorage.getItem('id');
-
+  @Output() eventEmit = new EventEmitter();  
   ngOnInit() {
     this.getarchive()
   }
@@ -35,5 +35,10 @@ export class MainArchiveComponent implements OnInit {
       console.log("archive array", this.archiveArray);
     })
   }
-  
+  emit(event){
+    console.log(event)
+    if(event){
+      this.getarchive()
+    }
+  }
 }

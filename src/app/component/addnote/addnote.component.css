@@ -8,7 +8,7 @@
     height:min-content;
     border-radius: 10px;
     word-wrap: break-word;
-    width:auto;
+    width:200px;
 }
 mat-card-content{
     width:150px;

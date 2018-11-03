@@ -1,4 +1,4 @@
-<span data-toggle="tooltip" title="more">
+<span data-toggle="tooltip" title="{{!isDeleted ? 'more':''}}">
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon class="more" *ngIf="!isDeleted">more_vert</mat-icon>
   </button>

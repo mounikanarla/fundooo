@@ -1,4 +1,4 @@
-<div fxLayout="row wrap">
+<div fxLayout="row wrap" >
   <div fxFlex="5%"></div>
   <div fxFlex="90%" fxLayout="row wrap" fxLayoutGap="10px">
     <!-- mat-card starts -->
@@ -26,14 +26,16 @@
       <!-- Icon Print Starts -->
       <mat-card-actions>
         <span class=invisible>
-          <app-reminder [noteid]=index></app-reminder>
-          <app-collaborator [noteid]=index></app-collaborator>
-          <app-changecolor [colorid]=index (eventEmit)="emit($event)"></app-changecolor>
-          <app-image [noteid]=index></app-image>
-          <app-archieve [noteid]=index (eventEmit)="emit($event)" [Archive]= index.isArchived></app-archieve>
-          <app-more [noteid]=index  (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)" [deleted]=index.isDeleted></app-more>
+          <div fxFlex="100%" fxLayout="row" fxLayoutGap="10px">
+          <div fxFlex="10%"><app-reminder [noteid]=index></app-reminder></div>
+          <div fxFlex="14%"><app-collaborator [noteid]=index></app-collaborator></div>
+          <div fxFlex="14%"><app-changecolor [colorid]=index (eventEmit)="emit($event)"></app-changecolor></div>
+          <div fxFlex="14%"><app-image [noteid]=index></app-image></div>
+          <div fxFlex="14%"><app-archieve [noteid]=index (eventEmit)="emit($event)" [Archive]= index.isArchived></app-archieve></div>
+          <div fxFlex="14%"><app-more [noteid]=index  (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)" [deleted]=index.isDeleted></app-more></div>
           <!-- <app-undo></app-undo> -->
           <!-- <app-redo></app-redo> -->
+          </div>
         </span>
       </mat-card-actions>
       <!-- Icon printing Ends -->

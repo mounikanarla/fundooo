@@ -22,11 +22,11 @@ export class MoreComponent implements OnInit {
 
   @Output() eventEmitLabel = new EventEmitter();
   accepted: Boolean;
-  public isDeleted=false;
+  public isDeleted = false;
   ngOnInit() {
     this.checkLabel();
-    if(this.noteid!=undefined && this.noteid.isDeleted==true){
-      this.isDeleted==true
+    if (this.noteid != undefined && this.noteid.isDeleted == true) {
+      this.isDeleted == true
     }
     console.log(this.deleted)
     if (this.noteid != null) {
@@ -58,16 +58,15 @@ export class MoreComponent implements OnInit {
     this.httpService.getnote("noteLabels/getNoteLabelList", localStorage.getItem('id')).subscribe(
       response => {
         this.array = response['data'].details;
-        if(this.noteid.noteLabels.length>0)
-        {
-        for (var i = 0; i < this.array.length; i++) {
-          for (var j = 0; j < this.noteid.noteLabels.length; j++) {
-            if (this.array[i].id == this.noteid.noteLabels[j].id) {
-              this.array[i].isChecked = true;
+        if (this.noteid.noteLabels.length > 0) {
+          for (var i = 0; i < this.array.length; i++) {
+            for (var j = 0; j < this.noteid.noteLabels.length; j++) {
+              if (this.array[i].id == this.noteid.noteLabels[j].id) {
+                this.array[i].isChecked = true;
+              }
             }
           }
         }
-      }
         // console.log(this.array, "Label array printing successsss ");
       },
       error => {
@@ -83,11 +82,11 @@ export class MoreComponent implements OnInit {
     if (this.noteid != null && label.isChecked == null) {
       // this.eventEmit.emit({});
 
-    this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/add", localStorage.getItem('id'))
+      this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/add", localStorage.getItem('id'))
         .subscribe((response) => {
           console.log("checklist added", response);
           this.eventEmit.emit({});
-          console.log("event1",this.eventEmit.emit({}));
+          console.log("event1", this.eventEmit.emit({}));
 
         },
           (error) => {
@@ -109,5 +108,5 @@ export class MoreComponent implements OnInit {
         )
     }
   }
- 
+
 }

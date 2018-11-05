@@ -13,6 +13,8 @@ export class NotesComponent implements OnInit {
 
   constructor(private getService: SignupService, public route: ActivatedRoute, public router: Router) { }
   private press: boolean = true;
+  private click:boolean= true;
+
   @Output() eventEmit = new EventEmitter();  
 
   @Output() onNewEntryAdded = new EventEmitter();
@@ -23,12 +25,19 @@ export class NotesComponent implements OnInit {
   private id = localStorage.getItem('id');
   public body: any = {}
   public bgcolor="#FFFFFF";
+  public notepin
   public label="";
+  public dataarray=[];
+  public checklist=[];
   ngOnInit() {
   }
   toggleChild() {
     this.press = !this.press;
   }
+  checkitem(){
+    this.click=!this.click;
+  }
+  
   /*
   * @description: notes() is used to post the data that are getting from the user
   */
@@ -39,18 +48,18 @@ export class NotesComponent implements OnInit {
     this.title = document.getElementById("title").textContent;
     this.description = document.getElementById("description").textContent;
     this.press = !this.press;
-    
     console.log(this.title);
     console.log(this.description);
     console.log(this.id);
     // this.onNewEntryAdded.emit({});
   
     // post the data by passing the parameters
-    this.getService.dataPost("notes/addnotes", this.body = {
+    if(this.press==true){
+       this.getService.dataPost("notes/addnotes", this.body = {
       "title": this.title,
       "description": this.description,
-      "checklist": "",
-      "isPinned": false,
+      // "checklist": "",
+      "isPined": "false",
       "color": color,
       "labelIdList":JSON.stringify(this.arraylabel)
     }, this.id).subscribe((response) => {
@@ -65,16 +74,37 @@ export class NotesComponent implements OnInit {
       })
 
     },
-      (error) => {
-        console.log(error);
+  )
+}else{
+  this.checklist=this.dataarray;
+  console.log(this.checklist)
+  this.getService.dataPost("notes/addnotes", this.body = {
+    "title": this.title,
+    // "check": this.description,
+    "checklist": this.checklist,
+    "isPined": "false",
+    "color": color,
+    "labelIdList":JSON.stringify(this.arraylabel)
+  }, this.id).subscribe((response) => {
+    // If the response is true then the data will be emitted
+    console.log("successful", response);
+    console.log(this.id);
+    this.getService.getnote("notes/getNotesList", this.id).subscribe((response) => {
+      console.log(response);
+      this.onNewEntryAdded.emit({});
+      this.eventEmit.emit({});
 
-      }
-    )
+    })
+
+  },
+)
+
+}
   }
-  
-  emit(event){
+    emit(event){
     this.bgcolor=event;
-
+    this.notepin=true;
+    console.log(this.notepin)
   }
   public arraylabel=[]
   public labelevent=[]
@@ -86,7 +116,7 @@ export class NotesComponent implements OnInit {
   }
   else{
     this.arraylabel.splice(this.arraylabel.indexOf(event),1)
-    this.labelevent.splice(this.labelevent.indexOf(event),1)
+     this.labelevent.splice(this.labelevent.indexOf(event),1)
   }
   }
 
@@ -104,4 +134,43 @@ export class NotesComponent implements OnInit {
     }
   )
   }
+  public data;
+  public i=0;
+enter(){
+  this.i++;
+  if(this.data!=null){
+    console.log(event,"keydown");
+    var obj={
+      "index":this.i,
+      "data":this.data
+    }
+    this.dataarray.push(obj);
+    this.data=null
+    
+  }
+}
+ondelete(deletedObj){
+  console.log("ondelete fumction runnig");
+  for(var i=0;i<this.dataarray.length;i++){
+    if(deletedObj.index==this.dataarray[i].index){
+      this.dataarray.splice(i,1);
+      break;
+    }
+  }
+  console.log(this.dataarray);
+  
+}
+
+editing(event,edited){
+  if(event.code=="Enter"){
+    console.log("enter pressed");
+    for(var i=0;i<this.dataarray.length;i++){
+      if(edited.index==this.dataarray[i].index){
+        this.dataarray[i].data==edited.data
+      }
+    }
+    console.log(this.dataarray);
+    
+  }
+}
 }

@@ -46,6 +46,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { SearchPipe } from './search.pipe';
 import { SearchComponent } from './component/search/search.component';
 import { LabelclickComponent } from './component/labelclick/labelclick.component';
+import { PinComponent } from './component/pin/pin.component';
 
 
 
@@ -78,6 +79,7 @@ import { LabelclickComponent } from './component/labelclick/labelclick.component
     SearchPipe,
     SearchComponent,
     LabelclickComponent,
+    PinComponent,
     
   ],
   imports: [

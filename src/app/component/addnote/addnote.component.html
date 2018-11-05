@@ -4,11 +4,16 @@
     <!-- mat-card starts -->
     <mat-card  class="example-card" *ngFor='let index of newData | search:searchInput' [ngStyle]="{'background-color':index.color}">
       <!--Title printing starts -->
-      <mat-card-header (click)="openDialog(index)">
-        <mat-card-title placeholder="Title" >
-          {{index.title }}
-        </mat-card-title>
-      </mat-card-header>
+        <div fxLayout="row" fxFlex="100%">
+          <div fxFlex="90%">
+          <mat-card-header (click)="openDialog(index)">
+            <mat-card-title placeholder="Title" >
+              {{index.title }}
+            </mat-card-title>
+          </mat-card-header>
+          </div>
+          <div fxFlex="10%" class="pin"><app-pin [noteid]=index (eventEmit)="emit($event)" [Pin]= index.isPined></app-pin></div>
+        </div>
        <!--Title printing Ends -->
        <!-- Description Printing starts -->
       <mat-card-content (click)="openDialog(index)" >

@@ -4,13 +4,13 @@
             <div fxLayout="row" fxLayoutAlign="center center" fxFlex=100%>
                 <div fxFlex=25%></div>
                 <div fxFlex=50% fxLayoutAlign="center center">
-                <mat-card class="card" *ngIf="press"  (click)=toggleChild() >
+                <mat-card class="card" *ngIf="press"  (click)=toggleChild()>
                     <div fxFlex="70%">
                         Take a note...
                     </div>
                     <div fxFlex="30%">
                         <div fxLayout="row" fxFlex="40%">
-                            <mat-icon style="opacity: 0.5;">list</mat-icon>
+                            <mat-icon style="opacity: 0.5;" *ngIf="click" (click)=checkitem()>check_box</mat-icon>
                         </div>
                         <div  fxFlex="40%">
                             <mat-icon style="opacity: 0.5;">insert_photo</mat-icon>
@@ -35,13 +35,14 @@
                                         <div fxFlex=95%>
                                             <div data-text="Title" id="title" contenteditable="true" class="title" role="textbox" aria-label="Note"  spellcheck="true"></div> 
                                         </div>
-                                        <div fxFlex=5% style="opacity: 0.5;">
-                                            <a mat-list-item href="#" ><img src="../../../assets/pin.svg"></a>
+                                        <div fxFlex=5% class="pin">
+                                            <app-pin (eventEmit)="emit($event)"></app-pin>
                                         </div>
                                     </div>
                                 </mat-card-header>
                             </div>
                             <div fxFlex=65%>
+                                <div>
                                 <mat-card-content>
                                     <div data-text="Type your text" id="description" contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note" class="textbar" ></div>
                                 </mat-card-content>
@@ -52,7 +53,22 @@
                                         </mat-chip>
                                         </div>
                                 </mat-chip-list>
+                                </div>
+                                <div *ngIf="!click">
+                                <div *ngFor="let data of dataarray" fxLayout="row">
+                                <mat-checkbox fxFlex="5%"></mat-checkbox>
+                                <input fxFlex="90" *ngIf="!click" class="textbar"  [(ngModel)]=data.data (keydown)="editing($event.data)">
+                                    <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="delete">close</mat-icon>
+                                </div>
+                                <mat-divider></mat-divider>
+                                 <div fxLayout="row">
+                                    <mat-icon fxFlex="5%">add</mat-icon>
+                                    <input [(ngModel)]=data fxFlex="95%" class="textbarcheck" placeholder="list item" (keydown.enter)="enter()">
+                                </div>
+                                <mat-divider></mat-divider>
                             </div>
+                            </div>
+
                             <div fxFlex=15%>
                                 <mat-card-actions>
                                     <div fxLayout="row"  class="icons">
@@ -61,10 +77,8 @@
                                             <app-collaborator></app-collaborator>
                                             <app-changecolor (eventEmit)="emit($event)"></app-changecolor>
                                             <app-image></app-image>
-                                            <app-archieve></app-archieve>
+                                            <app-archieve (eventEmit)="emit($event)"></app-archieve>
                                             <app-more (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
-                                            <!-- <app-undo></app-undo>
-                                            <app-redo></app-redo> -->
                                         </div>
                                         <div fxFlex=20% class="button">
                                             <!-- <div> -->

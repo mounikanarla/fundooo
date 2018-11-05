@@ -24,8 +24,8 @@
 }
 .textbar:empty:before{
     content:attr(data-text);
-    /* display:block; */
-}
+    display:block;
+} 
 .icons{
     padding-bottom:15px;
     position: relative;
@@ -41,3 +41,23 @@
 .title:empty:before{
     content:attr(data-text);
 }
+.pin{
+    opacity:0.5;
+}
+.pin:hover{
+    opacity:1;
+}
+.addcheck{
+     margin-top:10px;
+} 
+.textbarcheck{
+    border:none;
+    outline:none;
+    /* padding-left: 17px; */
+    /* margin-top: 15px; */
+
+}
+/* .textbarcheck:empty:before{
+    content:attr(data-text);
+    /* display:block; */
+/* } */ 

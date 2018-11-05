@@ -36,7 +36,9 @@ update(){
     "noteId": this.id,
     "title": this.title,
     "description": this.description,
-    "color":this.color
+    "color":this.color,
+    // "label":this.arraylabel
+
   }, this.token).subscribe((response) => {
     console.log("successful", response);
     this.eventEmit.emit({});
@@ -53,9 +55,20 @@ emit(event){
 
   this.bgcolor=event
 }
-labelarray=[]
+public arraylabel=[]
+public labelevent=[]
 eventEmitLabel(event) {
-  this.labelarray=event
+  console.log(event);
+  // "label":this.arraylabel;
+
+  // if(this.labelevent.indexOf(event)<0){
+  //   this.labelevent.push(event);
+  //   this.arraylabel.push(event.label);
+  // }
+  // else{
+  //   this.arraylabel.splice(this.arraylabel.indexOf(event.label),1)
+  //    this.labelevent.splice(this.labelevent.indexOf(event),1)
+  // }
 
 }
    

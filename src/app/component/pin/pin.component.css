@@ -1,0 +1,10 @@
+.notepin{
+    opacity: 0.5;
+    cursor: pointer;
+    /* background-color:blue; */
+}
+.notepin:hover{
+    opacity:1;
+    cursor: pointer;
+
+}

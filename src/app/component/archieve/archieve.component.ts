@@ -70,4 +70,3 @@ export class ArchieveComponent implements OnInit {
       })
   }
 }
-

@@ -1,4 +1,4 @@
-<div style="position:relative">
+<div class="notesPosition">
     <app-notes (onNewEntryAdded)="addNewEntry($event)"></app-notes>
     <app-addnote  [newData]=array (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)" ></app-addnote>
 </div>

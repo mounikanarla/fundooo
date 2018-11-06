@@ -66,6 +66,6 @@ export class PinComponent implements OnInit {
         console.log("error", error);
 
       })
+    }
   }
-}
 }

@@ -9,27 +9,24 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class AddlabelComponent implements OnInit {
 constructor(
-    public dialogRef: MatDialogRef<AddlabelComponent>,
+  public dialogRef: MatDialogRef<AddlabelComponent>,
   @Inject(MAT_DIALOG_DATA) public data:any ,private httpService: SignupService) {}
   @ViewChild('myLabel') myLabel:ElementRef;
   @ViewChild('myUpdate') myUpdate:ElementRef;
   @Output() eventEmit = new EventEmitter();  
-
   press: boolean = true;
-  // editlabel:boolean=true;
-  editClick=false;
-  editLabel;
-  editId;
-  editDoneIcon=true;
-  editable=false;
-    ngOnInit() {
+  public editClick=false;
+  public editLabel;
+  public editId;
+  public editDoneIcon=true;
+  public editable=false;
+  ngOnInit() {
     this.getLabels();
   }
   toggleChild() {
     this.press=!this.press;
     
   }
-
   onClose():void{
   this.dialogRef.close();
   this.addLabel()
@@ -43,22 +40,20 @@ constructor(
   public label;
   public labelArray=[];
   addLabel(){
-
-    // console.log(this.myDiv.nativeElement.innerHTML);
     this.httpService.delPost("noteLabels",{
       "label":this.myLabel.nativeElement.innerHTML,
       "isDeleted":false,
       "userId":localStorage.getItem('userId')
-    },localStorage.getItem('id')).subscribe(response=>{
+    },localStorage.getItem('id'))
+    .subscribe(response => {
       console.log("success in createpostlabel",response)
     },
-    error=>{
+    error => {
       console.log("error in create postlabel",error)
     })
   }
-getLabels(){
- 
-  this.httpService.getnote("noteLabels/getNoteLabelList",localStorage.getItem('id')).subscribe(
+  getLabels(){
+    this.httpService.getnote("noteLabels/getNoteLabelList",localStorage.getItem('id')).subscribe(
     response=>{
       this.labelArray=[];
       console.log(response['data'].details);

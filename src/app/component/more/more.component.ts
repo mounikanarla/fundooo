@@ -26,7 +26,7 @@ export class MoreComponent implements OnInit {
   ngOnInit() {
     this.checkLabel();
     if (this.noteid != undefined && this.noteid.isDeleted == true) {
-      this.isDeleted == true
+      this.isDeleted = true
     }
     console.log(this.deleted)
     if (this.noteid != null) {

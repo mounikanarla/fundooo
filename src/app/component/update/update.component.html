@@ -1,47 +1,50 @@
-<div> 
-        <div fxLayout="row" fxFlex=100%>
-            <mat-card class="notecard" [ngStyle]="{'background-color':bgcolor}">
-                <div fxLayout="column" fxFlex=100%>
-                    <div  fxFlex=20%>
-                        <!-- <mat-card-header> -->
-                            <div fxLayout="row" fxFlex=100%>       
-                                <div fxFlex=95%>
-                                    <div [innerHTML]="data.title" contenteditable="true" class="title" id="title"></div> 
-                                </div>
-                                <div fxFlex=5% style="opacity: 0.5;">
-                                    <a mat-list-item href="#" ><img src="../../../assets/pin.svg"></a>
-                                </div>
-                            </div>
-                        <!-- </mat-card-header> -->
+<div>
+    <div fxLayout="row" fxFlex=100%>
+        <mat-card class="notecard" [ngStyle]="{'background-color':bgcolor}">
+            <div fxLayout="column" fxFlex=100%>
+                <div fxFlex=20%>
+                    <!-- <mat-card-header> -->
+                    <div fxLayout="row" fxFlex=100%>
+                        <div fxFlex=95%>
+                            <div [innerHTML]="data.title" contenteditable="true" class="title" id="title"></div>
+                        </div>
+                        <div fxFlex=5% style="opacity: 0.5;">
+                            <a mat-list-item href="#"><img src="../../../assets/pin.svg"></a>
+                        </div>
                     </div>
-                    <div fxFlex=65%>
-                        <!-- <mat-card-content> -->
-                           <div  id="description" [innerHTML]="data.description" contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note" class="textbar" tabindex="0" spellcheck="true"></div>
-                        <!-- </mat-card-content> -->
-    
-                     </div>
-                    <div fxFlex=15% class="action">
-                        <!-- <mat-card-actions> -->
-                            <div fxLayout="row"  class="icons">
-                                <div fxFlex=80% fxLayoutGap="20px">
-                                    <app-reminder></app-reminder>
-                                    <app-collaborator></app-collaborator>
-                                    <app-changecolor [colorid]=data.id (eventEmit)="emit($event)"></app-changecolor>
-                                    <app-image></app-image>
-                                    <app-archieve [noteid]=data.id (eventEmit)="emit($event)"></app-archieve>
-                                    <app-more [noteid]=data.id (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
-                                    <!-- <app-undo></app-undo>
-                                    <app-redo></app-redo> -->
-                                </div>
-                                <div fxFlex=20% class="button">
-                                    <div>
-                                        <button mat-button (click)= onClick()>CLOSE</button>
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- </mat-card-actions> -->
-                    </div>
+                    <!-- </mat-card-header> -->
                 </div>
-            </mat-card>
-        </div>
-    </div> 
+                <div fxFlex=65%>
+                    <!-- <mat-card-content> -->
+                    <div id="description" [innerHTML]="data.description" contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note"
+                        class="textbar" tabindex="0" spellcheck="true"></div>
+                    <!-- </mat-card-content> -->
+                </div>
+                <div *ngFor="let label of label">
+                    <mat-chip *ngIf="!label.isDeleted">{{label.label}}
+                    <mat-icon matChipRemove (click)="removelabel(data,label)">cancel</mat-icon>
+                    </mat-chip>
+                </div>
+                <div fxFlex=15% class="action">
+                    <!-- <mat-card-actions> -->
+                    <div fxLayout="row" class="icons">
+                        <div fxFlex=80% fxLayoutGap="20px">
+                            <app-reminder></app-reminder>
+                            <app-collaborator></app-collaborator>
+                            <app-changecolor [colorid]=data.id (eventEmit)="emit($event)"></app-changecolor>
+                            <app-image></app-image>
+                            <app-archieve [noteid]=data.id (eventEmit)="emit($event)"></app-archieve>
+                            <app-more [noteid]=data.id (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
+                        </div>
+                        <div fxFlex=20% class="button">
+                            <div>
+                                <button mat-button (click)=onClick()>CLOSE</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </mat-card-actions> -->
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

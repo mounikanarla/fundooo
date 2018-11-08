@@ -39,21 +39,22 @@ export class LoginComponent implements OnInit {
 
     });
     obs.subscribe((response) => {
-      console.log("login successfull")
+      // console.log("login successfull")
       localStorage.setItem('id', response["id"]);
       localStorage.setItem('firstName', response["firstName"]);
       localStorage.setItem('lastName', response["lastName"]);
       localStorage.setItem('email', response["email"]);
       localStorage.setItem('userId', response["userId"])
+      localStorage.setItem('imageUrl',response["imageUrl"])
       this.router.navigate(['home']);
       this.snackBar.open("login succesfull", "ok", {
         duration: 2000,
       });
-      console.log(response);
+      // console.log(response);
     },
       (error) => {
-        console.log(error)
-        console.log("login unsuccessfull")
+        // console.log(error)
+        // console.log("login unsuccessfull")
         this.snackBar.open("Invalid details", "false", {
           duration: 2000,
         });

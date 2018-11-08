@@ -16,7 +16,11 @@ export class UpdateComponent implements OnInit {
   public color;
   public bgcolor=this.data.color;
   public label;
+  public checkLabels
   ngOnInit() {
+    // console.log("checkingdata",this.data)
+    this.label=this.data.noteLabels;
+    
   }
   constructor(private getService: SignupService,
     public dialogRef: MatDialogRef<UpdateComponent>,
@@ -37,7 +41,7 @@ update(){
     "title": this.title,
     "description": this.description,
     "color":this.color,
-    // "label":this.arraylabel
+    "label":this.label
 
   }, this.token).subscribe((response) => {
     console.log("successful", response);
@@ -55,21 +59,37 @@ emit(event){
 
   this.bgcolor=event
 }
-public arraylabel=[]
-public labelevent=[]
+
 eventEmitLabel(event) {
   console.log(event);
-  // "label":this.arraylabel;
-
-  // if(this.labelevent.indexOf(event)<0){
-  //   this.labelevent.push(event);
-  //   this.arraylabel.push(event.label);
-  // }
-  // else{
-  //   this.arraylabel.splice(this.arraylabel.indexOf(event.label),1)
-  //    this.labelevent.splice(this.labelevent.indexOf(event),1)
-  // }
+  var flag=false,index;
+  for(var i=0;i<this.label.length;i++){
+    if(event.id==this.label[i].id){
+      flag=true;
+      index=i;
+    }
+  }
+  if(flag==true){
+    this.label.splice(index,1)
+  }
+  else{
+    this.label.push(event);
+  }
+ 
 
 }
-   
+removelabel(data, label) {
+  // this.accepted = true;
+  console.log(data)
+  console.log(label);
+  this.getService.logoutPost("notes/" + data.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
+    .subscribe((response) => {
+      console.log("checklist added" + response)
+      this.eventEmit.emit({});
+    },
+      (error) => {
+        console.log("error occured" + error)
+      }
+    )
+}
 }

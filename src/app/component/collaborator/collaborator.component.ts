@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-collaborator',
@@ -9,10 +9,10 @@ export class CollaboratorComponent implements OnInit {
 
   constructor() { }
   @Input() noteid
-  public isDeleted=false;
+  public isDeleted = false;
   ngOnInit() {
-    if(this.noteid!=undefined && this.noteid.isDeleted==true){
-      this.isDeleted=true
+    if (this.noteid != undefined && this.noteid.isDeleted == true) {
+      this.isDeleted = true
     }
   }
 

@@ -28,7 +28,7 @@ export class MainArchiveComponent implements OnInit {
       for (var i = length - 1; i >= 0; i--) {
         console.log(data['data'].data.length);
         // Checking the condition that card is archived or not and it is pushing into array
-        if (data['data'].data[i].isArchived == true) {
+        if (data['data'].data[i].isDeleted == false) {
           this.archiveArray.push(data['data'].data[i]);
         }
       }

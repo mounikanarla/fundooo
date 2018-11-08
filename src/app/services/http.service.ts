@@ -77,6 +77,16 @@ export class SignupService {
     };
     return this.http.post(this.URL + '/' + value, data, colorOption)
   }
+    
+  loadingImage(url,body,access_token){
+  console.log(access_token);
+  var http={
+    headers:new HttpHeaders({
+     'Authorization':access_token
+    })
+  };
+  return this.http.post(this.URL+"/"+url,body,http)
+}
 }
 
 

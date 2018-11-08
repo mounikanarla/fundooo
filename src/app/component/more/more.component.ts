@@ -1,5 +1,8 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { SignupService } from '../../services/http.service';
+import {MatDialog} from '@angular/material/dialog';
+import {TrashComponent} from '../trash/trash.component'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-more',
@@ -15,7 +18,10 @@ export class MoreComponent implements OnInit {
   public check: boolean = true;
   public label;
   public notearray = [];
-  constructor(private httpService: SignupService) { }
+  public arraynotes:any
+  public model:any
+
+  constructor(private httpService: SignupService,public dialog: MatDialog,public snackBar: MatSnackBar) { }
   @Input() noteid
   @Input() deleted
   @Output() eventEmit = new EventEmitter();
@@ -25,10 +31,10 @@ export class MoreComponent implements OnInit {
   public isDeleted = false;
   ngOnInit() {
     this.checkLabel();
-    if (this.noteid != undefined && this.noteid.isDeleted == true) {
+    if (this.noteid != undefined && this.noteid['isDeleted'] == true) {
       this.isDeleted = true
     }
-    console.log(this.deleted)
+    // console.log(this.deleted)
     if (this.noteid != null) {
       for (var i = 0; i < this.noteid.noteLabels.length; i++) {
         this.notearray.push(this.noteid.noteLabels);
@@ -108,5 +114,30 @@ export class MoreComponent implements OnInit {
         )
     }
   }
+    
+deleteForever() {
+  
+    console.log(this.noteid)
+    var array = []
+    array.push(this.noteid.id)
+      this.model = {
+        "isDeleted": true,
+        "noteIdList": array
+      }
+      console.log(this.model, "trash");
+      this.httpService.delPost('notes/deleteForeverNotes', this.model,localStorage.getItem('id')).subscribe(response => {
+        console.log(response, "success");
+        this.eventEmit.emit({});
+        
+        this.snackBar.open("Deleted Note Permanently", "trash", {
+          duration: 10000,
+        });
+      }),
+        error => {
+          console.log(error, "error occured in trash");
+        }
+   
+}
+
 
 }

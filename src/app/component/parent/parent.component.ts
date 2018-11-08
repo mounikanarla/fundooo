@@ -28,16 +28,16 @@ export class ParentComponent implements OnInit {
     this.httpService.getnote("notes/getNotesList", this.token).subscribe(data => {
       this.array = [];
 
-      console.log("get cards list successfull", data);
+      // console.log("get cards list successfull", data);
       var length = data['data'].data.length;
       // Loop is initialized to the cards list in the reverse order 
       for (var i = length - 1; i >= 0; i--) {
-        console.log(data['data'].data.length);
+        // console.log(data['data'].data.length);
         if (data['data'].data[i].isDeleted == false && data['data'].data[i].isArchived == false) {
           this.array.push(data['data'].data[i]);
         }
       }
-      console.log("array", this.array);
+      // console.log("array", this.array);
     })
   }
   emit(event) {

@@ -46,10 +46,10 @@ constructor(
       "userId":localStorage.getItem('userId')
     },localStorage.getItem('id'))
     .subscribe(response => {
-      console.log("success in createpostlabel",response)
+      // console.log("success in createpostlabel",response)
     },
     error => {
-      console.log("error in create postlabel",error)
+      // console.log("error in create postlabel",error)
     })
   }
   getLabels(){
@@ -64,21 +64,21 @@ constructor(
         }
       }
       this.eventEmit.emit({});
-      console.log(this.labelArray,"Label array printing successsss ");
+      // console.log(this.labelArray,"Label array printing successsss ");
     },
     error=>{
-      console.log("error in get LABELS",error);
+      // console.log("error in get LABELS",error);
     }
   )
 }
 delete(labelId){
-  console.log(labelId)
+  // console.log(labelId)
   this.httpService.deleteLabel("/noteLabels/"+labelId+"/deleteNoteLabel",localStorage.getItem('id'))
   .subscribe((response) =>{
-    console.log("Deleted data",response);
+    // console.log("Deleted data",response);
     this.getLabels();
   },(error) => {
-    console.log(error);
+    // console.log(error);
   });
 }
 edit(labelId){
@@ -94,9 +94,8 @@ update(labelId){
   this.editClick=false;
   this.editDoneIcon=true;
   this.editable=false;
-  console.log("edit function");
-  console.log(labelId)
-  console.log(this.myUpdate.nativeElement.innerHTML)
+  // console.log(labelId)
+  // console.log(this.myUpdate.nativeElement.innerHTML)
   // var str=this.myUpdate.nativeElement.innerHTML
   this.httpService.delPost("noteLabels/"+labelId.id+"/updateNoteLabel",
   {
@@ -113,12 +112,7 @@ update(labelId){
     console.log(error);
   });
 }
-// eventEmitLabel(event){
-//   if(event){
-//   this.eventEmit.emit(event)
-//   console.log(event);
-//   }
-// }
+
 }
 
 

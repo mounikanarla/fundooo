@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -47,6 +47,7 @@ import { SearchPipe } from './search.pipe';
 import { SearchComponent } from './component/search/search.component';
 import { LabelclickComponent } from './component/labelclick/labelclick.component';
 import { PinComponent } from './component/pin/pin.component';
+// import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 
 
 
@@ -82,6 +83,7 @@ import { PinComponent } from './component/pin/pin.component';
     PinComponent,
     
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -106,7 +108,7 @@ import { PinComponent } from './component/pin/pin.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddnoteComponent,UpdateComponent,NavbaroneComponent,AddlabelComponent]
+  entryComponents:[AddnoteComponent,UpdateComponent,NavbaroneComponent,AddlabelComponent,TrashComponent]
   
 
 })

@@ -28,6 +28,7 @@
   border:none;
   outline:none;
   background-color:rgb(235, 168, 23);
+  padding-left:30px;
 }
 input:focus{
   background:white;
@@ -90,4 +91,33 @@ input:focus{
 }
 .space{
   margin-right:20px;
+}
+.displayname{
+  color:black;
+  font-family:Bookman, URW Bookman L, serif;
+  margin-left:10px;
+}
+.menuicon{
+  color:black
+}
+.searchicon{
+  position:fixed;
+  margin-top:8px;
+  color:black;
+}
+.sideicon{
+  margin-top:20px;
+  color:black
+}
+.profileicon{
+  float:right;
+  margin-left:30%;
+}
+.image{
+  width:20%;
+  /* margin-top:80%; */
+  margin-left:30%
+}
+.buttonimage{
+  margin-right:15%
 }

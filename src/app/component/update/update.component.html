@@ -34,7 +34,7 @@
                             <app-changecolor [colorid]=data.id (eventEmit)="emit($event)"></app-changecolor>
                             <app-image></app-image>
                             <app-archieve [noteid]=data.id (eventEmit)="emit($event)"></app-archieve>
-                            <app-more [noteid]=data.id (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
+                            <app-more [noteid]=data (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
                         </div>
                         <div fxFlex=20% class="button">
                             <div>

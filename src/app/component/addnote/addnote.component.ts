@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { SignupService } from '../../services/http.service';
+import { SignupService } from '../../core/services/http/http.service';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
+import { DataServiceService } from '../../core/services/dataServices/data-service.service';
 
 
 @Component({
@@ -11,9 +12,10 @@ import { UpdateComponent } from '../update/update.component';
 })
 export class AddnoteComponent implements OnInit {
 
-  constructor(private httpService: SignupService, public dialog: MatDialog) { }
+  constructor(private httpService: SignupService, public dialog: MatDialog,private data: DataServiceService) { }
   public array = [];
   token = localStorage.getItem('id');
+  public condition=false;
 
   /*
   * @description: @INPUT AND @Output are decorators used to bind the data
@@ -29,6 +31,11 @@ export class AddnoteComponent implements OnInit {
     if (this.newData != null && this.newData.isDeleted == true) {
 
     }
+    this.data.currentMessage1.subscribe(message => {
+      this.condition = message;
+      console.log(this.condition)
+    }
+    )
   }
   /*
   * @description : emit(event) is used to emit the event coming from child component at the time of action

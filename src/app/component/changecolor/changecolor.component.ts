@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { SignupService } from '../../services/http.service';
+import { SignupService } from '../../core/services/http/http.service';
 
 @Component({
   selector: 'app-changecolor',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataServiceService } from '../../data-service.service';
-import { SignupService } from '../../services/http.service';
+import { DataServiceService } from '../../core/services/dataServices/data-service.service';
+import { SignupService } from '../../core/services/http/http.service';
 
 @Component({
   selector: 'app-search',
@@ -19,6 +19,9 @@ export class SearchComponent implements OnInit {
       console.log(this.message)
     }
     )
+    // this.data.changeView.subscribe(message=>{
+
+    // })
 
   }
   getCard() {

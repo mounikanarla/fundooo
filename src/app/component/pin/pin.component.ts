@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SignupService } from '../../services/http.service';
+import { SignupService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-pin',

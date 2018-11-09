@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { SignupService } from '../../services/http.service';
+import { SignupService } from '../../core/services/http/http.service';
 import {MatDialog} from '@angular/material/dialog';
 import {TrashComponent} from '../trash/trash.component'
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,16 +30,13 @@ export class MoreComponent implements OnInit {
   accepted: Boolean;
   public isDeleted = false;
   ngOnInit() {
-    this.checkLabel();
     if (this.noteid != undefined && this.noteid['isDeleted'] == true) {
       this.isDeleted = true
     }
-    // console.log(this.deleted)
-    if (this.noteid != null) {
-      for (var i = 0; i < this.noteid.noteLabels.length; i++) {
-        this.notearray.push(this.noteid.noteLabels);
-      }
-    }
+    // console.log(this.noteid)
+    
+    this.checkLabel();
+
     // this.delData(this.flag)
   }
   delData(flag) {
@@ -64,7 +61,9 @@ export class MoreComponent implements OnInit {
     this.httpService.getnote("noteLabels/getNoteLabelList", localStorage.getItem('id')).subscribe(
       response => {
         this.array = response['data'].details;
-        if (this.noteid.noteLabels.length > 0) {
+        // console.log(this.noteid.noteLabels.length);
+        
+        if (this.noteid.noteLabels!= undefined) {
           for (var i = 0; i < this.array.length; i++) {
             for (var j = 0; j < this.noteid.noteLabels.length; j++) {
               if (this.array[i].id == this.noteid.noteLabels[j].id) {

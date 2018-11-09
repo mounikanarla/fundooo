@@ -1,8 +1,8 @@
 <div fxLayout="row wrap">
-  <div fxFlex="5%"></div>
-  <div fxFlex="90%" fxLayout="row wrap" fxLayoutGap="10px">
+  <div fxFlex.lg="13%" fxFlex.md="10%" fxFlex.sm="5%" ></div>
+  <div fxFlex.lg="74%" fxFlex.md="80%" fxFlex.sm="90%" fxFlex.md="100%" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="30px">
     <!-- mat-card starts -->
-    <mat-card class="example-card" *ngFor='let index of newData | search:searchInput' [ngStyle]="{'background-color':index.color}">
+    <mat-card class="example-card" ngStyle.xs="width:100%" [ngClass]="{'viewgrid':condition,'viewlist':!condition}" *ngFor='let index of newData | search:searchInput' [ngStyle]="{'background-color':index.color}">
       <!--Title printing starts -->
       <div fxLayout="row" fxFlex="100%">
         <div fxFlex="90%">
@@ -21,11 +21,11 @@
       <mat-card-content (click)="openDialog(index)">
         {{index.description}}
       </mat-card-content>
-      <div *ngFor="let list of index.noteCheckLists">
+      <div *ngFor="let list of index.noteCheckLists" (click)="openDialog(index)">
         <mat-checkbox></mat-checkbox>   {{list.itemName}}
       </div>
       <mat-chip-list>
-        <div *ngFor="let label of index.noteLabels">
+        <div *ngFor="let label of index.noteLabels" (click)="openDialog(index)">
           <mat-chip *ngIf="!label.isDeleted">{{label.label}}
             <mat-icon matChipRemove (click)="removelabel(index,label)">cancel</mat-icon>
           </mat-chip>
@@ -35,7 +35,7 @@
       <!-- Icon Print Starts -->
       <mat-card-actions>
         <span class=invisible>
-          <div fxFlex="100%" fxLayout="row" fxLayoutGap="10px">
+          <div fxFlex="100%" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
             <div fxFlex="10%">
               <app-reminder [noteid]=index></app-reminder>
             </div>
@@ -48,10 +48,10 @@
             <div fxFlex="14%">
               <app-image [noteid]=index></app-image>
             </div>
-            <div fxFlex="14%">
+            <div fxFlex="12%">
               <app-archieve [noteid]=index (eventEmit)="emit($event)" [Archive]=i ndex.isArchived></app-archieve>
             </div>
-            <div fxFlex="14%">
+            <div fxFlex="10%">
               <app-more [noteid]=index (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)" [deleted]=index.isDeleted></app-more>
             </div>
             <!-- <app-undo></app-undo> -->
@@ -63,6 +63,6 @@
     </mat-card>
     <!-- matcard Ends -->
   </div>
-  <div fxFlex="5%"></div>
+  <div fxFlex.lg="13%"  fxFlex.md="10%" fxFlex.sm="5%" ></div>
   <!-- </div> -->
 </div>

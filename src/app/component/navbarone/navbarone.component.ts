@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SignupService } from '../../services/http.service';
+import { SignupService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AddlabelComponent } from '../../component/addlabel/addlabel.component';
-import { DataServiceService } from '../../data-service.service';
+import { DataServiceService } from '../../core/services/dataServices/data-service.service';
 
 @Component({
   selector: 'app-navbarone',
@@ -26,6 +26,7 @@ export class NavbaroneComponent {
   public firstName = localStorage.getItem('firstName');
   public lastName = localStorage.getItem('lastName');
   public email = localStorage.getItem('email');
+  public number=1;
   constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router, public dialog: MatDialog, private data: DataServiceService) { }
   ngOnInit() {
     this.checkLabel();
@@ -92,6 +93,15 @@ export class NavbaroneComponent {
   newMessage() {
     this.data.changeMessage(this.searchInput)
   }
+  listview() {
+    this.number = 0;
+    this.data.changeView(true);
+  }
+  gridview() {
+    this.number = 1;
+    this.data.changeView(false);
+  }
+
   /* First the file is assigned as null */
   selectedFile = null;
   /* get the image url from the local storage */

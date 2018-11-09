@@ -2,13 +2,14 @@
     margin-top:8px;
     display: flex;
     flex-direction: column;
-    margin-left:30px;
-    padding-right:30px;
+    /* margin-left:30px; */
+    /* padding-right:30px; */
     height:auto;
     height:min-content;
     border-radius: 10px;
     word-wrap: break-word;
-    width:240px;
+    /* width:210px; */
+    width:auto;
 }
 mat-card-content{
     width:150px;
@@ -28,3 +29,11 @@ mat-card-content{
     opacity:1
 
 }
+.viewgrid{
+    width:500px;
+    margin-left:25px;
+}
+.viewlist{
+    width:210px;
+}
+

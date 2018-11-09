@@ -1,9 +1,10 @@
 .sidenav-container {
   height: 100%;
+  background-color:aqua
 }
 
 .sidenav {
-  width: 250px;
+  width: 270px;
   background-color:lightgrey;
   margin-left:-15px;
   position: fixed;
@@ -101,12 +102,12 @@ input:focus{
   color:black
 }
 .searchicon{
-  position:fixed;
+  /* position:fixed; */
   margin-top:8px;
   color:black;
 }
 .sideicon{
-  margin-top:20px;
+  margin-top:10px;
   color:black
 }
 .profileicon{

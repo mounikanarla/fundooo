@@ -1,5 +1,22 @@
 <span data-toggle="tooltip" title="{{!isDeleted ? 'Remind Me':''}}">
   <button mat-icon-button>
-    <mat-icon class="remain" *ngIf="!isDeleted"><img src="../../../assets/remainder.svg"></mat-icon>
+    <mat-icon class="remain" *ngIf="!isDeleted" [matMenuTriggerFor]="menu"><img src="../../../assets/remainder.svg"></mat-icon>
   </button>
 </span>
+<mat-menu #menu="matMenu" class="incmenusize">
+    <span>Remainder:</span>
+    <button mat-menu-item>
+      <span>Later Today</span>
+    </button>
+    <button mat-menu-item>
+      <span>Tomorrow</span>
+    </button>
+    <button mat-menu-item>
+      <span>Next Week</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>access_time</mat-icon>
+      <span>Pick a Date</span>
+   
+    </button>
+  </mat-menu>

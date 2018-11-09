@@ -1,5 +1,5 @@
 import { Component, OnInit,Inject,ElementRef,ViewChild,Output, EventEmitter } from '@angular/core';
-import { SignupService } from '../../services/http.service';
+import { SignupService } from '../../core/services/http/http.service';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({

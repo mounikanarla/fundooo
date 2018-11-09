@@ -1,6 +1,6 @@
 import { Component, OnInit,Inject,EventEmitter,Output,Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { SignupService } from '../../services/http.service';
+import { SignupService } from '../../core/services/http/http.service'
 
 @Component({
   selector: 'app-update',
@@ -18,7 +18,7 @@ export class UpdateComponent implements OnInit {
   public label;
   public checkLabels
   ngOnInit() {
-    // console.log("checkingdata",this.data)
+    console.log("checkingdata",this.data.notelabels)
     this.label=this.data.noteLabels;
     
   }
@@ -80,11 +80,11 @@ eventEmitLabel(event) {
 }
 removelabel(data, label) {
   // this.accepted = true;
-  console.log(data)
-  console.log(label);
+  // console.log(data)
+  // console.log(label);
   this.getService.logoutPost("notes/" + data.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
     .subscribe((response) => {
-      console.log("checklist added" + response)
+      console.log("checklist removed" + response)
       this.eventEmit.emit({});
     },
       (error) => {

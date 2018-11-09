@@ -8,7 +8,7 @@ import { NavbaroneComponent } from './component/navbarone/navbarone.component';
 import { NotesComponent } from './component/notes/notes.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
-import { AuthGuard } from './component/_guard/auth.guard';
+import { AuthGuard } from './core/services/guard/auth.guard';
 import { ParentComponent } from './component/parent/parent.component';
 import { MainArchiveComponent } from './component/main-archive/main-archive.component';
 import { TrashComponent } from './component/trash/trash.component';

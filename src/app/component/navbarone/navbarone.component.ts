@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Output,EventEmitter } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AddlabelComponent } from '../../component/addlabel/addlabel.component';
 import { DataServiceService } from '../../core/services/dataServices/data-service.service';
+import { CropimageComponent } from '../../component/cropimage/cropimage.component';
 
 @Component({
   selector: 'app-navbarone',
@@ -27,6 +28,10 @@ export class NavbaroneComponent {
   public lastName = localStorage.getItem('lastName');
   public email = localStorage.getItem('email');
   public number=1;
+  public image = localStorage.getItem('imageUrl');
+  public img = "http://34.213.106.173/" + this.image;
+  @Output() eventEmit = new EventEmitter();
+
   constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router, public dialog: MatDialog, private data: DataServiceService) { }
   ngOnInit() {
     this.checkLabel();
@@ -102,34 +107,22 @@ export class NavbaroneComponent {
     this.data.changeView(false);
   }
 
-  /* First the file is assigned as null */
-  selectedFile = null;
-  /* get the image url from the local storage */
-  public image = localStorage.getItem('imageUrl');
-  img = "http://34.213.106.173/" + this.image;/** */
-  /* a method to upload the image by triggering the event */
-  onImageUpload(event) {
-    /*assigning the path & files of event to the selected file */
-    this.selectedFile = event.path[0].files[0];
-    /*it is used to transmit keyed data */
-    const uploadData = new FormData();
-    /* 
-     * FormData.append():Appends a new value onto an existing key inside a FormData object,
-     * or adds the key if it does not already exist.
-     */
-    uploadData.append('file', this.selectedFile, this.selectedFile.name);
-    this.logoutService.loadingImage('user/uploadProfileImage', uploadData,  localStorage.getItem('id')).subscribe(response => {
-      // console.log(response, "success in image upload");
-      /* to display the image url */
-      // console.log("url: ", response['status'].imageUrl)
-      /* setting the url */
-      this.img = "http://34.213.106.173/" + response['status'].imageUrl;
-       localStorage.setItem('imageUrl',response['imageUrl']);
+  fileSelected(event): void {
+    const dialogRef = this.dialog.open(CropimageComponent, {
+        data: event
+    });
 
-      /* if error exists */
-    }, error => {
-      /* then display the error */
-      console.log(error);
-    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.eventEmit.emit({});
+      this.image = localStorage.getItem('imageUrl');
+      this.img = "http://34.213.106.173/" + this.image;
+    });
   }
+
+  croppedImage: any = '';
+  imageCropped(event:any) {
+    this.croppedImage = event.base64;
+}
+ 
 }

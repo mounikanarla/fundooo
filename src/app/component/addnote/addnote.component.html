@@ -25,19 +25,28 @@
         <mat-checkbox></mat-checkbox>   {{list.itemName}}
       </div>
       <mat-chip-list>
-        <div *ngFor="let label of index.noteLabels" (click)="openDialog(index)">
+        <div *ngFor="let label of index.noteLabels">
           <mat-chip *ngIf="!label.isDeleted">{{label.label}}
             <mat-icon matChipRemove (click)="removelabel(index,label)">cancel</mat-icon>
           </mat-chip>
         </div>
       </mat-chip-list>
+      <mat-chip-list>
+          <div *ngFor="let label of index.reminder">
+            <mat-chip *ngIf="!label.isDeleted">
+            <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+            {{label | date:"medium"}}
+              <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
+            </mat-chip>
+          </div>
+        </mat-chip-list>
       <!-- Description Printing Ends -->
       <!-- Icon Print Starts -->
       <mat-card-actions>
         <span class=invisible>
           <div fxFlex="100%" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
             <div fxFlex="10%">
-              <app-reminder [noteid]=index></app-reminder>
+              <app-reminder [noteid]=index (eventEmit)="emit($event)"></app-reminder>
             </div>
             <div fxFlex="14%">
               <app-collaborator [noteid]=index></app-collaborator>

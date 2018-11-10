@@ -47,6 +47,11 @@ import { SearchPipe } from './search.pipe';
 import { SearchComponent } from './component/search/search.component';
 import { LabelclickComponent } from './component/labelclick/labelclick.component';
 import { PinComponent } from './component/pin/pin.component';
+import { CropimageComponent } from './component/cropimage/cropimage.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+
 // import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 
 
@@ -81,6 +86,7 @@ import { PinComponent } from './component/pin/pin.component';
     SearchComponent,
     LabelclickComponent,
     PinComponent,
+    CropimageComponent,
     
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
@@ -104,11 +110,15 @@ import { PinComponent } from './component/pin/pin.component';
     LayoutModule,
     MatListModule,
     MatMenuModule,
-    MatDialogModule,MatChipsModule
+    MatDialogModule,MatChipsModule,
+    ImageCropperModule,
+    MatDatepickerModule,
+  
+
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent],
-  entryComponents:[AddnoteComponent,UpdateComponent,NavbaroneComponent,AddlabelComponent,TrashComponent]
+  entryComponents:[AddnoteComponent,UpdateComponent,NavbaroneComponent,AddlabelComponent,TrashComponent,CropimageComponent]
   
 
 })

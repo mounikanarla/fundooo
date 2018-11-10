@@ -20,6 +20,7 @@ export class AddnoteComponent implements OnInit {
   /*
   * @description: @INPUT AND @Output are decorators used to bind the data
   */
+ @Input() noteid
   @Input() newData;
   @Input() searchInput;
   @Output() eventEmit = new EventEmitter();
@@ -36,6 +37,9 @@ export class AddnoteComponent implements OnInit {
       console.log(this.condition)
     }
     )
+
+  
+    
   }
   /*
   * @description : emit(event) is used to emit the event coming from child component at the time of action
@@ -99,4 +103,20 @@ export class AddnoteComponent implements OnInit {
 
   //   })
   // }
+  removeRemainder(label) {
+    var id =[];
+    id.push(label)
+    var body={
+      "noteIdList" : id
+    }
+    this.httpService.delPost("/notes/removeReminderNotes",body, localStorage.getItem('id'))
+      .subscribe((response) => {
+        console.log("Reminder deleted" + response)
+        this.eventEmit.emit({});
+      },
+        (error) => {
+          console.log("error occured" + error)
+        }
+      )
+  }
 }

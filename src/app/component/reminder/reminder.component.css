@@ -4,6 +4,13 @@
 .remain:hover{
     opacity:1;
 }
-/* .incmenusize{
-    /* height:500px; */
-/* }  */
+.spaceremain{
+    float:right;
+}
+.remainder{
+    float:right;
+    margin-left:40px;
+}
+.clock{
+    margin-top:10px;
+}

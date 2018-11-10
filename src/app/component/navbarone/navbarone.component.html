@@ -38,21 +38,22 @@
                </button>
               <mat-menu  #appMenu="matMenu" [overlapTrigger]="false" style="width:20%">
                   <div fxLayout="row" fxFlex="100%">
-                  <div fxFlex="30%" >  
+                  <div fxFlex="30%">  
                       <button (click) = "$event.stopPropagation()" class="buttonimage" [ngStyle]="{'float':'left','background-image':'url(' +img+ ')','background-size':'cover'}" (click)="selectFile.click()" matTooltip="fundoo Account" mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform:uppercase; margin-left: 34px;">
-                       </button>
-                       
-                       <input (click) = "$event.stopPropagation()" class="image" type="file" 
-                       (change)="onImageUpload($event)" #selectFile>
+                        <input (click) = "$event.stopPropagation()" class="image" type="file" 
+                        (change)=fileSelected($event) #selectFile>
+                      </button>
+                      
                   </div>
                   <div  fxFlex="70%">
-                  <mat-content fxFlex class="style">
+                  <mat-content class="style">
                     {{firstName}}&nbsp;{{lastName}}
                     {{email}}
                   </mat-content>
                   </div>  
               </div>
-                <span style="float:right"><button mat-button (click)=logout()>Logout</button></span>
+              
+                <span class="logoutButton"><button mat-button (click)=logout()>Logout</button></span>
             </mat-menu>
           </div>
             <!-- Profile Ends -->

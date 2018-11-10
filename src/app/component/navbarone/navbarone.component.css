@@ -102,7 +102,6 @@ input:focus{
   color:black
 }
 .searchicon{
-  /* position:fixed; */
   margin-top:8px;
   color:black;
 }
@@ -116,9 +115,15 @@ input:focus{
 }
 .image{
   width:20%;
-  /* margin-top:80%; */
-  margin-left:30%
+  margin-top:110%;
 }
 .buttonimage{
   margin-right:15%
+}
+.logoutButton{
+  float:right;
+  margin-bottom:30px;
+}
+.style{
+  margin-left:10px;
 }

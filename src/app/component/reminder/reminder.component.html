@@ -1,22 +1,64 @@
 <span data-toggle="tooltip" title="{{!isDeleted ? 'Remind Me':''}}">
   <button mat-icon-button>
-    <mat-icon class="remain" *ngIf="!isDeleted" [matMenuTriggerFor]="menu"><img src="../../../assets/remainder.svg"></mat-icon>
+    <mat-icon class="remain" *ngIf="!isDeleted" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation();"><img src="../../../assets/remainder.svg"></mat-icon>
   </button>
 </span>
-<mat-menu #menu="matMenu" class="incmenusize">
-    <span>Remainder:</span>
-    <button mat-menu-item>
-      <span>Later Today</span>
+<mat-menu (click)="$event.stopPropagation();" class="menu" #menu="matMenu" [overlapTrigger]="false">
+    <button (click)="$event.stopPropagation();" mat-menu-item><span>Reminder : </span></button>
+    <button (click)="$event.stopPropagation();" mat-menu-item>
+        <div><span (click)="remindToday()">Later today</span>
+            <span class="spaceremain">8:00 PM</span></div>
     </button>
-    <button mat-menu-item>
-      <span>Tomorrow</span>
+    <button (click)="$event.stopPropagation();" mat-menu-item>
+        <div><span (click)="remindTomorrow()">Tomorrow </span>
+            <span class="spaceremain">8:00 AM</span></div>
     </button>
-    <button mat-menu-item>
-      <span>Next Week</span>
+    <button (click)="$event.stopPropagation();" mat-menu-item>
+        <div><span (click)="weekRemainder()">Next week</span>
+            <span class="remainder">Mon,8:00 AM</span></div>
     </button>
-    <button mat-menu-item>
-      <mat-icon>access_time</mat-icon>
-      <span>Pick a Date</span>
-   
-    </button>
-  </mat-menu>
+    <!-- <button (click)="$event.stopPropagation();" mat-menu-item>
+        <span>Home </span>
+        <span class="latertoday"></span>
+    </button> -->
+    <div fxLayoutAlign="row">
+        <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+        <button (click)="$event.stopPropagation();" [matMenuTriggerFor]="dateMenu" mat-menu-item><span>Pick date & time
+            </span></button>
+    </div>
+    <div fxLayoutAlign="row">
+        <mat-icon class="clock" mat-icon-button>location_on</mat-icon>
+        <button [matMenuTriggerFor]="placeMenu" (click)="$event.stopPropagation();" mat-menu-item><span>Pick place</span></button>
+    </div>
+    <mat-menu (click)="$event.stopPropagation();" #placeMenu="matMenu" [overlapTrigger]="false">
+        <div>
+            <mat-icon mat-icon-button>keyboard_backspace</mat-icon>
+            <span class="place">Pick place</span><br>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+            <input (click)="$event.stopPropagation();" matInput placeholder="Choose a location ">
+        </mat-form-field>
+    </mat-menu>
+    <mat-menu (click)="$event.stopPropagation();" class="date" #dateMenu="matMenu" [overlapTrigger]="false">
+        <div>
+            <mat-icon mat-icon-button>keyboard_backspace</mat-icon>
+            <span class="place1">Pick Date & Time</span><br>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+            <input (click)="$event.stopPropagation();" matInput [matDatepicker]="dp" [formControl]="date">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input (click)="$event.stopPropagation();" matInput placeholder="Reminded Data & Time" [formControl]="date">
+        </mat-form-field>
+        <!-- <mat-form-field (click)="$event.stopPropagation();">
+            <mat-select (click)="$event.stopPropagation();" placeholder="Pick Time">
+                <mat-option (click)="$event.stopPropagation();">
+                </mat-option>
+            </mat-select>
+        </mat-form-field> -->
+    </mat-menu>
+</mat-menu>

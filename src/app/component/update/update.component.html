@@ -28,15 +28,27 @@
                 <div fxFlex=15% class="action">
                     <!-- <mat-card-actions> -->
                     <div fxLayout="row" class="icons">
-                        <div fxFlex=80% fxLayoutGap="20px">
+                        <div fxFlex.lg="80%" fxFlex.md="80%" fxFlex.sm="75%" fxFlex.xs="75%" fxLayoutGap="20px">
+                            <div fxFlex="8%">
                             <app-reminder></app-reminder>
+                            </div> 
+                            <div fxFlex="8%">
                             <app-collaborator></app-collaborator>
+                            </div>
+                            <div fxFlex="8%">
                             <app-changecolor [colorid]=data.id (eventEmit)="emit($event)"></app-changecolor>
-                            <app-image></app-image>
+                            </div>
+                            <div fxFlex="8%">
+                             <app-image></app-image>
+                             </div>
+                             <div fxFlex="8%">
                             <app-archieve [noteid]=data.id (eventEmit)="emit($event)"></app-archieve>
+                            </div>
+                            <div fxFlex="6%">
                             <app-more [noteid]=data (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
+                            </div>
                         </div>
-                        <div fxFlex=20% class="button">
+                        <div fxFlex.lg=20% fxFlex.md="20%" fxFlex.sm="25%" fxFlex.xs="25%" class="button">
                             <div>
                                 <button mat-button (click)=onClick()>CLOSE</button>
                             </div>

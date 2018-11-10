@@ -60,7 +60,8 @@ export class NotesComponent implements OnInit {
         "description": this.description,
         "isPined": "false",
         "color": color,
-        "labelIdList": JSON.stringify(this.arraylabel)
+        "labelIdList": JSON.stringify(this.arraylabel),
+        "reminder":this.remindevent
       }, this.id).subscribe((response) => {
         // If the response is true then the data will be emitted
         // console.log("successful", response);
@@ -100,6 +101,7 @@ export class NotesComponent implements OnInit {
         // console.log(this.id);
         this.getService.getnote("notes/getNotesList", this.id).subscribe((response) => {
           // console.log(response);
+          this.dataarray=[];
           this.onNewEntryAdded.emit({});
           this.eventEmit.emit({});
 
@@ -110,10 +112,13 @@ export class NotesComponent implements OnInit {
 
     }
   }
+  public remindevent = []
+
   emit(event) {
     this.bgcolor = event;
     this.listColor = event;
     this.notepin = true;
+    // this.remindevent=event;
     // console.log(this.notepin)
   }
   public arraylabel = []
@@ -149,15 +154,21 @@ export class NotesComponent implements OnInit {
   enter() {
     this.i++;
     if (this.data != null) {
+      
       // console.log(event, "keydown");
       var obj = {
         "index": this.i,
         "data": this.data
       }
       this.dataarray.push(obj);
-      this.data = null
-
+      this.data = null;
     }
+  }
+
+  onenter():void{
+    this.enter();
+    this.dataarray=[];
+    
   }
   ondelete(deletedObj) {
     // console.log("ondelete fumction runnig");
@@ -180,7 +191,6 @@ export class NotesComponent implements OnInit {
         }
       }
       // console.log(this.dataarray);
-
     }
   }
 }

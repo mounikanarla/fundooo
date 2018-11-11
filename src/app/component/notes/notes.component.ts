@@ -33,6 +33,8 @@ export class NotesComponent implements OnInit {
   public listColor = "#ffffff";
   public press = false
   public check = false
+  public isChecked=false;
+
   // public isChecked=false;
   ngOnInit() {
   }
@@ -52,7 +54,7 @@ export class NotesComponent implements OnInit {
     // console.log(this.id);
 
     // post the data by passing the parameters
-    if (this.press == true) {
+    if (this.check == false) {
       this.description = document.getElementById("description").textContent;
 
       this.getService.dataPost("notes/addnotes", this.body = {
@@ -111,6 +113,7 @@ export class NotesComponent implements OnInit {
       )
 
     }
+   
   }
   public remindevent = []
 
@@ -135,10 +138,16 @@ export class NotesComponent implements OnInit {
     }
   }
 
+// public labelName=[];
+// public labelId=[]
+deleteLabel(index){
+  this.arraylabel.splice(this.arraylabel.indexOf(index), 1)
+  this.labelevent.splice(this.labelevent.indexOf(index), 1)
+}
   removelabel(index, label) {
     // this.accepted = true;
-    // console.log(index.id)
-    // console.log(label.id);
+    console.log(index.id)
+    console.log(label.id);
     this.getService.logoutPost("notes/" + index.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
       .subscribe((response) => {
         // console.log("checklist added" + response)
@@ -151,25 +160,39 @@ export class NotesComponent implements OnInit {
   }
   public data;
   public i = 0;
-  enter() {
-    this.i++;
-    if (this.data != null) {
-      
-      // console.log(event, "keydown");
-      var obj = {
-        "index": this.i,
-        "data": this.data
-      }
-      this.dataarray.push(obj);
-      this.data = null;
+  public adding=false;
+  public addCheck=false;
+
+  enter(event) {
+   if (this.data != "") {
+      this.adding = true;
     }
+    else {
+      this.adding = false;
+    }
+   this.i++;
+   this.isChecked=this.addCheck
+    if (this.data != null && event.code == "Enter"){
+    console.log(event,"keydown");
+    var obj={
+      "index":this.i,
+      "data":this.data,
+      "isChecked":this.isChecked
+    }
+    this.dataarray.push(obj)
+    console.log(this.dataarray);
+    this.data=null;
+    this.adding=false;
+    this.isChecked=false;
+      this.addCheck = false;
+     }
   }
 
-  onenter():void{
-    this.enter();
-    this.dataarray=[];
+  // onenter():void{
+  //   this.enter();
+  //   this.dataarray=[];
     
-  }
+  // }
   ondelete(deletedObj) {
     // console.log("ondelete fumction runnig");
     for (var i = 0; i < this.dataarray.length; i++) {

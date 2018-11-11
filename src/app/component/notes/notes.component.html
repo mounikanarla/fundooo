@@ -50,23 +50,30 @@
                             <mat-chip-list>
                                 <div *ngFor="let index of labelevent">
                                     <mat-chip *ngIf="!index.isDeleted">{{index.label}}
-                                        <mat-icon matChipRemove (click)="removelabel(index,label)">cancel</mat-icon>
+                                        <mat-icon matChipRemove (click)="deleteLabel(index)">cancel</mat-icon>
                                     </mat-chip>
                                 </div>
                             </mat-chip-list>
                         </div>
                         <div *ngIf="check">
                             <div *ngFor="let data of dataarray" fxLayout="row">
-                                <mat-checkbox fxFlex="5%" [(ngModel)]=data.press (click)="this.press = !this.press;"></mat-checkbox>
-                                <input fxFlex="90" class="textbar" [(ngModel)]=data.data (keydown)="editing($event.data)" [style.backgroundColor]="listColor">
-                                <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="delete">close</mat-icon>
+                                <mat-checkbox fxFlex="5%" *ngIf="!data.isChecked" [(ngModel)]=data.isChecked (click)="this.isChecked = !this.isChecked;"></mat-checkbox>
+                                <input fxFlex="90" class="textbar" [(ngModel)]=data.data *ngIf="!data.isChecked" (keydown)="editing($event.data)" [style.backgroundColor]="listColor">
+                                <mat-icon fxFlex="4%" *ngIf="!data.isChecked" (click)=ondelete(data) matTooltip="delete">close</mat-icon>
                             </div>
                             <mat-divider></mat-divider>
                             <div fxLayout="row">
-                                <mat-icon fxFlex="5%">add</mat-icon>
-                                <input [(ngModel)]=data fxFlex="95%" class="textbarcheck" placeholder="list item" [style.backgroundColor]="listColor" (keydown.enter)="enter()">
+                                <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
+                                <mat-checkbox fxFlex="5%" *ngIf="adding" [(ngModel)]=addCheck (click)="isChecked=!isChecked"></mat-checkbox>   
+
+                                <input [(ngModel)]=data fxFlex="95%" class="textbarcheck" placeholder="list item" [style.backgroundColor]="listColor" (keydown)="enter($event)" (keydown.backspace)="ondelete()">
                             </div>
-                            <mat-divider></mat-divider>
+                             <mat-divider></mat-divider>
+                             <div *ngFor="let data of dataarray" fxLayout="row">
+                                <mat-checkbox fxFlex="5%" *ngIf="data.isChecked" [(ngModel)]=data.isChecked (click)="this.isChecked = !this.isChecked;"></mat-checkbox>
+                                <input fxFlex="90" class="textbar" [(ngModel)]=data.data *ngIf="data.isChecked" (keydown)="editing($event.data)" [style.backgroundColor]="listColor">
+                                <mat-icon fxFlex="4%" *ngIf="data.isChecked" (click)=ondelete(data) matTooltip="delete">close</mat-icon>
+                            </div>
                         </div>
                     </div>
                     <div fxFlex=15%>

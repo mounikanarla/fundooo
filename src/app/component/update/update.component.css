@@ -59,3 +59,7 @@
    background: #fff;
    color: rgba(0,0,0,.87);
 }
+.note{
+  border:none;
+  outline:none;
+}

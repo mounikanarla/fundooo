@@ -16,10 +16,21 @@ export class UpdateComponent implements OnInit {
   public color;
   public bgcolor=this.data.color;
   public label;
-  public checkLabels
+  public checkLabels;
+  public modifiedCheckList;
+  public tempArray=[];
+  public newList;
+  public newData:any={}
+  public checklist=false;
+
   ngOnInit() {
     console.log("checkingdata",this.data.notelabels)
     this.label=this.data.noteLabels;
+    if (this.data.noteCheckLists.length>0){
+      this.checklist=true;
+    }
+    this.tempArray=this.data.noteCheckLists;
+
     
   }
   constructor(private getService: SignupService,
@@ -36,6 +47,8 @@ update(){
     this.description = document.getElementById("description").innerHTML;
     this.id=this.data.id;
     this.color=this.data.color
+  if(this.checklist==false){
+
   this.getService.dataPost("notes/updateNotes", {
     "noteId": this.id,
     "title": this.title,
@@ -49,12 +62,98 @@ update(){
 
     console.log(this.id);
       console.log(response);
-  },
-    (error) => {
-      console.log(error);
-    }
+  }
+  
   )
+}else{
+  var apiData={
+    "itemName": this.modifiedCheckList.itemName,
+    "status":this.modifiedCheckList.status
 }
+ var url = "notes/" +this.data.id+ "/checklist/" + this.modifiedCheckList.id + "/update";
+ this.getService.delPost(url, JSON.stringify(apiData), localStorage.getItem('id')).subscribe(response => {
+   console.log(response);
+ })
+
+}
+}
+editing(editedList,event){
+      
+  console.log(editedList);
+  if(event.code=="Enter"){
+  this.modifiedCheckList=editedList;
+  this.update();
+  }
+}
+checkBox(checkList){
+    
+  if (checkList.status=="open"){
+    checkList.status = "close"
+  }
+  else{
+    checkList.status = "open"
+  }
+  console.log(checkList);
+  this.modifiedCheckList=checkList;
+  this.update();
+}
+public removedList;
+  removeList(checklist){
+    console.log(checklist)
+    this.removedList=checklist;
+    this.removeCheckList()
+  }
+  removeCheckList(){
+    var url = "notes/" + this.data.id + "/checklist/" + this.removedList.id + "/remove";
+
+    this.getService.delPost(url,null,localStorage.getItem('id')).subscribe((response)=>{
+      console.log(response);
+      for(var i=0;i<this.tempArray.length;i++){
+        if(this.tempArray[i].id==this.removedList.id){
+          this.tempArray.splice(i,1)
+        }
+      }
+    })
+  }
+  public adding=false;
+  public addCheck=false;
+  public status="open"
+  addList(event){
+    if(this.newList!=""){
+      this.adding = true;
+    }
+   else{
+      this.adding = false;
+   }
+    if (event.code == "Enter") {
+      if(this.addCheck==true){
+        this.status="close";
+      }
+      else{
+        this.status="open"
+      }
+      this.newData={
+        "itemName":this.newList,
+        "status":this.status
+      }
+  
+      var url = "notes/" + this.data.id + "/checklist/add";
+
+    this.getService.delPost(url, this.newData, localStorage.getItem('id'))
+    .subscribe(response => {
+      console.log(response);
+      this.newList=null;
+      this.addCheck=false;
+      this.adding=false;
+      console.log(response['data'].details);
+      
+      this.tempArray.push(response['data'].details)
+
+      console.log(this.tempArray)
+
+    })
+  }
+  }
 emit(event){
 
   this.bgcolor=event
@@ -79,9 +178,7 @@ eventEmitLabel(event) {
 
 }
 removelabel(data, label) {
-  // this.accepted = true;
-  // console.log(data)
-  // console.log(label);
+  
   this.getService.logoutPost("notes/" + data.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
     .subscribe((response) => {
       console.log("checklist removed" + response)
@@ -92,4 +189,5 @@ removelabel(data, label) {
       }
     )
 }
+
 }

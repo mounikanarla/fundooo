@@ -36,4 +36,9 @@ mat-card-content{
 .viewlist{
     width:210px;
 }
+.note{
+    border:none;
+    outline: none;
+    margin-left:10px;
+}
 

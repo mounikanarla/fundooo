@@ -16,6 +16,8 @@ export class AddnoteComponent implements OnInit {
   public array = [];
   token = localStorage.getItem('id');
   public condition=false;
+  public isChecked=false;
+
 
   /*
   * @description: @INPUT AND @Output are decorators used to bind the data
@@ -92,17 +94,30 @@ export class AddnoteComponent implements OnInit {
         }
       )
   }
-  // updatelist(id){
-  //   var apiData = {
-  //     "itemName": this.modifiedCheckList.itemName,
-  //     "status": this.modifiedCheckList.status
-  //   }
-  //   var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
-  //   this.service.postDel(url, JSON.stringify(apiData), localStorage.getItem('id')).subscribe(response => {
-  //     console.log(response);
+  public modifiedCheckList
+  checkBox(checkList,index) {
 
-  //   })
-  // }
+    if (checkList.status == "open") {
+      checkList.status = "close"
+    }
+    else {
+      checkList.status = "open"
+    }
+    console.log(checkList);
+    this.modifiedCheckList = checkList;
+    this.updatelist(index.id);
+  }
+  updatelist(id){
+    var checklistData = {
+      "itemName": this.modifiedCheckList.itemName,
+      "status": this.modifiedCheckList.status
+    }
+    var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
+    this.httpService.delPost(url, JSON.stringify(checklistData), localStorage.getItem('id')).subscribe(response => {
+      console.log(response);
+
+    })
+  }
   removeRemainder(label) {
     var id =[];
     id.push(label)

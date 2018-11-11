@@ -18,15 +18,27 @@
       </div>
       <!--Title printing Ends -->
       <!-- Description Printing starts -->
+      <div>
       <mat-card-content (click)="openDialog(index)">
         {{index.description}}
       </mat-card-content>
-      <div *ngFor="let list of index.noteCheckLists" (click)="openDialog(index)">
-        <mat-checkbox></mat-checkbox>   {{list.itemName}}
       </div>
+      <div class="note" *ngFor="let checkList of index.noteCheckLists">
+        <mat-checkbox fxFlex="10%" *ngIf="checkList.status=='open'&& !checkList.isDeleted" 
+        (click)=checkBox(checkList,index)></mat-checkbox>
+        <input *ngIf="!checkList.isDeleted && checkList.status=='open' " 
+        [(ngModel)]=checkList.itemName fxFlex="90%" class="note"
+          (click)="openDialog(index)" [style.backgroundColor]="index.color">
+      </div>
+      <div class="note" *ngFor="let checkList of index.noteCheckLists" fxLayout="row">
+      <mat-checkbox fxFlex="10%" checked=true *ngIf="checkList.status=='close'&& !checkList.isDeleted"
+      (click)=checkBox(checkList,index)></mat-checkbox>
+      <del *ngIf="!checkList.isDeleted && checkList.status=='close'" class="note"
+      (click)="openDialog(index)">{{checkList.itemName}}</del>
+      </div>  
       <mat-chip-list>
         <div *ngFor="let label of index.noteLabels">
-          <mat-chip *ngIf="!label.isDeleted">{{label.label}}
+          <mat-chip *ngIf="!label.isDeleted" (click)="openDialog(index)">{{label.label}}
             <mat-icon matChipRemove (click)="removelabel(index,label)">cancel</mat-icon>
           </mat-chip>
         </div>

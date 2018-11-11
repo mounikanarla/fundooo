@@ -46,7 +46,7 @@ public isDeleted=false;
   }
   getRemainder() {
     this.httpService.getnote("/notes/getReminderNotesList", localStorage.getItem('id')).subscribe((response) => {
-    console.log("Success",response)
+    // console.log("Success",response)
   },
   (error)=>{
     console.log("error",error)

@@ -75,12 +75,21 @@
                                 <mat-icon fxFlex="4%" *ngIf="data.isChecked" (click)=ondelete(data) matTooltip="delete">close</mat-icon>
                             </div>
                         </div>
+                        <mat-chip-list>
+                            <div *ngFor="let label of array">
+                              <mat-chip *ngIf="!label.isDeleted">
+                              <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+                              {{label | date:"medium"}}
+                                <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
+                              </mat-chip>
+                            </div>
+                          </mat-chip-list>
                     </div>
                     <div fxFlex=15%>
                         <mat-card-actions>
                             <div fxLayout="row" class="icons" fxFlex.xs="90%">
                                 <div fxFlex="80%" fxLayoutGap="20px">
-                                    <app-reminder (eventEmit)="emit($event)"></app-reminder>
+                                    <app-reminder (eventEmitReminder)="eventEmitRemainder($event)"></app-reminder>
                                     <app-collaborator></app-collaborator>
                                     <app-changecolor (eventEmit)="emit($event)"></app-changecolor>
                                     <app-image></app-image>

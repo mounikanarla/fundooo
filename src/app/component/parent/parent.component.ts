@@ -4,7 +4,7 @@ import { SignupService } from '../../core/services/http/http.service';
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
-  styleUrls: ['./parent.component.css']
+  styleUrls: ['./parent.component.scss']
 })
 export class ParentComponent implements OnInit {
 

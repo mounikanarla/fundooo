@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css'],
+  styleUrls: ['./notes.component.scss'],
   outputs: ['onNewEntryAdded']
 
 })
@@ -33,7 +33,7 @@ export class NotesComponent implements OnInit {
   public listColor = "#ffffff";
   public press = false
   public check = false
-  public isChecked=false;
+  public isChecked = false;
 
   // public isChecked=false;
   ngOnInit() {
@@ -44,6 +44,7 @@ export class NotesComponent implements OnInit {
   * @description: notes() is used to post the data that are getting from the user
   */
   notes() {
+    this.array=[];
     var color = this.bgcolor;
     this.bgcolor = '#ffffff'
 
@@ -63,7 +64,7 @@ export class NotesComponent implements OnInit {
         "isPined": "false",
         "color": color,
         "labelIdList": JSON.stringify(this.arraylabel),
-        "reminder":this.remindevent
+        "reminder": this.array
       }, this.id).subscribe((response) => {
         // If the response is true then the data will be emitted
         // console.log("successful", response);
@@ -96,14 +97,15 @@ export class NotesComponent implements OnInit {
         "checklist": JSON.stringify(this.checklist),
         "isPined": "false",
         "color": color,
-        "labelIdList": JSON.stringify(this.arraylabel)
+        "labelIdList": JSON.stringify(this.arraylabel),
+        "reminder": this.array
       }, this.id).subscribe((response) => {
         // If the response is true then the data will be emitted
         // console.log("successful", response);
         // console.log(this.id);
         this.getService.getnote("notes/getNotesList", this.id).subscribe((response) => {
           // console.log(response);
-          this.dataarray=[];
+          this.dataarray = [];
           this.onNewEntryAdded.emit({});
           this.eventEmit.emit({});
 
@@ -113,7 +115,7 @@ export class NotesComponent implements OnInit {
       )
 
     }
-   
+
   }
   public remindevent = []
 
@@ -137,13 +139,23 @@ export class NotesComponent implements OnInit {
       this.labelevent.splice(this.labelevent.indexOf(event), 1)
     }
   }
+  public array=[]
+  eventEmitRemainder(event){
+    this.array=[];
+    if(event)
+    {
+    this.array.push(event);
+    console.log(this.array)
+    console.log("event receiving");
+    }
+  }
 
-// public labelName=[];
-// public labelId=[]
-deleteLabel(index){
-  this.arraylabel.splice(this.arraylabel.indexOf(index), 1)
-  this.labelevent.splice(this.labelevent.indexOf(index), 1)
-}
+  // public labelName=[];
+  // public labelId=[]
+  deleteLabel(index) {
+    this.arraylabel.splice(this.arraylabel.indexOf(index), 1)
+    this.labelevent.splice(this.labelevent.indexOf(index), 1)
+  }
   removelabel(index, label) {
     // this.accepted = true;
     console.log(index.id)
@@ -160,38 +172,38 @@ deleteLabel(index){
   }
   public data;
   public i = 0;
-  public adding=false;
-  public addCheck=false;
+  public adding = false;
+  public addCheck = false;
 
   enter(event) {
-   if (this.data != "") {
+    if (this.data != "") {
       this.adding = true;
     }
     else {
       this.adding = false;
     }
-   this.i++;
-   this.isChecked=this.addCheck
-    if (this.data != null && event.code == "Enter"){
-    console.log(event,"keydown");
-    var obj={
-      "index":this.i,
-      "data":this.data,
-      "isChecked":this.isChecked
-    }
-    this.dataarray.push(obj)
-    console.log(this.dataarray);
-    this.data=null;
-    this.adding=false;
-    this.isChecked=false;
+    this.i++;
+    this.isChecked = this.addCheck
+    if (this.data != null && event.code == "Enter") {
+      console.log(event, "keydown");
+      var obj = {
+        "index": this.i,
+        "data": this.data,
+        "isChecked": this.isChecked
+      }
+      this.dataarray.push(obj)
+      console.log(this.dataarray);
+      this.data = null;
+      this.adding = false;
+      this.isChecked = false;
       this.addCheck = false;
-     }
+    }
   }
 
   // onenter():void{
   //   this.enter();
   //   this.dataarray=[];
-    
+
   // }
   ondelete(deletedObj) {
     // console.log("ondelete fumction runnig");

@@ -6,10 +6,8 @@
       <!--Title printing starts -->
       <div fxLayout="row" fxFlex="100%">
         <div fxFlex="90%">
-          <mat-card-header (click)="openDialog(index)">
-            <mat-card-title placeholder="Title">
-              {{index.title }}
-            </mat-card-title>
+          <mat-card-header (click)="openDialog(index)" >
+            <mat-card-title placeholder="Title" class="title">{{index.title }}</mat-card-title>
           </mat-card-header>
         </div>
         <div fxFlex="10%" class="pin">
@@ -18,10 +16,8 @@
       </div>
       <!--Title printing Ends -->
       <!-- Description Printing starts -->
-      <div>
-      <mat-card-content (click)="openDialog(index)">
-        {{index.description}}
-      </mat-card-content>
+      <div div fxLayout="row" fxFlex="100%">
+      <mat-card-content (click)="openDialog(index)">{{index.description}}</mat-card-content>
       </div>
       <div class="note" *ngFor="let checkList of index.noteCheckLists">
         <mat-checkbox fxFlex="10%" *ngIf="checkList.status=='open'&& !checkList.isDeleted" 
@@ -58,7 +54,7 @@
         <span class=invisible>
           <div fxFlex="100%" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
             <div fxFlex="10%">
-              <app-reminder [noteid]=index (eventEmit)="emit($event)"></app-reminder>
+              <app-reminder [noteid]=index (eventEmit)="emit($event)" (eventEmitReminder)="eventEmitRemainder($event)"></app-reminder>
             </div>
             <div fxFlex="14%">
               <app-collaborator [noteid]=index></app-collaborator>
@@ -70,7 +66,7 @@
               <app-image [noteid]=index></app-image>
             </div>
             <div fxFlex="12%">
-              <app-archieve [noteid]=index (eventEmit)="emit($event)" [Archive]=i ndex.isArchived></app-archieve>
+              <app-archieve [noteid]=index (eventEmit)="emit($event)" [Archive]=index.isArchived></app-archieve>
             </div>
             <div fxFlex="10%">
               <app-more [noteid]=index (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)" [deleted]=index.isDeleted></app-more>

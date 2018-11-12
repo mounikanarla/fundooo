@@ -16,6 +16,7 @@ import { UpdateComponent } from './component/update/update.component';
 import { AddlabelComponent } from './component/addlabel/addlabel.component';
 import { SearchComponent } from './component/search/search.component';
 import { LabelclickComponent } from './component/labelclick/labelclick.component';
+import { ReminderNotesComponent } from './component/reminder-notes/reminder-notes.component';
 
 
 const routes: Routes = [
@@ -31,7 +32,8 @@ const routes: Routes = [
     {path:'archive',component:MainArchiveComponent},
     {path:'trash',component:TrashComponent},
     {path:'search',component:SearchComponent},
-    {path:'label/:params',component:LabelclickComponent}
+    {path:'label/:params',component:LabelclickComponent},
+    {path:'reminders',component:ReminderNotesComponent}
     // {path:'addlabel',component: AddlabelComponent }
   ]},
   { path: '', redirectTo:  'login', pathMatch:  'full' }

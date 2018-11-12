@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-pin',
   templateUrl: './pin.component.html',
-  styleUrls: ['./pin.component.css']
+  styleUrls: ['./pin.component.scss']
 })
 export class PinComponent implements OnInit {
 

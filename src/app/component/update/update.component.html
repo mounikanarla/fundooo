@@ -43,16 +43,25 @@
                    
                     <div class="note" *ngFor="let check of tempArray" fxLayout="row">
                       <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
-                      <input [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;" fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
+                      <input [(ngModel)]=check.itemName [style.backgroundColor]="bgcolor" class="note" style="text-decoration: line-through;" fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
                         (keydown)=editing(check,$event)>
                       <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
-                </div>
+                    </div>
+                    <mat-chip-list>
+                        <div *ngFor="let label of array">
+                          <mat-chip *ngIf="!label.isDeleted">
+                          <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+                          {{label | date:"medium"}}
+                            <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
+                          </mat-chip>
+                        </div>
+                      </mat-chip-list>
                 <div fxFlex=15% class="action">
                     <!-- <mat-card-actions> -->
                     <div fxLayout="row" class="icons">
                         <div fxFlex.lg="80%" fxFlex.md="80%" fxFlex.sm="75%" fxFlex.xs="75%" fxLayoutGap="20px">
                             <div fxFlex="8%">
-                            <app-reminder></app-reminder>
+                            <app-reminder [noteid]=data (eventEmit)="emit($event)" (eventEmitReminder)="eventEmitRemainder($event)"></app-reminder>
                             </div> 
                             <div fxFlex="8%">
                             <app-collaborator></app-collaborator>

@@ -4,7 +4,7 @@ import { SignupService } from '../../core/services/http/http.service';
 @Component({
   selector: 'app-changecolor',
   templateUrl: './changecolor.component.html',
-  styleUrls: ['./changecolor.component.css']
+  styleUrls: ['./changecolor.component.scss']
 })
 export class ChangecolorComponent implements OnInit {
 

@@ -5,7 +5,7 @@ import { SignupService } from '../../core/services/http/http.service'
 @Component({
   selector: 'app-cropimage',
   templateUrl: './cropimage.component.html',
-  styleUrls: ['./cropimage.component.css']
+  styleUrls: ['./cropimage.component.scss']
 })
 export class CropimageComponent implements OnInit {
   public img;

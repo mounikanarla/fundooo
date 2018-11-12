@@ -8,7 +8,7 @@ import { DataServiceService } from '../../core/services/dataServices/data-servic
 @Component({
   selector: 'app-addnote',
   templateUrl: './addnote.component.html',
-  styleUrls: ['./addnote.component.css']
+  styleUrls: ['./addnote.component.scss']
 })
 export class AddnoteComponent implements OnInit {
 
@@ -78,6 +78,12 @@ export class AddnoteComponent implements OnInit {
     if (event) {
       this.eventEmit.emit(event)
       // console.log("event2",event);
+    }
+  }
+  eventEmitRemainder(event){
+    if (event) {
+      this.eventEmit.emit(event)
+      // console.log("gjdfghdjghdjg",event);
     }
   }
   removelabel(index, label) {

@@ -1,17 +1,17 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SignupService } from '../../core/services/http/http.service';
 
 @Component({
   selector: 'app-main-archive',
   templateUrl: './main-archive.component.html',
-  styleUrls: ['./main-archive.component.css']
+  styleUrls: ['./main-archive.component.scss']
 })
 export class MainArchiveComponent implements OnInit {
 
   constructor(private httpService: SignupService) { }
   public archiveArray = []
   token = localStorage.getItem('id');
-  @Output() eventEmit = new EventEmitter();  
+  @Output() eventEmit = new EventEmitter();
   ngOnInit() {
     this.getarchive()
   }
@@ -35,9 +35,9 @@ export class MainArchiveComponent implements OnInit {
       console.log("archive array", this.archiveArray);
     })
   }
-  emit(event){
+  emit(event) {
     console.log(event)
-    if(event){
+    if (event) {
       this.getarchive()
     }
   }

@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-archieve',
   templateUrl: './archieve.component.html',
-  styleUrls: ['./archieve.component.css']
+  styleUrls: ['./archieve.component.scss']
 })
 export class ArchieveComponent implements OnInit {
 

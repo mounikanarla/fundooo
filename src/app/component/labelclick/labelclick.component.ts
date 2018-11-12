@@ -6,7 +6,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-labelclick',
   templateUrl: './labelclick.component.html',
-  styleUrls: ['./labelclick.component.css']
+  styleUrls: ['./labelclick.component.scss']
 })
 export class LabelclickComponent implements OnInit {
   // @Output() eventEmitLabel = new EventEmitter();  

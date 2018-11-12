@@ -1,4 +1,4 @@
-import { Component,Output,EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { CropimageComponent } from '../../component/cropimage/cropimage.componen
 @Component({
   selector: 'app-navbarone',
   templateUrl: './navbarone.component.html',
-  styleUrls: ['./navbarone.component.css']
+  styleUrls: ['./navbarone.component.scss']
 })
 export class NavbaroneComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -27,7 +27,7 @@ export class NavbaroneComponent {
   public firstName = localStorage.getItem('firstName');
   public lastName = localStorage.getItem('lastName');
   public email = localStorage.getItem('email');
-  public number=1;
+  public number = 1;
   public image = localStorage.getItem('imageUrl');
   public img = "http://34.213.106.173/" + this.image;
   @Output() eventEmit = new EventEmitter();
@@ -109,7 +109,7 @@ export class NavbaroneComponent {
 
   fileSelected(event): void {
     const dialogRef = this.dialog.open(CropimageComponent, {
-        data: event
+      data: event
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -121,8 +121,8 @@ export class NavbaroneComponent {
   }
 
   croppedImage: any = '';
-  imageCropped(event:any) {
+  imageCropped(event: any) {
     this.croppedImage = event.base64;
-}
- 
+  }
+
 }

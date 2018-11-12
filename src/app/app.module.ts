@@ -31,7 +31,7 @@ import { ChangecolorComponent } from './component/changecolor/changecolor.compon
 import { ImageComponent } from './component/image/image.component';
 import { ArchieveComponent } from './component/archieve/archieve.component';
 import { MoreComponent } from './component/more/more.component';
-import { UndoComponent } from './component/undo/undo.component';
+// import { UndoComponent } from './component/undo/undo.component';
 import { RedoComponent } from './component/redo/redo.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
@@ -50,6 +50,7 @@ import { PinComponent } from './component/pin/pin.component';
 import { CropimageComponent } from './component/cropimage/cropimage.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ReminderNotesComponent } from './component/reminder-notes/reminder-notes.component';
 
 
 // import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
@@ -72,7 +73,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     ImageComponent,
     ArchieveComponent,
     MoreComponent,
-    UndoComponent,
+    // UndoComponent,
     RedoComponent,
     ProfileComponent,
     HomeComponent,
@@ -87,6 +88,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     LabelclickComponent,
     PinComponent,
     CropimageComponent,
+    ReminderNotesComponent,
     
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],

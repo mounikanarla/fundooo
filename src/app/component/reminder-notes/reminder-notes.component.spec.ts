@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UndoComponent } from './undo.component';
+import { ReminderNotesComponent } from './reminder-notes.component';
 
-describe('UndoComponent', () => {
-  let component: UndoComponent;
-  let fixture: ComponentFixture<UndoComponent>;
+describe('ReminderNotesComponent', () => {
+  let component: ReminderNotesComponent;
+  let fixture: ComponentFixture<ReminderNotesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UndoComponent ]
+      declarations: [ ReminderNotesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UndoComponent);
+    fixture = TestBed.createComponent(ReminderNotesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

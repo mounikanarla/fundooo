@@ -24,7 +24,7 @@ export const MY_FORMATS = {
 @Component({
   selector: 'app-reminder',
   templateUrl: './reminder.component.html',
-  styleUrls: ['./reminder.component.css'],
+  styleUrls: ['./reminder.component.scss'],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
@@ -33,9 +33,11 @@ export const MY_FORMATS = {
 export class ReminderComponent implements OnInit {
   date = new FormControl(moment());
   public body:any={}
+  public flag=false;
   constructor(private httpService: SignupService) { }
 @Input() noteid
 @Output() eventEmit = new EventEmitter();
+@Output() eventEmitReminder = new EventEmitter();
 
 public isDeleted=false;
   ngOnInit() {
@@ -55,7 +57,11 @@ public isDeleted=false;
   }
   
   remindToday(){
+
     let currentDate = new Date()
+    var date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
+    this.eventEmitReminder.emit(date);
+    if(this.noteid!=null){
     this.body =
       {
         'noteIdList': [this.noteid.id],
@@ -65,14 +71,22 @@ public isDeleted=false;
       .subscribe(data => {
         console.log("success in today reminders",data);
         this.eventEmit.emit({});
-  
+        console.log("event emitting");
+
       },
         error => {
           console.log("error in today reminders",error)
         })
+      }
   }
   remindTomorrow(){
-    let currentDate = new Date()
+    let currentDate = new Date();
+    var date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1, 8, 0, 0)
+
+    this.eventEmitReminder.emit(date);
+
+    if(this.noteid!=null){
+
     this.body =
       {
         'noteIdList': [this.noteid.id],
@@ -82,14 +96,24 @@ public isDeleted=false;
       .subscribe(data => {
         console.log("success in tomorrow reminders",data);
         this.eventEmit.emit({});
-  
+        // this.eventEmitReminder.emit(date);
+
       },
         error => {
           console.log("error in tomorrow reminders",error)
         })
+      }
   }
+
   weekRemainder(){
+
     let currentDate = new Date()
+    var date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7, 8, 0, 0)
+
+    this.eventEmitReminder.emit(date);
+
+    if(this.noteid!=null)
+    {
     this.body =
       {
         'noteIdList': [this.noteid.id],
@@ -99,6 +123,8 @@ public isDeleted=false;
       .subscribe(data => {
         console.log("success in week reminders",data);
         this.eventEmit.emit({});
+        // this.eventEmitReminder.emit(date);
+
   
       },
         error => {
@@ -106,3 +132,5 @@ public isDeleted=false;
         })
   }
 }
+}
+

@@ -5,7 +5,7 @@ import { SignupService } from '../../core/services/http/http.service'
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
-  styleUrls: ['./update.component.css']
+  styleUrls: ['./update.component.scss']
 })
 export class UpdateComponent implements OnInit {
   public title;
@@ -24,37 +24,40 @@ export class UpdateComponent implements OnInit {
   public checklist=false;
 
   ngOnInit() {
-    console.log("checkingdata",this.data.notelabels)
     this.label=this.data.noteLabels;
     if (this.data.noteCheckLists.length>0){
       this.checklist=true;
     }
     this.tempArray=this.data.noteCheckLists;
-
-    
+    this.array=this.data.reminder
   }
   constructor(private getService: SignupService,
     public dialogRef: MatDialogRef<UpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) {}
     @Output() eventEmit = new EventEmitter();  
     @Input() colorid
+    
     onClick(): void {
-    this.dialogRef.close();
-    this.update();
-  }
+      this.dialogRef.close();
+      if(this.modifiedCheckList==null){
+        this.update();
+      }
+    }
 update(){
     this.title = document.getElementById("title").innerHTML;
     this.description = document.getElementById("description").innerHTML;
     this.id=this.data.id;
     this.color=this.data.color
-  if(this.checklist==false){
+  if(this.checklist==false)
+  {
 
   this.getService.dataPost("notes/updateNotes", {
     "noteId": this.id,
     "title": this.title,
     "description": this.description,
     "color":this.color,
-    "label":this.label
+    "label":this.label,
+    "reminder":this.array
 
   }, this.token).subscribe((response) => {
     console.log("successful", response);
@@ -66,6 +69,7 @@ update(){
   
   )
 }else{
+
   var apiData={
     "itemName": this.modifiedCheckList.itemName,
     "status":this.modifiedCheckList.status
@@ -83,11 +87,12 @@ editing(editedList,event){
   if(event.code=="Enter"){
   this.modifiedCheckList=editedList;
   this.update();
+
   }
 }
 checkBox(checkList){
     
-  if (checkList.status=="open"){
+  if(checkList.status=="open"){
     checkList.status = "close"
   }
   else{
@@ -95,6 +100,7 @@ checkBox(checkList){
   }
   console.log(checkList);
   this.modifiedCheckList=checkList;
+
   this.update();
 }
 public removedList;
@@ -177,6 +183,16 @@ eventEmitLabel(event) {
  
 
 }
+public array=[]
+  eventEmitRemainder(event){
+    this.array=[];
+    if(event)
+    {
+    this.array.push(event);
+    console.log(this.array)
+    console.log("event receiving");
+    }
+  }
 removelabel(data, label) {
   
   this.getService.logoutPost("notes/" + data.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))

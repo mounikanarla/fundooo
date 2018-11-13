@@ -205,5 +205,24 @@ removelabel(data, label) {
       }
     )
 }
+removeRemainder(label) {
+  console.log(label);
+  
+  var id =[];
+  id.push(label)
+
+  var body={
+    "noteIdList" : id
+  }
+  this.getService.delPost("/notes/removeReminderNotes",body, localStorage.getItem('id'))
+    .subscribe((response) => {
+      console.log("Reminder deleted" + response)
+      this.eventEmit.emit({});
+    },
+      (error) => {
+        console.log("error occured" + error)
+      }
+    )
+}
 
 }

@@ -1,6 +1,6 @@
 <div fxLayout="row wrap">
   <div fxFlex.lg="13%" fxFlex.md="10%" fxFlex.sm="5%" ></div>
-  <div fxFlex.lg="74%" fxFlex.md="80%" fxFlex.sm="90%" fxFlex.md="100%" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="30px">
+  <div fxFlex.lg="74%" fxFlex.md="80%" fxFlex.sm="90%" fxFlex.xs="95%" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap.lg="30px" fxLayoutGap.md="10px" fxLayoutGap.sm="10px">
     <!-- mat-card starts -->
     <mat-card class="example-card" ngStyle.xs="width:100%" [ngClass]="{'viewgrid':condition,'viewlist':!condition}" *ngFor='let index of newData | search:searchInput' [ngStyle]="{'background-color':index.color}">
       <!--Title printing starts -->
@@ -39,7 +39,7 @@
           </mat-chip>
         </div>
       </mat-chip-list>
-      <mat-chip-list>
+      <mat-chip-list class="margin">
           <div *ngFor="let label of index.reminder">
             <mat-chip *ngIf="!label.isDeleted">
             <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
@@ -54,7 +54,7 @@
         <span class=invisible>
           <div fxFlex="100%" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
             <div fxFlex="10%">
-              <app-reminder [noteid]=index (eventEmit)="emit($event)" (eventEmitReminder)="eventEmitRemainder($event)"></app-reminder>
+              <app-reminder [noteid]=index (eventEmit)="emit($event)" (eventEmitRemainder)="eventEmitRemainder($event)"></app-reminder>
             </div>
             <div fxFlex="14%">
               <app-collaborator [noteid]=index></app-collaborator>

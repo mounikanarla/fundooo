@@ -52,7 +52,7 @@
                           <mat-chip *ngIf="!label.isDeleted">
                           <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
                           {{label | date:"medium"}}
-                            <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
+                            <mat-icon matChipRemove (click)="removeRemainder(data.id)">cancel</mat-icon>
                           </mat-chip>
                         </div>
                       </mat-chip-list>

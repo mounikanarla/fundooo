@@ -1,7 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { SignupService } from '../../core/services/http/http.service';
 import { MatDialog } from '@angular/material/dialog';
-import { TrashComponent } from '../trash/trash.component'
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -33,11 +32,7 @@ export class MoreComponent implements OnInit {
     if (this.noteid != undefined && this.noteid['isDeleted'] == true) {
       this.isDeleted = true
     }
-    // console.log(this.noteid)
-
     this.checkLabel();
-
-    // this.delData(this.flag)
   }
   delData(flag) {
     console.log(this.noteid)
@@ -62,8 +57,7 @@ export class MoreComponent implements OnInit {
       response => {
         this.array = response['data'].details;
         // console.log(this.noteid.noteLabels.length);
-
-        if (this.noteid.noteLabels != undefined) {
+         if (this.noteid.noteLabels != undefined) {
           for (var i = 0; i < this.array.length; i++) {
             for (var j = 0; j < this.noteid.noteLabels.length; j++) {
               if (this.array[i].id == this.noteid.noteLabels[j].id) {
@@ -81,12 +75,7 @@ export class MoreComponent implements OnInit {
   }
   addChecklabel(label) {
     this.eventEmitLabel.emit(label);
-
-    // console.log(this.eventEmitLabel.emit(label))
-
     if (this.noteid != null && label.isChecked == null) {
-      // this.eventEmit.emit({});
-
       this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/add", localStorage.getItem('id'))
         .subscribe((response) => {
           console.log("checklist added", response);
@@ -100,7 +89,6 @@ export class MoreComponent implements OnInit {
         )
     }
     if (this.noteid != null && label.isChecked == true) {
-      // this.eventEmit.emit({});
 
       this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
         .subscribe((response) => {

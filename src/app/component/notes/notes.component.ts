@@ -44,7 +44,7 @@ export class NotesComponent implements OnInit {
   * @description: notes() is used to post the data that are getting from the user
   */
   notes() {
-    this.array=[];
+    
     var color = this.bgcolor;
     this.bgcolor = '#ffffff'
 
@@ -71,6 +71,7 @@ export class NotesComponent implements OnInit {
         // console.log(this.id);
         this.getService.getnote("notes/getNotesList", this.id).subscribe((response) => {
           // console.log(response);
+          this.array=[];
           this.onNewEntryAdded.emit({});
           this.eventEmit.emit({});
 
@@ -105,6 +106,7 @@ export class NotesComponent implements OnInit {
         // console.log(this.id);
         this.getService.getnote("notes/getNotesList", this.id).subscribe((response) => {
           // console.log(response);
+          this.array=[];
           this.dataarray = [];
           this.onNewEntryAdded.emit({});
           this.eventEmit.emit({});
@@ -146,7 +148,7 @@ export class NotesComponent implements OnInit {
     {
     this.array.push(event);
     console.log(this.array)
-    console.log("event receiving");
+    console.log("event is emitting from notes");
     }
   }
 

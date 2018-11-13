@@ -77,13 +77,13 @@ export class AddnoteComponent implements OnInit {
   eventEmitLabel(event) {
     if (event) {
       this.eventEmit.emit(event)
-      // console.log("event2",event);
+      console.log("event2",event);
     }
   }
   eventEmitRemainder(event){
     if (event) {
       this.eventEmit.emit(event)
-      // console.log("gjdfghdjghdjg",event);
+      // console.log("event is receiving to addnote",event);
     }
   }
   removelabel(index, label) {

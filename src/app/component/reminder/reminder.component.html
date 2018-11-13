@@ -1,6 +1,6 @@
 <span data-toggle="tooltip" title="{{!isDeleted ? 'Remind Me':''}}">
   <button mat-icon-button>
-    <mat-icon class="remain" *ngIf="!isDeleted" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation();"><img src="../../../assets/remainder.svg"></mat-icon>
+    <mat-icon class="remain" *ngIf="!isDeleted" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation() && reminder()"><img src="../../../assets/remainder.svg"></mat-icon>
   </button>
 </span>
 <mat-menu (click)="$event.stopPropagation();" class="menu" #menu="matMenu" [overlapTrigger]="false">
@@ -30,17 +30,43 @@
             <mat-icon (click)="$event.stopPropagation();" (click)="flag=false" mat-icon-button>keyboard_backspace</mat-icon>
             <span class="place1">Pick Date & Time</span><br>
         <mat-divider></mat-divider>
+        <div>
         <mat-form-field>
-            <input (click)="$event.stopPropagation();"  matInput [matDatepicker]="dp" [formControl]="date">
+            <input (click)="$event.stopPropagation();" #date="ngModel" [(ngModel)]="myDate.date"  matInput [matDatepicker]="dp" value="this.value.date">
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
         </mat-form-field>
-        <mat-form-field>
-            <input (click)="$event.stopPropagation();" matInput placeholder="Reminded Data & Time" [formControl]="date">
+        </div>
+        <div>
+        <form class="example-form">
+        <mat-form-field class="example-full-width">
+                <input (click)="$event.stopPropagation();" matInput placeholder [matMenuTriggerFor]="menu" (click)="$event.stopPropagation();" value="3:30 PM">
         </mat-form-field>
-        <button mat-raised-button class="button">Save</button>
-
-    </div> 
+        </form>
+        <mat-menu (click)="$event.stopPropagation();" class="menu" #menu="matMenu" [overlapTrigger]="false">
+            <button (click)="$event.stopPropagation();" mat-menu-item>
+                <div><span>Morning </span>
+                    <span class="timeSpace">8:00 AM</span></div>
+            </button>
+            <button (click)="$event.stopPropagation();" mat-menu-item>
+                <div><span>Afternoon</span>
+                    <span class="noonSpace">1:00 PM</span></div>
+            </button>
+            <button (click)="$event.stopPropagation();" mat-menu-item>
+                <div><span>Evening</span>
+                    <span class="timeSpace">6:00 PM</span></div>
+            </button>
+            <button (click)="$event.stopPropagation();" mat-menu-item>
+                <div><span>Night</span>
+                    <span class="timeSpace">8:00 PM</span></div>
+            </button>
+            <button (click)="$event.stopPropagation();" mat-menu-item>
+                <div><span>Custom</span></div>
+            </button>
+        </mat-menu>
+        </div>
+        <button mat-raised-button class="button" (click)="customDate()">Save</button>
+        </div> 
 </mat-menu>
 
 

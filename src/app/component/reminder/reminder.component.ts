@@ -34,27 +34,27 @@ export class ReminderComponent implements OnInit {
   date = new FormControl(moment());
   public body:any={}
   public flag=false;
+  public isDeleted=false;
+  public myDate: any={
+  "date":"",
+  "time":""
+}
+  public value;
+  public currentDate;
+  public obj;
+
   constructor(private httpService: SignupService) { }
 @Input() noteid
 @Output() eventEmit = new EventEmitter();
 @Output() eventEmitReminder = new EventEmitter();
 
-public isDeleted=false;
+
   ngOnInit() {
     if(this.noteid!=undefined && this.noteid.isDeleted==true){
       this.isDeleted=true
     }
-    this.getRemainder();
   }
-  getRemainder() {
-    this.httpService.getnote("/notes/getReminderNotesList", localStorage.getItem('id')).subscribe((response) => {
-    // console.log("Success",response)
-  },
-  (error)=>{
-    console.log("error",error)
-
-  })
-  }
+  
   
   remindToday(){
 
@@ -129,8 +129,48 @@ public isDeleted=false;
       },
         error => {
           console.log("error in week reminders",error)
-        })
+     })
   }
+}
+
+reminder(){
+  this.value=this.currentDate;
+  if(this.noteid.reminder.length!=0)
+  {
+    var reminder=new Date(this.noteid.reminder);
+    var form=new FormControl(reminder);
+    this.value=form.value
+    this.obj.date=this.value
+    this.value=reminder;
+  }
+  // this.myDate.date=this.value;
+  
+}
+customDate(){
+//  var date=new Date(this.value.date.getFullYear(),this.value.date.getMonth(),this.value.date.getDate())
+//  this.eventEmitReminder.emit(date);
+
+ if(this.noteid!=null)
+ {
+ this.body =
+   {
+     'noteIdList': [this.noteid.id],
+     'reminder': new Date(this.myDate.date.getFullYear(),this.myDate.date.getMonth(),this.myDate.date.getDate())
+   }
+ this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id'))
+   .subscribe(data => {
+     console.log("success in week reminders",data);
+     this.eventEmit.emit({});
+     // this.eventEmitReminder.emit(date);
+
+
+   },
+     error => {
+       console.log("error in week reminders",error)
+  })
+}
+
+
 }
 }
 

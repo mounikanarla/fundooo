@@ -1,4 +1,8 @@
 <div class="notesPosition">
     <app-notes (onNewEntryAdded)="addNewEntry($event)"></app-notes>
+    <!-- <span>PINNED</span> -->
+    <app-addnote  [newData]=pinarray (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)"  ></app-addnote>
+    <!-- <span>OTHERS</span> -->
     <app-addnote  [newData]=array (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)"  ></app-addnote>
+
 </div>

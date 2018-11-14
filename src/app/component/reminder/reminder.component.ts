@@ -20,7 +20,6 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
 @Component({
   selector: 'app-reminder',
   templateUrl: './reminder.component.html',
@@ -31,6 +30,16 @@ export const MY_FORMATS = {
 ],
 })
 export class ReminderComponent implements OnInit {
+  selectedValue: string;
+  dates: any = [
+    {value: 'Morning-0', viewPeriod: 'Morning', viewTime: '8:00 AM'},
+    {value: 'Afternoon-1', viewPeriod: 'Afternoon' ,viewTime:'1:00 PM'},
+    {value: 'Evening-2', viewPeriod: 'Evening',viewTime:'6:00 PM'},
+    {value: 'Night-3', viewPeriod: 'Night',    viewTime:'8:00 PM'},
+    {value: 'Custom-4', viewPeriod: 'Custom'},
+
+  ];
+
   date = new FormControl(moment());
   public body:any={}
   public flag=false;
@@ -148,23 +157,30 @@ reminder(){
 }
 customDate(){
 //  var date=new Date(this.value.date.getFullYear(),this.value.date.getMonth(),this.value.date.getDate())
-//  this.eventEmitReminder.emit(date);
-
+// console.log(date);
+console.log(this.myDate.date)
+ //  this.eventEmitReminder.emit(date);
+var timearray=this.myDate.split(' ');
+var timearray2=timearray[0].split(':')
+timearray2.push(timearray[1])
+var min=Number(timearray2[1]);
+var hr=Number(timearray2[0]);
+if(timearray2[2]=="PM" && hr<12){
+  hr=hr+12;
+}
  if(this.noteid!=null)
  {
  this.body =
    {
      'noteIdList': [this.noteid.id],
-     'reminder': new Date(this.myDate.date.getFullYear(),this.myDate.date.getMonth(),this.myDate.date.getDate())
+     'reminder': new Date(this.myDate.date.getFullYear(),this.myDate.date.getMonth(),this.myDate.date.getDate()+0,hr,min,0)
    }
  this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id'))
    .subscribe(data => {
      console.log("success in week reminders",data);
      this.eventEmit.emit({});
      // this.eventEmitReminder.emit(date);
-
-
-   },
+  },
      error => {
        console.log("error in week reminders",error)
   })

@@ -51,6 +51,7 @@ import { CropimageComponent } from './component/cropimage/cropimage.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ReminderNotesComponent } from './component/reminder-notes/reminder-notes.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 // import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
@@ -115,6 +116,7 @@ import { ReminderNotesComponent } from './component/reminder-notes/reminder-note
     MatDialogModule,MatChipsModule,
     ImageCropperModule,
     MatDatepickerModule,
+    MatSelectModule
   
 
   ],

@@ -11,7 +11,7 @@ export class ParentComponent implements OnInit {
   constructor(private httpService: SignupService) { }
   public array = []
   token = localStorage.getItem('id');
-
+  public pinarray=[]
   ngOnInit() {
     this.getCard();
   }
@@ -19,6 +19,7 @@ export class ParentComponent implements OnInit {
     if (event) {
       // this.array=[];
       this.getCard();
+      this.getpinCard();
     }
   }
   /*
@@ -33,8 +34,25 @@ export class ParentComponent implements OnInit {
       // Loop is initialized to the cards list in the reverse order 
       for (var i = length - 1; i >= 0; i--) {
         // console.log(data['data'].data.length);
-        if (data['data'].data[i].isDeleted == false && data['data'].data[i].isArchived == false) {
+        if (data['data'].data[i].isDeleted === false && data['data'].data[i].isArchived === false && data['data'].data[i].isPined === false ) {
           this.array.push(data['data'].data[i]);
+        }
+      }
+      // console.log("array", this.array);
+    })
+  }
+
+  getpinCard() {
+    this.httpService.getnote("notes/getNotesList", this.token).subscribe(data => {
+      this.pinarray = [];
+
+      // console.log("get cards list successfull", data);
+      var length = data['data'].data.length;
+      // Loop is initialized to the cards list in the reverse order 
+      for (var i = length - 1; i >= 0; i--) {
+        // console.log(data['data'].data.length);
+        if (data['data'].data[i].isPined === true) {
+          this.pinarray.push(data['data'].data[i]);
         }
       }
       // console.log("array", this.array);
@@ -42,7 +60,9 @@ export class ParentComponent implements OnInit {
   }
   emit(event) {
     if (event) {
+      this.getpinCard();
       this.getCard();
+      // this.getpinCard();
     }
   }
 

@@ -96,22 +96,7 @@
 
 
 
- <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu" class="timeSet">keyboard_arrow_down</mat-icon>
-            
-</div>
-<mat-menu #timeMenu [overlapTrigger]=false>
-<div fxLayout="column" *ngFor="let timing of remind">
-        <button mat-button (click)="reminderBody.time = timing.viewTime" 
-        (click)="$event.stopPropagation()">
-                
-                <div fxFlex>{{timing.viewPeriod}}</div>
-                <div fxFlex></div>
-                <div fxFlex>{{timing.viewTime}}</div>
-                
-        </button>
-        
-    
-</div>
+ 
 
 
 

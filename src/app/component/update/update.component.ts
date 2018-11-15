@@ -185,12 +185,18 @@ eventEmitLabel(event) {
 }
 public array=[]
   eventEmitRemainder(event){
+    var flag=false,index;
     this.array=[];
     if(event)
     {
+      flag=true;
+      index=1;
     this.array.push(event);
     console.log(this.array)
     console.log("event receiving");
+    }
+    if(flag==true){
+      this.array.splice(index,1)
     }
   }
 removelabel(data, label) {

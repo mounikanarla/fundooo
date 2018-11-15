@@ -40,6 +40,7 @@
 }
 .title:empty:before{
     content:attr(data-text);
+    display:block;
 }
 .pin{
     opacity:0.5;

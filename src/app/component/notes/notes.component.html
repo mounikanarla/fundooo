@@ -77,11 +77,27 @@
                         </div>
                         <mat-chip-list>
                             <div *ngFor="let label of array">
-                              <mat-chip *ngIf="!label.isDeleted">
+                                <div *ngIf="(!label.isDeleted && (today | date:shortDate) == (label | date:shortDate))">
+                              <mat-chip >
                               <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
-                              {{label | date:"medium"}}
-                                <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
+                                    Today{{label | date:"shortTime"}}
+                              <mat-icon matChipRemove (click)="deleteReminder(index)">cancel</mat-icon>
                               </mat-chip>
+                            </div>
+                            <div *ngIf="(!label.isDeleted && (tomorrow | date:shortDate) == (label | date:shortDate ))">
+                                    <mat-chip>
+                                    <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+                                    Tomorrow {{label | date:"shortTime"}}
+                                      <mat-icon matChipRemove (click)="deleteReminder(index)">cancel</mat-icon>
+                                    </mat-chip>
+                            </div>
+                            <div *ngIf="((today | date:shortDate) != (label | date:shortDate) ) && ((tomorrow | date:shortDate) != (label | date:shortDate) )">                  
+                                <mat-chip>
+                                <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+                                          {{label | date:"medium"}}
+                                <mat-icon matChipRemove (click)="deleteReminder(index)">cancel</mat-icon>
+                                </mat-chip>
+                                </div>
                             </div>
                           </mat-chip-list>
                     </div>
@@ -89,7 +105,7 @@
                         <mat-card-actions>
                             <div fxLayout="row" class="icons" fxFlex.xs="90%">
                                 <div fxFlex="80%" fxLayoutGap="20px">
-                                    <app-reminder (eventEmitReminder)="eventEmitRemainder($event)"></app-reminder>
+                                    <app-reminder (eventEmitReminder)="eventEmitReminder($event)"></app-reminder>
                                     <app-collaborator></app-collaborator>
                                     <app-changecolor (eventEmit)="emit($event)"></app-changecolor>
                                     <app-image></app-image>
@@ -112,3 +128,5 @@
         <app-addnote></app-addnote>
     </div>
 </div>
+
+

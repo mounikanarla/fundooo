@@ -17,7 +17,9 @@ export class AddnoteComponent implements OnInit {
   token = localStorage.getItem('id');
   public condition=false;
   public isChecked=false;
-
+  public  today = new Date();
+  public  tomorrow=new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1, 8, 0, 0)
+  name="fundoo"
 
   /*
   * @description: @INPUT AND @Output are decorators used to bind the data
@@ -42,6 +44,13 @@ export class AddnoteComponent implements OnInit {
 
   
     
+  }
+
+  labelDisplay(list){
+    this.name=list.label;
+    console.log(this.name)
+    this.eventEmit.emit(event);
+
   }
   /*
   * @description : emit(event) is used to emit the event coming from child component at the time of action
@@ -80,10 +89,10 @@ export class AddnoteComponent implements OnInit {
       console.log("event2",event);
     }
   }
-  eventEmitRemainder(event){
+  eventEmitReminder(event){
     if (event) {
       this.eventEmit.emit(event)
-      // console.log("event is receiving to addnote",event);
+      console.log("event is receiving to addnote",event);
     }
   }
   removelabel(index, label) {
@@ -139,5 +148,13 @@ export class AddnoteComponent implements OnInit {
           console.log("error occured" + error)
         }
       )
+  }
+  checkReminder(date){
+    var reminderPresent=new Date().getTime();
+    var value=new Date(date).getTime();
+    if(value > reminderPresent){
+    return true;
+    }
+    else false;
   }
 }

@@ -30,6 +30,7 @@ export class NavbaroneComponent {
   public number = 1;
   public image = localStorage.getItem('imageUrl');
   public img = "http://34.213.106.173/" + this.image;
+  name="Fundoo Notes"
   @Output() eventEmit = new EventEmitter();
 
   constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router, public dialog: MatDialog, private data: DataServiceService) { }
@@ -37,6 +38,12 @@ export class NavbaroneComponent {
     this.checkLabel();
     // this.data.currentMessage.subscribe(message => this.message = message)
 
+  }
+  titleDisplay(routeName){
+    this.name=routeName;
+  }
+  labelDisplay(list){
+    this.name=list.label;
   }
   clicksearch() {
     console.log('in')
@@ -124,5 +131,14 @@ export class NavbaroneComponent {
   imageCropped(event: any) {
     this.croppedImage = event.base64;
   }
+  // emit(event) {
+  //   console.log(event)
+  //   if (event) {
+  //     this.labelDisplay(event){
+  //       this.name=event.label
 
+  //     }
+      
+  //   }
+  // }
 }

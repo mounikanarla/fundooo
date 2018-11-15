@@ -7,12 +7,13 @@
             <mat-icon class="menuicon" aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
         <!-- </div> -->
-        <div fxHide.xs="true" fxHide.sm="true">
+        <div fxLayoutAlign="center center">
+          <span class="routename">{{name}}</span>
+        </div>
+        <!-- <div fxHide.xs="true" fxHide.sm="true">
           <span class="displayname">Fundoo</span>
         </div>
-        <!-- <div fxFlex.lg="40%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%"> -->
-          <span class="displayname">Keep</span>
-        <!-- </div> -->
+          <span class="displayname">Keep</span> -->
       </div>
       <div fxLayout="row" fxFlex.lg="60%" fxFlex.md="70%" >
         <!-- <div fxFlex.lg="40%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%"> -->
@@ -34,16 +35,15 @@
           <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="30%" fxFlex.xs="50%">
             <button (click) = "$event.stopPropagation()"
                 [ngStyle]="{'float':'left','background-image':'url('+img+')','background-size':'cover'}"
-                matTooltip="fundoo Account" mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color:black;float:right;color:white;text-transform:uppercase;">
+                matTooltip="fundoo Account" mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color:navy;float:right;color:white;text-transform:uppercase;">
                </button>
               <mat-menu  #appMenu="matMenu" [overlapTrigger]="false" style="width:20%">
                   <div fxLayout="row" fxFlex="100%">
                   <div fxFlex="30%">  
-                      <button (click) = "$event.stopPropagation()" class="buttonimage" [ngStyle]="{'float':'left','background-image':'url(' +img+ ')','background-size':'cover'}" (click)="selectFile.click()" matTooltip="fundoo Account" mat-mini-fab style="background-color:#fb0;float:right;color:white;text-transform:uppercase; margin-left: 34px;">
+                      <button (click) = "$event.stopPropagation()" class="buttonimage" [ngStyle]="{'float':'left','background-image':'url(' +img+ ')','background-size':'cover'}" (click)="selectFile.click()" matTooltip="fundoo Account" mat-mini-fab style="background-color:navy;float:right;color:white;text-transform:uppercase; margin-left: 34px;">
                         <input (click) = "$event.stopPropagation()" class="image" type="file" 
                         (change)=fileSelected($event) #selectFile>
                       </button>
-                      
                   </div>
                   <div  fxFlex="70%">
                   <mat-content class="style">
@@ -52,8 +52,7 @@
                   </mat-content>
                   </div>  
               </div>
-              
-                <span class="logoutButton"><button mat-button (click)=logout()>Logout</button></span>
+              <span class="logoutButton"><button mat-button (click)=logout()>Logout</button></span>
             </mat-menu>
           </div>
             <!-- Profile Ends -->
@@ -64,18 +63,17 @@
       <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
         <mat-nav-list>
-          <a mat-list-item routerLink="/home/notes" routerLinkActive="active"><img src="../../../assets/notes.svg"><span
+          <a mat-list-item routerLink="/home/notes" routerLinkActive="active" (click)="titleDisplay('KEEP')"><img src="../../../assets/notes.svg"><span
               class="notes">Notes</span></a>
-          <a mat-list-item routerLink="/home/reminders" routerLinkActive="active"><img src="../../../assets/remainder.svg"><span class="remainder">Reminders</span></a>
+          <a mat-list-item routerLink="/home/reminders" routerLinkActive="active" (click)="titleDisplay('REMINDERS')"><img src="../../../assets/remainder.svg"><span class="remainder">Reminders</span></a>
         </mat-nav-list>
         <hr>
-
         <div class="label">
           <a mat-list-item>Labels<button class="edit" (click)=addlabel()>Edit</button></a>
         </div>
         <mat-nav-list>
           <div *ngFor="let list of array" class="printlabel">
-            <a mat-list-item routerLink="/home/label/{{ list.label }}" routerLinkActive="active"> <mat-icon class="material-icons"
+            <a mat-list-item routerLink="/home/label/{{ list.label }}"  routerLinkActive="active" (click)="labelDisplay(list)" (eventEmit)="emit($event)"> <mat-icon class="material-icons"
                 class="space">label_outline</mat-icon><span class="display">{{ list.label }}</span></a>
           </div>
         </mat-nav-list>
@@ -85,9 +83,9 @@
         </mat-nav-list>
         <hr>
         <mat-nav-list>
-          <a mat-list-item routerLink="/home/archive" routerLinkActive="active"><img src="../../../assets/archive.svg"><span
+          <a mat-list-item routerLink="/home/archive" routerLinkActive="active" (click)="titleDisplay('ARCHIVE')"><img src="../../../assets/archive.svg"><span
               class="notes">Archive</span></a>
-          <a mat-list-item routerLink="/home/trash" routerLinkActive="active"><img src="../../../assets/trash.svg"><span
+          <a mat-list-item routerLink="/home/trash" routerLinkActive="active" (click)="titleDisplay('TRASH')"><img src="../../../assets/trash.svg"><span
               class="remainder">Trash</span></a>
         </mat-nav-list>
         <hr>
@@ -115,22 +113,3 @@
 
 
 
-<!-- <mat-icon fxFlex="40px" *ngIf="number==1" (click)="listview()" aria-label="Side nav toggle icon" matTooltip="list view">view_stream</mat-icon>
-    <mat-icon fxFlex="40px" *ngIf="number==0" (click)="gridview()" aria-label="Side nav toggle icon" matTooltip="grid view">apps</mat-icon>
-
-
-
-
-  listview() {
-    this.number = 0;
-    this.dataservice.changeMessage3(false);
-  }
-  gridview() {
-    this.number = 1;
-    this.dataservice.changeMessage3(true);
-  }
-
-
-
-
-  <mat-card [ngClass]="{'viewgrid':condition,'viewlist':!condition}" class="example-card" *ngFor='let index of myData | LockFilter:searchInput' -->

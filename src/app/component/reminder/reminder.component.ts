@@ -31,31 +31,32 @@ export const MY_FORMATS = {
 })
 export class ReminderComponent implements OnInit {
   selectedValue: string;
-  remind: any = [
+  reminders: any = [
     {value: 'Morning', viewPeriod: 'Morning', viewTime: '08:00 AM'},
     {value: 'Afternoon', viewPeriod: 'Afternoon' ,viewTime:'01:00 PM'},
     {value: 'Evening', viewPeriod: 'Evening',viewTime:'06:00 PM'},
     {value: 'Night', viewPeriod: 'Night',    viewTime:'08:00 PM'},
-    {value: 'Custom', viewPeriod: 'Custom'},
-
-  ];
+];
 
   date = new FormControl(moment());
   public body:any={}
   public flag=false;
   public isDeleted=false;
-  public myDate: any={
-  "date":"",
-  "time":""
-}
+  // public  today = new Date();
+  // public  tomorrow=new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1, 8, 0, 0)
+
+  reminderBody={
+    "date": new FormControl(new Date()),
+    "time":""
+  }
   public value;
   public currentDate;
   public obj;
 
   constructor(private httpService: SignupService) { }
-@Input() noteid
-@Output() eventEmit = new EventEmitter();
-@Output() eventEmitReminder = new EventEmitter();
+  @Input() noteid
+  @Output() eventEmit = new EventEmitter();
+  @Output() eventEmitReminder = new EventEmitter();
 
 
   ngOnInit() {
@@ -66,7 +67,8 @@ export class ReminderComponent implements OnInit {
   
   
   remindToday(){
-
+    console.log(this.body.reminder);
+    
     let currentDate = new Date()
     var date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
     this.eventEmitReminder.emit(date);
@@ -105,9 +107,7 @@ export class ReminderComponent implements OnInit {
       .subscribe(data => {
         console.log("success in tomorrow reminders",data);
         this.eventEmit.emit({});
-        // this.eventEmitReminder.emit(date);
-
-      },
+       },
         error => {
           console.log("error in tomorrow reminders",error)
         })
@@ -132,93 +132,58 @@ export class ReminderComponent implements OnInit {
       .subscribe(data => {
         console.log("success in week reminders",data);
         this.eventEmit.emit({});
-        // this.eventEmitReminder.emit(date);
-
-  
       },
         error => {
           console.log("error in week reminders",error)
      })
   }
 }
-
-reminder(){
-  this.value=this.currentDate;
-  if(this.noteid.reminder.length!=0)
-  {
-    var reminder=new Date(this.noteid.reminder);
-    var form=new FormControl(reminder);
-    this.value=form.value
-    this.obj.date=this.value
-    this.value=reminder;
-  }
-  // this.myDate.date=this.value;
-  
-}
-
-
-reminderBody={
-  "date": new FormControl(new Date()),
-  "time":""
-}
-
-addRemCustom(date,timing){
+addCustomRemainders(date,timing){
   timing.match('^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$');
-  if(timing=='8:00 AM'){
+  if(timing==this.reminderBody.time){
+  var timeSplitted=this.reminderBody.time.split("",8);
+  var hour= Number(timeSplitted[0]+timeSplitted[1]);
+  var minute= Number(timeSplitted[3]+timeSplitted[4]);
+  var ampm = (timeSplitted[6]+timeSplitted[7]);
+  var emittingDate=new Date(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate(), hour, minute, 0, 0);
+  this.eventEmitReminder.emit(emittingDate)
+  
+  if(ampm == 'AM' || ampm == 'am' && this.noteid!=null){
     this.body = {
       "noteIdList": [this.noteid.id],
-      "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0)
+      "reminder": new Date(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate(), hour, minute, 0, 0)
     }
-}
-else if(timing=='1:00 PM'){
-
-  this.body = {
-    "noteIdList": [this.noteid.id],
-    "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0, 0)
-  }
-  
-}
-else if(timing=='6:00 PM'){
-  this.body = {
-    "noteIdList": [this.noteid.id],
-    "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 18, 0, 0, 0)
-  }
-
-}
-else if(timing=='9:00 PM'){
-  this.body = {
-    "noteIdList": [this.noteid.id],
-    "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 21, 0, 0, 0)
-  }
-  
-}
-else if(timing==this.reminderBody.time){
-  var splitTime=this.reminderBody.time.split("",8);
-  var hour= Number(splitTime[0]+splitTime[1]);
-  var minute= Number(splitTime[3]+splitTime[4]);
-  var ampm = (splitTime[6]+splitTime[7]);
- 
-  if(ampm=='AM' || ampm=='am'){
-    this.body = {
-      "noteIdList": [this.noteid.id],
-      "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0)
-    }
-    this.httpService.delPost('notes/addUpdateReminderNotes', this.body,localStorage.getItem('id')).subscribe((result) => {
-      
-      this.eventEmitReminder.emit()
+    this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id')).subscribe((result) => {
+     this.eventEmitReminder.emit(date)
+     console.log("emitting event from reminders",this.eventEmitReminder.emit(date));
+     
     })
-  }else if(ampm=='PM' || ampm=='pm'){
+  }else if(ampm =='PM' || ampm =='pm'&& this.noteid!=null){
     this.body = {
       "noteIdList": [this.noteid.id],
-      "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour+12, minute, 0, 0)
+      "reminder": new Date(new Date(date).getFullYear(),new Date(date).getMonth(), new Date(date).getDate(), hour+12, minute, 0, 0)
     }
     
   }
   
 }
-this.httpService.delPost('notes/addUpdateReminderNotes',this.body,localStorage.getItem('id')).subscribe((result) => {
-    
-  this.eventEmitReminder.emit()
+this.httpService.delPost('/notes/addUpdateReminderNotes',this.body,localStorage.getItem('id')).subscribe((result) => {
+    this.eventEmitReminder.emit(date)
 })
 }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

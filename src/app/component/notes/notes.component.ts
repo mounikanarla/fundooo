@@ -34,6 +34,8 @@ export class NotesComponent implements OnInit {
   public press = false
   public check = false
   public isChecked = false;
+  public  today = new Date();
+  public  tomorrow=new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1, 8, 0, 0)
 
   // public isChecked=false;
   ngOnInit() {
@@ -53,7 +55,7 @@ export class NotesComponent implements OnInit {
     // console.log(this.title);
     // console.log(this.description);
     // console.log(this.id);
-
+    this.array=[];
     // post the data by passing the parameters
     if (this.check == false) {
       this.description = document.getElementById("description").textContent;
@@ -142,16 +144,20 @@ export class NotesComponent implements OnInit {
     }
   }
   public array=[]
-  eventEmitRemainder(event){
+  eventEmitReminder(event){
+    var value=event
     this.array=[];
     if(event)
     {
-    this.array.push(event);
+    this.array.push(value);
     console.log(this.array)
     console.log("event is emitting from notes");
     }
   }
-
+  deleteReminder(index) {
+    this.array.splice(this.array.indexOf(index), 1)
+    // this.labelevent.splice(this.labelevent.indexOf(index), 1)
+  }
   // public labelName=[];
   // public labelId=[]
   deleteLabel(index) {

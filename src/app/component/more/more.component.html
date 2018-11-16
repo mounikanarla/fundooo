@@ -1,11 +1,16 @@
 <span data-toggle="tooltip" title="{{!isDeleted ? 'more':''}}">
+  <!-- More Icon Printig Starts -->
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon class="more">more_vert</mat-icon>
   </button>
+  <!-- More Icon Printig ends -->
+<!-- Printing the list inside menu Starts-->
+<!-- Delete Note Starts -->
   <mat-menu #menu="matMenu" class="menu">
     <button (click)=delData(true) *ngIf="!deleted" mat-menu-item>Delete Note</button>
     <button (click)=delData(false) *ngIf="deleted" mat-menu-item>Restore Note</button>
-
+<!-- Delete Note Ends -->
+    <!-- Add Label Printing starts -->
     <button mat-menu-item [matMenuTriggerFor]="addLabel" *ngIf="!deleted" (click)=" $event.stopPropagation();">Add Label</button>
     <mat-menu #addLabel="matMenu">
       <span>Label Note</span>
@@ -19,7 +24,10 @@
         <!-- <input (click)=" $event.stopPropagation();"><mat-checkbox (click)="$event.stopPropagation(); removelabel(label)" *ngIf="label.isChecked==false"></mat-checkbox> -->
       </div>
     </mat-menu>
+    <!-- Add Label Printing Ends -->
+
     <button mat-menu-item *ngIf="!deleted">Show CheckBox</button>
     <button mat-menu-item *ngIf="deleted" (click)="deleteForever()">Delete Forever</button>
   </mat-menu>
+  <!-- Printing the list inside menu Ends -->
 </span>

@@ -5,6 +5,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import * as _moment from 'moment';
 import * as _moment1 from 'moment';
 import { SignupService } from '../../core/services/http/http.service';
+import { LoggerService } from '../../core/services/loggerService/logger.service';
 
 // import {default as _rollupMoment} from 'moment';
 
@@ -31,17 +32,21 @@ export const MY_FORMATS = {
 })
 export class ReminderComponent implements OnInit {
   selectedValue: string;
-  reminders: any = [
-    {value: 'Morning', viewPeriod: 'Morning', viewTime: '08:00 AM'},
-    {value: 'Afternoon', viewPeriod: 'Afternoon' ,viewTime:'01:00 PM'},
-    {value: 'Evening', viewPeriod: 'Evening',viewTime:'06:00 PM'},
-    {value: 'Night', viewPeriod: 'Night',    viewTime:'08:00 PM'},
-];
-
   date = new FormControl(moment());
   public body:any={}
   public flag=false;
   public isDeleted=false;
+  public dateflag=false;
+ 
+  reminders: any = [
+    {value: 'Morning', viewPeriod:'Morning', viewTime: '08:00 AM', disableStatus:false},
+    {value: 'Afternoon', viewPeriod:'Afternoon' ,viewTime:'01:00 PM',disableStatus:false},
+    {value: 'Evening', viewPeriod:'Evening',viewTime:'06:00 PM',disableStatus:false},
+    {value: 'Night', viewPeriod:'Night',    viewTime:'08:00 PM',disableStatus:false},
+];
+
+  today = new Date();
+
   // public  today = new Date();
   // public  tomorrow=new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1, 8, 0, 0)
 
@@ -52,7 +57,8 @@ export class ReminderComponent implements OnInit {
   public value;
   public currentDate;
   public obj;
-
+  public setDate=this.reminderBody.date.value;
+  // public today=new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate() + 0, 8, 0, 0)
   constructor(private httpService: SignupService) { }
   @Input() noteid
   @Output() eventEmit = new EventEmitter();
@@ -63,15 +69,17 @@ export class ReminderComponent implements OnInit {
     if(this.noteid!=undefined && this.noteid.isDeleted==true){
       this.isDeleted=true
     }
+    this.disabledates()
+
   }
   
   
   remindToday(){
-    console.log(this.body.reminder);
+    // console.log(this.body.reminder);
     
     let currentDate = new Date()
-    var date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
-    this.eventEmitReminder.emit(date);
+    var today=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
+    this.eventEmitReminder.emit(today);
     if(this.noteid!=null){
     this.body =
       {
@@ -82,11 +90,11 @@ export class ReminderComponent implements OnInit {
       .subscribe(data => {
         console.log("success in today reminders",data);
         this.eventEmit.emit({});
-        console.log("event emitting");
+        // console.log("event emitting");
 
       },
         error => {
-          console.log("error in today reminders",error)
+          // console.log("error in today reminders",error)
         })
       }
   }
@@ -105,11 +113,11 @@ export class ReminderComponent implements OnInit {
       }
     this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id'))
       .subscribe(data => {
-        console.log("success in tomorrow reminders",data);
+        // console.log("success in tomorrow reminders",data);
         this.eventEmit.emit({});
        },
         error => {
-          console.log("error in tomorrow reminders",error)
+          // console.log("error in tomorrow reminders",error)
         })
       }
   }
@@ -130,11 +138,11 @@ export class ReminderComponent implements OnInit {
       }
     this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id'))
       .subscribe(data => {
-        console.log("success in week reminders",data);
+        // console.log("success in week reminders",data);
         this.eventEmit.emit({});
       },
         error => {
-          console.log("error in week reminders",error)
+          // console.log("error in week reminders",error)
      })
   }
 }
@@ -155,7 +163,7 @@ addCustomRemainders(date,timing){
     }
     this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id')).subscribe((result) => {
      this.eventEmitReminder.emit(date)
-     console.log("emitting event from reminders",this.eventEmitReminder.emit(date));
+    //  console.log("emitting event from reminders",this.eventEmitReminder.emit(date));
      
     })
   }else if(ampm =='PM' || ampm =='pm'&& this.noteid!=null){
@@ -171,10 +179,39 @@ this.httpService.delPost('/notes/addUpdateReminderNotes',this.body,localStorage.
     this.eventEmitReminder.emit(date)
 })
 }
+disable(event)
+  {
+    this.dateflag=false;
+    var pattern=/^(2[0-3]|1[0-9]|[0][0-9]):[0-5][0-9] (AM|PM|pm|am|Pm|pM|Am|aM)$/;
+   if(pattern.test( this.reminderBody.time))
+   {
+    this.dateflag=true;
+   }
+   else
+   this.dateflag=false;
+  }
+disabledates(){
+  if ((new Date(this.setDate).getFullYear()-new Date(this.today).getFullYear()) === 0) {
+    if ((new Date(this.setDate).getMonth() - new Date(this.today).getMonth()) === 0) {
+      if ((new Date(this.setDate).getDate() - new Date(this.today).getDate()) === 0) {
+        if ((new Date(this.setDate).getHours()) > 8) {
+          this.reminders[0].disableStatus = true;
+        } if ((new Date(this.setDate).getHours()) > 13) {
+          this.reminders[1].disableStatus = true;
+        } if ((new Date(this.setDate).getHours()) > 18) {
+          this.reminders[2].disableStatus = true;
+        } if ((new Date(this.setDate).getHours()) > 20) {
+          this.reminders[3].disableStatus = true;
+          // LoggerService.log(this.setData)
+        }
+      }
+      
+    }
+  }
 
 }
 
-
+}
 
 
 

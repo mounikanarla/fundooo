@@ -150,8 +150,8 @@ export class NotesComponent implements OnInit {
     if(event)
     {
     this.array.push(value);
-    console.log(this.array)
-    console.log("event is emitting from notes");
+    // console.log(this.array)
+    // console.log("event is emitting from notes");
     }
   }
   deleteReminder(index) {
@@ -208,11 +208,7 @@ export class NotesComponent implements OnInit {
     }
   }
 
-  // onenter():void{
-  //   this.enter();
-  //   this.dataarray=[];
-
-  // }
+ 
   ondelete(deletedObj) {
     // console.log("ondelete fumction runnig");
     for (var i = 0; i < this.dataarray.length; i++) {

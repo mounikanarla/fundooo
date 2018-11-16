@@ -6,7 +6,6 @@ import { ForgotPasswordComponent } from './component/forgot-password/forgot-pass
 import { ResetComponent } from './component/reset/reset.component';
 import { NavbaroneComponent } from './component/navbarone/navbarone.component';
 import { NotesComponent } from './component/notes/notes.component';
-import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
 import { AuthGuard } from './core/services/guard/auth.guard';
 import { ParentComponent } from './component/parent/parent.component';
@@ -28,7 +27,6 @@ const routes: Routes = [
   {path:'home',component:HomeComponent,canActivate:[AuthGuard],children:[
     {path:'',redirectTo:'notes',pathMatch:'full'},
     {path:'notes',component:ParentComponent},
-    {path:'profile',component:ProfileComponent},
     {path:'archive',component:MainArchiveComponent},
     {path:'trash',component:TrashComponent},
     {path:'search',component:SearchComponent},

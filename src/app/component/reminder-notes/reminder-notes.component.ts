@@ -12,6 +12,7 @@ export class ReminderNotesComponent implements OnInit {
   constructor(private httpService: SignupService) { }
   token = localStorage.getItem('id');
   public reminderArray=[]
+  public sortedarray
   ngOnInit() {
     this.getReminder();
   }
@@ -19,21 +20,24 @@ export class ReminderNotesComponent implements OnInit {
     this.httpService.getnote("/notes/getReminderNotesList", this.token).subscribe(data => {
       this.reminderArray = [];
 
-      console.log("get cards list successfull", data);
+      // console.log("get cards list successfull", data);
       var length = data['data'].data.length;
       // Initializing the for loop to store and print the cards in reverseorder      
       for (var i = length - 1; i >= 0; i--) {
-        console.log(data['data'].data.length);
+        // console.log(data['data'].data.length);
         // Checking the condition that card is archived or not and it is pushing into array
         // if (data['data'].data[i].isDeleted == false) {
           this.reminderArray.push(data['data'].data[i]);
+          this.sortedarray = this.reminderArray.sort((a: any, b: any) =>
+          new Date(a.reminder).getTime() - new Date(b.reminder).getTime()
+      );
         // }
       }
-      console.log("Reminder array", this.reminderArray);
+      // console.log("Reminder array", this.reminderArray);
     })
   }
   emit(event) {
-    console.log(event)
+    // console.log(event)
     if (event) {
       this.getReminder()
     }

@@ -33,20 +33,20 @@
           <mat-divider></mat-divider>
           <div fxLayout="column" fxLayoutAlign="center center">
           <mat-form-field>
-              <input (click)="$event.stopPropagation();" [min]="date.startDate" matInput [matDatepicker]="dp"  [(ngModel)]= "reminderBody.date.value" [formControl]="date">
+              <input (click)="$event.stopPropagation();" [min]="today" matInput [matDatepicker]="dp"  [(ngModel)]= "reminderBody.date.value" [formControl]="date">
               <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
               <mat-datepicker #dp></mat-datepicker>
           </mat-form-field>
           <div fxLayout="row" fxLayoutAlign="center center" >
             <mat-form-field (click)="$event.stopPropagation()">
-                <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu" [(ngModel)]="reminderBody.time" >
+                <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu" [(ngModel)]="reminderBody.time" (keyup)="disable(event)" >
             </mat-form-field>
                 <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu" class="timeSet">keyboard_arrow_down</mat-icon>
         </div>
         </div>
         <mat-menu #timeMenu [overlapTrigger]=false class="menu">
-        <div fxLayout="column" *ngFor="let time of reminders">
-            <button mat-button (click)="reminderBody.time = time.viewTime" (click)="$event.stopPropagation()">
+        <div fxLayout="column" *ngFor="let time of reminders" class="adjust">
+            <button mat-button [disabled]="time.disableStatus"  (click)="reminderBody.time = time.viewTime; dateflag=true"   (click)="$event.stopPropagation()">
                     <div fxFlex="35" >{{time.viewPeriod}}</div>
                     <div fxFlex="40"></div>
                     <div fxFlex="30">{{time.viewTime}}</div>
@@ -56,7 +56,7 @@
             <button mat-button (click)="$event.stopPropagation()" class="custom">Custom Time</button>
         </div>
     </mat-menu>
-    <div><button mat-button (click)="addCustomRemainders(reminderBody.date.value,reminderBody.time)">Save</button></div>
+    <div><button mat-button [disabled]="dateflag==false" (click)="addCustomRemainders(reminderBody.date.value,reminderBody.time)">Save</button></div>
 </div>
 </mat-menu>
 

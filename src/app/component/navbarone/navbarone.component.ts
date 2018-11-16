@@ -36,9 +36,8 @@ export class NavbaroneComponent {
   constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router, public dialog: MatDialog, private data: DataServiceService) { }
   ngOnInit() {
     this.checkLabel();
-    // this.data.currentMessage.subscribe(message => this.message = message)
-
-  }
+    this.data.currentMessage2.subscribe(message => this.name = message)
+    }
   titleDisplay(routeName){
     this.name=routeName;
   }
@@ -46,14 +45,14 @@ export class NavbaroneComponent {
     this.name=list.label;
   }
   clicksearch() {
-    console.log('in')
+    // console.log('in')
     this.router.navigate(['/home/search']);
   }
   profile() {
     this.profileclick = !this.profileclick;
   }
   logout() {
-    console.log(this.id)
+    // console.log(this.id)
     this.logoutService.logoutPost("user/logout", this.id)
       .subscribe((response) => {
         console.log(response);
@@ -66,8 +65,8 @@ export class NavbaroneComponent {
           duration: 2000,
         });
       }, (error) => {
-        console.log("unsuccess");
-        console.log(error);
+        // console.log("unsuccess");
+        // console.log(error);
         this.snackBar.open("Logout", "failed", {
           duration: 2000,
         });
@@ -89,13 +88,13 @@ export class NavbaroneComponent {
     this.logoutService.getnote("noteLabels/getNoteLabelList", localStorage.getItem('id')).subscribe(
       response => {
         this.array = [];
-        console.log(response['data'].details);
+        // console.log(response['data'].details);
         for (var i = 0; i < (response['data'].details).length; i++) {
           if (response['data'].details[i].isDeleted == false) {
             this.array.push(response['data'].details[i])
           }
         }
-        console.log(this.array, "Label array printing successsss ");
+        // console.log(this.array, "Label array printing successsss ");
       },
       error => {
         console.log("error in get LABELS", error);
@@ -131,14 +130,5 @@ export class NavbaroneComponent {
   imageCropped(event: any) {
     this.croppedImage = event.base64;
   }
-  // emit(event) {
-  //   console.log(event)
-  //   if (event) {
-  //     this.labelDisplay(event){
-  //       this.name=event.label
-
-  //     }
-      
-  //   }
-  // }
+ 
 }

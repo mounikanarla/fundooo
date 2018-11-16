@@ -32,8 +32,6 @@ import { ImageComponent } from './component/image/image.component';
 import { ArchieveComponent } from './component/archieve/archieve.component';
 import { MoreComponent } from './component/more/more.component';
 // import { UndoComponent } from './component/undo/undo.component';
-import { RedoComponent } from './component/redo/redo.component';
-import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
 import { AddnoteComponent } from './component/addnote/addnote.component';
 import { ParentComponent } from './component/parent/parent.component';
@@ -52,6 +50,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ReminderNotesComponent } from './component/reminder-notes/reminder-notes.component';
 import {MatSelectModule} from '@angular/material/select';
+import { MessagingService } from "../app/core/services/messaging.service";
+
 
 
 // import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
@@ -74,9 +74,6 @@ import {MatSelectModule} from '@angular/material/select';
     ImageComponent,
     ArchieveComponent,
     MoreComponent,
-    // UndoComponent,
-    RedoComponent,
-    ProfileComponent,
     HomeComponent,
     AddnoteComponent,
     ParentComponent,
@@ -90,7 +87,7 @@ import {MatSelectModule} from '@angular/material/select';
     PinComponent,
     CropimageComponent,
     ReminderNotesComponent,
-    
+  
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -120,7 +117,7 @@ import {MatSelectModule} from '@angular/material/select';
   
 
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule,MessagingService],
   bootstrap: [AppComponent],
   entryComponents:[AddnoteComponent,UpdateComponent,NavbaroneComponent,AddlabelComponent,TrashComponent,CropimageComponent]
   

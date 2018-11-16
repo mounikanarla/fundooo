@@ -1,6 +1,7 @@
 import { Component, OnInit,Inject,EventEmitter,Output,Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { SignupService } from '../../core/services/http/http.service'
+import { LoggerService } from '../../core/services/loggerService/logger.service';
 
 @Component({
   selector: 'app-update',
@@ -60,11 +61,10 @@ update(){
     "reminder":this.array
 
   }, this.token).subscribe((response) => {
-    console.log("successful", response);
+    // console.log("successful", response);
     this.eventEmit.emit({});
 
-    console.log(this.id);
-      console.log(response);
+  
   }
   
   )
@@ -76,14 +76,14 @@ update(){
 }
  var url = "notes/" +this.data.id+ "/checklist/" + this.modifiedCheckList.id + "/update";
  this.getService.delPost(url, JSON.stringify(apiData), localStorage.getItem('id')).subscribe(response => {
-   console.log(response);
+  //  console.log(response);
  })
 
 }
 }
 editing(editedList,event){
       
-  console.log(editedList);
+  // console.log(editedList);
   if(event.code=="Enter"){
   this.modifiedCheckList=editedList;
   this.update();
@@ -98,14 +98,14 @@ checkBox(checkList){
   else{
     checkList.status = "open"
   }
-  console.log(checkList);
+  // console.log(checkList);
   this.modifiedCheckList=checkList;
 
   this.update();
 }
 public removedList;
   removeList(checklist){
-    console.log(checklist)
+    // console.log(checklist)
     this.removedList=checklist;
     this.removeCheckList()
   }
@@ -113,7 +113,7 @@ public removedList;
     var url = "notes/" + this.data.id + "/checklist/" + this.removedList.id + "/remove";
 
     this.getService.delPost(url,null,localStorage.getItem('id')).subscribe((response)=>{
-      console.log(response);
+      // console.log(response);
       for(var i=0;i<this.tempArray.length;i++){
         if(this.tempArray[i].id==this.removedList.id){
           this.tempArray.splice(i,1)
@@ -147,15 +147,15 @@ public removedList;
 
     this.getService.delPost(url, this.newData, localStorage.getItem('id'))
     .subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.newList=null;
       this.addCheck=false;
       this.adding=false;
-      console.log(response['data'].details);
+      LoggerService.log(response['data'].details);
       
       this.tempArray.push(response['data'].details)
 
-      console.log(this.tempArray)
+      // console.log(this.tempArray)
 
     })
   }
@@ -166,7 +166,7 @@ emit(event){
 }
 
 eventEmitLabel(event) {
-  console.log(event);
+  // console.log(event);
   var flag=false,index;
   for(var i=0;i<this.label.length;i++){
     if(event.id==this.label[i].id){
@@ -192,8 +192,8 @@ public array=[]
       flag=true;
       index=1;
     this.array.push(event);
-    console.log(this.array)
-    console.log("event receiving");
+    // console.log(this.array)
+    // console.log("event receiving");
     }
     if(flag==true){
       this.array.splice(index,1)
@@ -203,16 +203,16 @@ removelabel(data, label) {
   
   this.getService.logoutPost("notes/" + data.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
     .subscribe((response) => {
-      console.log("checklist removed" + response)
+      // console.log("checklist removed" + response)
       this.eventEmit.emit({});
     },
       (error) => {
-        console.log("error occured" + error)
+        // console.log("error occured" + error)
       }
     )
 }
 removeRemainder(label) {
-  console.log(label);
+  // console.log(label);
   
   var id =[];
   id.push(label)
@@ -222,11 +222,11 @@ removeRemainder(label) {
   }
   this.getService.delPost("/notes/removeReminderNotes",body, localStorage.getItem('id'))
     .subscribe((response) => {
-      console.log("Reminder deleted" + response)
+     LoggerService.log("Reminder deleted" + response)
       this.eventEmit.emit({});
     },
       (error) => {
-        console.log("error occured" + error)
+        // console.log("error occured" + error)
       }
     )
 }

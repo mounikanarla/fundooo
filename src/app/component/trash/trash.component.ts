@@ -24,7 +24,6 @@ trash(){
 
     for (var i = length - 1; i >= 0; i--) {
       console.log(data['data'].data.length);
-      // if (data['data'].data[i].isArchived == true)
       {
         this.array.push(data['data'].data[i]);
       }

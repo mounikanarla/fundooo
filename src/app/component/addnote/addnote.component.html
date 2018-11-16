@@ -19,6 +19,8 @@
       <div fxLayout="row" fxFlex="100%">
       <mat-card-content (click)="openDialog(index)">{{index.description}}</mat-card-content>
       </div>
+      <!-- Description Printing Ends -->
+      <!-- Checklist Printing starts -->
       <div class="note" *ngFor="let checkList of index.noteCheckLists">
         <mat-checkbox fxFlex="10%" *ngIf="checkList.status=='open'&& !checkList.isDeleted" 
         (click)=checkBox(checkList,index)></mat-checkbox>
@@ -31,14 +33,18 @@
       (click)=checkBox(checkList,index)></mat-checkbox>
       <del *ngIf="!checkList.isDeleted && checkList.status=='close'" class="note"
       (click)="openDialog(index)">{{checkList.itemName}}</del>
-      </div>  
+      </div> 
+      <!-- Checklist Printing Ends -->
+      <!-- Label Printing Starts --> 
       <mat-chip-list>
         <div *ngFor="let label of index.noteLabels">
-          <mat-chip *ngIf="!label.isDeleted" routerLink="/home/label/{{ label.label }}"  routerLinkActive="active" (click)="labelDisplay(label)">{{label.label}}
+          <mat-chip *ngIf="!label.isDeleted" routerLink="/home/label/{{ label.label }}"  routerLinkActive="active" (click)="labelDisplay(label.label)">{{label.label}}
             <mat-icon matChipRemove (click)="removelabel(index,label)">cancel</mat-icon>
           </mat-chip>
         </div>
       </mat-chip-list>
+      <!-- Label Printing Ends --> 
+      <!-- Reminder Printing Starts -->
       <mat-chip-list class="margin">
         <div fxLayout="row" *ngIf="checkReminder(index.reminder[0])">
           <div *ngFor="let label of index.reminder">
@@ -67,7 +73,7 @@
         </div>
         <div fxLayout="row" *ngIf="!checkReminder(index.reminder[0])">
             <div *ngFor="let label of index.reminder">
-              <mat-chip *ngIf="!label.isDeleted">
+              <mat-chip *ngIf="!label.isDeleted" >
               <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
              <del> {{label | date:"medium"}}</del>
                 <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
@@ -75,8 +81,8 @@
             </div>
           </div>
         </mat-chip-list>
-      <!-- Description Printing Ends -->
-      <!-- Icon Print Starts -->
+        <!-- Reminder Printing Ends -->
+        <!-- Icon Print Starts -->
       <mat-card-actions>
         <span class=invisible>
           <div fxFlex="100%" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
@@ -98,8 +104,6 @@
             <div fxFlex="10%">
               <app-more [noteid]=index (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)" [deleted]=index.isDeleted></app-more>
             </div>
-            <!-- <app-undo></app-undo> -->
-            <!-- <app-redo></app-redo> -->
           </div>
         </span>
       </mat-card-actions>
@@ -108,5 +112,4 @@
     <!-- matcard Ends -->
   </div>
   <div fxFlex.lg="13%"  fxFlex.md="10%" fxFlex.sm="5%" ></div>
-  <!-- </div> -->
 </div>

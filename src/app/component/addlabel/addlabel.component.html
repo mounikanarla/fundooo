@@ -1,7 +1,10 @@
 <div fxLayout="column" fxFlex=100% fxLayoutAlign="center" class="labelbox">
+  <!-- Title start for Edinting Labels -->
   <div fxFlex=20%>
     <h1 mat-dialog-title>Edit labels</h1>
   </div>
+  <!-- Title ends for Edinting Labels -->
+  <!-- Text Area starts  -->
   <div fxFlex=15% class="labelflex">
     <div fxLayoutGap="space-between" fxLayoutAlign="row" mat-dialog-content>
       <div fxLayout="row" fxFlex=100%>
@@ -15,6 +18,8 @@
       </div>
     </div>
   </div>
+  <!-- Text Area Ends  -->
+  <!-- Printing of labels starts-->
   <div fxFlex=50%>
     <div *ngFor="let label of labelArray">
       <div fxLayoutGap="space-between" fxLayout="row" fxFlex=100%>
@@ -34,7 +39,10 @@
       </div>
     </div>
   </div>
+  <!-- Printing of labels Ends-->
+  <!-- close button starts -->
   <div fxFlex=15%>
     <button mat-button class="button" (click)="onClose()">Done</button>
   </div>
+  <!-- close button Ends -->
 </div>

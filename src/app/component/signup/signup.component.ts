@@ -41,13 +41,13 @@ export class SignupComponent implements OnInit {
       for (var i = 0; i < data.data.length; i++) {
         data.data[i].select = false;
         this.card.push(data.data[i]);
-        console.log(data.data[i]);
+        // console.log(data.data[i]);
       }
-      console.log(this.card);
+      // console.log(this.card);
     })
     this.signservice.dataStore("user")
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
       }
 
       )

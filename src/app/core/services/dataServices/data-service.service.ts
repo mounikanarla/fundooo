@@ -12,7 +12,9 @@ export class DataServiceService {
   private messageSource1 = new Subject<boolean>();
   currentMessage1 = this.messageSource1.asObservable();
 
-
+  private messageSource2 = new BehaviorSubject('FUNDOO');
+  currentMessage2 = this.messageSource2.asObservable();
+ 
   constructor() { }
   changeMessage(message: string) {
     this.messageSource.next(message)
@@ -20,6 +22,10 @@ export class DataServiceService {
 
   changeView(message: boolean) {
     this.messageSource1.next(message)
+  }
+
+  changelabel(message: string) {
+    this.messageSource2.next(message)
   }
 
 }

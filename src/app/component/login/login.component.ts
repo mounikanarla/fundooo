@@ -3,6 +3,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { SignupService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+// import { MessagingService } from './messaging.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,7 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
-
+ body:any={}
   constructor(private loginservice: SignupService, public snackBar: MatSnackBar, public router: Router) { }
   email = new FormControl('', [Validators.required, Validators.email]);
   token = localStorage.getItem('id');
@@ -50,7 +53,21 @@ export class LoginComponent implements OnInit {
       this.snackBar.open("login succesfull", "ok", {
         duration: 2000,
       });
-      // console.log(response);
+      var body={
+      "pushToken":localStorage.getItem('pushtoken')
+      }
+      this.loginservice.delPost("user/registerPushToken",body,localStorage.getItem('id'))
+      .subscribe((response)=>{
+        console.log(response)
+        console.log('api hit sucessfull');
+      },
+      error=>{
+        console.log('failed');
+        
+      }
+    
+    
+    )
     },
       (error) => {
         // console.log(error)
@@ -61,4 +78,7 @@ export class LoginComponent implements OnInit {
       }
     )
   }
+    
+  
+
 }

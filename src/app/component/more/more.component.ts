@@ -34,6 +34,9 @@ export class MoreComponent implements OnInit {
     }
     this.checkLabel();
   }
+  /*
+  *  @description: Deleting the notes by invoking the function call
+  */
   delData(flag) {
     console.log(this.noteid)
     var array = []
@@ -51,7 +54,9 @@ export class MoreComponent implements OnInit {
       }
     )
   }
-
+ /*
+  *  @description: Checking the label from nodeLabelList and pushing it in an array
+  */
   checkLabel() {
     this.httpService.getnote("noteLabels/getNoteLabelList", localStorage.getItem('id')).subscribe(
       response => {
@@ -69,39 +74,47 @@ export class MoreComponent implements OnInit {
         // console.log(this.array, "Label array printing successsss ");
       },
       error => {
-        console.log("error in get LABELS", error);
+        // console.log("error in get LABELS", error);
       }
     )
   }
+  /*
+  *  @description: Adding the labels to the list by invoking the api
+  */
   addChecklabel(label) {
     this.eventEmitLabel.emit(label);
+    // Checking the condition for labels while clicking
     if (this.noteid != null && label.isChecked == null) {
       this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/add", localStorage.getItem('id'))
         .subscribe((response) => {
-          console.log("checklist added", response);
+          // console.log("checklist added", response);
           this.eventEmit.emit({});
-          console.log("event1", this.eventEmit.emit({}));
+          // console.log("event1", this.eventEmit.emit({}));
 
         },
           (error) => {
-            console.log("error occured" + error)
+            // console.log("error occured" + error)
           }
         )
     }
+    // Checking the condition for labels while it is unclicked
+
     if (this.noteid != null && label.isChecked == true) {
 
       this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
         .subscribe((response) => {
-          console.log("checklist added" + response)
+          // console.log("checklist added" + response)
           this.eventEmit.emit({});
         },
           (error) => {
-            console.log("error occured" + error)
+            // console.log("error occured" + error)
           }
         )
     }
   }
-
+ /*
+  *  @description: deleteForever() is a function to delete the notes permanently
+  */
   deleteForever() {
 
     console.log(this.noteid)

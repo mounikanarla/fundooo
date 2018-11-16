@@ -2,6 +2,7 @@
     <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon class="colour" *ngIf="!isDeleted">color_lens</mat-icon>
     </button>
+    <!--Starts  Displaying colors-->
     <mat-menu #menu="matMenu" class="menu">
         <div fxLayout="column" fxFlex=100%>
             <div fxFlex=33%>
@@ -78,4 +79,5 @@
             </div>
         </div>
     </mat-menu>
+    <!--Ends  Displaying colors-->
 </span>

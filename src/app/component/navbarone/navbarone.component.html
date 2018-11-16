@@ -2,25 +2,18 @@
   <div fxLayout="column">
     <mat-toolbar color="primary" position="fixed">
       <div fxLayout="row" fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="20%" fxFlex.xs="33%">
-        <!-- <div fxFlex.lg="40%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%"> -->
           <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
             <mat-icon class="menuicon" aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
-        <!-- </div> -->
         <div fxLayoutAlign="center center">
           <span class="routename">{{name}}</span>
         </div>
-        <!-- <div fxHide.xs="true" fxHide.sm="true">
-          <span class="displayname">Fundoo</span>
-        </div>
-          <span class="displayname">Keep</span> -->
+       
       </div>
       <div fxLayout="row" fxFlex.lg="60%" fxFlex.md="70%" >
-        <!-- <div fxFlex.lg="40%" fxFlex.md="50%" fxFlex.sm="60%" fxFlex.xs="100%"> -->
         <span><mat-icon class="searchicon">search</mat-icon> </span>
         <input class=searchbar type=text matInput placeholder="search" [(ngModel)]="searchInput" (click)="clicksearch()" (keydown)="newMessage()"
          fxHide.xs="true">
-        <!-- </div> -->
       </div>
       <div fxLayout="row"  fxFlex="20%">
         <div fxLayout="row" fxFlex="100%">

@@ -19,12 +19,11 @@ export class AddnoteComponent implements OnInit {
   public isChecked=false;
   public  today = new Date();
   public  tomorrow=new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1, 8, 0, 0)
-  name="fundoo"
-
+  public flag
   /*
   * @description: @INPUT AND @Output are decorators used to bind the data
   */
- @Input() noteid
+  @Input() noteid
   @Input() newData;
   @Input() searchInput;
   @Output() eventEmit = new EventEmitter();
@@ -38,19 +37,12 @@ export class AddnoteComponent implements OnInit {
     }
     this.data.currentMessage1.subscribe(message => {
       this.condition = message;
-      console.log(this.condition)
+      // console.log(this.condition)
     }
     )
-
-  
-    
   }
-
-  labelDisplay(list){
-    this.name=list.label;
-    console.log(this.name)
-    this.eventEmit.emit(event);
-
+  labelDisplay(event){
+  this.data.changelabel(event)
   }
   /*
   * @description : emit(event) is used to emit the event coming from child component at the time of action
@@ -60,55 +52,67 @@ export class AddnoteComponent implements OnInit {
     if (event) {
       this.eventEmit.emit({});
       console.log("event2", this.eventEmit.emit({}));
-
     }
   }
+  /*
+  * @description : Performing the dialog action when clicking on the card
+  */
   openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateComponent, {
-
-      data: note
+          data: note
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.eventEmit.emit({});
 
     });
-
   }
+  /*
+  * @description : labelEmit(event) is used to emit the event coming from label component at the time of action
+  */
   labelEmit(event) {
     console.log(event)
     if (event) {
       this.eventEmit.emit({});
-
     }
   }
+  /*
+  * @description : labelEmit(event) is used to emit the event coming from label component at the time of action
+  */
   eventEmitLabel(event) {
     if (event) {
       this.eventEmit.emit(event)
       console.log("event2",event);
     }
   }
+  /*
+  * @description : eventEmitReminder(event) is used to emit the event coming from reminder component at the time of action
+  */
   eventEmitReminder(event){
     if (event) {
       this.eventEmit.emit(event)
       console.log("event is receiving to addnote",event);
     }
   }
+ /*
+  * @description : removelabel(index, label) is used to remove the labels while clicking on the cancel button
+  */
   removelabel(index, label) {
-    // this.accepted = true;
     console.log(index)
     console.log(label);
     this.httpService.logoutPost("notes/" + index.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
       .subscribe((response) => {
-        console.log("checklist added" + response)
+        // console.log("checklist added" + response)
         this.eventEmit.emit({});
       },
         (error) => {
-          console.log("error occured" + error)
+          // console.log("error occured" + error)
         }
       )
   }
+  /*
+  * @description : Updating the check box by checking the status of the checkbox
+  */
   public modifiedCheckList
   checkBox(checkList,index) {
 
@@ -122,6 +126,9 @@ export class AddnoteComponent implements OnInit {
     this.modifiedCheckList = checkList;
     this.updatelist(index.id);
   }
+  /*
+  * @description : In order to update the checkbox we are getting the data from the database by sending the api 
+  */
   updatelist(id){
     var checklistData = {
       "itemName": this.modifiedCheckList.itemName,
@@ -133,6 +140,9 @@ export class AddnoteComponent implements OnInit {
 
     })
   }
+  /*
+  * @description : Invoking the function for removing of reminders by clicking on close button
+  */
   removeRemainder(label) {
     var id =[];
     id.push(label)
@@ -149,12 +159,21 @@ export class AddnoteComponent implements OnInit {
         }
       )
   }
+  /*
+  * @description :checking the reminders to print today and tomorrow by comparing with present date and time
+  */
   checkReminder(date){
+    // this.flag=false;
     var reminderPresent=new Date().getTime();
     var value=new Date(date).getTime();
     if(value > reminderPresent){
+    // this.flag;
     return true;
+
     }
-    else false;
+    else 
+    // this.flag;
+    return false;
+
   }
 }

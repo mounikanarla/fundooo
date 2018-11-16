@@ -64,7 +64,7 @@ export class ArchieveComponent implements OnInit {
       }
     },
       (error) => {
-        console.log("error", error);
+        // console.log("error", error);
 
       })
   }

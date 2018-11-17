@@ -44,6 +44,7 @@
 }
 .pin{
     opacity:0.5;
+    margin-bottom:10px;
 }
 .pin:hover{
     opacity:1;
@@ -54,8 +55,7 @@
 .textbarcheck{
     border:none;
     outline:none;
-    /* padding-left: 17px; */
-    /* margin-top: 15px; */
+    margin-left: 18px; 
 
 }
 /* .textbarcheck:empty:before{

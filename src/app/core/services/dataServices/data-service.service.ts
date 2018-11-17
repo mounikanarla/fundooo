@@ -26,6 +26,8 @@ export class DataServiceService {
 
   changelabel(message: string) {
     this.messageSource2.next(message)
+    console.log(message);
+    
   }
 
 }

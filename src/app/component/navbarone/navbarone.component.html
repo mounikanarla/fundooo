@@ -1,51 +1,58 @@
 <div fxFlex>
   <div fxLayout="column">
     <mat-toolbar color="primary" position="fixed">
-      <div fxLayout="row" fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="20%" fxFlex.xs="33%">
-          <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <div fxLayout="row" fxFlex="20%" >
+        <div fxLayout="row" fxFlex="100%">
+          <div fxFlex="20%">
+           <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
             <mat-icon class="menuicon" aria-label="Side nav toggle icon">menu</mat-icon>
-          </button>
-        <div fxLayoutAlign="center center">
+            </button>
+        </div>
+        <div fxFlex="80%"  fxLayoutAlign="center center">
           <span class="routename">{{name}}</span>
         </div>
-       
+        
       </div>
-      <div fxLayout="row" fxFlex.lg="60%" fxFlex.md="70%" >
+      </div>
+      <div fxLayout="row" fxFlex="60%"  >
         <span><mat-icon class="searchicon">search</mat-icon> </span>
-        <input class=searchbar type=text matInput placeholder="search" [(ngModel)]="searchInput" (click)="clicksearch()" (keydown)="newMessage()"
-         fxHide.xs="true">
+        <input class=searchbar type=text matInput placeholder="search" [(ngModel)]="searchInput" (click)="clicksearch()" (keydown)="newMessage()">
       </div>
-      <div fxLayout="row"  fxFlex="20%">
+      <div fxLayout="row"  fxFlex="20%" >
         <div fxLayout="row" fxFlex="100%">
-          <div fxFlex.lg="30%" fxFlex.md="20%" fxFlex.sm="30%" fxFlex.xs="50%" fxLayoutAlign="center">
+          <!-- <div fxFlex.lg="30%" fxFlex.md="20%" fxFlex.sm="30%" fxFlex.xs="50%" fxLayoutAlign="center">
             <span  class="sideicon"><mat-icon>refresh</mat-icon></span>
-          </div>
-          <div fxFlex.lg="50%" fxFlex.md="60%" fxFlex.sm="40%"fxHide.xs="true" fxLayoutAlign="center">
+          </div> -->
+          <div fxFlex="80%" fxHide.xs="true" fxLayoutAlign="center">
              <span class="sideicon"><mat-icon *ngIf="number==1" (click)="listview()"  aria-label="Side nav toggle icon" matTooltip="list view">view_stream</mat-icon></span>
             <span class="sideicon"><mat-icon *ngIf="number==0" (click)="gridview()" aria-label="Side nav toggle icon" matTooltip="grid view">grid_view</mat-icon></span> 
           </div>
           <!-- Profile Starts -->
-          <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="30%" fxFlex.xs="50%">
+          <div fxFlex="20%">
             <button (click) = "$event.stopPropagation()"
                 [ngStyle]="{'float':'left','background-image':'url('+img+')','background-size':'cover'}"
                 matTooltip="fundoo Account" mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color:navy;float:right;color:white;text-transform:uppercase;">
                </button>
               <mat-menu  #appMenu="matMenu" [overlapTrigger]="false" style="width:20%">
                   <div fxLayout="row" fxFlex="100%">
-                  <div fxFlex="30%">  
-                      <button (click) = "$event.stopPropagation()" class="buttonimage" [ngStyle]="{'float':'left','background-image':'url(' +img+ ')','background-size':'cover'}" (click)="selectFile.click()" matTooltip="fundoo Account" mat-mini-fab style="background-color:navy;float:right;color:white;text-transform:uppercase; margin-left: 34px;">
-                        <input (click) = "$event.stopPropagation()" class="image" type="file" 
-                        (change)=fileSelected($event) #selectFile>
+                  <div fxFlex="40%">  
+                      <button (click) = "$event.stopPropagation()" class="buttonimage" [ngStyle]="{'float':'left','background-image':'url(' +img+ ')','background-size':'cover'}" (click)="selectFile.click()" matTooltip="fundoo Account" mat-mini-fab style="background-color:navy;float:right;color:white;text-transform:uppercase; margin-left: 10px;height:100px;width:100px">
+                          <input fxHide="true" (click) = "$event.stopPropagation()" class="image" type="file"
+                          (change)=fileSelected($event) #selectFile>
+                          <p class="change">Change</p>
                       </button>
                   </div>
-                  <div  fxFlex="70%">
+                  <div  fxFlex="60%" fxLayoutAlign="center">
                   <mat-content class="style">
                     {{firstName}}&nbsp;{{lastName}}
                     {{email}}
                   </mat-content>
                   </div>  
               </div>
+              <div class="line"><mat-divider></mat-divider></div>
+              <div fxLayoutAlign="center center">
               <span class="logoutButton"><button mat-button (click)=logout()>Logout</button></span>
+              </div>
             </mat-menu>
           </div>
             <!-- Profile Ends -->

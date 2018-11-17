@@ -1,6 +1,6 @@
 <span data-toggle="tooltip" title="{{!isDeleted ? 'Remind Me':''}}">
   <button mat-icon-button>
-    <mat-icon class="remain" *ngIf="!isDeleted" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation() && reminder()"><img src="../../../assets/remainder.svg"></mat-icon>
+    <mat-icon class="remain" *ngIf="!isDeleted" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation() && reminder()">add_alert</mat-icon>
   </button>
 </span>
 <mat-menu (click)="$event.stopPropagation();" class="menu" #menu="matMenu" [overlapTrigger]="false">

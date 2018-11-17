@@ -1,23 +1,32 @@
 .sidenav-container {
+  
   height: 100%;
-  background-color:aqua
+  background-color:aqua;
+
+
 }
 
 .sidenav {
+  margin-top:56px;
   width: 270px;
   background-color:lightgrey;
   margin-left:-15px;
   position: fixed;
+ 
+  // padding-top:60px;
 }
+
 
 .mat-toolbar.mat-primary {
   position: sticky;
-  top: 0;
+  top:0px;
+  z-index: 1;
 }
 .mat-drawer.mat-drawer-side {
   top:0;
   height:100%;
   margin-top:65px;
+  z-index: 1;
 }
 .mat-toolbar.mat-primary {
   background:#fb0 ;
@@ -115,20 +124,32 @@ input:focus{
   margin-left:30%;
 }
 .image{
-  width:20%;
-  margin-top:110%;
+  width:15%;
+  float:left;
+  // border:none;
+  // outline:none;
+  // margin-top:110%;
 }
 .buttonimage{
   margin-right:15%
 }
 .logoutButton{
   float:right;
-  margin-bottom:30px;
+  margin-right:10px;
 }
 .style{
   margin-left:10px;
+  margin-top:30px;
 }
 .routename{
   color:black;
-  margin-left:20px;
+  // margin-left:20px;
+}
+.line{
+  margin-top:10px;
+  
+}
+.change{
+  color:black;
+margin-top:20px;
 }

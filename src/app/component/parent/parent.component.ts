@@ -51,7 +51,7 @@ export class ParentComponent implements OnInit {
       // Loop is initialized to the cards list in the reverse order 
       for (var i = length - 1; i >= 0; i--) {
         // console.log(data['data'].data.length);
-        if (data['data'].data[i].isPined === true) {
+        if (data['data'].data[i].isPined === true && data['data'].data[i].isDeleted === false) {
           this.pinarray.push(data['data'].data[i]);
         }
       }

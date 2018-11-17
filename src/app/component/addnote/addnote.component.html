@@ -1,6 +1,6 @@
 <div fxLayout="row wrap">
-  <div fxFlex.lg="13%" fxFlex.md="10%" fxFlex.sm="5%" ></div>
-  <div fxFlex.lg="74%" fxFlex.md="80%" fxFlex.sm="90%" fxFlex.xs="95%" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap.lg="30px" fxLayoutGap.md="10px" fxLayoutGap.sm="10px">
+  <div fxFlex.lg="13%" fxFlex.md="13%" fxFlex.sm="5%" ></div>
+  <div fxFlex.lg="74%" fxFlex.md="74%" fxFlex.sm="90%" fxFlex.xs="95%" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap.lg="30px" fxLayoutGap.md="10px" fxLayoutGap.sm="10px">
     <!-- mat-card starts -->
     <mat-card class="example-card" ngStyle.xs="width:100%" [ngClass]="{'viewgrid':condition,'viewlist':!condition}" *ngFor='let index of newData | search:searchInput' [ngStyle]="{'background-color':index.color}">
       <!--Title printing starts -->
@@ -86,7 +86,9 @@
       <mat-card-actions>
         <span class=invisible>
           <div fxFlex="100%" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
-            <div fxFlex="10%">
+            <!-- <div fxFlex="5%"></div> -->
+            <!-- <div fxFlex="90%"> -->
+              <div fxFlex="12%">
               <app-reminder [noteid]=index (eventEmit)="emit($event)" (eventEmitReminder)="eventEmitReminder($event)"></app-reminder>
             </div>
             <div fxFlex="14%">
@@ -101,9 +103,11 @@
             <div fxFlex="12%">
               <app-archieve [noteid]=index (eventEmit)="emit($event)" [Archive]=index.isArchived></app-archieve>
             </div>
-            <div fxFlex="10%">
+            <div fxFlex>
               <app-more [noteid]=index (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)" [deleted]=index.isDeleted></app-more>
             </div>
+            <!-- </div> -->
+            <!-- <div fxFlex="5%"></div> -->
           </div>
         </span>
       </mat-card-actions>
@@ -111,5 +115,5 @@
     </mat-card>
     <!-- matcard Ends -->
   </div>
-  <div fxFlex.lg="13%"  fxFlex.md="10%" fxFlex.sm="5%" ></div>
+  <div fxFlex.lg="13%"  fxFlex.md="13%" fxFlex.sm="5%" ></div>
 </div>

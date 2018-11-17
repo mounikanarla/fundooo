@@ -14,7 +14,7 @@ export class NotesComponent implements OnInit {
   constructor(private getService: SignupService, public route: ActivatedRoute, public router: Router) { }
   // private press: boolean = true;
   // private click:boolean= true;
-
+  @Input() deleted
   @Output() eventEmit = new EventEmitter();
 
   @Output() onNewEntryAdded = new EventEmitter();
@@ -36,6 +36,7 @@ export class NotesComponent implements OnInit {
   public isChecked = false;
   public  today = new Date();
   public  tomorrow=new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 1, 8, 0, 0)
+ 
 
   // public isChecked=false;
   ngOnInit() {
@@ -49,13 +50,11 @@ export class NotesComponent implements OnInit {
     
     var color = this.bgcolor;
     this.bgcolor = '#ffffff'
+    this.listColor='#ffffff'
 
     this.title = document.getElementById("title").textContent;
     this.press = !this.press;
-    // console.log(this.title);
-    // console.log(this.description);
-    // console.log(this.id);
-    this.array=[];
+    
     // post the data by passing the parameters
     if (this.check == false) {
       this.description = document.getElementById("description").textContent;
@@ -74,6 +73,8 @@ export class NotesComponent implements OnInit {
         this.getService.getnote("notes/getNotesList", this.id).subscribe((response) => {
           // console.log(response);
           this.array=[];
+          this.arraylabel=[];
+          this. labelevent = []
           this.onNewEntryAdded.emit({});
           this.eventEmit.emit({});
 
@@ -110,6 +111,8 @@ export class NotesComponent implements OnInit {
           // console.log(response);
           this.array=[];
           this.dataarray = [];
+          this.arraylabel=[];
+          this. labelevent = []
           this.onNewEntryAdded.emit({});
           this.eventEmit.emit({});
 
@@ -119,6 +122,7 @@ export class NotesComponent implements OnInit {
       )
 
     }
+   
 
   }
   public remindevent = []
@@ -233,3 +237,8 @@ export class NotesComponent implements OnInit {
     }
   }
 }
+
+
+
+
+

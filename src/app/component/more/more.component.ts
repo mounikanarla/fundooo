@@ -22,7 +22,7 @@ export class MoreComponent implements OnInit {
 
   constructor(private httpService: SignupService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
   @Input() noteid
-  @Input() deleted
+  // @Input() deleted
   @Output() eventEmit = new EventEmitter();
 
   @Output() eventEmitLabel = new EventEmitter();
@@ -62,6 +62,7 @@ export class MoreComponent implements OnInit {
       response => {
         this.array = response['data'].details;
         // console.log(this.noteid.noteLabels.length);
+        if(this.noteid != undefined){
          if (this.noteid.noteLabels != undefined) {
           for (var i = 0; i < this.array.length; i++) {
             for (var j = 0; j < this.noteid.noteLabels.length; j++) {
@@ -71,6 +72,7 @@ export class MoreComponent implements OnInit {
             }
           }
         }
+      }
         // console.log(this.array, "Label array printing successsss ");
       },
       error => {

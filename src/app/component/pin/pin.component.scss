@@ -1,10 +1,14 @@
 .notepin{
     opacity: 0.5;
     cursor: pointer;
+    padding-top:20px;
     /* background-color:blue; */
 }
 .notepin:hover{
     opacity:1;
     cursor: pointer;
 
+}
+.pintop{
+    margin-bottom:20px;
 }

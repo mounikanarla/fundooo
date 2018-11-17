@@ -34,6 +34,7 @@ export class ChangecolorComponent implements OnInit {
     // color=this.bgcolor;
     this.eventEmit.emit(color);
     // console.log(this.colorid)
+    if(this.colorid != undefined){
     var array = []
     array.push(this.colorid.id)
     // posting the clicked colour and id of cards into array
@@ -49,4 +50,5 @@ export class ChangecolorComponent implements OnInit {
         // console.log("error", error);
       })
   }
+}
 }

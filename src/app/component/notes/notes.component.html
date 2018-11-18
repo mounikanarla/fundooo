@@ -1,9 +1,8 @@
 <div fxLayout="column" fxFlex="100%" fxLayoutAlign="space-around center">
     <div fxFlex=20%>
-        <!-- Card Printi -->
         <!-- <div fxLayout fxFlex=100%> -->
         <div fxFlex=100%  fxLayout="row" fxLayoutAlign="space-around center">
-            <div fxFlex=25%></div>
+            <!-- <div fxFlex=25%></div> -->
             <div fxFlex.lg=100% fxFlex.md="100%" fxFlex.sm="90%" fxFlex.xs="70%" fxLayoutAlign="center center" *ngIf="!press">
                 <mat-card class="card">
                     <div fxFlex="70%" (click)="press=true">
@@ -22,12 +21,13 @@
                     </div>
                 </mat-card>
             </div>
-            <div fxFlex=25%></div>
+            <!-- <div fxFlex=25%></div> -->
         </div>
     </div>
     <!-- </div> -->
     <div *ngIf=press>
-        <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxFlex.lg=100% fxFlex.md="100%" fxFlex.sm="90%" fxFlex.xs="70%" fxLayoutAlign="center center">
             <mat-card class="notecard" [ngStyle]="{'background-color':bgcolor}">
                 <div fxLayout="column" fxFlex="100%">
                     <div fxFlex=20%>
@@ -43,7 +43,6 @@
                         </mat-card-header>
                     </div>
                     <div fxFlex=65%>
-                       
                         <div *ngIf="check">
                             <div *ngFor="let data of dataarray" fxLayout="row">
                                 <mat-checkbox fxFlex="5%" *ngIf="!data.isChecked" [(ngModel)]=data.isChecked (click)="this.isChecked = !this.isChecked;"></mat-checkbox>
@@ -111,8 +110,8 @@
                     </div>
                     <div fxFlex=15%>
                         <mat-card-actions>
-                            <div fxLayout="row" class="icons" fxFlex.xs="90%">
-                                <div fxFlex="80%" fxLayoutGap="20px">
+                            <div fxLayout="row" fxFlex="100%" class="icons">
+                                <div fxFlex="80%" fxFlex.xs="80%">
                                     <app-reminder (eventEmitReminder)="eventEmitReminder($event)"></app-reminder>
                                     <app-collaborator></app-collaborator>
                                     <app-changecolor (eventEmit)="emit($event)"></app-changecolor>
@@ -120,7 +119,7 @@
                                     <app-archieve (eventEmit)="emit($event)"></app-archieve>
                                     <app-more (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
                                 </div>
-                                <div fxFlex.lg="20%" class="button">
+                                <div fxFlex="20%" fxFlex.xs="20%" class="button">
                                     <!-- <div> -->
                                     <button mat-button (click)="notes();check=false">CLOSE</button>
                                     <!-- </div> -->
@@ -130,6 +129,7 @@
                     </div>
                 </div>
             </mat-card>
+            </div>
         </div>
     </div>
     <div>

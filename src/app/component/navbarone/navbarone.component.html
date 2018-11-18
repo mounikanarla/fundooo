@@ -1,34 +1,34 @@
 <div fxFlex>
   <div fxLayout="column">
     <mat-toolbar color="primary" position="fixed">
-      <div fxLayout="row" fxFlex="20%" >
+      <div fxLayout="row" fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="20%" fxFlex.xs="30%">
         <div fxLayout="row" fxFlex="100%">
-          <div fxFlex="20%">
+          <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="30%" fxFlex.xs="40%">
            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
             <mat-icon class="menuicon" aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
         </div>
-        <div fxFlex="80%"  fxLayoutAlign="center center">
+        <div fxFlex.lg="80%" fxFLex.md="80%"  fxFLex.sm="70%"  fxFLex.xs="60%"fxLayoutAlign="space-around center">
           <span class="routename">{{name}}</span>
         </div>
         
       </div>
       </div>
-      <div fxLayout="row" fxFlex="60%"  >
-        <span><mat-icon class="searchicon">search</mat-icon> </span>
+      <div fxLayout="row" fxFlex.lg="60%" fxFlex.md="60%" fxFlex.sm="60%" fxFlex.xs="50%" fxLayoutAlign="space-around center">
+        <span><mat-icon class="searchicon" >search</mat-icon> </span>
         <input class=searchbar type=text matInput placeholder="search" [(ngModel)]="searchInput" (click)="clicksearch()" (keydown)="newMessage()">
       </div>
-      <div fxLayout="row"  fxFlex="20%" >
+      <div fxLayout="row"  fxFlex.lg="20%"  fxFlex.md="20%" fxFlex.sm="20%"  fxFlex.xs="20%">
         <div fxLayout="row" fxFlex="100%">
           <!-- <div fxFlex.lg="30%" fxFlex.md="20%" fxFlex.sm="30%" fxFlex.xs="50%" fxLayoutAlign="center">
             <span  class="sideicon"><mat-icon>refresh</mat-icon></span>
           </div> -->
-          <div fxFlex="80%" fxHide.xs="true" fxLayoutAlign="center">
+          <div fxFlex.lg="80%" fxHide.xs="true" fxLayoutAlign="center">
              <span class="sideicon"><mat-icon *ngIf="number==1" (click)="listview()"  aria-label="Side nav toggle icon" matTooltip="list view">view_stream</mat-icon></span>
             <span class="sideicon"><mat-icon *ngIf="number==0" (click)="gridview()" aria-label="Side nav toggle icon" matTooltip="grid view">grid_view</mat-icon></span> 
           </div>
           <!-- Profile Starts -->
-          <div fxFlex="20%">
+          <div fxFlex.lg="20%" fxFlex.xs="100%" fxLayoutAlign="end" fxLayoutAlign="end" >
             <button (click) = "$event.stopPropagation()"
                 [ngStyle]="{'float':'left','background-image':'url('+img+')','background-size':'cover'}"
                 matTooltip="fundoo Account" mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color:navy;float:right;color:white;text-transform:uppercase;">

@@ -34,12 +34,13 @@
 }
 .searchbar{
   height:40px;
-  width:80%; 
+  width:300%; 
   border:none;
   outline:none;
   background-color:rgb(235, 168, 23);
   padding-left:30px;
   color:black;
+  border-radius:10px;
 }
 input:focus{
   background:white;
@@ -112,12 +113,15 @@ input:focus{
   color:black
 }
 .searchicon{
-  margin-top:8px;
+  margin-top:20px;
   color:black;
+  position:fixed;
+  top:0px;
 }
 .sideicon{
   margin-top:10px;
-  color:black
+  color:black;
+ 
 }
 .profileicon{
   float:right;
@@ -143,6 +147,7 @@ input:focus{
 }
 .routename{
   color:black;
+  font-size:16px;
   // margin-left:20px;
 }
 .line{

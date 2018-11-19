@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SignupService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../core/services/userServices/user.service';
 
 @Component({
   selector: 'app-reset',
@@ -12,7 +13,7 @@ export class ResetComponent implements OnInit {
   model: any = {
     "password": ""
   }
-  constructor(private resetService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute) { }
+  constructor(private userService: UserService, public snackBar: MatSnackBar, public route: ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -30,7 +31,7 @@ export class ResetComponent implements OnInit {
     }
     console.log(this.model.password)
     console.log(this.id)
-    this.resetService.dataPost("user/reset-password", body, this.id)
+    this.userService.passwordPost(body, this.id)
       .subscribe((response) => {
         console.log("password successfully changed");
         this.snackBar.open("success", "Success", {

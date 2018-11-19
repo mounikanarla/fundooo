@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { SignupService } from '../../core/services/http/http.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { NoteService } from '../../core/services/noteServices/note.service';
 
 @Component({
   selector: 'app-addlabel',
@@ -10,7 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class AddlabelComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddlabelComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private httpService: SignupService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private httpService: SignupService,private noteService: NoteService) { }
   @ViewChild('myLabel') myLabel: ElementRef;
   @ViewChild('myUpdate') myUpdate: ElementRef;
   @Output() eventEmit = new EventEmitter();
@@ -20,6 +21,7 @@ export class AddlabelComponent implements OnInit {
   public editId;
   public editDoneIcon = true;
   public editable = false;
+  public token=localStorage.getItem('id')
   ngOnInit() {
     this.getLabels();
   }
@@ -40,7 +42,7 @@ export class AddlabelComponent implements OnInit {
   public label;
   public labelArray = [];
   addLabel() {
-    this.httpService.delPost("noteLabels", {
+    this.noteService.delLabel({
       "label": this.myLabel.nativeElement.innerHTML,
       "isDeleted": false,
       "userId": localStorage.getItem('userId')
@@ -53,7 +55,7 @@ export class AddlabelComponent implements OnInit {
         })
   }
   getLabels() {
-    this.httpService.getnote("noteLabels/getNoteLabelList", localStorage.getItem('id')).subscribe(
+    this.noteService.getLabelNote(this.token).subscribe(
       response => {
         this.labelArray = [];
         console.log(response['data'].details);
@@ -73,7 +75,7 @@ export class AddlabelComponent implements OnInit {
   }
   delete(labelId) {
     // console.log(labelId)
-    this.httpService.deleteLabel("/noteLabels/" + labelId + "/deleteNoteLabel", localStorage.getItem('id'))
+    this.noteService.deleteLabel(labelId,this.token)
       .subscribe((response) => {
         // console.log("Deleted data",response);
         this.getLabels();
@@ -97,13 +99,13 @@ export class AddlabelComponent implements OnInit {
     // console.log(labelId)
     // console.log(this.myUpdate.nativeElement.innerHTML)
     // var str=this.myUpdate.nativeElement.innerHTML
-    this.httpService.delPost("noteLabels/" + labelId.id + "/updateNoteLabel",
+    this.noteService.updateLabelPost(labelId,
       {
         "label": this.myUpdate.nativeElement.innerHTML,
         "isDeleted": false,
         "id": labelId.id,
         "userId": localStorage.getItem("userId")
-      }, localStorage.getItem('id'))
+      },this.token)
       .subscribe((response) => {
         // this.labelArray=[];
         this.getLabels();

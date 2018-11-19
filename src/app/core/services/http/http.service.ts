@@ -10,9 +10,11 @@ export class SignupService {
   URL=environment.apiUrl
   // URL = "http://34.213.106.173/api";
   constructor(private http: HttpClient) { }
-  getdata(value) {
+ 
+ getdata(value) {
     return this.http.get(this.URL + '/' + value);
   }
+
   deleteLabel(path,body)
   {
     return this.http.delete(this.URL + '/' + path,body);
@@ -90,6 +92,8 @@ export class SignupService {
   };
   return this.http.post(this.URL+"/"+url,body,http)
 }
+
+
 }
 
 

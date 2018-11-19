@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { SignupService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserService } from '../../core/services/userServices/user.service';
 // import { MessagingService } from './messaging.service';
 
 
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     password: ''
   }
  body:any={}
-  constructor(private loginservice: SignupService, public snackBar: MatSnackBar, public router: Router) { }
+  constructor(private loginservice: SignupService, private userService:UserService,public snackBar: MatSnackBar, public router: Router) { }
   email = new FormControl('', [Validators.required, Validators.email]);
   token = localStorage.getItem('id');
 
@@ -35,8 +36,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
-    let obs = this.loginservice.httpPost("user/login", {
+    // let body={
+      
+    // }
+    let obs = this.userService.loginPost({
       "email": this.model.email,
       "password": this.model.password,
 

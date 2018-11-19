@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignupService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../core/services/userServices/user.service';
 
 
 @Component({
@@ -29,11 +30,11 @@ export class SignupComponent implements OnInit {
   }
   public service:any
   show = true;
-  constructor(private signservice: SignupService, public snackBar: MatSnackBar) { }
+  constructor(private userService:UserService, private signservice: SignupService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
-    let obs = this.signservice.getdata("user/service");
+    let obs = this.userService.getService();
     obs.subscribe((response) => {
       var data = response["data"];
       //  console.log(data);
@@ -88,7 +89,7 @@ export class SignupComponent implements OnInit {
       });
       return;
     }
-    this.signservice.httpPost("/user/userSignUp", {
+    this.userService.signupPost( {
       "firstName": this.model.firstName,
       "lastName": this.model.lastName,
       "phoneNumber": "7536982410",

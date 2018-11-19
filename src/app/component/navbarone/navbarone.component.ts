@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material';
 import { AddlabelComponent } from '../../component/addlabel/addlabel.component';
 import { DataServiceService } from '../../core/services/dataServices/data-service.service';
 import { CropimageComponent } from '../../component/cropimage/cropimage.component';
+import { NoteService } from '../../core/services/noteServices/note.service';
 
 @Component({
   selector: 'app-navbarone',
@@ -33,7 +34,7 @@ export class NavbaroneComponent {
   name="Fundoo Notes"
   @Output() eventEmit = new EventEmitter();
 
-  constructor(private breakpointObserver: BreakpointObserver, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router, public dialog: MatDialog, private data: DataServiceService) { }
+  constructor(private breakpointObserver: BreakpointObserver,private service:NoteService, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router, public dialog: MatDialog, private data: DataServiceService) { }
   ngOnInit() {
     this.checkLabel();
     this.data.currentMessage2.subscribe(message => this.name = message)
@@ -53,7 +54,7 @@ export class NavbaroneComponent {
   }
   logout() {
     // console.log(this.id)
-    this.logoutService.logoutPost("user/logout", this.id)
+    this.service.logoutPost(this.id)
       .subscribe((response) => {
         console.log(response);
         localStorage.removeItem('id');

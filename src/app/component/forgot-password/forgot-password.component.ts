@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SignupService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../core/services/userServices/user.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,7 +12,7 @@ export class ForgotPasswordComponent implements OnInit {
   model: any = {
     "email": ""
   }
-  constructor(private forgotPassword: SignupService, public snackBar: MatSnackBar) { }
+  constructor(private forgotPassword: SignupService,public userService:UserService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -23,7 +24,7 @@ export class ForgotPasswordComponent implements OnInit {
       });
       return;
     }
-    this.forgotPassword.httpPost("user/reset", {
+    this.userService.resetPost({
       "email": this.model.email
     }).subscribe((response => {
       this.snackBar.open("password is send to your email", "Ok", {

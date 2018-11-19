@@ -3,6 +3,7 @@ import { SignupService } from '../../core/services/http/http.service';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
 import { DataServiceService } from '../../core/services/dataServices/data-service.service';
+import { NoteService } from '../../core/services/noteServices/note.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { DataServiceService } from '../../core/services/dataServices/data-servic
 })
 export class AddnoteComponent implements OnInit {
 
-  constructor(private httpService: SignupService, public dialog: MatDialog,private data: DataServiceService) { }
+  constructor(private httpService: SignupService,private noteService:NoteService, public dialog: MatDialog,private data: DataServiceService) { }
   public array = [];
   token = localStorage.getItem('id');
   public condition=false;
@@ -100,7 +101,7 @@ export class AddnoteComponent implements OnInit {
   removelabel(index, label) {
     console.log(index)
     console.log(label);
-    this.httpService.logoutPost("notes/" + index.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
+    this.noteService.removeLabelPost( index, label, localStorage.getItem('id'))
       .subscribe((response) => {
         // console.log("checklist added" + response)
         this.eventEmit.emit({});
@@ -134,8 +135,7 @@ export class AddnoteComponent implements OnInit {
       "itemName": this.modifiedCheckList.itemName,
       "status": this.modifiedCheckList.status
     }
-    var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
-    this.httpService.delPost(url, JSON.stringify(checklistData), localStorage.getItem('id')).subscribe(response => {
+    this.noteService.updateCheckbox(id,this.modifiedCheckList,JSON.stringify(checklistData), localStorage.getItem('id')).subscribe(response => {
       console.log(response);
 
     })
@@ -149,7 +149,7 @@ export class AddnoteComponent implements OnInit {
     var body={
       "noteIdList" : id
     }
-    this.httpService.delPost("/notes/removeReminderNotes",body, localStorage.getItem('id'))
+    this.noteService.removeRemainPost(body, localStorage.getItem('id'))
       .subscribe((response) => {
         console.log("Reminder deleted" + response)
         this.eventEmit.emit({});

@@ -16,6 +16,13 @@ export class ReminderNotesComponent implements OnInit {
   ngOnInit() {
     this.getReminder();
   }
+  addNewEntry(event) {
+    if (event) {
+      // this.array=[];
+      this.getReminder();
+
+    }
+  }
   getReminder() {
     this.httpService.getnote("/notes/getReminderNotesList", this.token).subscribe(data => {
       this.reminderArray = [];

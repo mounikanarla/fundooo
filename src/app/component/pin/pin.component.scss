@@ -1,5 +1,5 @@
 .notepin{
-    opacity: 0.5;
+    opacity: 1;
     cursor: pointer;
     padding-top:20px;
     /* background-color:blue; */
@@ -9,6 +9,28 @@
     cursor: pointer;
 
 }
+.notepin1{
+    opacity: 1;
+    cursor: pointer;
+    padding-top:20px;
+    // color:blue; 
+}
+.notepin1:hover{
+    opacity:1;
+    // color:blue; 
+
+    cursor: pointer;
+
+}
+
 .pintop{
     margin-bottom:20px;
+    // color:blue;
+
 }
+.pintop1{
+    margin-bottom:20px;
+    // color:blue;
+
+}
+

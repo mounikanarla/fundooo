@@ -1,7 +1,7 @@
 <div fxFlex>
   <div fxLayout="column">
     <mat-toolbar color="primary" position="fixed">
-      <div fxLayout="row" fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="20%" fxFlex.xs="30%">
+      <div fxLayout="row" fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="20%" fxFlex.xs="35%">
         <div fxLayout="row" fxFlex="100%">
           <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="30%" fxFlex.xs="40%">
            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
@@ -14,7 +14,7 @@
         
       </div>
       </div>
-      <div fxLayout="row" fxFlex.lg="60%" fxFlex.md="60%" fxFlex.sm="60%" fxFlex.xs="50%" fxLayoutAlign="space-around center">
+      <div fxLayout="row" fxFlex.lg="60%" fxFlex.md="60%" fxFlex.sm="60%" fxFlex.xs="45%" fxLayoutAlign="space-around center">
         <span><mat-icon class="searchicon" >search</mat-icon> </span>
         <input class=searchbar type=text matInput placeholder="search" [(ngModel)]="searchInput" (click)="clicksearch()" (keydown)="newMessage()">
       </div>
@@ -63,9 +63,9 @@
       <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
         <mat-nav-list>
-          <a mat-list-item routerLink="/home/notes" routerLinkActive="active" (click)="titleDisplay('KEEP')"><img src="../../../assets/notes.svg"><span
+          <a mat-list-item routerLink="/home/notes" routerLinkActive="active" (click)="titleDisplay('Fundoo')"><img src="../../../assets/notes.svg"><span
               class="notes">Notes</span></a>
-          <a mat-list-item routerLink="/home/reminders" routerLinkActive="active" (click)="titleDisplay('REMINDERS')"><img src="../../../assets/remainder.svg"><span class="remainder">Reminders</span></a>
+          <a mat-list-item routerLink="/home/reminders" routerLinkActive="active" (click)="titleDisplay('Reminders')"><img src="../../../assets/remainder.svg"><span class="remainder">Reminders</span></a>
         </mat-nav-list>
         <hr>
         <div class="label">
@@ -83,19 +83,19 @@
         </mat-nav-list>
         <hr>
         <mat-nav-list>
-          <a mat-list-item routerLink="/home/archive" routerLinkActive="active" (click)="titleDisplay('ARCHIVE')"><img src="../../../assets/archive.svg"><span
+          <a mat-list-item routerLink="/home/archive" routerLinkActive="active" (click)="titleDisplay('Archive')"><img src="../../../assets/archive.svg"><span
               class="notes">Archive</span></a>
-          <a mat-list-item routerLink="/home/trash" routerLinkActive="active" (click)="titleDisplay('TRASH')"><img src="../../../assets/trash.svg"><span
+          <a mat-list-item routerLink="/home/trash" routerLinkActive="active" (click)="titleDisplay('Trash')"><img src="../../../assets/trash.svg"><span
               class="remainder">Trash</span></a>
         </mat-nav-list>
         <hr>
         <mat-nav-list>
           <a mat-list-item ><img src="../../../assets/settings.svg"><span class="notes">Settings</span></a>
-          <a mat-list-item ><img src="../../../assets/feedback.svg"><span class="remainder">Send Feedback</span></a>
+          <!-- <a mat-list-item ><img src="../../../assets/feedback.svg"><span class="remainder">Send Feedback</span></a>
           <a mat-list-item ><img src="../../../assets/help.svg"><span class="notes">Help</span></a>
           <a mat-list-item ><img src="../../../assets/download.svg"><span class="remainder">App Downloads</span></a>
-          <a mat-list-item ><img src="../../../assets/keyboard.svg"><span class="remainder">Keyboard Shortcuts</span></a>
-        </mat-nav-list>
+          <a mat-list-item ><img src="../../../assets/keyboard.svg"><span class="remainder">Keyboard Shortcuts</span></a> -->
+        </mat-nav-list> 
       </mat-sidenav>
       <mat-sidenav-content style="width:-webkit-fill-available;position:fixed;box-align: center">
         <router-outlet></router-outlet>

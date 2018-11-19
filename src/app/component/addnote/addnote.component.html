@@ -5,19 +5,19 @@
     <mat-card class="example-card" ngStyle.xs="width:100%" [ngClass]="{'viewgrid':condition,'viewlist':!condition}" *ngFor='let index of newData | search:searchInput' [ngStyle]="{'background-color':index.color}">
       <!--Title printing starts -->
       <div fxLayout="row" fxFlex="100%">
-        <div fxFlex="90%">
-          <mat-card-header (click)="openDialog(index)" >
-            <mat-card-title placeholder="Title" class="title">{{index.title }}</mat-card-title>
-          </mat-card-header>
+        <div fxFlex="90%" (click)="openDialog(index)">
+          <!-- <mat-card-header  > -->
+            <mat-card-content class="title">{{index.title }}</mat-card-content>
+          <!-- </mat-card-header> -->
         </div>
-        <div fxFlex="10%" class="pin">
-          <app-pin [noteid]=index (eventEmit)="emit($event)" [Pin]=index.isPined></app-pin>
+        <div fxFlex="10%" class="pin" >
+          <app-pin [noteid]=index (eventEmit)="emit($event)" [Pin]="index.isPined"></app-pin>
         </div>
       </div>
       <!--Title printing Ends -->
       <!-- Description Printing starts -->
       <div fxLayout="row" fxFlex="100%">
-      <mat-card-content (click)="openDialog(index)">{{index.description}}</mat-card-content>
+      <mat-card-content class="description" (click)="openDialog(index)">{{index.description}}</mat-card-content>
       </div>
       <!-- Description Printing Ends -->
       <!-- Checklist Printing starts -->
@@ -35,53 +35,55 @@
       (click)="openDialog(index)">{{checkList.itemName}}</del>
       </div> 
       <!-- Checklist Printing Ends -->
+        <!-- Reminder Printing Starts -->
+        <mat-chip-list class="margin">
+            <div fxLayout="row" *ngIf="checkReminder(index.reminder[0])">
+              <div *ngFor="let label of index.reminder">
+                <div *ngIf="((today | date:shortDate) == (label | date:shortDate))">
+                <mat-chip>
+                <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+                Today {{label | date:"shortTime"}}
+                  <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
+                </mat-chip>
+              </div>
+                <div *ngIf="((tomorrow | date:shortDate) == (label | date:shortDate ))">
+                  <mat-chip>
+                  <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+                 Tomorrow {{label | date:"shortTime"}}
+                    <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
+                  </mat-chip>
+                </div>
+                <div *ngIf="((today | date:shortDate) != (label | date:shortDate) ) && ((tomorrow | date:shortDate) != (label | date:shortDate) )">                  
+                  <mat-chip>
+                  <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+                    {{label | date:"medium"}}
+                  <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
+                  </mat-chip>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="row" *ngIf="!checkReminder(index.reminder[0])">
+                <div *ngFor="let label of index.reminder">
+                  <mat-chip *ngIf="!label.isDeleted" >
+                  <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+                 <del> {{label | date:"medium"}}</del>
+                    <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
+                  </mat-chip>
+                </div>
+              </div>
+            </mat-chip-list>
+            <!-- Reminder Printing Ends -->
       <!-- Label Printing Starts --> 
-      <mat-chip-list>
-        <div *ngFor="let label of index.noteLabels">
-          <mat-chip *ngIf="!label.isDeleted" routerLink="/home/label/{{ label.label }}"  routerLinkActive="active" (click)="labelDisplay(label.label)">{{label.label}}
+      <mat-chip-list class="margin">
+        <div *ngFor="let label of index.noteLabels" >
+          <mat-chip *ngIf="!label.isDeleted" routerLink="/home/label/{{ label.label }}"  routerLinkActive="active" (click)="labelDisplay(label.label)">
+            <span class="span">{{label.label}}</span>
             <mat-icon matChipRemove (click)="removelabel(index,label)">cancel</mat-icon>
           </mat-chip>
         </div>
       </mat-chip-list>
       <!-- Label Printing Ends --> 
-      <!-- Reminder Printing Starts -->
-      <mat-chip-list class="margin">
-        <div fxLayout="row" *ngIf="checkReminder(index.reminder[0])">
-          <div *ngFor="let label of index.reminder">
-            <div *ngIf="((today | date:shortDate) == (label | date:shortDate))">
-            <mat-chip>
-            <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
-            Today {{label | date:"shortTime"}}
-              <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
-            </mat-chip>
-          </div>
-            <div *ngIf="((tomorrow | date:shortDate) == (label | date:shortDate ))">
-              <mat-chip>
-              <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
-             Tomorrow {{label | date:"shortTime"}}
-                <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
-              </mat-chip>
-            </div>
-            <div *ngIf="((today | date:shortDate) != (label | date:shortDate) ) && ((tomorrow | date:shortDate) != (label | date:shortDate) )">                  
-              <mat-chip>
-              <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
-                {{label | date:"medium"}}
-              <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
-              </mat-chip>
-            </div>
-          </div>
-        </div>
-        <div fxLayout="row" *ngIf="!checkReminder(index.reminder[0])">
-            <div *ngFor="let label of index.reminder">
-              <mat-chip *ngIf="!label.isDeleted" >
-              <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
-             <del> {{label | date:"medium"}}</del>
-                <mat-icon matChipRemove (click)="removeRemainder(index.id)">cancel</mat-icon>
-              </mat-chip>
-            </div>
-          </div>
-        </mat-chip-list>
-        <!-- Reminder Printing Ends -->
+    
         <!-- Icon Print Starts -->
       <mat-card-actions>
         <span class=invisible>

@@ -31,7 +31,6 @@ import { ChangecolorComponent } from './component/changecolor/changecolor.compon
 import { ImageComponent } from './component/image/image.component';
 import { ArchieveComponent } from './component/archieve/archieve.component';
 import { MoreComponent } from './component/more/more.component';
-// import { UndoComponent } from './component/undo/undo.component';
 import { HomeComponent } from './component/home/home.component';
 import { AddnoteComponent } from './component/addnote/addnote.component';
 import { ParentComponent } from './component/parent/parent.component';
@@ -50,7 +49,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ReminderNotesComponent } from './component/reminder-notes/reminder-notes.component';
 import {MatSelectModule} from '@angular/material/select';
-import { MessagingService } from "../app/core/services/messaging.service";
+import { MessagingService } from "../app/core/services/messageservice/messaging.service"
 
 
 

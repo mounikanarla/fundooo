@@ -14,48 +14,50 @@
                     </div>
                     <!-- </mat-card-header> -->
                 </div>
-                <div fxFlex=65%>
+                <div fxFlex>
                     <!-- <mat-card-content> -->
                     <div id="description" [innerHTML]="data.description" contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note"
                         class="textbar" tabindex="0" spellcheck="true"></div>
                     <!-- </mat-card-content> -->
                 </div>
-                
+                <div class="margin">
                 <div class="note" *ngFor="let check of tempArray" fxLayout="row">
                     <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
                     <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event)
                       [style.backgroundColor]="bgcolor" *ngIf="!check.isDeleted && check.status=='open' ">
                     <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
                 </div>
-                
-                    <hr *ngIf="checklist">
+                <hr *ngIf="checklist">
                     <div fxLayout="row" *ngIf="checklist">
-                      <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
-                      <mat-checkbox *ngIf="adding" [(ngModel)]=addCheck  color="primary"></mat-checkbox>
-                      <input  fxFlex="95%" class="note" placeholder="List Item" [style.backgroundColor]="bgcolor" [(ngModel)]=newList (keydown)=addList($event)/>
+                      <mat-icon fxFlex="10%" *ngIf="!adding">add</mat-icon>
+                      <mat-checkbox  fxFlex="10%" *ngIf="adding" [(ngModel)]=addCheck  color="primary"></mat-checkbox>
+                      <input  fxFlex="90%" class="notelist" placeholder="List Item" [style.backgroundColor]="bgcolor" [(ngModel)]=newList (keydown)=addList($event)/>
                     </div>
-                    <hr *ngIf="checklist">
-                   
-                    <div class="note" *ngFor="let check of tempArray" fxLayout="row">
+                <hr *ngIf="checklist">
+                <div class="note" *ngFor="let check of tempArray" fxLayout="row">
                       <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
                       <input [(ngModel)]=check.itemName [style.backgroundColor]="bgcolor" class="note" style="text-decoration: line-through;" fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
                         (keydown)=editing(check,$event)>
                       <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
-                    </div>
-                    <mat-chip-list>
-                        <div *ngFor="let label of array">
-                          <mat-chip *ngIf="!label.isDeleted">
+                </div>
+                </div>
+                <mat-chip-list class="margin">
+                    <div *ngFor="let label of array">
+                        <mat-chip *ngIf="!label.isDeleted">
                           <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
                           {{label | date:"medium"}}
-                            <mat-icon matChipRemove (click)="removeRemainder(data.id)">cancel</mat-icon>
-                          </mat-chip>
-                        </div>
-                      </mat-chip-list>
-                      <div *ngFor="let label of label">
-                            <mat-chip *ngIf="!label.isDeleted">{{label.label}}
-                            <mat-icon matChipRemove (click)="removelabel(data,label)">cancel</mat-icon>
-                            </mat-chip>
+                          <mat-icon matChipRemove (click)="removeRemainder(data.id)">cancel</mat-icon>
+                        </mat-chip>
                     </div>
+                </mat-chip-list>
+                <mat-chip-list class="margin">
+                     <div *ngFor="let label of label">
+                        <mat-chip *ngIf="!label.isDeleted">{{label.label}}
+                            <mat-icon matChipRemove (click)="removelabel(data,label)">cancel</mat-icon>
+                        </mat-chip>
+                    </div>
+                </mat-chip-list>
+
                 <div fxFlex=15% class="action">
                     <!-- <mat-card-actions> -->
                     <div fxLayout="row" class="icons">

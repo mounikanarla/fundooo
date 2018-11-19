@@ -21,13 +21,30 @@ mat-card-content{
     opacity:1
 
 }
+.icon {
+    color: white;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.icon svg {
+    fill:blue;
+}
 .pin{
-    opacity:0;
+    opacity:1;
+
 }
 .pin:hover{
     opacity:1
 
 }
+.pin1{
+    opacity:1;
+    color:blue
+}
+.pin1:hover{
+    opacity:1
+
+}
+
 .viewgrid{
     width:500px;
     margin-left:32px;
@@ -53,5 +70,10 @@ mat-card-content{
 .margin{
     margin-top:10px;
 }
-
+.span{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+    width:70px;
+}
 

@@ -1,7 +1,12 @@
 <div class="notesPosition">
     <app-notes (onNewEntryAdded)="addNewEntry($event)"></app-notes>
+    <div *ngIf="pinarray.length">
+    <span class="pined">PINNED</span>
     <app-addnote  [newData]=pinarray (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)"  ></app-addnote>
-
-    <app-addnote  [newData]=array (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)"  ></app-addnote>
-
+    <span class="others">OTHERS</span>
+    <app-addnote [newData]=array (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)"  ></app-addnote>
+    </div>
+    <div *ngIf="!pinarray.length">
+    <app-addnote [newData]=array (eventEmit)="emit($event)" (labelEmit)="labelEmit($event)"  ></app-addnote>
+    </div>
 </div>

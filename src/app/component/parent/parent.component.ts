@@ -14,12 +14,14 @@ export class ParentComponent implements OnInit {
   public pinarray=[]
   ngOnInit() {
     this.getCard();
+    this.getpinCard();
+
   }
   addNewEntry(event) {
     if (event) {
       // this.array=[];
-      this.getCard();
       this.getpinCard();
+      this.getCard();
     }
   }
   /*

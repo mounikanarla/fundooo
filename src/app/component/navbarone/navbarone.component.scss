@@ -148,6 +148,10 @@ input:focus{
 .routename{
   color:black;
   font-size:16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+  width:70%
   // margin-left:20px;
 }
 .line{
@@ -157,4 +161,9 @@ input:focus{
 .change{
   color:black;
 margin-top:20px;
+}
+.display{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
 }

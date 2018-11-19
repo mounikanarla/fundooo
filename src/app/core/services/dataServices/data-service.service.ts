@@ -12,7 +12,7 @@ export class DataServiceService {
   private messageSource1 = new Subject<boolean>();
   currentMessage1 = this.messageSource1.asObservable();
 
-  private messageSource2 = new BehaviorSubject('FUNDOO');
+  private messageSource2 = new BehaviorSubject('Fundoo');
   currentMessage2 = this.messageSource2.asObservable();
  
   constructor() { }

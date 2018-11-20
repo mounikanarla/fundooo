@@ -1,9 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { SignupService } from '../../core/services/http/http.service';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
 import { DataServiceService } from '../../core/services/dataServices/data-service.service';
 import { NoteService } from '../../core/services/noteServices/note.service';
+import{ NoteModel } from '../../core/models/note-model'
+import { Subject } from 'rxjs';
+// import 'rxjs/add/operator/takeUntil';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -11,9 +14,11 @@ import { NoteService } from '../../core/services/noteServices/note.service';
   templateUrl: './addnote.component.html',
   styleUrls: ['./addnote.component.scss']
 })
-export class AddnoteComponent implements OnInit {
+export class AddnoteComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private httpService: SignupService,private noteService:NoteService, public dialog: MatDialog,private data: DataServiceService) { }
+ constructor(private noteService:NoteService, public dialog: MatDialog,private data: DataServiceService) { }
+  list:NoteModel[]=[]
   public array = [];
   token = localStorage.getItem('id');
   public condition=false;
@@ -36,7 +41,10 @@ export class AddnoteComponent implements OnInit {
     if (this.newData != null && this.newData.isDeleted == true) {
 
     }
-    this.data.currentMessage1.subscribe(message => {
+    this.data.currentMessage1
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(message => {
       this.condition = message;
       // console.log(this.condition)
     }
@@ -62,7 +70,10 @@ export class AddnoteComponent implements OnInit {
     const dialogRef = this.dialog.open(UpdateComponent, {
           data: note
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(result => {
       console.log('The dialog was closed');
       this.eventEmit.emit({});
 
@@ -101,8 +112,10 @@ export class AddnoteComponent implements OnInit {
   removelabel(index, label) {
     console.log(index)
     console.log(label);
-    this.noteService.removeLabelPost( index, label, localStorage.getItem('id'))
-      .subscribe((response) => {
+    this.noteService.removeLabelPost( index, label)
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe((response) => {
         // console.log("checklist added" + response)
         this.eventEmit.emit({});
       },
@@ -135,7 +148,7 @@ export class AddnoteComponent implements OnInit {
       "itemName": this.modifiedCheckList.itemName,
       "status": this.modifiedCheckList.status
     }
-    this.noteService.updateCheckbox(id,this.modifiedCheckList,JSON.stringify(checklistData), localStorage.getItem('id')).subscribe(response => {
+    this.noteService.updateCheckbox(id,this.modifiedCheckList,JSON.stringify(checklistData)).subscribe(response => {
       console.log(response);
 
     })
@@ -149,7 +162,9 @@ export class AddnoteComponent implements OnInit {
     var body={
       "noteIdList" : id
     }
-    this.noteService.removeRemainPost(body, localStorage.getItem('id'))
+    this.noteService.removeRemainPost(body)
+    .pipe(takeUntil(this.destroy$))
+
       .subscribe((response) => {
         console.log("Reminder deleted" + response)
         this.eventEmit.emit({});
@@ -175,5 +190,10 @@ export class AddnoteComponent implements OnInit {
     // this.flag;
     return false;
 
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

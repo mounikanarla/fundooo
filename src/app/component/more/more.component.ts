@@ -1,7 +1,9 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { SignupService } from '../../core/services/http/http.service';
+import { Component, Input, Output, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NoteService } from '../../core/services/noteServices/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-more',
@@ -9,7 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./more.component.scss']
 })
 
-export class MoreComponent implements OnInit {
+export class MoreComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   show: boolean = true;
   token = localStorage.getItem('id');
   public body: any = {}
@@ -20,7 +24,7 @@ export class MoreComponent implements OnInit {
   public arraynotes: any
   public model: any
 
-  constructor(private httpService: SignupService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(private noteService: NoteService,public dialog: MatDialog, public snackBar: MatSnackBar) { }
   @Input() noteid
   // @Input() deleted
   @Output() eventEmit = new EventEmitter();
@@ -41,10 +45,13 @@ export class MoreComponent implements OnInit {
     console.log(this.noteid)
     var array = []
     array.push(this.noteid.id)
-    this.httpService.delPost("notes/trashNotes", this.body = {
+    this.noteService.trashPost( this.body = {
       "isDeleted": flag,
       "noteIdList": array
-    }, this.token).subscribe((response) => {
+    })
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe((response) => {
       this.eventEmit.emit({});
       console.log(this.eventEmit.emit())
       console.log("successful", response);
@@ -58,7 +65,10 @@ export class MoreComponent implements OnInit {
   *  @description: Checking the label from nodeLabelList and pushing it in an array
   */
   checkLabel() {
-    this.httpService.getnote("noteLabels/getNoteLabelList", localStorage.getItem('id')).subscribe(
+    this.noteService.getLabelNote()
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(
       response => {
         this.array = response['data'].details;
         // console.log(this.noteid.noteLabels.length);
@@ -87,7 +97,9 @@ export class MoreComponent implements OnInit {
     this.eventEmitLabel.emit(label);
     // Checking the condition for labels while clicking
     if (this.noteid != null && label.isChecked == null) {
-      this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/add", localStorage.getItem('id'))
+      this.noteService.addCheckLabel(this.noteid,label)
+      .pipe(takeUntil(this.destroy$))
+
         .subscribe((response) => {
           // console.log("checklist added", response);
           this.eventEmit.emit({});
@@ -103,7 +115,9 @@ export class MoreComponent implements OnInit {
 
     if (this.noteid != null && label.isChecked == true) {
 
-      this.httpService.logoutPost("notes/" + this.noteid.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
+      this.noteService.removeLabelPost(this.noteid, label)
+      .pipe(takeUntil(this.destroy$))
+
         .subscribe((response) => {
           // console.log("checklist added" + response)
           this.eventEmit.emit({});
@@ -127,7 +141,10 @@ export class MoreComponent implements OnInit {
       "noteIdList": array
     }
     console.log(this.model, "trash");
-    this.httpService.delPost('notes/deleteForeverNotes', this.model, localStorage.getItem('id')).subscribe(response => {
+    this.noteService.deleteForeverPost( this.model)
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(response => {
       console.log(response, "success");
       this.eventEmit.emit({});
 
@@ -141,5 +158,9 @@ export class MoreComponent implements OnInit {
 
   }
 
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

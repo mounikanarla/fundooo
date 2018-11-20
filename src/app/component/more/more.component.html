@@ -7,11 +7,11 @@
 <!-- Printing the list inside menu Starts-->
 <!-- Delete Note Starts -->
   <mat-menu #menu="matMenu" class="menu">
-    <button (click)=delData(true) *ngIf="!deleted" mat-menu-item>Delete Note</button>
-    <button (click)=delData(false) *ngIf="deleted" mat-menu-item>Restore Note</button>
+    <button (click)=delData(true) *ngIf="!isDeleted" mat-menu-item>Delete Note</button>
+    <button (click)=delData(false) *ngIf="isDeleted" mat-menu-item>Restore Note</button>
 <!-- Delete Note Ends -->
     <!-- Add Label Printing starts -->
-    <button mat-menu-item [matMenuTriggerFor]="addLabel" *ngIf="!deleted" (click)=" $event.stopPropagation();">Add Label</button>
+    <button mat-menu-item [matMenuTriggerFor]="addLabel" *ngIf="!isDeleted" (click)=" $event.stopPropagation();">Add Label</button>
     <mat-menu #addLabel="matMenu">
       <span>Label Note</span>
       <div (click)=" $event.stopPropagation();">
@@ -19,15 +19,14 @@
         <mat-icon>search</mat-icon>
       </div>
       <div *ngFor="let label of array | search: query">
-        <mat-checkbox (click)="$event.stopPropagation(); addChecklabel(label)" [(ngModel)]="label.isChecked">{{ label.label
-          }}</mat-checkbox>
+        <mat-checkbox (click)="$event.stopPropagation(); addChecklabel(label)" [(ngModel)]="label.isChecked">{{ label.label}}</mat-checkbox>
         <!-- <input (click)=" $event.stopPropagation();"><mat-checkbox (click)="$event.stopPropagation(); removelabel(label)" *ngIf="label.isChecked==false"></mat-checkbox> -->
       </div>
     </mat-menu>
     <!-- Add Label Printing Ends -->
 
-    <button mat-menu-item *ngIf="!deleted">Show CheckBox</button>
-    <button mat-menu-item *ngIf="deleted" (click)="deleteForever()">Delete Forever</button>
+    <button mat-menu-item *ngIf="!isDeleted">Show CheckBox</button>
+    <button mat-menu-item *ngIf="isDeleted" (click)="deleteForever()">Delete Forever</button>
   </mat-menu>
   <!-- Printing the list inside menu Ends -->
 </span>

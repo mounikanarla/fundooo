@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { SignupService } from '../../core/services/http/http.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NoteService } from '../../core/services/noteServices/note.service';
+import {NoteModel} from '../../core/models/note-model'
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-trash',
   templateUrl: './trash.component.html',
   styleUrls: ['./trash.component.scss']
 })
-export class TrashComponent implements OnInit {
+export class TrashComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private httpService: SignupService) { }
+  constructor(private noteService:NoteService) { }
+  list:NoteModel[]=[]
+
   public array = []
   token = localStorage.getItem('id');
 
@@ -16,16 +22,20 @@ export class TrashComponent implements OnInit {
       this.trash();
   }
 trash(){
-  this.httpService.getnote("notes/getTrashNotesList", this.token).subscribe(data => {
+  this.noteService.getTrash(this.token)
+  .pipe(takeUntil(this.destroy$))
+
+  .subscribe(data => {
     this.array = [];
 
     console.log("get cards list successfull", data);
-    var length = data['data'].data.length;
+ this.list=data['data'].data
+    // var length = data['data'].data.length;
 
-    for (var i = length - 1; i >= 0; i--) {
-      console.log(data['data'].data.length);
+    for (var i = this.list.length- 1; i >= 0; i--) {
+      console.log(this.list.length);
       {
-        this.array.push(data['data'].data[i]);
+        this.array.push(this.list[i]);
       }
     }
     console.log("archive array", this.array);
@@ -36,5 +46,10 @@ emit(event){
   if(event){
     this.trash();
   }
+}
+ngOnDestroy() {
+  this.destroy$.next(true);
+  // Now let's also unsubscribe from the subject itself:
+  this.destroy$.unsubscribe();
 }
 }

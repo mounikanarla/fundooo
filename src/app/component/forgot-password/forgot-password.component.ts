@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { SignupService } from '../../core/services/http/http.service';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../core/services/userServices/user.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit ,OnDestroy{
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   model: any = {
     "email": ""
   }
-  constructor(private forgotPassword: SignupService,public userService:UserService, public snackBar: MatSnackBar) { }
+  constructor(public userService:UserService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -26,7 +28,9 @@ export class ForgotPasswordComponent implements OnInit {
     }
     this.userService.resetPost({
       "email": this.model.email
-    }).subscribe((response => {
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((response => {
       this.snackBar.open("password is send to your email", "Ok", {
         duration: 2000,
       })
@@ -37,5 +41,10 @@ export class ForgotPasswordComponent implements OnInit {
         });
       })
     )
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

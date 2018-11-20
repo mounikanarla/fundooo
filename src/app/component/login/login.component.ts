@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { SignupService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from '../../core/services/userServices/user.service';
+import { Subject } from 'rxjs';
+// import 'rxjs/add/operator/takeUntil';
+import { takeUntil } from 'rxjs/operators';
+
 // import { MessagingService } from './messaging.service';
 
 
@@ -15,13 +18,15 @@ import { UserService } from '../../core/services/userServices/user.service';
 })
 
 export class LoginComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   hide = "true";
   model: any = {
     email: '',
     password: ''
   }
  body:any={}
-  constructor(private loginservice: SignupService, private userService:UserService,public snackBar: MatSnackBar, public router: Router) { }
+  constructor(private userService:UserService,public snackBar: MatSnackBar, public router: Router) { }
   email = new FormControl('', [Validators.required, Validators.email]);
   token = localStorage.getItem('id');
 
@@ -43,7 +48,9 @@ export class LoginComponent implements OnInit {
       "email": this.model.email,
       "password": this.model.password,
 
-    });
+    })
+    .pipe(takeUntil(this.destroy$))
+
     obs.subscribe((response) => {
       // console.log("login successfull")
       localStorage.setItem('id', response["id"]);
@@ -59,7 +66,9 @@ export class LoginComponent implements OnInit {
       var body={
       "pushToken":localStorage.getItem('pushtoken')
       }
-      this.loginservice.delPost("user/registerPushToken",body,localStorage.getItem('id'))
+      this.userService.pushToken(body)
+      .pipe(takeUntil(this.destroy$))
+
       .subscribe((response)=>{
         console.log(response)
         console.log('api hit sucessfull');
@@ -68,8 +77,6 @@ export class LoginComponent implements OnInit {
         console.log('failed');
         
       }
-    
-    
     )
     },
       (error) => {
@@ -81,7 +88,9 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-    
-  
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

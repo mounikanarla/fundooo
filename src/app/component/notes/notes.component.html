@@ -34,7 +34,7 @@
                         <mat-card-header>
                             <div fxLayout="row" fxFlex=100%>
                                 <div fxFlex=95%>
-                                    <div data-text="Title" id="title" contenteditable="true" class="title" aria-multiline="true" role="textbox" aria-label="Note" spellcheck="true"></div>
+                                    <div data-text="Title" id="title" #title contenteditable="true" class="title" aria-multiline="true" role="textbox" aria-label="Note" spellcheck="true"></div>
                                 </div>
                                 <div fxFlex=5% class="pin">
                                     <app-pin (eventEmit)="emit($event)"></app-pin>
@@ -43,7 +43,7 @@
                         </mat-card-header>
                     </div>
                     <mat-card-content>
-                             <div data-text="Type your text" id="description" contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note" spellcheck="true" class="textbar" *ngIf="!check"></div>
+                             <div data-text="Type your text" id="description" #description contenteditable="true" aria-multiline="true" role="textbox" aria-label="Note" spellcheck="true" class="textbar" *ngIf="!check"></div>
                     </mat-card-content>
                     <div fxFlex=65%>
                         <div *ngIf="check">

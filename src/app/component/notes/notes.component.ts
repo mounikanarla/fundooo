@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { SignupService } from '../../core/services/http/http.service';
+import { Component, OnInit, Output, Input, EventEmitter,ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NoteService } from '../../core/services/noteServices/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notes',
@@ -9,17 +11,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   outputs: ['onNewEntryAdded']
 
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private getService: SignupService, public route: ActivatedRoute, public router: Router) { }
+  constructor(private noteService:NoteService, public route: ActivatedRoute, public router: Router) { }
   // private press: boolean = true;
   // private click:boolean= true;
+  @ViewChild('title') title: ElementRef;
+  @ViewChild('description') description: ElementRef;
   @Input() deleted
   @Output() eventEmit = new EventEmitter();
 
   @Output() onNewEntryAdded = new EventEmitter();
-  public title;
-  public description;
+  // public title;
+  // public description;
   // public cardid=this.id;
   public isPinned = false;
   private id = localStorage.getItem('id');
@@ -52,25 +57,31 @@ export class NotesComponent implements OnInit {
     this.bgcolor = '#ffffff'
     this.listColor='#ffffff'
 
-    this.title = document.getElementById("title").textContent;
+    // this.title = document.getElementById("title").textContent;
     this.press = !this.press;
     
     // post the data by passing the parameters
     if (this.check == false) {
-      this.description = document.getElementById("description").textContent;
+      // this.description = document.getElementById("description").textContent;
 
-      this.getService.dataPost("notes/addnotes", this.body = {
-        "title": this.title,
-        "description": this.description,
+      this.noteService.noteAddingPost(this.body = {
+        "title": this.title.nativeElement.innerHTML,
+        "description": this.description.nativeElement.innerHTML,
         "isPined": "false",
         "color": color,
         "labelIdList": JSON.stringify(this.arraylabel),
         "reminder": this.array
-      }, this.id).subscribe((response) => {
+      })
+      .pipe(takeUntil(this.destroy$))
+
+      .subscribe((response) => {
         // If the response is true then the data will be emitted
         // console.log("successful", response);
         // console.log(this.id);
-        this.getService.getnote("notes/getNotesList", this.id).subscribe((response) => {
+        this.noteService.getNote()
+        .pipe(takeUntil(this.destroy$))
+
+        .subscribe((response) => {
           // console.log(response);
           this.array=[];
           this.arraylabel=[];
@@ -96,18 +107,23 @@ export class NotesComponent implements OnInit {
       }
       // this.checklist=this.dataarray;
       // console.log(this.checklist)
-      this.getService.dataPost("notes/addnotes", this.body = {
-        "title": this.title,
+      this.noteService.noteAddingPost(this.body = {
+        "title":  this.title.nativeElement.innerHTML,
         "checklist": JSON.stringify(this.checklist),
         "isPined": "false",
         "color": color,
         "labelIdList": JSON.stringify(this.arraylabel),
         "reminder": this.array
-      }, this.id).subscribe((response) => {
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response) => {
         // If the response is true then the data will be emitted
         // console.log("successful", response);
         // console.log(this.id);
-        this.getService.getnote("notes/getNotesList", this.id).subscribe((response) => {
+        this.noteService.getNote()
+        .pipe(takeUntil(this.destroy$))
+
+        .subscribe((response) => {
           // console.log(response);
           this.array=[];
           this.dataarray = [];
@@ -172,7 +188,9 @@ export class NotesComponent implements OnInit {
     // this.accepted = true;
     console.log(index.id)
     console.log(label.id);
-    this.getService.logoutPost("notes/" + index.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
+    this.noteService.removeLabelPost( index, label.id)
+    .pipe(takeUntil(this.destroy$))
+
       .subscribe((response) => {
         // console.log("checklist added" + response)
         this.eventEmit.emit({});
@@ -235,6 +253,11 @@ export class NotesComponent implements OnInit {
       }
       // console.log(this.dataarray);
     }
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
 

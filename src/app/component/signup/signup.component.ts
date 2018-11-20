@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SignupService } from '../../core/services/http/http.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../core/services/userServices/user.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +10,9 @@ import { UserService } from '../../core/services/userServices/user.service';
   styleUrls: ['./signup.component.scss']
 })
 
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit ,OnDestroy{
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   hide = true;
   public card = [];
   
@@ -30,12 +31,14 @@ export class SignupComponent implements OnInit {
   }
   public service:any
   show = true;
-  constructor(private userService:UserService, private signservice: SignupService, public snackBar: MatSnackBar) { }
+  constructor(private userService:UserService,public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
     let obs = this.userService.getService();
-    obs.subscribe((response) => {
+    obs
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((response) => {
       var data = response["data"];
       //  console.log(data);
       // console.log(data.data.length);
@@ -46,7 +49,9 @@ export class SignupComponent implements OnInit {
       }
       // console.log(this.card);
     })
-    this.signservice.dataStore("user")
+    this.userService.dataStore()
+    .pipe(takeUntil(this.destroy$))
+
       .subscribe((response) => {
         // console.log(response);
       }
@@ -100,7 +105,10 @@ export class SignupComponent implements OnInit {
       "email": this.model.email,
       "emailVerified": true,
       "password": this.model.password
-    }).subscribe((response) => {
+    })
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe((response) => {
 
       console.log("successful");
       this.snackBar.open("Signup successful", "Ok", {
@@ -120,6 +128,11 @@ export class SignupComponent implements OnInit {
     console.log(this.service);
 
 
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
 

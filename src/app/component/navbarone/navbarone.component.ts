@@ -2,7 +2,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SignupService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -10,19 +9,24 @@ import { AddlabelComponent } from '../../component/addlabel/addlabel.component';
 import { DataServiceService } from '../../core/services/dataServices/data-service.service';
 import { CropimageComponent } from '../../component/cropimage/cropimage.component';
 import { NoteService } from '../../core/services/noteServices/note.service';
-
+import { NoteModel } from '../../core/models/note-model'
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-navbarone',
   templateUrl: './navbarone.component.html',
   styleUrls: ['./navbarone.component.scss']
 })
 export class NavbaroneComponent {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
   searchInput: any
   public array = [];
+  list:NoteModel []=[]
   profileclick: boolean = false;
   private id = localStorage.getItem('id');
   public firstName = localStorage.getItem('firstName');
@@ -34,7 +38,7 @@ export class NavbaroneComponent {
   name="Fundoo Notes"
   @Output() eventEmit = new EventEmitter();
 
-  constructor(private breakpointObserver: BreakpointObserver,private service:NoteService, private logoutService: SignupService, public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router, public dialog: MatDialog, private data: DataServiceService) { }
+  constructor(private breakpointObserver: BreakpointObserver,private service:NoteService,public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router, public dialog: MatDialog, private data: DataServiceService) { }
   ngOnInit() {
     this.checkLabel();
     this.data.currentMessage2.subscribe(message => this.name = message)
@@ -55,7 +59,8 @@ export class NavbaroneComponent {
   logout() {
     // console.log(this.id)
     this.service.logoutPost(this.id)
-      .subscribe((response) => {
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((response) => {
         console.log(response);
         localStorage.removeItem('id');
         localStorage.removeItem('firstname');
@@ -86,13 +91,16 @@ export class NavbaroneComponent {
     });
   }
   checkLabel() {
-    this.logoutService.getnote("noteLabels/getNoteLabelList", localStorage.getItem('id')).subscribe(
+    this.service.getLabelNote()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       response => {
         this.array = [];
+        this.list=response['data'].details
         // console.log(response['data'].details);
-        for (var i = 0; i < (response['data'].details).length; i++) {
-          if (response['data'].details[i].isDeleted == false) {
-            this.array.push(response['data'].details[i])
+        for (var i = 0; i < this.list.length; i++) {
+          if (this.list[i].isDeleted == false) {
+            this.array.push(this.list[i])
           }
         }
         // console.log(this.array, "Label array printing successsss ");
@@ -119,7 +127,9 @@ export class NavbaroneComponent {
       data: event
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
       console.log('The dialog was closed');
       // this.eventEmit.emit({});
       this.image = localStorage.getItem('imageUrl');
@@ -131,5 +141,9 @@ export class NavbaroneComponent {
   imageCropped(event: any) {
     this.croppedImage = event.base64;
   }
- 
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

@@ -1,14 +1,18 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { SignupService } from '../../core/services/http/http.service';
+import { Component, Input, Output, OnInit, EventEmitter,OnDestroy  } from '@angular/core';
+import { NoteService } from '../../core/services/noteServices/note.service';
+import { Subject } from 'rxjs';
+// import 'rxjs/add/operator/takeUntil';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-changecolor',
   templateUrl: './changecolor.component.html',
   styleUrls: ['./changecolor.component.scss']
 })
-export class ChangecolorComponent implements OnInit {
+export class ChangecolorComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private httpService: SignupService) { }
+  constructor(private noteService:NoteService) { }
   token = localStorage.getItem('id');
   /*
     * @description: @INPUT AND @Output are decorators used to bind the data
@@ -17,13 +21,15 @@ export class ChangecolorComponent implements OnInit {
     */
   //  public bgcolor="#FFFFFF"
 
-  @Input() colorid;
+  @Input() noteid;
   public body: any = {}
+
   @Output() eventEmit = new EventEmitter();
   public isDeleted = false;
+   array = []
 
   ngOnInit() {
-    if (this.colorid != undefined && this.colorid.isDeleted == true) {
+    if (this.noteid != undefined && this.noteid.isDeleted == true) {
       this.isDeleted = true
     }
   }
@@ -34,14 +40,18 @@ export class ChangecolorComponent implements OnInit {
     // color=this.bgcolor;
     this.eventEmit.emit(color);
     // console.log(this.colorid)
-    if(this.colorid != undefined){
-    var array = []
-    array.push(this.colorid.id)
+    if(this.noteid != undefined){
+    this.array.push(this.noteid.id)
+    console.log(this.array)
+
     // posting the clicked colour and id of cards into array
-    this.httpService.colorPost("notes/changesColorNotes", this.body = {
+    this.noteService.colorPost( this.body = {
       "color": color,
-      "noteIdList": array
-    }, this.token).subscribe((response) => {
+      "noteIdList":this.array
+    })
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe((response) => {
       // console.log(  this.onEmit.emit() )
       // console.log("successful", response);
       this.eventEmit.emit({});
@@ -50,5 +60,10 @@ export class ChangecolorComponent implements OnInit {
         // console.log("error", error);
       })
   }
+}
+ngOnDestroy() {
+  this.destroy$.next(true);
+  // Now let's also unsubscribe from the subject itself:
+  this.destroy$.unsubscribe();
 }
 }

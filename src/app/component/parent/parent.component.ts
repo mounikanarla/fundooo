@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { SignupService } from '../../core/services/http/http.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NoteService } from '../../core/services/noteServices/note.service';
+import {NoteModel} from '../../core/models/note-model'
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.scss']
 })
-export class ParentComponent implements OnInit {
+export class ParentComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private httpService: SignupService) { }
+  constructor(private noteService: NoteService ) { }
   public array = []
+  list:NoteModel[]=[];
   token = localStorage.getItem('id');
   public pinarray=[]
   ngOnInit() {
@@ -28,16 +33,19 @@ export class ParentComponent implements OnInit {
   * @description:getcard() is used to get the card data from database and it is prionting it in the array
   */
   getCard() {
-    this.httpService.getnote("notes/getNotesList", this.token).subscribe(data => {
+    this.noteService.getNote()
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(data => {
       this.array = [];
 
       // console.log("get cards list successfull", data);
-      var length = data['data'].data.length;
+      this.list = data['data'].data;
       // Loop is initialized to the cards list in the reverse order 
-      for (var i = length - 1; i >= 0; i--) {
+      for (var i = this.list.length - 1; i >= 0; i--) {
         // console.log(data['data'].data.length);
-        if (data['data'].data[i].isDeleted === false && data['data'].data[i].isArchived === false && data['data'].data[i].isPined === false ) {
-          this.array.push(data['data'].data[i]);
+        if (this.list[i].isDeleted === false && this.list[i].isArchived === false && this.list[i].isPined === false ) {
+          this.array.push(this.list[i]);
         }
       }
       // console.log("array", this.array);
@@ -45,18 +53,22 @@ export class ParentComponent implements OnInit {
   }
 
   getpinCard() {
-    this.httpService.getnote("notes/getNotesList", this.token).subscribe(data => {
+    this.noteService.getNote()
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(data => {
       this.pinarray = [];
 
       // console.log("get cards list successfull", data);
-      var length = data['data'].data.length;
+      this.list = data['data'].data;
       // Loop is initialized to the cards list in the reverse order 
-      for (var i = length - 1; i >= 0; i--) {
+      for (var i = this.list.length-1; i >= 0; i--) {
         // console.log(data['data'].data.length);
-        if (data['data'].data[i].isPined === true && data['data'].data[i].isDeleted === false) {
-          this.pinarray.push(data['data'].data[i]);
+        if (this.list[i].isPined === true && this.list[i].isDeleted === false && this.list[i].isArchived === false ) {
+          this.pinarray.push(this.list[i]);
         }
-      }
+      } 
+
       // console.log("array", this.array);
     })
   }
@@ -67,5 +79,9 @@ export class ParentComponent implements OnInit {
       // this.getpinCard();
     }
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

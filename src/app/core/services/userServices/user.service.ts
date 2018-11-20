@@ -25,8 +25,17 @@ export class UserService {
     let url = this.URL+ "/user/reset";
     return this. httpService.httpPost1(url,body);/**passing the input & calling the  getFormUrlEncoded()*/
   }
-  passwordPost(body,token){
+  passwordPost(body){
     let url = this.URL+ "/user/reset-password";
-    return this. httpService.httpPost(url,body,token);/**passing the input & calling the  getFormUrlEncoded()*/
+    return this. httpService.httpPost(url,body);/**passing the input & calling the  getFormUrlEncoded()*/
   }
+  dataStore() {
+    let url = this.URL+ "/user";
+    return this.httpService.httpGet(url);
+  }
+  pushToken(body){
+    let url = this.URL+"user/registerPushToken";
+    return this. httpService.httpPost(url,body);
+  }
+  
 }

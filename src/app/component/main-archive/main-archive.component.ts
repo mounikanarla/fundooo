@@ -1,14 +1,18 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { SignupService } from '../../core/services/http/http.service';
-
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { NoteService } from '../../core/services/noteServices/note.service';
+import { NoteModel } from '../../core/models/note-model'
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-main-archive',
   templateUrl: './main-archive.component.html',
   styleUrls: ['./main-archive.component.scss']
 })
-export class MainArchiveComponent implements OnInit {
+export class MainArchiveComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private httpService: SignupService) { }
+  constructor(private noteService:NoteService) { }
+  list:NoteModel[]=[]
   public archiveArray = []
   token = localStorage.getItem('id');
   @Output() eventEmit = new EventEmitter();
@@ -19,17 +23,19 @@ export class MainArchiveComponent implements OnInit {
   * @description: getarchive() is used to get the archived datalist and is printing into the array
   */
   getarchive() {
-    this.httpService.getnote("notes/getArchiveNotesList", this.token).subscribe(data => {
+    this.noteService.getArchive()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
       this.archiveArray = [];
 
       console.log("get cards list successfull", data);
-      var length = data['data'].data.length;
+      this.list = data['data'].data;
       // Initializing the for loop to store and print the cards in reverseorder      
-      for (var i = length - 1; i >= 0; i--) {
-        console.log(data['data'].data.length);
+      for (var i = this.list.length - 1; i >= 0; i--) {
+        console.log(this.list.length);
         // Checking the condition that card is archived or not and it is pushing into array
-        if (data['data'].data[i].isDeleted == false) {
-          this.archiveArray.push(data['data'].data[i]);
+        if (this.list[i].isDeleted == false) {
+          this.archiveArray.push(this.list[i]);
         }
       }
       console.log("archive array", this.archiveArray);
@@ -40,5 +46,10 @@ export class MainArchiveComponent implements OnInit {
     if (event) {
       this.getarchive()
     }
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

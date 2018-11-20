@@ -1,15 +1,18 @@
-import { Component, OnInit,Inject,EventEmitter,Output,Input } from '@angular/core';
+import { Component, OnInit,Inject,EventEmitter,Output,Input,OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { SignupService } from '../../core/services/http/http.service'
-
+import { NoteService } from '../../core/services/noteServices/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-cropimage',
   templateUrl: './cropimage.component.html',
   styleUrls: ['./cropimage.component.scss']
 })
-export class CropimageComponent implements OnInit {
+export class CropimageComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   public img;
-  constructor(private imageService: SignupService,
+  constructor(private noteService:NoteService,
     public dialogRef: MatDialogRef<CropimageComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) {}
   ngOnInit() {
@@ -31,7 +34,9 @@ export class CropimageComponent implements OnInit {
      * or adds the key if it does not already exist.
      */
     uploadData.append('file', this.selectedFile, this.selectedFile.name);
-    this.imageService.loadingImage('user/uploadProfileImage', uploadData,  localStorage.getItem('id')).subscribe(response => {
+    this.noteService.loadingImage( uploadData)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(response => {
       console.log(response, "success in image upload");
       /* to display the image url */
       console.log("url: ", response['status'].imageUrl)
@@ -44,5 +49,10 @@ export class CropimageComponent implements OnInit {
       /* then display the error */
       console.log(error);
     })
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

@@ -1,14 +1,17 @@
-import { Component, OnInit,Inject,EventEmitter,Output,Input } from '@angular/core';
+import { Component, OnInit,Inject,EventEmitter,Output,Input, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { SignupService } from '../../core/services/http/http.service'
 import { LoggerService } from '../../core/services/loggerService/logger.service';
-
+import { NoteService } from '../../core/services/noteServices/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss']
 })
-export class UpdateComponent implements OnInit {
+export class UpdateComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   public title;
   public description;
   public token = localStorage.getItem('id');
@@ -31,8 +34,10 @@ export class UpdateComponent implements OnInit {
     }
     this.tempArray=this.data.noteCheckLists;
     this.array=this.data.reminder
+    console.log()
+
   }
-  constructor(private getService: SignupService,
+  constructor(private noteService:NoteService,
     public dialogRef: MatDialogRef<UpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) {}
     @Output() eventEmit = new EventEmitter();  
@@ -42,6 +47,7 @@ export class UpdateComponent implements OnInit {
       this.dialogRef.close();
       if(this.modifiedCheckList==null){
         this.update();
+
       }
     }
 update(){
@@ -49,10 +55,13 @@ update(){
     this.description = document.getElementById("description").innerHTML;
     this.id=this.data.id;
     this.color=this.data.color
+    this.eventEmit.emit(event);
+
+    console.log(this.color)
   if(this.checklist==false)
   {
 
-  this.getService.dataPost("notes/updateNotes", {
+  this.noteService.noteUpdate( {
     "noteId": this.id,
     "title": this.title,
     "description": this.description,
@@ -60,22 +69,21 @@ update(){
     "label":this.label,
     "reminder":this.array
 
-  }, this.token).subscribe((response) => {
+  })
+  .pipe(takeUntil(this.destroy$))
+
+  .subscribe((response) => {
     // console.log("successful", response);
     this.eventEmit.emit({});
-
-  
-  }
-  
-  )
+  })
 }else{
 
   var apiData={
     "itemName": this.modifiedCheckList.itemName,
     "status":this.modifiedCheckList.status
 }
- var url = "notes/" +this.data.id+ "/checklist/" + this.modifiedCheckList.id + "/update";
- this.getService.delPost(url, JSON.stringify(apiData), localStorage.getItem('id')).subscribe(response => {
+//  var url = "notes/" +this.data.id+ "/checklist/" + this.modifiedCheckList.id + "/update";
+ this.noteService.updateCheckbox(this.data.id,this.modifiedCheckList.id ,JSON.stringify(apiData)).subscribe(response => {
   //  console.log(response);
  })
 
@@ -110,9 +118,12 @@ public removedList;
     this.removeCheckList()
   }
   removeCheckList(){
-    var url = "notes/" + this.data.id + "/checklist/" + this.removedList.id + "/remove";
+    // var url = "notes/" + this.data.id + "/checklist/" + this.removedList.id + "/remove";
 
-    this.getService.delPost(url,null,localStorage.getItem('id')).subscribe((response)=>{
+    this.noteService.removeCheckList(this.data,this.removedList)
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe((response)=>{
       // console.log(response);
       for(var i=0;i<this.tempArray.length;i++){
         if(this.tempArray[i].id==this.removedList.id){
@@ -143,9 +154,11 @@ public removedList;
         "status":this.status
       }
   
-      var url = "notes/" + this.data.id + "/checklist/add";
+      // var url = "notes/" + this.data.id + "/checklist/add";
 
-    this.getService.delPost(url, this.newData, localStorage.getItem('id'))
+    this.noteService.addCheckList(this.data,this.newData)
+    .pipe(takeUntil(this.destroy$))
+
     .subscribe(response => {
       // console.log(response);
       this.newList=null;
@@ -201,7 +214,9 @@ public array=[]
   }
 removelabel(data, label) {
   
-  this.getService.logoutPost("notes/" + data.id + "/addLabelToNotes/" + label.id + "/remove", localStorage.getItem('id'))
+  this.noteService.removeLabelPost(data, label)
+  .pipe(takeUntil(this.destroy$))
+
     .subscribe((response) => {
       // console.log("checklist removed" + response)
       this.eventEmit.emit({});
@@ -220,7 +235,9 @@ removeRemainder(label) {
   var body={
     "noteIdList" : id
   }
-  this.getService.delPost("/notes/removeReminderNotes",body, localStorage.getItem('id'))
+  this.noteService.removeRemainPost(body)
+  .pipe(takeUntil(this.destroy$))
+
     .subscribe((response) => {
      LoggerService.log("Reminder deleted" + response)
       this.eventEmit.emit({});
@@ -230,5 +247,9 @@ removeRemainder(label) {
       }
     )
 }
-
+ngOnDestroy() {
+  this.destroy$.next(true);
+  // Now let's also unsubscribe from the subject itself:
+  this.destroy$.unsubscribe();
+}
 }

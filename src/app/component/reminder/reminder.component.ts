@@ -1,12 +1,13 @@
-import { Component, OnInit ,Input,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit ,Input,Output,EventEmitter, OnDestroy} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import * as _moment from 'moment';
 import * as _moment1 from 'moment';
-import { SignupService } from '../../core/services/http/http.service';
 import { LoggerService } from '../../core/services/loggerService/logger.service';
-
+import { NoteService } from '../../core/services/noteServices/note.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 // import {default as _rollupMoment} from 'moment';
 
 const moment = _moment1 || _moment;
@@ -30,7 +31,9 @@ export const MY_FORMATS = {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
 ],
 })
-export class ReminderComponent implements OnInit {
+export class ReminderComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   selectedValue: string;
   date = new FormControl(moment());
   public body:any={}
@@ -59,7 +62,7 @@ export class ReminderComponent implements OnInit {
   public obj;
   public setDate=this.reminderBody.date.value;
   // public today=new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate() + 0, 8, 0, 0)
-  constructor(private httpService: SignupService) { }
+  constructor(private noteService:NoteService ) { }
   @Input() noteid
   @Output() eventEmit = new EventEmitter();
   @Output() eventEmitReminder = new EventEmitter();
@@ -86,8 +89,10 @@ export class ReminderComponent implements OnInit {
         'noteIdList': [this.noteid.id],
         'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
       }
-    this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id'))
-      .subscribe(data => {
+    this.noteService.reminderPost( this.body)
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(data => {
         console.log("success in today reminders",data);
         this.eventEmit.emit({});
         // console.log("event emitting");
@@ -111,8 +116,10 @@ export class ReminderComponent implements OnInit {
         'noteIdList': [this.noteid.id],
         'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1, 8, 0, 0)
       }
-    this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id'))
-      .subscribe(data => {
+    this.noteService.reminderPost(this.body)
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(data => {
         // console.log("success in tomorrow reminders",data);
         this.eventEmit.emit({});
        },
@@ -136,8 +143,10 @@ export class ReminderComponent implements OnInit {
         'noteIdList': [this.noteid.id],
         'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7, 8, 0, 0)
       }
-    this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id'))
-      .subscribe(data => {
+    this.noteService.reminderPost(this.body)
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe(data => {
         // console.log("success in week reminders",data);
         this.eventEmit.emit({});
       },
@@ -161,7 +170,10 @@ addCustomRemainders(date,timing){
       "noteIdList": [this.noteid.id],
       "reminder": new Date(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate(), hour, minute, 0, 0)
     }
-    this.httpService.delPost('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('id')).subscribe((result) => {
+    this.noteService.reminderPost(this.body)
+    .pipe(takeUntil(this.destroy$))
+
+    .subscribe((result) => {
      this.eventEmitReminder.emit(date)
     //  console.log("emitting event from reminders",this.eventEmitReminder.emit(date));
      
@@ -175,7 +187,10 @@ addCustomRemainders(date,timing){
   }
   
 }
-this.httpService.delPost('/notes/addUpdateReminderNotes',this.body,localStorage.getItem('id')).subscribe((result) => {
+this.noteService.reminderPost(this.body)
+.pipe(takeUntil(this.destroy$))
+
+.subscribe((result) => {
     this.eventEmitReminder.emit(date)
 })
 }
@@ -210,7 +225,11 @@ disabledates(){
   }
 
 }
-
+ngOnDestroy() {
+  this.destroy$.next(true);
+  // Now let's also unsubscribe from the subject itself:
+  this.destroy$.unsubscribe();
+}
 }
 
 

@@ -28,7 +28,7 @@ export class ReminderNotesComponent implements OnInit,OnDestroy {
     }
   }
   getReminder() {
-    this.noteService.getNote()
+    this.noteService.getReminder()
     .pipe(takeUntil(this.destroy$))
 
     .subscribe(data => {
@@ -38,9 +38,8 @@ export class ReminderNotesComponent implements OnInit,OnDestroy {
      this.list= data['data'].data;
       // Initializing the for loop to store and print the cards in reverseorder      
       for (var i = this.list.length-1; i >= 0; i--) {
-        // console.log(data['data'].data.length);
         // Checking the condition that card is archived or not and it is pushing into array
-        // if (data['data'].data[i].isDeleted == false) {
+        // if (this.list[i].isDeleted === false) {
           this.reminderArray.push(this.list[i]);
           this.sortedarray = this.reminderArray.sort((a: any, b: any) =>
           new Date(a.reminder).getTime() - new Date(b.reminder).getTime()

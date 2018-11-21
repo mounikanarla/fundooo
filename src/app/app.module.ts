@@ -51,6 +51,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { MessagingService } from "../app/core/services/messageservice/messaging.service"
 import { InterceptorService } from './core/services/interceptor/interceptor.service'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandler, Injectable} from '@angular/core';
+import { ErrorsHandler } from './core/errorHandler/errors-handler';
 
 
 // import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
@@ -114,7 +116,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     MatDatepickerModule,
     MatSelectModule,
     HttpClientModule,
-
+    ErrorHandler,
+    Injectable
   
 
 
@@ -123,7 +126,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true
-  }],
+  },    [{
+    provide: ErrorHandler,
+    useClass: ErrorsHandler,
+  }]
+],
   bootstrap: [AppComponent],
   entryComponents:[AddnoteComponent,UpdateComponent,NavbaroneComponent,AddlabelComponent,TrashComponent,CropimageComponent]
   

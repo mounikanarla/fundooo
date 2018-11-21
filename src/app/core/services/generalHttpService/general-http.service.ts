@@ -36,6 +36,13 @@ export class GeneralHttpService {
   httpPost1(url,body){
     return this.http.post(url,body);
   }
+  httpPost3(url,body){
+    var httpAuthOptions2 = {
+        headers: new HttpHeaders({
+        })
+      };
+      return this.http.post(url, body, httpAuthOptions2);
+  }
   httpGet(url) {
     return this.http.get(url);
    

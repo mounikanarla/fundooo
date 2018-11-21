@@ -1,26 +1,26 @@
 <div fxLayout="row wrap">
   <div fxFlex.lg="13%" fxFlex.md="10%" fxFlex.sm="5%" ></div>
   <div fxFlex.lg="74%" fxFlex.md="80%" fxFlex.sm="90%" fxFlex.xs="95%" fxLayoutAlign="center" fxLayout="row wrap"fxLayoutGap.lg="30px" fxLayoutGap.md="20px" fxLayoutGap.sm="10px">
-    <!-- mat-card starts -->
+    <!-- ---------------------mat-card starts ----------------------------->
     <mat-card class="example-card" ngStyle.xs="width:100%" [ngClass]="{'viewgrid':condition,'viewlist':!condition}" *ngFor='let index of newData | search:searchInput' [ngStyle]="{'background-color':index.color}">
-      <!--Title printing starts -->
+      <!----------------------------Title printing starts ---------------------->
       <div fxLayout="row" fxFlex="100%">
         <div fxFlex="90%" (click)="openDialog(index)">
-          <!-- <mat-card-header  > -->
+          <!-------------------------- <mat-card-header> ------------------------->
             <mat-card-content class="title">{{index.title }}</mat-card-content>
-          <!-- </mat-card-header> -->
+          <!--------------------------- mat-card-header ------------------------>
         </div>
         <div fxFlex="10%" class="pin" >
           <app-pin [noteid]=index (eventEmit)="emit($event)" [Pin]="index.isPined"></app-pin>
         </div>
       </div>
-      <!--Title printing Ends -->
-      <!-- Description Printing starts -->
+      <!-------------------------------Title printing Ends ------------------------->
+      <!------------------------- Description Printing starts --------------------->
       <div fxLayout="row" fxFlex="100%">
       <mat-card-content class="description" (click)="openDialog(index)">{{index.description}}</mat-card-content>
       </div>
-      <!-- Description Printing Ends -->
-      <!-- Checklist Printing starts -->
+      <!------------------------- Description Printing Ends ------------------------>
+      <!-------------------------- Checklist Printing starts --------------------------->
       <div class="note" *ngFor="let checkList of index.noteCheckLists">
         <mat-checkbox fxFlex="10%" *ngIf="checkList.status=='open'&& !checkList.isDeleted" 
         (click)=checkBox(checkList,index)></mat-checkbox>
@@ -34,8 +34,8 @@
       <del *ngIf="!checkList.isDeleted && checkList.status=='close'" class="note"
       (click)="openDialog(index)">{{checkList.itemName}}</del>
       </div> 
-      <!-- Checklist Printing Ends -->
-        <!-- Reminder Printing Starts -->
+      <!-------------------------------- Checklist Printing Ends --------------------------->
+        <!---------------------------- Reminder Printing Starts ---------------------------->
         <mat-chip-list class="margin">
             <div fxLayout="row" *ngIf="checkReminder(index.reminder[0])">
               <div *ngFor="let label of index.reminder">
@@ -72,8 +72,8 @@
                 </div>
               </div>
             </mat-chip-list>
-            <!-- Reminder Printing Ends -->
-      <!-- Label Printing Starts --> 
+            <!---------------------- Reminder Printing Ends ---------------------->
+      <!------------------ Label Printing Starts------------------------> 
       <mat-chip-list class="margin">
         <div *ngFor="let label of index.noteLabels" >
           <mat-chip *ngIf="!label.isDeleted" routerLink="/home/label/{{ label.label }}"  routerLinkActive="active" (click)="labelDisplay(label.label)">
@@ -82,9 +82,9 @@
           </mat-chip>
         </div>
       </mat-chip-list>
-      <!-- Label Printing Ends --> 
+      <!------------------- Label Printing Ends -------------------------> 
     
-        <!-- Icon Print Starts -->
+        <!-------------------- Icon Print Starts ----------------------->
       <mat-card-actions>
         <span class=invisible>
           <div fxFlex="100%" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">

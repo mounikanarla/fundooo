@@ -69,9 +69,9 @@ export class ReminderComponent implements OnInit,OnDestroy {
 
 
   ngOnInit() {
-    if(this.noteid!=undefined && this.noteid.isDeleted==true){
-      this.isDeleted=true
-    }
+    // if(this.noteid!=undefined && this.noteid.isDeleted==true){
+    //   this.isDeleted=true
+    // }
     this.disabledates()
 
   }

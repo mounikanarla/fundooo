@@ -56,7 +56,7 @@ export class NoteService {
   }
   loadingImage(body){
     let url=this.URL+"/user/uploadProfileImage"
-    return this.httpService.httpPost2(url,body);
+    return this.httpService.httpPost3(url,body);
   }
   getLabel(label,body){
     let url=this.URL+"/notes/getNotesListByLabel/" + label;
@@ -113,7 +113,7 @@ export class NoteService {
       return this.httpService.httpPost(url,{});
   }
   addCheckList(data,body){
-    let url = this.URL+ "notes/" + data.id + "/checklist/add"
+    let url = this.URL+ "/notes/" + data.id + "/checklist/add"
     return this.httpService.httpPost(url,body);
 }
 }

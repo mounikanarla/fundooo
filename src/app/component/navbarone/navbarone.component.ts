@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AddlabelComponent } from '../../component/addlabel/addlabel.component';
 import { DataServiceService } from '../../core/services/dataServices/data-service.service';
@@ -12,6 +12,9 @@ import { NoteService } from '../../core/services/noteServices/note.service';
 import { NoteModel } from '../../core/models/note-model'
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
+
+
 @Component({
   selector: 'app-navbarone',
   templateUrl: './navbarone.component.html',
@@ -25,8 +28,10 @@ export class NavbaroneComponent {
       map(result => result.matches)
     );
   searchInput: any
+  URL=environment.imageUrl;
+
   public array = [];
-  list:NoteModel []=[]
+  list:NoteModel[]=[]
   profileclick: boolean = false;
   private id = localStorage.getItem('id');
   public firstName = localStorage.getItem('firstName');
@@ -34,15 +39,16 @@ export class NavbaroneComponent {
   public email = localStorage.getItem('email');
   public number = 1;
   public image = localStorage.getItem('imageUrl');
-  public img = "http://34.213.106.173/" + this.image;
+  public img = this.URL+ this.image;
   name="Fundoo Notes"
   @Output() eventEmit = new EventEmitter();
+
 
   constructor(private breakpointObserver: BreakpointObserver,private service:NoteService,public snackBar: MatSnackBar, public route: ActivatedRoute, public router: Router, public dialog: MatDialog, private data: DataServiceService) { }
   ngOnInit() {
     this.checkLabel();
     this.data.currentMessage2.subscribe(message => this.name = message)
-    }
+   }
   titleDisplay(routeName){
     this.name=routeName;
   }
@@ -133,7 +139,7 @@ export class NavbaroneComponent {
       console.log('The dialog was closed');
       // this.eventEmit.emit({});
       this.image = localStorage.getItem('imageUrl');
-      this.img = "http://34.213.106.173/" + this.image;
+      this.img = this.URL+ this.image;
     });
   }
 
@@ -141,9 +147,16 @@ export class NavbaroneComponent {
   imageCropped(event: any) {
     this.croppedImage = event.base64;
   }
-  ngOnDestroy() {
+  ngOnDestroy(){
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
   }
 }
+
+
+
+
+
+
+

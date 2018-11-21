@@ -23,14 +23,11 @@ export class NotesComponent implements OnInit,OnDestroy {
   @Output() eventEmit = new EventEmitter();
 
   @Output() onNewEntryAdded = new EventEmitter();
-  // public title;
-  // public description;
-  // public cardid=this.id;
+  
   public isPinned = false;
-  private id = localStorage.getItem('id');
   public body: any = {}
   public bgcolor = "#FFFFFF";
-  public notepin
+  public isPined
   public label = "";
   public dataarray = [];
   public checklist = [];
@@ -56,7 +53,7 @@ export class NotesComponent implements OnInit,OnDestroy {
     var color = this.bgcolor;
     this.bgcolor = '#ffffff'
     this.listColor='#ffffff'
-
+   
     // this.title = document.getElementById("title").textContent;
     this.press = !this.press;
     
@@ -73,7 +70,6 @@ export class NotesComponent implements OnInit,OnDestroy {
         "reminder": this.array
       })
       .pipe(takeUntil(this.destroy$))
-
       .subscribe((response) => {
         // If the response is true then the data will be emitted
         // console.log("successful", response);
@@ -146,7 +142,7 @@ export class NotesComponent implements OnInit,OnDestroy {
   emit(event) {
     this.bgcolor = event;
     this.listColor = event;
-    this.notepin = true;
+    this.isPined = event;
     // this.remindevent=event;
     // console.log(this.notepin)
   }

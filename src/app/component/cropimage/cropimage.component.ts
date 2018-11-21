@@ -1,6 +1,8 @@
 import { Component, OnInit,Inject,EventEmitter,Output,Input,OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { NoteService } from '../../core/services/noteServices/note.service';
+import { environment } from '../../../environments/environment';
+
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 @Component({
@@ -10,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class CropimageComponent implements OnInit,OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
+  URL=environment.imageUrl;
 
   public img;
   constructor(private noteService:NoteService,
@@ -34,14 +37,14 @@ export class CropimageComponent implements OnInit,OnDestroy {
      * or adds the key if it does not already exist.
      */
     uploadData.append('file', this.selectedFile, this.selectedFile.name);
-    this.noteService.loadingImage( uploadData)
+    this.noteService.loadingImage(uploadData)
     .pipe(takeUntil(this.destroy$))
     .subscribe(response => {
       console.log(response, "success in image upload");
       /* to display the image url */
       console.log("url: ", response['status'].imageUrl)
       /* setting the url */
-      this.img = "http://34.213.106.173/" + response['status'].imageUrl;
+      this.img = this.URL + response['status'].imageUrl;
        localStorage.setItem('imageUrl',response['status'].imageUrl);
         this.dialogRef.close();
       /* if error exists */

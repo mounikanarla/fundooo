@@ -1,10 +1,9 @@
 import { Component, OnInit, Inject, ElementRef, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteService } from '../../core/services/noteServices/note.service';
-import{ NoteModel } from '../../core/models/note-model'
+import { NoteModel } from '../../core/models/note-model'
 import { LoggerService } from '../../core/services/loggerService/logger.service';
 import { Subject } from 'rxjs';
-// import 'rxjs/add/operator/takeUntil';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -12,23 +11,23 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './addlabel.component.html',
   styleUrls: ['./addlabel.component.scss']
 })
-export class AddlabelComponent implements OnInit,OnDestroy {
+export class AddlabelComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     public dialogRef: MatDialogRef<AddlabelComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private noteService: NoteService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private noteService: NoteService) { }
   @ViewChild('myLabel') myLabel: ElementRef;
   @ViewChild('myUpdate') myUpdate: ElementRef;
   @Output() eventEmit = new EventEmitter();
-  list:NoteModel[]=[]
+  list: NoteModel[] = []
   press: boolean = true;
   public editClick = false;
   public editLabel;
   public editId;
   public editDoneIcon = true;
   public editable = false;
-  public token=localStorage.getItem('id')
+  public token = localStorage.getItem('id')
   ngOnInit() {
     this.getLabels();
   }
@@ -49,59 +48,60 @@ export class AddlabelComponent implements OnInit,OnDestroy {
   public label;
   public labelArray = [];
   addLabel() {
-    try{
-        this.noteService.delLabel({
+    try {
+      this.noteService.delLabel({
         "label": this.myLabel.nativeElement.innerHTML,
         "isDeleted": false,
         "userId": localStorage.getItem('userId')
-    })
-    .pipe(takeUntil(this.destroy$))
-
-      .subscribe(response => {
-        LoggerService.log("success in createpostlabel",response)
       })
-    }catch (err) {
-        if (err instanceof ReferenceError
-            || err instanceof TypeError
-            || err instanceof SyntaxError
-            || err instanceof RangeError) {
-              LoggerService.log("Something bad happened in add label",err);
-            }
+        .pipe(takeUntil(this.destroy$))
+
+        .subscribe(response => {
+          LoggerService.log("success in createpostlabel", response)
+        })
+    } catch (err) {
+      if (err instanceof ReferenceError
+        || err instanceof TypeError
+        || err instanceof SyntaxError
+        || err instanceof RangeError) {
+        LoggerService.log("Something bad happened in add label", err);
       }
+    }
   }
   getLabels() {
-    this.noteService.getLabelNote()
-    .pipe(takeUntil(this.destroy$))
-
-    .subscribe(
-      response => {
-        this.labelArray = [];
-        // console.log(response['data'].details);
-        this.list=response['data'].details
-        for (var i = 0; i < this.list.length; i++) {
-          if (this.list[i].isDeleted == false) {
-            this.labelArray.push(this.list[i])
-            // console.log(this.labelArray.push(response['data'].details[i].length));
+    try {
+      this.noteService.getLabelNote()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          response => {
+            this.labelArray = [];
+            this.list = response['data'].details
+            for (var i = 0; i < this.list.length; i++) {
+              if (this.list[i].isDeleted == false) {
+                this.labelArray.push(this.list[i])
+              }
+            }
+            this.eventEmit.emit({});
+          },
+          error => {
+            LoggerService.log("error in get LABELS", error);
           }
-        }
-        this.eventEmit.emit({});
-        // console.log(this.labelArray,"Label array printing successsss ");
-      },
-      error => {
-        // console.log("error in get LABELS",error);
+        )
+    } catch (err) {
+      if (err instanceof ReferenceError
+        || err instanceof TypeError
+        || err instanceof SyntaxError
+        || err instanceof RangeError) {
+        LoggerService.log("Something bad happened in getting labels", err);
       }
-    )
+    }
   }
   delete(labelId) {
-    // console.log(labelId)
-    this.noteService.deleteLabel(labelId,this.token)
-    .pipe(takeUntil(this.destroy$))
-
-    .subscribe((response) => {
-        // console.log("Deleted data",response);
+    this.noteService.deleteLabel(labelId, this.token)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response) => {
         this.getLabels();
       }, (error) => {
-        // console.log(error);
       });
   }
   edit(labelId) {
@@ -117,9 +117,6 @@ export class AddlabelComponent implements OnInit,OnDestroy {
     this.editClick = false;
     this.editDoneIcon = true;
     this.editable = false;
-    // console.log(labelId)
-    // console.log(this.myUpdate.nativeElement.innerHTML)
-    // var str=this.myUpdate.nativeElement.innerHTML
     this.noteService.updateLabelPost(labelId,
       {
         "label": this.myUpdate.nativeElement.innerHTML,
@@ -128,7 +125,6 @@ export class AddlabelComponent implements OnInit,OnDestroy {
         "userId": localStorage.getItem("userId")
       })
       .pipe(takeUntil(this.destroy$))
-
       .subscribe((response) => {
         // this.labelArray=[];
         this.getLabels();

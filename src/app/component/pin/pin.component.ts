@@ -34,9 +34,7 @@ export class PinComponent implements OnInit,OnDestroy {
     }
   }
   pin(flag) {
-    this.eventEmit.emit({});
-    console.log(event);
-
+    this.eventEmit.emit(event);
     if (this.noteid != undefined) {
       // this.isPined=true
 

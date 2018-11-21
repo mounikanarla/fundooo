@@ -38,7 +38,7 @@ trash(){
         this.array.push(this.list[i]);
       }
     }
-    console.log("archive array", this.array);
+    console.log("Trash array", this.array);
   })
 }
 emit(event){

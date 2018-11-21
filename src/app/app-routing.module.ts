@@ -26,11 +26,11 @@ const routes: Routes = [
   {path:'navbarone',component:NavbaroneComponent},
   {path:'home',component:HomeComponent,canActivate:[AuthGuard],children:[
     {path:'',redirectTo:'notes',pathMatch:'full'},
+    {path:'label/:params',component:LabelclickComponent},
     {path:'notes',component:ParentComponent},
     {path:'archive',component:MainArchiveComponent},
     {path:'trash',component:TrashComponent},
     {path:'search',component:SearchComponent},
-    {path:'label/:params',component:LabelclickComponent},
     {path:'reminders',component:ReminderNotesComponent}
     // {path:'addlabel',component: AddlabelComponent }
   ]},

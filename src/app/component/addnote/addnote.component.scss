@@ -1,79 +1,80 @@
-.example-card{
-    margin-top:8px;
+@import "../../../SCSS/_mixins.scss";
+
+.example-card {
+    margin-top: 8px;
     display: flex;
     flex-direction: column;
-    //  margin-right:15px; 
-    /* padding-right:30px; */
-    height:auto;
-    height:min-content;
+    height: auto;
+    height: min-content;
     border-radius: 10px;
     word-wrap: break-word;
-    width:auto;
-}
-mat-card-content{
-    width:150px;
-   position:relative;
-}
-.invisible{
-    opacity:0;
-}
-.invisible:hover{
-    opacity:1
+    width: auto;
+  }
+  
+  mat-card-content {
+    width: 150px;
+    position: relative;
+  }
+  
+  .invisible {
+    opacity: 0;
+    &:hover {
+      opacity: 1;
+    }
+  }
 
-}
-.icon {
-    color: white;
-}
-/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
-.icon svg {
-    fill:blue;
-}
-.pin{
-    opacity:1;
+  /* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+  
+  .pin {
+    opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  .pin1 {
+    opacity: 1;
+    color: blue;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  .viewgrid {
+    width: 500px;
+    @include margins(0px,0px,0px,32px);
 
-}
-.pin:hover{
-    opacity:1
+    // margin-left: 32px;
+  }
+  
+  .viewlist {
+    width: 210px;
+  }
+  
+  .note {
+    @include border;
+    @include margins(0px,0px,0px,10px);
 
-}
-.pin1{
-    opacity:1;
-    color:blue
-}
-.pin1:hover{
-    opacity:1
-
-}
-
-.viewgrid{
-    width:500px;
-    margin-left:32px;
-}
-.viewlist{
-    width:210px;
-}
-.note{
-    border:none;
-    outline: none;
-    margin-left:10px;
-}
-.title{
+    //  margin-left: 10px;
+  }
+  
+  .title {
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
-    font:bold;
-    // word-wrap:break-word
+    font: bold;
+  }
+  
+  .break {
+    word-wrap: break-word;
+  }
+  
+  .margin {
+    @include margins(10px,0px,0px,0px);
 
-}
-.break{
-    word-wrap:break-word
-}
-.margin{
-    margin-top:10px;
-}
-.span{
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden !important;
-    width:70px;
-}
-
+    // margin-top: 10px;
+  }
+  
+  .span {
+    @include labelDisplay();
+    width: 70px;
+  }

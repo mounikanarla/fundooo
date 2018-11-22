@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -51,8 +51,10 @@ import {MatSelectModule} from '@angular/material/select';
 import { MessagingService } from "../app/core/services/messageservice/messaging.service"
 import { InterceptorService } from './core/services/interceptor/interceptor.service'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorHandler, Injectable} from '@angular/core';
+// import { ErrorHandler, Injectable} from '@angular/core';
 import { ErrorsHandler } from './core/errorHandler/errors-handler';
+import { AddCollaboratorsComponent } from './component/add-collaborators/add-collaborators.component';
+
 
 
 // import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
@@ -88,7 +90,8 @@ import { ErrorsHandler } from './core/errorHandler/errors-handler';
     PinComponent,
     CropimageComponent,
     ReminderNotesComponent,
-  
+    AddCollaboratorsComponent,
+
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -116,23 +119,23 @@ import { ErrorsHandler } from './core/errorHandler/errors-handler';
     MatDatepickerModule,
     MatSelectModule,
     HttpClientModule,
-    ErrorHandler,
-    Injectable
-  
+   
 
 
   ],
-  providers: [MatDatepickerModule,MessagingService,InterceptorService,{
+  providers: [MatDatepickerModule,MessagingService,InterceptorService,
+  {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true
-  },    [{
+  },
+  {
     provide: ErrorHandler,
     useClass: ErrorsHandler,
-  }]
+  }
 ],
   bootstrap: [AppComponent],
-  entryComponents:[AddnoteComponent,UpdateComponent,NavbaroneComponent,AddlabelComponent,TrashComponent,CropimageComponent]
+  entryComponents:[AddnoteComponent,UpdateComponent, AddCollaboratorsComponent,NavbaroneComponent,AddlabelComponent,TrashComponent,CropimageComponent]
   
 
 })

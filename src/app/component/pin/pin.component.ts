@@ -40,7 +40,7 @@ export class PinComponent implements OnInit,OnDestroy {
 
 
       console.log(this.noteid)
-      var array = []
+      let  array = []
       array.push(this.noteid.id)
       //posting the data into pin notes by using the post service
       this.noteService.pinPost( this.body = {

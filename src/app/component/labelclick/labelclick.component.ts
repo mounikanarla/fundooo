@@ -43,7 +43,7 @@ export class LabelclickComponent implements OnInit,OnDestroy {
     .subscribe(data => {
       this.array = [];
       this.list=data['data'].data
-      for (var i = this.list.length - 1; i >= 0; i--) {
+      for (let i = this.list.length - 1; i >= 0; i--) {
         this.array.push(this.list[i]);
       }
       // console.log("array", this.array);

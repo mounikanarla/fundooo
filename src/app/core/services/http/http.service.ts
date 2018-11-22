@@ -45,7 +45,7 @@ export class SignupService {
     return formBody.join('&')
   }
   logoutPost(value, token) {
-    var body: any = {}
+    let body: any = {}
     const logoutOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -85,7 +85,7 @@ export class SignupService {
     
   loadingImage(url,body,access_token){
   console.log(access_token);
-  var http={
+  let http={
     headers:new HttpHeaders({
      'Authorization':access_token
     })

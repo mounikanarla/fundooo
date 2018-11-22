@@ -31,7 +31,7 @@ export class MainArchiveComponent implements OnInit,OnDestroy {
       console.log("get cards list successfull", data);
       this.list = data['data'].data;
       // Initializing the for loop to store and print the cards in reverseorder      
-      for (var i = this.list.length - 1; i >= 0; i--) {
+      for (let i = this.list.length - 1; i >= 0; i--) {
         console.log(this.list.length);
         // Checking the condition that card is archived or not and it is pushing into array
         if (this.list[i].isDeleted == false) {

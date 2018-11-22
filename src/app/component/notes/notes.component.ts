@@ -50,7 +50,7 @@ export class NotesComponent implements OnInit,OnDestroy {
   */
   notes() {
     
-    var color = this.bgcolor;
+    let color = this.bgcolor;
     this.bgcolor = '#ffffff'
     this.listColor='#ffffff'
    
@@ -90,11 +90,11 @@ export class NotesComponent implements OnInit,OnDestroy {
       },
       )
     } else {
-      for (var i = 0; i < this.dataarray.length; i++) {
+      for (let i = 0; i < this.dataarray.length; i++) {
         if (this.dataarray[i].isChecked == true) {
           this.status = "close"
         }
-        var listObj = {
+        let listObj = {
           "itemName": this.dataarray[i].data,
           "status": this.status
         }
@@ -161,7 +161,7 @@ export class NotesComponent implements OnInit,OnDestroy {
   }
   public array=[]
   eventEmitReminder(event){
-    var value=event
+    let value=event
     this.array=[];
     if(event)
     {
@@ -212,7 +212,7 @@ export class NotesComponent implements OnInit,OnDestroy {
     this.isChecked = this.addCheck
     if (this.data != null && event.code == "Enter") {
       console.log(event, "keydown");
-      var obj = {
+      let obj = {
         "index": this.i,
         "data": this.data,
         "isChecked": this.isChecked
@@ -229,7 +229,7 @@ export class NotesComponent implements OnInit,OnDestroy {
  
   ondelete(deletedObj) {
     // console.log("ondelete fumction runnig");
-    for (var i = 0; i < this.dataarray.length; i++) {
+    for (let i = 0; i < this.dataarray.length; i++) {
       if (deletedObj.index == this.dataarray[i].index) {
         this.dataarray.splice(i, 1);
         break;
@@ -242,7 +242,7 @@ export class NotesComponent implements OnInit,OnDestroy {
   editing(event, edited) {
     if (event.code == "Enter") {
       // console.log("enter pressed");
-      for (var i = 0; i < this.dataarray.length; i++) {
+      for (let i = 0; i < this.dataarray.length; i++) {
         if (edited.index == this.dataarray[i].index) {
           this.dataarray[i].data == edited.data
         }

@@ -1,64 +1,67 @@
-.card{
-    width:500px;
-    /* height:50px; */
-    margin-top:15%;
-    /* height:fit-content;  */
-     position: relative;
-    /* left: 300px; */
+@import "../../../SCSS/_mixins.scss";
 
-}
-.notecard{
-    width:500px;
-    margin-top:9%;
-    /* right: 300px; */
-    /* position: absolute; */
-    /* padding-left: 17px; */
+.card {
+    width: 500px;
+    @include margins(15%,0%,0%,0%);
 
-}
-.textbar{
-    /* width:100%;
-    height:50%; */
-    border:none;
-    outline:none;
-    padding-left: 17px;
-}
-.textbar:empty:before{
-    content:attr(data-text);
-    display:block;
-} 
-.icons{
-    padding-bottom:15px;
+    // margin-top: 15%;
     position: relative;
-} 
-.button{
-    padding-bottom:20px;
+  }
+  
+  .notecard {
+    width: 500px;
+    // margin-top: 9%;
+    @include margins(9%,0%,0%,0%);
 
-}
-.title{
-    border:none;
-    outline:none;
-}
-.title:empty:before{
-    content:attr(data-text);
-    display:block;
-}
-.pin{
-    opacity:0.5;
-    margin-bottom:10px;
-}
-.pin:hover{
-    opacity:1;
-}
-.addcheck{
-     margin-top:10px;
-} 
-.textbarcheck{
-    border:none;
-    outline:none;
-    margin-left: 18px; 
+  }
+  
+  .textbar {
+    @include border;
+     padding-left: 17px;
+    &:empty:before {
+      content: attr(data-text);
+      display: block;
+    }
+  }
+  
+  .icons {
+    padding-bottom: 15px;
+    position: relative;
+  }
+  
+  .button {
+    padding-bottom: 20px;
+  }
+  
+  .title {
+    @include border;
+    &:empty:before {
+      content: attr(data-text);
+      display: block;
+    }
+  }
+  
+  .pin {
+    opacity: 0.5;
+    @include margins(0px,0px,10px,0px);
 
-}
-/* .textbarcheck:empty:before{
-    content:attr(data-text);
-    /* display:block; */
-/* } */ 
+    // margin-bottom: 10px;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  .addcheck {
+    @include margins(10px,0px,0px,0px);
+
+    // margin-top: 10px;
+  }
+  
+  .textbarcheck {
+    @include border;
+    @include margins(0px,0px,0px,18px);
+
+    // margin-left: 18px;
+  }
+  
+  

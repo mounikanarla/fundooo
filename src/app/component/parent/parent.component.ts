@@ -42,7 +42,7 @@ export class ParentComponent implements OnInit,OnDestroy {
       // console.log("get cards list successfull", data);
       this.list = data['data'].data;
       // Loop is initialized to the cards list in the reverse order 
-      for (var i = this.list.length - 1; i >= 0; i--) {
+      for (let i = this.list.length - 1; i >= 0; i--) {
         // console.log(data['data'].data.length);
         if (this.list[i].isDeleted === false && this.list[i].isArchived === false && this.list[i].isPined === false ) {
           this.array.push(this.list[i]);
@@ -62,7 +62,7 @@ export class ParentComponent implements OnInit,OnDestroy {
       // console.log("get cards list successfull", data);
       this.list = data['data'].data;
       // Loop is initialized to the cards list in the reverse order 
-      for (var i = this.list.length-1; i >= 0; i--) {
+      for (let i = this.list.length-1; i >= 0; i--) {
         // console.log(data['data'].data.length);
         if (this.list[i].isPined === true && this.list[i].isDeleted === false && this.list[i].isArchived === false ) {
           this.pinarray.push(this.list[i]);

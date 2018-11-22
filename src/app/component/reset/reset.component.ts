@@ -28,7 +28,7 @@ export class ResetComponent implements OnInit,OnDestroy {
       });
       return;
     }
-    var body = {
+    let body = {
       "newPassword": this.model.password
     }
     console.log(this.model.password)

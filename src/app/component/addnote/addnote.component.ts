@@ -67,7 +67,7 @@ export class AddnoteComponent implements OnInit,OnDestroy {
   * @description : Performing the dialog action when clicking on the card
   */
   openDialog(note): void {
-    const dialogRef = this.dialog.open(UpdateComponent, {
+    const dialogRef = this.dialog.open(UpdateComponent,{
           data: note
     });
     dialogRef.afterClosed()
@@ -144,7 +144,7 @@ export class AddnoteComponent implements OnInit,OnDestroy {
   * @description : In order to update the checkbox we are getting the data from the database by sending the api 
   */
   updatelist(id){
-    var checklistData = {
+    let checklistData = {
       "itemName": this.modifiedCheckList.itemName,
       "status": this.modifiedCheckList.status
     }
@@ -157,9 +157,9 @@ export class AddnoteComponent implements OnInit,OnDestroy {
   * @description : Invoking the function for removing of reminders by clicking on close button
   */
   removeRemainder(label) {
-    var id =[];
+    let id =[];
     id.push(label)
-    var body={
+    let body={
       "noteIdList" : id
     }
     this.noteService.removeRemainPost(body)
@@ -179,8 +179,8 @@ export class AddnoteComponent implements OnInit,OnDestroy {
   */
   checkReminder(date){
     // this.flag=false;
-    var reminderPresent=new Date().getTime();
-    var value=new Date(date).getTime();
+    let reminderPresent=new Date().getTime();
+    let value=new Date(date).getTime();
     if(value > reminderPresent){
     // this.flag;
     return true;

@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       this.snackBar.open("login succesfull", "ok", {
         duration: 2000,
       });
-      var body={
+      let body={
       "pushToken":localStorage.getItem('pushtoken')
       }
       this.userService.pushToken(body)

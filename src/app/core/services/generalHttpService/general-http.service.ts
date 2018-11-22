@@ -9,7 +9,7 @@ export class GeneralHttpService {
   URL=environment.apiUrl
   constructor(private http: HttpClient) { }
    httpPost(url,body){
-    var httpAuthOptions1 = {
+    let httpAuthOptions1 = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
@@ -17,7 +17,7 @@ export class GeneralHttpService {
       return this.http.post(url, body, httpAuthOptions1);
   }
   httpPost2(url,body){
-    var httpAuthOptions2 = {
+    let httpAuthOptions2 = {
         headers: new HttpHeaders({
           'Content-Type': 'application/x-www-form-urlencoded'
         })
@@ -37,7 +37,7 @@ export class GeneralHttpService {
     return this.http.post(url,body);
   }
   httpPost3(url,body){
-    var httpAuthOptions2 = {
+    let httpAuthOptions2 = {
         headers: new HttpHeaders({
         })
       };
@@ -48,7 +48,7 @@ export class GeneralHttpService {
    
   }
   httpGet1(url) {
-    var httpAuthOptions2 = {
+    let httpAuthOptions2 = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })

@@ -43,7 +43,7 @@ export class MoreComponent implements OnInit,OnDestroy {
   */
   delData(flag) {
     console.log(this.noteid)
-    var array = []
+    let array = []
     array.push(this.noteid.id)
     this.noteService.trashPost( this.body = {
       "isDeleted": flag,
@@ -74,8 +74,8 @@ export class MoreComponent implements OnInit,OnDestroy {
         // console.log(this.noteid.noteLabels.length);
         if(this.noteid != undefined){
          if (this.noteid.noteLabels != undefined) {
-          for (var i = 0; i < this.array.length; i++) {
-            for (var j = 0; j < this.noteid.noteLabels.length; j++) {
+          for (let i = 0; i < this.array.length; i++) {
+            for (let j = 0; j < this.noteid.noteLabels.length; j++) {
               if (this.array[i].id == this.noteid.noteLabels[j].id) {
                 this.array[i].isChecked = true;
               }
@@ -134,7 +134,7 @@ export class MoreComponent implements OnInit,OnDestroy {
   deleteForever() {
 
     console.log(this.noteid)
-    var array = []
+    let array = []
     array.push(this.noteid.id)
     this.model = {
       "isDeleted": true,

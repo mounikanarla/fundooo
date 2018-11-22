@@ -81,7 +81,7 @@ export class ReminderComponent implements OnInit,OnDestroy {
     // console.log(this.body.reminder);
     
     let currentDate = new Date()
-    var today=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
+    let today=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
     this.eventEmitReminder.emit(today);
     if(this.noteid!=null){
     this.body =
@@ -105,7 +105,7 @@ export class ReminderComponent implements OnInit,OnDestroy {
   }
   remindTomorrow(){
     let currentDate = new Date();
-    var date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1, 8, 0, 0)
+    let date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1, 8, 0, 0)
 
     this.eventEmitReminder.emit(date);
 
@@ -132,7 +132,7 @@ export class ReminderComponent implements OnInit,OnDestroy {
   weekRemainder(){
 
     let currentDate = new Date()
-    var date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7, 8, 0, 0)
+    let date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7, 8, 0, 0)
 
     this.eventEmitReminder.emit(date);
 
@@ -158,11 +158,11 @@ export class ReminderComponent implements OnInit,OnDestroy {
 addCustomRemainders(date,timing){
   timing.match('^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$');
   if(timing==this.reminderBody.time){
-  var timeSplitted=this.reminderBody.time.split("",8);
-  var hour= Number(timeSplitted[0]+timeSplitted[1]);
-  var minute= Number(timeSplitted[3]+timeSplitted[4]);
-  var ampm = (timeSplitted[6]+timeSplitted[7]);
-  var emittingDate=new Date(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate(), hour, minute, 0, 0);
+    let timeSplitted=this.reminderBody.time.split("",8);
+    let hour= Number(timeSplitted[0]+timeSplitted[1]);
+ let minute= Number(timeSplitted[3]+timeSplitted[4]);
+ let ampm = (timeSplitted[6]+timeSplitted[7]);
+ let emittingDate=new Date(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate(), hour, minute, 0, 0);
   this.eventEmitReminder.emit(emittingDate)
   
   if(ampm == 'AM' || ampm == 'am' && this.noteid!=null){
@@ -197,7 +197,7 @@ this.noteService.reminderPost(this.body)
 disable(event)
   {
     this.dateflag=false;
-    var pattern=/^(2[0-3]|1[0-9]|[0][0-9]):[0-5][0-9] (AM|PM|pm|am|Pm|pM|Am|aM)$/;
+    let pattern=/^(2[0-3]|1[0-9]|[0][0-9]):[0-5][0-9] (AM|PM|pm|am|Pm|pM|Am|aM)$/;
    if(pattern.test( this.reminderBody.time))
    {
     this.dateflag=true;

@@ -37,7 +37,7 @@ export class NoteService {
     return this.httpService.httpPost(url,{});
   }
   updateCheckbox(id,modifiedCheckList,body){
-    var url = this.URL+ "/notes/" + id + "/checklist/" + modifiedCheckList.id + "/update";
+    let url = this.URL+ "/notes/" + id + "/checklist/" + modifiedCheckList.id + "/update";
     return this.httpService.httpPost(url,body);
   }
   removeRemainPost(body){
@@ -116,4 +116,8 @@ export class NoteService {
     let url = this.URL+ "/notes/" + data.id + "/checklist/add"
     return this.httpService.httpPost(url,body);
 }
+  searchuserlist(body){
+        let url=this.URL+'user/searchUserList';
+        return this.httpService.httpPost(url,body);
+    }
 }

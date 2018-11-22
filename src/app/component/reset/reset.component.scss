@@ -1,15 +1,21 @@
+@import "../../../SCSS/_mixins.scss";
+
 .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
- .mat-form-field-underline {
-    width:180%;   
- }
-.reset{
-    margin-left:60%;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.mat-form-field-underline {
+  width: 180%;
+}
+
+.reset {
+  @include margins(0%,0%,0%,60%);
+
+  // margin-left: 60%;
 }

@@ -39,10 +39,10 @@ export class SignupComponent implements OnInit ,OnDestroy{
     obs
     .pipe(takeUntil(this.destroy$))
     .subscribe((response) => {
-      var data = response["data"];
+      let data = response["data"];
       //  console.log(data);
       // console.log(data.data.length);
-      for (var i = 0; i < data.data.length; i++) {
+      for (let i = 0; i < data.data.length; i++) {
         data.data[i].select = false;
         this.card.push(data.data[i]);
         // console.log(data.data[i]);
@@ -67,7 +67,7 @@ export class SignupComponent implements OnInit ,OnDestroy{
     // console.log(data.name);
     // console.log(this.card[i].name)
 
-    for (var i = 0; i < this.card.length; i++) {
+    for (let i = 0; i < this.card.length; i++) {
       if (data.name == this.card[i].name)
         continue;
       this.card[i].select = false;

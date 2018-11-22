@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit,OnDestroy {
       this.array = [];
       this.list = data['data'].data;
       // Loop is initialized to the cards list in the reverse order 
-      for (var i = this.list.length-1; i >= 0; i--) {
+      for (let i = this.list.length-1; i >= 0; i--) {
         if (this.list[i].isDeleted == false && this.list[i].isArchived == false) {
           this.array.push(this.list[i]);
         }

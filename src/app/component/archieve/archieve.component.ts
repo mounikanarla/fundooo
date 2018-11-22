@@ -44,7 +44,7 @@ export class ArchieveComponent implements OnInit,OnDestroy {
   */
   archive(flag) {
     console.log(this.noteid)
-    var array = []
+    let  array = []
     array.push(this.noteid.id)
     //posting the data into archive notes by using the post service
     this.noteService.archivePost( this.body = {

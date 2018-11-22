@@ -30,9 +30,7 @@ trash(){
 
     console.log("get cards list successfull", data);
  this.list=data['data'].data
-    // var length = data['data'].data.length;
-
-    for (var i = this.list.length- 1; i >= 0; i--) {
+    for (let i = this.list.length- 1; i >= 0; i--) {
       console.log(this.list.length);
       {
         this.array.push(this.list[i]);

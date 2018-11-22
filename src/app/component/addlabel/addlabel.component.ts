@@ -76,7 +76,7 @@ export class AddlabelComponent implements OnInit, OnDestroy {
           response => {
             this.labelArray = [];
             this.list = response['data'].details
-            for (var i = 0; i < this.list.length; i++) {
+            for (let i = 0; i < this.list.length; i++) {
               if (this.list[i].isDeleted == false) {
                 this.labelArray.push(this.list[i])
               }

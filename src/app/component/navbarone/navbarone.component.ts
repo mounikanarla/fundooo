@@ -104,7 +104,7 @@ export class NavbaroneComponent {
         this.array = [];
         this.list=response['data'].details
         // console.log(response['data'].details);
-        for (var i = 0; i < this.list.length; i++) {
+        for (let i = 0; i < this.list.length; i++) {
           if (this.list[i].isDeleted == false) {
             this.array.push(this.list[i])
           }

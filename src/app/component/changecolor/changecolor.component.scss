@@ -1,79 +1,60 @@
-.colour{
-    opacity: 0.5;
-}
-.colour:hover{
-    opacity:1;
-}
-.color1{
-    background-color:white;
-    height:28px;
-    width:28px;
-    margin-left:1px;
-}
-.color2{
-    background-color:#DC143C;
-    height:28px;
-    width:28px;
-    /* margin-left:7px; */
-}
-.color3{
-    background-color:#FF8C00;
-    height:28px;
-    width:28px;
-    /* margin-left:7px; */
-}
-.color4{
-    background-color:#FFFF99;
-    height:28px;
-    width:28px;
-    /* margin-left:8px; */
-}
-.color5{
-    background-color:#2E8B57;
-    height:28px;
-    width:28px;
-    margin-left:1px;
-}
-.color6{
-    background-color:#008080;
-    height:28px;
-    width:28px;
-    /* margin-left:7px; */
-}
-.color7{
-    background-color:#87CEEB;
-    height:28px;
-    width:28px;
-    /* margin-left:7px; */
-}
-.color8{
+@import "../../../SCSS/_mixins.scss";
+@import "../../../SCSS/ _variables.scss";
 
-    background-color:#D2691E;
-    height:28px;
-    width:28px;
-    /* margin-right:1px; */
+.colour {
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  .color1 {
+      @include color($background-color1);
+        margin-left: 1px;
+    }
+  
+  .color2 {
+    @include color($background-color2);
+  }
+  
+  .color3 {
+    @include color( $background-color3);
 }
-.color9{
-    background-color:#DDA0DD;
-    height:28px;
-    width:28px;
-    margin-left:1px;
+  
+  .color4 {
+    @include color( $background-color4);
 }
-.color10{
-    background-color:Pink;
-    height:28px;
-    width:28px;
-    /* margin-left:7px; */
+  
+  .color5 {
+    @include color($background-color5);
+     margin-left: 1px;
+  }
+  
+  .color6 {
+    @include color( $background-color6);
 }
-.color11{
-    background-color:#A52A2A;
-    height:28px;
-    width:28px;
-    /* margin-left:7px; */
+  
+  .color7 {
+    @include color( $background-color7);
+ }
+  
+  .color8 {
+    @include color( $background-color8);
+ }
+  
+  .color9 {
+    @include color($background-color9);
+    margin-left: 1px;
+  }
+  
+  .color10 {
+    @include color($background-color10);
+  }
+  
+  .color11 {
+    @include color($background-color11);
 }
-.color12{
-    background-color:#C0C0C0;
-    height:28px;
-    width:28px;
-    /* margin-right:3px; */
+  
+  .color12 {
+    @include color( $background-color12);
 }

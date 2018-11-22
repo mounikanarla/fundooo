@@ -1,36 +1,13 @@
-.notepin{
+@import "../../../SCSS/_mixins.scss";
+
+.notepin {
     opacity: 1;
     cursor: pointer;
-    padding-top:20px;
-    /* background-color:blue; */
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+ .pintop1 {
+    @include margins(0px,0px,20px,0px);
 }
-.notepin:hover{
-    opacity:1;
-    cursor: pointer;
-
-}
-.notepin1{
-    opacity: 1;
-    cursor: pointer;
-    padding-top:20px;
-    // color:blue; 
-}
-.notepin1:hover{
-    opacity:1;
-    // color:blue; 
-
-    cursor: pointer;
-
-}
-
-.pintop{
-    margin-bottom:20px;
-    // color:blue;
-
-}
-.pintop1{
-    margin-bottom:20px;
-    // color:blue;
-
-}
-

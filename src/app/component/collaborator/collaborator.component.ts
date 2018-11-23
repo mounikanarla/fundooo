@@ -20,8 +20,7 @@ export class CollaboratorComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCollaboratorsComponent,{
-
-          // data: note
+    data: this.noteid
     });
     dialogRef.afterClosed()
       .subscribe(result => {

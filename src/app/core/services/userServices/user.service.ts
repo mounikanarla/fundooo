@@ -37,5 +37,8 @@ export class UserService {
     let url = this.URL+"user/registerPushToken";
     return this. httpService.httpPost(url,body);
   }
-  
+  searchpeople(body){
+    let url=this.URL+'/user/searchUserList';
+    return this.httpService.httpPost(url,body);
+}
 }

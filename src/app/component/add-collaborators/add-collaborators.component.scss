@@ -59,5 +59,19 @@
 }
 .place{
     margin-left:20px;
+    width:85%;
     @include border;
 }
+.menu{
+    width:500px;
+}
+::ng-deep .mat-menu-panel.colabwidth-dropdown {
+    // max-width:none;
+    width: 100vw; 
+    margin-left: -8px;
+    margin-top: 24px;
+    overflow: visible;
+  }
+  .colabwidth-row{
+      width:500px;
+  }

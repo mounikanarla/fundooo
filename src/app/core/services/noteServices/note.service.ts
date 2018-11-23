@@ -116,8 +116,9 @@ export class NoteService {
     let url = this.URL+ "/notes/" + data.id + "/checklist/add"
     return this.httpService.httpPost(url,body);
 }
-  searchuserlist(body){
-        let url=this.URL+'user/searchUserList';
-        return this.httpService.httpPost(url,body);
-    }
+addCollaborators(data,body){
+  let url = this.URL+ "/notes/" + data.id + "/AddcollaboratorsNotes"
+  return this.httpService.httpPost(url,body);
+}
+
 }

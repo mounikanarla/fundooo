@@ -39,11 +39,9 @@ export class LoginComponent implements OnInit {
         '';
 
   }
-
+  
   login() {
-    // let body={
-      
-    // }
+   
     let obs = this.userService.loginPost({
       "email": this.model.email,
       "password": this.model.password,

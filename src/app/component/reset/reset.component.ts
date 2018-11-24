@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../core/services/userServices/user.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LoggerService } from '../../core/services/loggerService/logger.service';
+
 @Component({
   selector: 'app-reset',
   templateUrl: './reset.component.html',
@@ -31,18 +33,17 @@ export class ResetComponent implements OnInit,OnDestroy {
     let body = {
       "newPassword": this.model.password
     }
-    console.log(this.model.password)
-    console.log(this.id)
+   
     this.userService.passwordPost(body)
     .pipe(takeUntil(this.destroy$))
       .subscribe((response) => {
-        console.log("password successfully changed");
+        LoggerService.log("password successfully changed");
         this.snackBar.open("success", "Success", {
           duration: 2000,
         });
       }, (error) => {
-        console.log("unsuccess");
-        console.log(error);
+        LoggerService.log("unsuccess");
+        LoggerService.log(error);
 
         this.snackBar.open("failed", "failed", {
           duration: 2000,

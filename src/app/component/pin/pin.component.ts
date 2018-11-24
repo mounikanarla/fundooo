@@ -54,7 +54,6 @@ export class PinComponent implements OnInit,OnDestroy {
         // If the response is true the event will be emitted
         // console.log("successful", response);
         this.eventEmit.emit({});
-        // console.log(this.eventEmit.emit({}))
         if (flag == true) {
           this.snackBar.open("Pinned", "ok", {
             duration: 2000,

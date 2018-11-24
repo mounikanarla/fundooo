@@ -1,0 +1,26 @@
+@import "../../../scss/ _variables.scss";
+
+@mixin labelDisplay() {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+  }
+@mixin border{
+    border:none;
+    outline:none;
+}
+@mixin circle{
+    height:28px;
+    width: 28px;
+  }
+@mixin color($color){
+    background-color:$color;
+    height:28px;
+    width: 28px;
+}
+@mixin margins($top,$right,$bottom,$left){
+    margin-top:$top;
+    margin-right:$right;
+    margin-bottom:$bottom;
+    margin-left:$left
+}

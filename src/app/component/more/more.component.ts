@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoteService } from '../../core/services/noteServices/note.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LoggerService } from '../../core/services/loggerService/logger.service';
 
 @Component({
   selector: 'app-more',
@@ -31,11 +32,8 @@ export class MoreComponent implements OnInit,OnDestroy {
 
   @Output() eventEmitLabel = new EventEmitter();
   accepted: Boolean;
-  public isDeleted = false;
+  // public isDeleted = false;
   ngOnInit() {
-    if (this.noteid != undefined && this.noteid['isDeleted'] == true) {
-      this.isDeleted = true
-    }
     this.checkLabel();
   }
   /*
@@ -53,11 +51,10 @@ export class MoreComponent implements OnInit,OnDestroy {
 
     .subscribe((response) => {
       this.eventEmit.emit({});
-      console.log(this.eventEmit.emit())
-      console.log("successful", response);
+      LoggerService.log("successful", response);
     },
       (error) => {
-        console.log("error", error);
+        LoggerService.log("error", error);
       }
     )
   }
@@ -71,7 +68,6 @@ export class MoreComponent implements OnInit,OnDestroy {
     .subscribe(
       response => {
         this.array = response['data'].details;
-        // console.log(this.noteid.noteLabels.length);
         if(this.noteid != undefined){
          if (this.noteid.noteLabels != undefined) {
           for (let i = 0; i < this.array.length; i++) {
@@ -83,10 +79,10 @@ export class MoreComponent implements OnInit,OnDestroy {
           }
         }
       }
-        // console.log(this.array, "Label array printing successsss ");
+        // LoggerService.log("Label array printing successsss ",this.array);
       },
       error => {
-        // console.log("error in get LABELS", error);
+        LoggerService.log("error in get LABELS", error);
       }
     )
   }
@@ -101,13 +97,11 @@ export class MoreComponent implements OnInit,OnDestroy {
       .pipe(takeUntil(this.destroy$))
 
         .subscribe((response) => {
-          // console.log("checklist added", response);
+          LoggerService.log("checklist added", response);
           this.eventEmit.emit({});
-          // console.log("event1", this.eventEmit.emit({}));
-
         },
           (error) => {
-            // console.log("error occured" + error)
+            LoggerService.log("error occured" + error)
           }
         )
     }
@@ -119,11 +113,11 @@ export class MoreComponent implements OnInit,OnDestroy {
       .pipe(takeUntil(this.destroy$))
 
         .subscribe((response) => {
-          // console.log("checklist added" + response)
+          LoggerService.log("checklist added" + response)
           this.eventEmit.emit({});
         },
           (error) => {
-            // console.log("error occured" + error)
+            LoggerService.log("error occured" + error)
           }
         )
     }
@@ -140,22 +134,21 @@ export class MoreComponent implements OnInit,OnDestroy {
       "isDeleted": true,
       "noteIdList": array
     }
-    console.log(this.model, "trash");
     this.noteService.deleteForeverPost( this.model)
     .pipe(takeUntil(this.destroy$))
 
     .subscribe(response => {
-      console.log(response, "success");
+      LoggerService.log("success",response);
       this.eventEmit.emit({});
 
       this.snackBar.open("Deleted Note Permanently", "trash", {
         duration: 10000,
       });
-    }),
-      error => {
-        console.log(error, "error occured in trash");
+    },
+    (error) => {
+        LoggerService.log("error occured in trash",error);
       }
-
+    )
   }
 
   ngOnDestroy() {

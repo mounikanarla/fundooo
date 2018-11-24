@@ -1,16 +1,13 @@
-@import "../../../SCSS/_mixins.scss";
+@import "../../../scss/_mixins.scss";
 
 .sidenav-container {
   height: 100%;
 }
 
 .sidenav {
-  @include margins(56px,0px,0px,0px);
-
-  margin-top: 56px;
+  @include margins(56px,0px,0px,-15px);
   width: 270px;
-  background-color: lightgrey;
-  margin-left: -15px;
+  background-color:$background-color14;
   position: fixed;
 }
 
@@ -24,28 +21,26 @@
   top: 0;
   height: 100%;
   @include margins(65px,0px,0px,0px);
-
-  // margin-top: 65px;
   z-index: 1;
 }
 
 .mat-toolbar.mat-primary {
   background: #fb0;
-  color: #fff;
+  color:$background-color1
 }
 
 .searchbar {
   height: 40px;
   width: 300%;
   @include border;
-  background-color: rgb(235, 168, 23);
+  background-color:$background-color15;
   padding-left: 30px;
-  color: black;
+  color:$background-color13;
   border-radius: 10px;
 }
 
 input:focus {
-  background: white;
+  background: $background-color1;
 }
 
 .notes, .remainder {
@@ -85,7 +80,7 @@ input:focus {
 .letter {
   @include margins(0px,0px,0px,10.5px);
 
-  color: aliceblue;
+  color: $background-color1;
   // margin-left: 10.5px;
   font-size: 30px;
   font-family: 'Times New Roman', Times, serif;
@@ -116,7 +111,7 @@ input:focus {
 }
 
 .displayname {
-  color: black;
+  color: $background-color13;
   font-family: Bookman, URW Bookman L, serif;
   // margin-left: 10px;
   @include margins(0px,0px,0px,10px);
@@ -124,14 +119,14 @@ input:focus {
 }
 
 .menuicon {
-  color: black;
+  color: $background-color13;
 }
 
 .searchicon {
   @include margins(20px,0px,0px,0px);
 
   // margin-top: 20px;
-  color: black;
+  color: $background-color13;
   position: fixed;
   top: 0px;
 }
@@ -140,7 +135,7 @@ input:focus {
   @include margins(10px,0px,0px,0px);
 
   // margin-top: 10px;
-  color: black;
+  color:$background-color13;
 }
 
 .profileicon {
@@ -176,7 +171,7 @@ input:focus {
 }
 
 .routename {
-  color: black;
+  color: $background-color13;
   font-size: 16px;
   @include labelDisplay();
    width: 70%;
@@ -189,7 +184,7 @@ input:focus {
 }
 
 .change {
-  color: black;
+  color: $background-color13;
   @include margins(20px,0px,0px,0px);
 
   // margin-top: 20px;

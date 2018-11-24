@@ -33,7 +33,6 @@ export class AddlabelComponent implements OnInit, OnDestroy {
   }
   toggleChild() {
     this.press = !this.press;
-
   }
   onClose(): void {
     this.dialogRef.close();
@@ -47,6 +46,9 @@ export class AddlabelComponent implements OnInit, OnDestroy {
   }
   public label;
   public labelArray = [];
+  /*
+  * @description :  addLabel() add the labels values while taking it as input
+  */
   addLabel() {
     try {
       this.noteService.delLabel({
@@ -55,19 +57,16 @@ export class AddlabelComponent implements OnInit, OnDestroy {
         "userId": localStorage.getItem('userId')
       })
         .pipe(takeUntil(this.destroy$))
-
         .subscribe(response => {
           LoggerService.log("success in createpostlabel", response)
         })
     } catch (err) {
-      if (err instanceof ReferenceError
-        || err instanceof TypeError
-        || err instanceof SyntaxError
-        || err instanceof RangeError) {
-        LoggerService.log("Something bad happened in add label", err);
-      }
+       LoggerService.log("Something bad happened in add label", err);
     }
   }
+  /*
+  * @description :  getLabel()  function get the added labels from the database
+  */
   getLabels() {
     try {
       this.noteService.getLabelNote()
@@ -96,6 +95,9 @@ export class AddlabelComponent implements OnInit, OnDestroy {
       }
     }
   }
+  /*
+  * @description :  delete(labelId) delete the label by clicking on the icon
+  */
   delete(labelId) {
     this.noteService.deleteLabel(labelId, this.token)
       .pipe(takeUntil(this.destroy$))
@@ -112,7 +114,9 @@ export class AddlabelComponent implements OnInit, OnDestroy {
     this.editable = true;
 
   }
-
+  /*
+  * @description :  update(labelId) update the label by clicking on the icon
+  */
   update(labelId) {
     this.editClick = false;
     this.editDoneIcon = true;

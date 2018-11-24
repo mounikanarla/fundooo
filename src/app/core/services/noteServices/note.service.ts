@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { GeneralHttpService } from '../generalHttpService/general-http.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -8,7 +9,7 @@ import { GeneralHttpService } from '../generalHttpService/general-http.service';
 })
 export class NoteService {
   URL=environment.apiUrl;
-  constructor(private httpService: GeneralHttpService ) { }
+  constructor(private note:HttpClient,private httpService: GeneralHttpService ) { }
   
   logoutPost(token) {
     let url = this.URL+ "/user/logout";
@@ -120,5 +121,8 @@ addCollaborators(data,body){
   let url = this.URL+ "/notes/" + data.id + "/AddcollaboratorsNotes"
   return this.httpService.httpPost(url,body);
 }
-
+removeCollaborators(data,userId){
+  let url = this.URL+ "/notes/" + data.id + "/removeCollaboratorsNotes/"+userId
+  return this.note.delete(url);
+}
 }

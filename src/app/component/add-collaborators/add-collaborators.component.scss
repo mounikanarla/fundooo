@@ -1,18 +1,10 @@
-@import "../../../SCSS/ _variables.scss";
-@import "../../../SCSS/_mixins.scss";
+@import "../../../scss/ _variables.scss";
+@import "../../../scss/_mixins.scss";
 
 .collab{
-    // width:300px;
-    // // margin:10px 10px 15px 20px;
-    // font-weight: bold;
-    // font-family:cursive;
-    // font-size:1.2em;
     height: auto;
     width: 500px;
     @include margins(30%,0%,0%,0%);
-  
-    // margin-top: 30%;
-    /* right: 300px;  */
     margin-top: 0px;
     display: flex;
     flex-direction: column;
@@ -34,7 +26,6 @@
     height: 100%;
     min-height: inherit;
     max-height: inherit;
-    /* padding:10px 10px 10px 10px; */
     @include margins(10px,0px,0px,0px);
 }  
 .collaborator{
@@ -44,11 +35,14 @@
 .content{
     font-weight: bold;
 }
+.content1{
+    font-weight: bold;
+    margin-left:20px;
+}
 .contentNew{
     font-weight:lighter;
     font-family:cursive;
-    margin-left:58px;
-    margin-top:-20px;
+  
 }
 .person{
     margin-top:20px;
@@ -58,7 +52,7 @@
 
 }
 .place{
-    margin-left:20px;
+    // margin-right:px;
     width:85%;
     @include border;
 }
@@ -66,7 +60,6 @@
     width:500px;
 }
 ::ng-deep .mat-menu-panel.colabwidth-dropdown {
-    // max-width:none;
     width: 100vw; 
     margin-left: -8px;
     margin-top: 24px;
@@ -75,3 +68,15 @@
   .colabwidth-row{
       width:500px;
   }
+.colabemail{
+    font-weight:lighter;
+    font-family:cursive;
+   
+}
+.displayletter{
+    color:$background-color13;
+    // margin-bottom:10px;
+}
+.space{
+    margin-top:10px;
+}

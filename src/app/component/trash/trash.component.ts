@@ -3,6 +3,7 @@ import { NoteService } from '../../core/services/noteServices/note.service';
 import {NoteModel} from '../../core/models/note-model'
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LoggerService } from '../../core/services/loggerService/logger.service';
 
 @Component({
   selector: 'app-trash',
@@ -31,16 +32,15 @@ trash(){
     console.log("get cards list successfull", data);
  this.list=data['data'].data
     for (let i = this.list.length- 1; i >= 0; i--) {
-      console.log(this.list.length);
+      // LoggerService.log(this.list.length);
       {
         this.array.push(this.list[i]);
       }
     }
-    console.log("Trash array", this.array);
+    LoggerService.log("Trash array", this.array);
   })
 }
 emit(event){
-  console.log(event)
   if(event){
     this.trash();
   }

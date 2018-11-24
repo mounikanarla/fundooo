@@ -7,7 +7,9 @@
       <div fxLayout="row" fxFlex="100%">
         <div fxFlex="90%" (click)="openDialog(index)">
           <!-------------------------- <mat-card-header> ------------------------->
-            <mat-card-content class="title">{{index.title }}</mat-card-content>
+              <div [innerHTML]="index.title" id="title" contenteditable="true" class="titlebar" ></div>
+
+            <!-- <mat-card-content class="title">{{index.title }}</mat-card-content> -->
           <!--------------------------- mat-card-header ------------------------>
         </div>
         <div fxFlex="10%" class="pin" >
@@ -17,7 +19,9 @@
       <!-------------------------------Title printing Ends ------------------------->
       <!------------------------- Description Printing starts --------------------->
       <div fxLayout="row" fxFlex="100%">
-      <mat-card-content class="description" (click)="openDialog(index)">{{index.description}}</mat-card-content>
+          <div id="description" [innerHTML]="index.description" contenteditable="true"
+          class="textbar" tabindex="0" spellcheck="true"></div>
+        <!-- <mat-card-content class="description" (click)="openDialog(index)">{{index.description}}</mat-card-content> -->
       </div>
       <!------------------------- Description Printing Ends ------------------------>
       <!-------------------------- Checklist Printing starts --------------------------->

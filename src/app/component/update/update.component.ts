@@ -73,7 +73,7 @@ update(){
   .pipe(takeUntil(this.destroy$))
 
   .subscribe((response) => {
-    // console.log("successful", response);
+    LoggerService.log("successful", response);
     this.eventEmit.emit({});
   })
 }else{
@@ -82,16 +82,16 @@ update(){
     "itemName": this.modifiedCheckList.itemName,
     "status":this.modifiedCheckList.status
 }
-//  var url = "notes/" +this.data.id+ "/checklist/" + this.modifiedCheckList.id + "/update";
- this.noteService.updateCheckbox(this.data.id,this.modifiedCheckList.id ,JSON.stringify(apiData)).subscribe(response => {
-  //  console.log(response);
- })
-
+ this.noteService.updateCheckbox(this.data.id,this.modifiedCheckList.id ,JSON.stringify(apiData))
+ .subscribe((response)=>{
+  LoggerService.log('api hit sucessfull');
+},
+(error)=>{
+  LoggerService.log('failed');
+})
 }
 }
 editing(editedList,event){
-      
-  // console.log(editedList);
   if(event.code=="Enter"){
   this.modifiedCheckList=editedList;
   this.update();
@@ -106,25 +106,22 @@ checkBox(checkList){
   else{
     checkList.status = "open"
   }
-  // console.log(checkList);
+  LoggerService.log(checkList);
   this.modifiedCheckList=checkList;
 
   this.update();
 }
 public removedList;
   removeList(checklist){
-    // console.log(checklist)
     this.removedList=checklist;
     this.removeCheckList()
   }
   removeCheckList(){
-    // var url = "notes/" + this.data.id + "/checklist/" + this.removedList.id + "/remove";
-
     this.noteService.removeCheckList(this.data,this.removedList)
     .pipe(takeUntil(this.destroy$))
 
     .subscribe((response)=>{
-      // console.log(response);
+      // LoggerService.log(response);
       for(var i=0;i<this.tempArray.length;i++){
         if(this.tempArray[i].id==this.removedList.id){
           this.tempArray.splice(i,1)
@@ -153,33 +150,23 @@ public removedList;
         "itemName":this.newList,
         "status":this.status
       }
-  
-      // var url = "notes/" + this.data.id + "/checklist/add";
-
     this.noteService.addCheckList(this.data,this.newData)
     .pipe(takeUntil(this.destroy$))
 
     .subscribe(response => {
-      // console.log(response);
       this.newList=null;
       this.addCheck=false;
       this.adding=false;
       LoggerService.log(response['data'].details);
-      
       this.tempArray.push(response['data'].details)
-
-      // console.log(this.tempArray)
-
     })
   }
   }
 emit(event){
-
   this.bgcolor=event
 }
 
 eventEmitLabel(event) {
-  // console.log(event);
   var flag=false,index;
   for(var i=0;i<this.label.length;i++){
     if(event.id==this.label[i].id){
@@ -205,8 +192,6 @@ public array=[]
       flag=true;
       index=1;
     this.array.push(event);
-    // console.log(this.array)
-    // console.log("event receiving");
     }
     if(flag==true){
       this.array.splice(index,1)
@@ -218,17 +203,15 @@ removelabel(data, label) {
   .pipe(takeUntil(this.destroy$))
 
     .subscribe((response) => {
-      // console.log("checklist removed" + response)
+      LoggerService.log("checklist removed" + response)
       this.eventEmit.emit({});
     },
       (error) => {
-        // console.log("error occured" + error)
+        LoggerService.log("error occured" + error)
       }
     )
 }
 removeRemainder(label) {
-  // console.log(label);
-  
   var id =[];
   id.push(label)
 
@@ -243,7 +226,7 @@ removeRemainder(label) {
       this.eventEmit.emit({});
     },
       (error) => {
-        // console.log("error occured" + error)
+        LoggerService.log("error occured" + error)
       }
     )
 }

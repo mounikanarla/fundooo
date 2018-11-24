@@ -1,52 +1,77 @@
-<div  class="collaborator">
+<div class="collaborator">
   <mat-card>
-    <!-- Collaborator Heading Starts -->
+    <!---------------------- Collaborator Heading Starts --------------------->
     <mat-card-header>
-    <div class="collab">Collaborators</div>
+      <div class="collab">Collaborators</div>
     </mat-card-header>
-    <!-- Collaborator Heading Starts -->
+    <!---------------------- Collaborator Heading Starts ---------------------->
     <hr>
     <br>
-<!-- printing collaborator data starts  -->
+    <!---------------------- printing collaborator data starts ----------------------->
+    <mat-card-content>
+      <div fxLayout="column" fxLayoutGap="20px">
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+          <div fxFlex="8" fxLayoutAlign="center"><button mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+            </button></div>
+          <div fxFlex="88">
+            <mat-content class="content" fxLayoutAlign="space-between center">
+              <div fxLayout="column" fxFlex="100">
+                <div fxFlex>{{firstName | titlecase}} {{lastName | titlecase}} (Owner)</div>
+                <div class="contentNew">
+                  <mat-content fxFlex>{{email}}</mat-content>
+                </div>
+              </div>
+            </mat-content>
+          </div>
+        </div>
+      </div>
+      <div class="space" fxLayout="column" fxLayoutGap="20px">
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" *ngFor='let collab of searcharray'>
+          <div fxFlex="8"><button mat-mini-fab><mat-icon fxflex fxLayoutAlign="center">{{collab.firstName | titlecase | slice
+                : 0 : 1}}</mat-icon></button></div>
+          <div fxFlex="82">
+            <mat-content class="content1">
+              <div fxLayout="column" fxFlex="100">
+                <div fxFlex>{{collab.firstName | titlecase}} {{collab.lastName | titlecase}}</div>
+                <div class="colabemail">
+                  <mat-content>{{collab.email}}</mat-content>
+                </div>
+              </div>
+            </mat-content>
+          </div>
+          <div fxFlex="10" (click)="removecollab(collab.userId)"><i class="material-icons">clear</i></div>
+        </div>
+      </div>
+      <div class="person" fxLayout="column" fxLayoutGap="20px">
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+          <div fxFlex="8" fxLayoutAlign="center"><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button></div>
+          <div fxFlex="82">
+            <span><input class="place" [(ngModel)]="searchword" [matMenuTriggerFor]="menu" (keyup)="searchpeople(searchword)"
+                placeholder="person or email to share with..."></span>
+            <span *ngIf="searchword"><button (click)="onEnterClick(searchword)">
+              <mat-icon>done</mat-icon>
+              </button>
+            </span>
+          </div>
 
-
-<mat-card-content>
-  <div fxLayout="row" fxLayoutGap="20px">
-      <button mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
-      </button>
-      <mat-content fxFlex class="content">
-          {{firstName | titlecase}} {{lastName | titlecase}} (Owner)
-      </mat-content>
-  </div>
-  <div class="contentNew"><mat-content fxFlex>{{email}}</mat-content></div>
-  
-    <div *ngFor='let collab of collabArray'>
-      <div class="person"><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button>
-        <mat-content fxFlex class="content">
-      {{collab.firstName | titlecase}} {{collab.lastName | titlecase}}
-      </mat-content>
-    </div>
-  </div>
-  <div class="person"><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button>
-    <input class="place" [(ngModel)]=collabArray.email [matMenuTriggerFor]="menu" (keyup)="searchpeople()" placeholder="person or email to share with...">
-  </div>
-</mat-card-content>
-<!-- printing collaborator data Ends  -->
-<!-- Collaborator Footer Starts -->
-<mat-card-footer> 
-  <div class="buttons">
+        </div>
+      </div>
+    </mat-card-content>
+    <!------------------------------- printing collaborator data Ends ----------------- -->
+    <!------------------------ Collaborator Footer Starts ------------------->
+    <mat-card-footer>
+      <div class="buttons">
         <a mat-button routerLink=".">Close</a>
         <a mat-button routerLink=".">Save</a>
-  </div> 
-</mat-card-footer>
-<!-- Collaborator Footer Starts -->
-</mat-card>
-<!-- Search data printing starts -->
-  <mat-menu class="colabwidth" (click)="$event.stopPropagation()" #menu="matMenu"  [overlapTrigger]="false">
-  <div class="colabwidth" *ngFor='let search of usersData' (click)="addCollab(search)">
-      {{search.firstName | titlecase}} {{search.lastName | titlecase}} <{{search.email}}>
-  </div>
-</mat-menu>
-<!-- Search data printing Ends-->
-
+      </div>
+    </mat-card-footer>
+    <!-------------------------- Collaborator Footer Starts --------------------->
+  </mat-card>
+  <!-------------------------- Search data printing starts ----------------------->
+  <mat-menu [overlapTrigger]="false" class="colabwidth" (click)="$event.stopPropagation()" #menu="matMenu" [overlapTrigger]="false">
+    <div class="colabwidth" *ngFor='let search of usersData' (click)="addCollab(search);select(search.email)">
+      {{search.firstName | titlecase}} {{search.lastName | titlecase}} [{{search.email}}]
+    </div>
+  </mat-menu>
+  <!-------------------------- Search data printing Ends ---------------------------->
 </div>

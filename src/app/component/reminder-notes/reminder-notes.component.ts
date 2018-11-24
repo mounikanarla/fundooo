@@ -22,9 +22,7 @@ export class ReminderNotesComponent implements OnInit,OnDestroy {
   }
   addNewEntry(event) {
     if (event) {
-      // this.array=[];
       this.getReminder();
-
     }
   }
   getReminder() {
@@ -33,24 +31,18 @@ export class ReminderNotesComponent implements OnInit,OnDestroy {
 
     .subscribe(data => {
       this.reminderArray = [];
-
-      // console.log("get cards list successfull", data);
      this.list= data['data'].data;
       // Initializing the for loop to store and print the cards in reverseorder      
       for (let i = this.list.length-1; i >= 0; i--) {
         // Checking the condition that card is archived or not and it is pushing into array
-        // if (this.list[i].isDeleted === false) {
           this.reminderArray.push(this.list[i]);
           this.sortedarray = this.reminderArray.sort((a: any, b: any) =>
           new Date(a.reminder).getTime() - new Date(b.reminder).getTime()
       );
-        // }
       }
-      // console.log("Reminder array", this.reminderArray);
     })
   }
   emit(event) {
-    // console.log(event)
     if (event) {
       this.getReminder()
     }

@@ -11,11 +11,14 @@ import { NoteService } from '../../core/services/noteServices/note.service';
   styleUrls: ['./add-collaborators.component.scss']
 })
 export class AddCollaboratorsComponent implements OnInit {
+  searchword: any;
   constructor(private userService: UserService ,private noteService:NoteService,public  dialogRef: MatDialogRef<AddCollaboratorsComponent>,
   @Inject(MAT_DIALOG_DATA) public data:any){ }
   @Input() noteid
   ngOnInit() {
-
+    for(let i=0;i<this.data['collaborators'].length;i++){
+      this.searcharray.push(this.data['collaborators'][i])
+    }
   }
   private usersData
   private image=localStorage.getItem('imageUrl');
@@ -24,12 +27,13 @@ export class AddCollaboratorsComponent implements OnInit {
   firstName=localStorage.getItem('firstName');
   lastName=localStorage.getItem('lastName');
   userId=localStorage.getItem('userId')
-  public searchemail
-  searchpeople(){
-    console.log("search email",this.searchemail);
-    if(this.searchemail!=null && this.searchemail != undefined &&  this.searchemail!=""){
+  /*
+  * @description : Getting the userdata by searching using searchpeople function
+  */
+  searchpeople(searchword){
+    if(searchword!=null && searchword != undefined && searchword!=""){
     var body={
-      "searchWord":this.searchemail
+      "searchWord":searchword
     }
     this.userService.searchpeople(body).subscribe(data=>{
       LoggerService.log("success in collaborator search",data)
@@ -37,13 +41,14 @@ export class AddCollaboratorsComponent implements OnInit {
     },
     error=>{
       LoggerService.log("error in collaborator search",error);
-    }
-  )
+    })
   }
   }
+  /*
+  * @description : addCollab(search) adds the persons emails by passing the data in body
+  */
   collabArray=[]
   addCollab(search){
-    console.log(search)
     var body={
       "firstName":search.firstName,
       "lastName":search.lastName,
@@ -53,7 +58,38 @@ export class AddCollaboratorsComponent implements OnInit {
     this.noteService.addCollaborators(this.data,body).subscribe(data=>{
       LoggerService.log("success in addcollaborator",data)
       this.collabArray=data['data'].details;
+    },
+    error=>{
+      LoggerService.log("success in addcollaborator",error)
+     })
+  }
+  private searcharray=[]
+  onEnterClick(searchword){
+    for(let index=0;index<this.usersData.length;index++){
+      if(this.usersData[index].email==searchword)
+      {
+        this.searcharray.push(this.usersData[index])
+      }
+    }
+    this.searchword='';
 
+  }
+  
+  select(searchword){  
+  this.searchword=searchword;
+  }
+  /*
+  * @description : removeCollab(id) removes the persons emails by passing userid of the particular mail
+  */
+  removecollab(id){
+    this.noteService.removeCollaborators(this.data,id).subscribe(data=>{
+     LoggerService.log("success in removecollaborator",data);
+    for(let i=0;i<this.searcharray.length;i++)
+    {
+      if(this.searcharray[i].userId===id){
+        this.searcharray.splice(i,1)
+      }
+    }
     },
     error=>{
       LoggerService.log("success in addcollaborator",error)

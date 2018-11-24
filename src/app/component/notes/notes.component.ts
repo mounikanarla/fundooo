@@ -239,17 +239,17 @@ export class NotesComponent implements OnInit,OnDestroy {
 
   }
 
-  editing(event, edited) {
-    if (event.code == "Enter") {
-      // console.log("enter pressed");
-      for (let i = 0; i < this.dataarray.length; i++) {
-        if (edited.index == this.dataarray[i].index) {
-          this.dataarray[i].data == edited.data
-        }
-      }
-      // console.log(this.dataarray);
-    }
-  }
+  // editing(event, edited) {
+  //   if (event.code == "Enter") {
+  //     // console.log("enter pressed");
+  //     for (let i = 0; i < this.dataarray.length; i++) {
+  //       // if (edited.index == this.dataarray[i].index) {
+  //         this.dataarray[i].data == edited.data
+  //       // }
+  //     }
+  //     // console.log(this.dataarray);
+  //   }
+  // }
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

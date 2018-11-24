@@ -69,17 +69,13 @@ export class ReminderComponent implements OnInit,OnDestroy {
 
 
   ngOnInit() {
-    // if(this.noteid!=undefined && this.noteid.isDeleted==true){
-    //   this.isDeleted=true
-    // }
+    if(this.noteid!=undefined && this.noteid.isDeleted==true){
+      this.isDeleted=true
+    }
     this.disabledates()
 
   }
-  
-  
   remindToday(){
-    // console.log(this.body.reminder);
-    
     let currentDate = new Date()
     let today=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
     this.eventEmitReminder.emit(today);
@@ -95,11 +91,11 @@ export class ReminderComponent implements OnInit,OnDestroy {
     .subscribe(data => {
         console.log("success in today reminders",data);
         this.eventEmit.emit({});
-        // console.log("event emitting");
+        LoggerService.log("event emitting");
 
       },
         error => {
-          // console.log("error in today reminders",error)
+          LoggerService.log("error in today reminders",error)
         })
       }
   }
@@ -118,13 +114,12 @@ export class ReminderComponent implements OnInit,OnDestroy {
       }
     this.noteService.reminderPost(this.body)
     .pipe(takeUntil(this.destroy$))
-
     .subscribe(data => {
-        // console.log("success in tomorrow reminders",data);
+        LoggerService.log("success in tomorrow reminders",data);
         this.eventEmit.emit({});
        },
         error => {
-          // console.log("error in tomorrow reminders",error)
+          LoggerService.log("error in tomorrow reminders",error)
         })
       }
   }
@@ -133,9 +128,7 @@ export class ReminderComponent implements OnInit,OnDestroy {
 
     let currentDate = new Date()
     let date=new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7, 8, 0, 0)
-
     this.eventEmitReminder.emit(date);
-
     if(this.noteid!=null)
     {
     this.body =
@@ -145,13 +138,12 @@ export class ReminderComponent implements OnInit,OnDestroy {
       }
     this.noteService.reminderPost(this.body)
     .pipe(takeUntil(this.destroy$))
-
     .subscribe(data => {
-        // console.log("success in week reminders",data);
+        LoggerService.log("success in week reminders",data);
         this.eventEmit.emit({});
       },
         error => {
-          // console.log("error in week reminders",error)
+          LoggerService.log("error in week reminders",error)
      })
   }
 }
@@ -160,39 +152,32 @@ addCustomRemainders(date,timing){
   if(timing==this.reminderBody.time){
     let timeSplitted=this.reminderBody.time.split("",8);
     let hour= Number(timeSplitted[0]+timeSplitted[1]);
- let minute= Number(timeSplitted[3]+timeSplitted[4]);
- let ampm = (timeSplitted[6]+timeSplitted[7]);
- let emittingDate=new Date(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate(), hour, minute, 0, 0);
-  this.eventEmitReminder.emit(emittingDate)
-  
-  if(ampm == 'AM' || ampm == 'am' && this.noteid!=null){
-    this.body = {
+    let minute= Number(timeSplitted[3]+timeSplitted[4]);
+    let ampm = (timeSplitted[6]+timeSplitted[7]);
+    let emittingDate=new Date(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate(), hour, minute, 0, 0);
+    this.eventEmitReminder.emit(emittingDate)
+    if(ampm == 'AM' || ampm == 'am' && this.noteid!=null){
+      this.body = {
       "noteIdList": [this.noteid.id],
       "reminder": new Date(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate(), hour, minute, 0, 0)
+      }
+      this.noteService.reminderPost(this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
+      this.eventEmitReminder.emit(date)
+      })
+      }else if(ampm =='PM' || ampm =='pm'&& this.noteid!=null){
+      this.body = {
+        "noteIdList": [this.noteid.id],
+        "reminder": new Date(new Date(date).getFullYear(),new Date(date).getMonth(), new Date(date).getDate(), hour+12, minute, 0, 0)
+      }
     }
-    this.noteService.reminderPost(this.body)
-    .pipe(takeUntil(this.destroy$))
-
-    .subscribe((result) => {
-     this.eventEmitReminder.emit(date)
-    //  console.log("emitting event from reminders",this.eventEmitReminder.emit(date));
-     
-    })
-  }else if(ampm =='PM' || ampm =='pm'&& this.noteid!=null){
-    this.body = {
-      "noteIdList": [this.noteid.id],
-      "reminder": new Date(new Date(date).getFullYear(),new Date(date).getMonth(), new Date(date).getDate(), hour+12, minute, 0, 0)
-    }
-    
   }
-  
-}
-this.noteService.reminderPost(this.body)
-.pipe(takeUntil(this.destroy$))
-
-.subscribe((result) => {
+  this.noteService.reminderPost(this.body)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe((result) => {
     this.eventEmitReminder.emit(date)
-})
+  })
 }
 disable(event)
   {
@@ -211,11 +196,11 @@ disabledates(){
       if ((new Date(this.setDate).getDate() - new Date(this.today).getDate()) === 0) {
         if ((new Date(this.setDate).getHours()) > 8) {
           this.reminders[0].disableStatus = true;
-        } if ((new Date(this.setDate).getHours()) > 13) {
+        }else if ((new Date(this.setDate).getHours()) > 13) {
           this.reminders[1].disableStatus = true;
-        } if ((new Date(this.setDate).getHours()) > 18) {
+        }else if ((new Date(this.setDate).getHours()) > 18) {
           this.reminders[2].disableStatus = true;
-        } if ((new Date(this.setDate).getHours()) > 20) {
+        }else if ((new Date(this.setDate).getHours()) > 20) {
           this.reminders[3].disableStatus = true;
           // LoggerService.log(this.setData)
         }

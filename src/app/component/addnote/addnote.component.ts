@@ -38,9 +38,7 @@ export class AddnoteComponent implements OnInit,OnDestroy {
   * @description:ngOnInit is used for all the initialization/declaration and avoid stuff to work in the 
   */
   ngOnInit() {
-    if (this.newData != null && this.newData.isDeleted == true) {
-
-    }
+    // if (this.newData != null && this.newData.isDeleted == true) {}
     this.data.currentMessage1
     .pipe(takeUntil(this.destroy$))
 
@@ -60,7 +58,6 @@ export class AddnoteComponent implements OnInit,OnDestroy {
     console.log(event)
     if (event) {
       this.eventEmit.emit({});
-      console.log("event2", this.eventEmit.emit({}));
     }
   }
   /*
@@ -83,7 +80,6 @@ export class AddnoteComponent implements OnInit,OnDestroy {
   * @description : labelEmit(event) is used to emit the event coming from label component at the time of action
   */
   labelEmit(event) {
-    console.log(event)
     if (event) {
       this.eventEmit.emit({});
     }
@@ -94,7 +90,6 @@ export class AddnoteComponent implements OnInit,OnDestroy {
   eventEmitLabel(event) {
     if (event) {
       this.eventEmit.emit(event)
-      console.log("event2",event);
     }
   }
   /*
@@ -103,7 +98,6 @@ export class AddnoteComponent implements OnInit,OnDestroy {
   eventEmitReminder(event){
     if (event) {
       this.eventEmit.emit(event)
-      console.log("event is receiving to addnote",event);
     }
   }
  /*

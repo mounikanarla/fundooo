@@ -22,7 +22,7 @@ export class InterceptorService implements HttpInterceptor {
     	// modify request
 	    request = request.clone({
 	      setHeaders: {
-	        Authorization: ` ${localStorage.getItem('id')}`
+	        Authorization: `${localStorage.getItem('id')}`
 	      }
 	    });
 	   return next.handle(request)

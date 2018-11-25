@@ -87,7 +87,12 @@
         </div>
       </mat-chip-list>
       <!------------------- Label Printing Ends -------------------------> 
-    
+      <div fxLayout="row" class="bubble">      
+        <div  (click)="openDialog(index)" *ngFor="let collab of index.collaborators">
+        <button mat-mini-fab><mat-icon fxflex fxLayoutAlign="center">{{collab.firstName | titlecase | slice : 0 : 1}}</mat-icon></button>
+      </div>
+    </div>
+
         <!-------------------- Icon Print Starts ----------------------->
       <mat-card-actions>
         <span class=invisible>

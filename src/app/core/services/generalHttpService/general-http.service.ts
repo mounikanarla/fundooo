@@ -11,7 +11,8 @@ export class GeneralHttpService {
    httpPost(url,body){
     let httpAuthOptions1 = {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          
         })
       };
       return this.http.post(url, body, httpAuthOptions1);

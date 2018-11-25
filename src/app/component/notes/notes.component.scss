@@ -63,5 +63,47 @@
 
     // margin-left: 18px;
   }
+  .collaborator{
+    border-radius:60px 20px 20px 20px;
+
+}
+.content{
+    font-weight: bold;
+}
+.content1{
+    font-weight: bold;
+    margin-left:20px;
+}
+.contentNew{
+    font-weight:lighter;
+    font-family:cursive;
   
+}
+.person{
+    margin-top:20px;
+}
+.buttons{
+    float:right;
+
+}
+.place{
+    // margin-right:px;
+    width:85%;
+    @include border;
+}
+.menu{
+    width:500px;
+}
+.colabemail{
+    font-weight:lighter;
+    font-family:cursive;
+   
+}
+.displayletter{
+    color:$background-color13;
+    // margin-bottom:10px;
+}
+.space{
+    margin-top:10px;
+}
   

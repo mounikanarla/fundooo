@@ -42,9 +42,7 @@
   
   .viewgrid {
     width: 500px;
-    @include margins(0px,0px,0px,32px);
-
-    // margin-left: 32px;
+    @include margins(25px,0px,0px,32px);
   }
   
   .viewlist {
@@ -94,6 +92,10 @@
     }
   }
   .bubble{
-      word-wrap:break-word;
-      margin-left:5px;
+    @include margins(10px,0px,0px,0px);
+    word-wrap:break-word;
+    margin-left:5px;
+  }
+  .fontwidth{
+    font-size: 20px;
   }

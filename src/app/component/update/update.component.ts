@@ -4,6 +4,9 @@ import { LoggerService } from '../../core/services/loggerService/logger.service'
 import { NoteService } from '../../core/services/noteServices/note.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
+import { AddCollaboratorsComponent } from '../add-collaborators/add-collaborators.component';
+
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
@@ -37,7 +40,7 @@ export class UpdateComponent implements OnInit,OnDestroy {
     console.log()
 
   }
-  constructor(private noteService:NoteService,
+  constructor(private noteService:NoteService,public dialog: MatDialog,
     public dialogRef: MatDialogRef<UpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) {}
     @Output() eventEmit = new EventEmitter();  
@@ -67,8 +70,8 @@ update(){
     "description": this.description,
     "color":this.color,
     "label":this.label,
-    "reminder":this.array
-
+    "reminder":this.array,
+    "collaberators":this.data.collaborators
   })
   .pipe(takeUntil(this.destroy$))
 
@@ -193,7 +196,7 @@ public array=[]
       index=1;
     this.array.push(event);
     }
-    if(flag==true){
+    if(flag=true){
       this.array.splice(index,1)
     }
   }
@@ -229,6 +232,17 @@ removeRemainder(label) {
         LoggerService.log("error occured" + error)
       }
     )
+}
+openDialog(): void {
+  const dialogRef = this.dialog.open(AddCollaboratorsComponent,{
+  data: this.data
+  });
+  dialogRef.afterClosed()
+    .subscribe(result => {
+    console.log('The dialog was closed');
+    this.eventEmit.emit({});
+
+   });
 }
 ngOnDestroy() {
   this.destroy$.next(true);

@@ -57,7 +57,12 @@
                         </mat-chip>
                     </div>
                 </mat-chip-list>
-
+                <div fxLayout="row" class="bubble" fxLayoutGap="5px">      
+                        <div  (click)="openDialog(data)" *ngFor="let collab of data.collaborators">
+                        <button mat-mini-fab class="fontwidth" fxLayoutAlign="center" >{{collab.firstName | titlecase | slice : 0 : 1}}</button>
+                        </div>
+                </div>
+                
                 <div fxFlex=15% class="action">
                     <!-- <mat-card-actions> -->
                     <div fxLayout="row" class="icons">
@@ -66,7 +71,7 @@
                             <app-reminder [noteid]=data (eventEmit)="emit($event)" (eventEmitReminder)="eventEmitRemainder($event)"></app-reminder>
                             </div> 
                             <div fxFlex="8%">
-                            <app-collaborator></app-collaborator>
+                            <app-collaborator [noteid]=data (eventEmit)="emit($event)" ></app-collaborator>
                             </div>
                             <div fxFlex="8%">
                             <app-changecolor [noteid]=data (eventEmit)="emit($event)"></app-changecolor>

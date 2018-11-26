@@ -58,6 +58,8 @@ export class AddCollaboratorsComponent implements OnInit {
     this.noteService.addCollaborators(this.data,body).subscribe(data=>{
       LoggerService.log("success in addcollaborator",data)
       this.collabArray=data['data'].details;
+      this.data['collaborators'].push(search);
+
     },
     error=>{
       LoggerService.log("success in addcollaborator",error)
@@ -70,11 +72,13 @@ export class AddCollaboratorsComponent implements OnInit {
       {
         this.searcharray.push(this.usersData[index])
       }
+
     }
     this.searchword='';
 
   }
-  
+  // word=this.search
+
   select(searchword){  
   this.searchword=searchword;
   }
@@ -88,11 +92,27 @@ export class AddCollaboratorsComponent implements OnInit {
     {
       if(this.searcharray[i].userId===id){
         this.searcharray.splice(i,1)
+        this.data['collaborators'].splice(i,1);
+
       }
+
     }
     },
     error=>{
       LoggerService.log("success in addcollaborator",error)
      })
+  }
+  cancel(){
+    this.dialogRef.close();
+  }
+  addCollabdone(){
+    if(this.searchword!="null")
+    {
+    this.searcharray.push(this.searchword)
+    this.dialogRef.close();
+    }
+    else{
+      this.searcharray.splice(this.searchword)
+    }
   }
 }

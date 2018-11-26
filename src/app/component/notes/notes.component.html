@@ -108,7 +108,7 @@
                                 </span>
                                 <div fxLayout="row" class="bubble">      
                                         <div  (click)="openDialog(index)" *ngFor="let collab of collabarray">
-                                        <button mat-mini-fab><mat-icon fxflex fxLayoutAlign="center">{{collab.firstName | titlecase | slice : 0 : 1}}</mat-icon></button>
+                                        <button mat-mini-fab class="fontwidth" fxLayoutAlign="center">{{collab.firstName | titlecase | slice : 0 : 1}}</button>
                                       </div>
                                 </div>
                             </div>
@@ -121,7 +121,11 @@
                                             <app-reminder (eventEmitReminder)="eventEmitReminder($event)"></app-reminder>
                                         </div>
                                         <div fxFlex (click)="collabratorClicked()">
-                                            <mat-icon>person_add</mat-icon>
+                                            <span data-toggle="tooltip" title="{{!isDeleted ? 'collaborator':''}}">
+                                                <button class="collab" mat-icon-button>
+                                                    <mat-icon>person_add</mat-icon>
+                                                </button>
+                                            </span>
                                         </div>
                                         <div fxFlex>
                                             <app-changecolor (eventEmit)="emit($event)"></app-changecolor>
@@ -197,12 +201,12 @@
                         <div class="person" fxLayout="column" fxLayoutGap="20px">
                             <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
                                 <div fxFlex="8" fxLayoutAlign="center"><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button></div>
-                                <div fxFlex="82">
+                                <div fxFlex="88">
                                     <span><input class="place" [(ngModel)]="searchInput" [matMenuTriggerFor]="menu" (keyup)="search()"
                                             placeholder="person or email to share with..."></span>
-                                    <span *ngIf="searchInput"><button (click)=addCollabdone()>
+                                    <span *ngIf="searchInput"><mat-button class="tick" (click)=addCollabdone()>
                                             <mat-icon>done</mat-icon>
-                                        </button>
+                                        </mat-button>
                                     </span>
                                 </div>
                             </div>
@@ -213,12 +217,12 @@
                              [{{user.email}}]
                         </div>
                     </mat-menu>
-                    <mat-card-footer>
-                        <div class="buttons">
-                            <a mat-button (click)=cancel()>Close</a>
-                            <a mat-button (click)=addCollab()>Save</a>
-                        </div>
+                    <div >
+                    <mat-card-footer  class="colour" fxLayoutAlign="end">
+                            <button  mat-button (click)=cancel()>Close</button>
+                            <button  mat-button (click)=addCollab()>Save</button>
                     </mat-card-footer>
+                    </div>
                 </mat-card>
             </div>
         </div>

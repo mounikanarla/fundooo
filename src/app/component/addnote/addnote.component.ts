@@ -7,6 +7,7 @@ import{ NoteModel } from '../../core/models/note-model'
 import { Subject } from 'rxjs';
 // import 'rxjs/add/operator/takeUntil';
 import { takeUntil } from 'rxjs/operators';
+import { AddCollaboratorsComponent } from '../add-collaborators/add-collaborators.component';
 
 
 @Component({
@@ -74,6 +75,19 @@ export class AddnoteComponent implements OnInit,OnDestroy {
       console.log('The dialog was closed');
       this.eventEmit.emit({});
 
+    });
+  }
+
+  opendialog(note): void {
+    const dialogRef = this.dialog.open(AddCollaboratorsComponent,{
+          data: note
+    });
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
+      this.openDialog(note)
+      console.log('The dialog was closed');
+      this.eventEmit.emit({});
     });
   }
   /*

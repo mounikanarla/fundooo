@@ -80,3 +80,10 @@
 .space{
     margin-top:10px;
 }
+.tick{
+    @include border;
+    margin-left:15px;
+}
+.fontwidth{
+    font-size: 20px;
+}

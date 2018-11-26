@@ -184,8 +184,6 @@ export class NotesComponent implements OnInit,OnDestroy {
     if(event)
     {
     this.array.push(value);
-    // console.log(this.array)
-    // console.log("event is emitting from notes");
     }
   }
   deleteReminder(index) {

@@ -3,16 +3,14 @@
 .card {
     width: 500px;
     @include margins(15%,0%,0%,0%);
-
-    // margin-top: 15%;
+    border-radius:5px;
     position: relative;
   }
   
   .notecard {
     width: 500px;
-    // margin-top: 9%;
+    // border-radius:10px;
     @include margins(9%,0%,0%,0%);
-
   }
   
   .textbar {
@@ -44,8 +42,6 @@
   .pin {
     opacity: 0.5;
     @include margins(0px,0px,10px,0px);
-
-    // margin-bottom: 10px;
     &:hover {
       opacity: 1;
     }
@@ -53,15 +49,11 @@
   
   .addcheck {
     @include margins(10px,0px,0px,0px);
-
-    // margin-top: 10px;
   }
   
   .textbarcheck {
     @include border;
     @include margins(0px,0px,0px,18px);
-
-    // margin-left: 18px;
   }
   .collaborator{
     border-radius:60px 20px 20px 20px;
@@ -87,7 +79,6 @@
 
 }
 .place{
-    // margin-right:px;
     width:85%;
     @include border;
 }
@@ -101,9 +92,27 @@
 }
 .displayletter{
     color:$background-color13;
-    // margin-bottom:10px;
 }
 .space{
     margin-top:10px;
 }
-  
+.collab{
+  opacity:0.5;
+}
+.collab:hover{
+  opacity:1;
+}
+.colour{
+  height:50px;
+  background-color:$background-color14;
+}
+.float{
+  float:right;
+}
+.fontwidth{
+  font-size: 20px;
+}
+.tick{
+  @include border;
+  margin-left:19px;
+}

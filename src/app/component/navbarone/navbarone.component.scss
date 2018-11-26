@@ -193,3 +193,15 @@ input:focus {
 .display {
   @include labelDisplay();
 }
+@media screen and (max-device-width : 320px)
+{
+  .routename  {
+    font-size: 5px;
+  }
+}
+@media screen and (max-device-width : 1440px)
+{
+  .routename  {
+    font-size:20px;
+  }
+}

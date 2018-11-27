@@ -1,0 +1,200 @@
+@import "../../../SCSS/_mixins.scss";
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  @include margins(56px,0px,0px,0px);
+
+  margin-top: 56px;
+  width: 270px;
+  background-color: lightgrey;
+  margin-left: -15px;
+  position: fixed;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+}
+
+.mat-drawer.mat-drawer-side {
+  top: 0;
+  height: 100%;
+  @include margins(65px,0px,0px,0px);
+
+  // margin-top: 65px;
+  z-index: 1;
+}
+
+.mat-toolbar.mat-primary {
+  background: #fb0;
+  color: #fff;
+}
+
+.searchbar {
+  height: 40px;
+  width: 300%;
+  @include border;
+  background-color: rgb(235, 168, 23);
+  padding-left: 30px;
+  color: black;
+  border-radius: 10px;
+}
+
+input:focus {
+  background: white;
+}
+
+.notes, .remainder {
+  padding-left: 15px;
+}
+
+.edit {
+  border: none;
+  height: 20px;
+  width: 50px; 
+   @include margins(0px,20px,0px,98px);
+
+  // margin-left: 98px;
+  // margin-right: 20px;
+}
+
+.label {
+  @include margins(0px,0px,0px,20px);
+
+  // margin-left: 20px;
+  font-size: 15px;
+}
+
+.example-card {
+  max-width: 300px;
+  position: absolute;
+  z-index: 10;
+  top: 65px;
+  right: 2px;
+}
+
+.example-header-image {
+  background-size: cover;
+  background-color: navy;
+}
+
+.letter {
+  @include margins(0px,0px,0px,10.5px);
+
+  color: aliceblue;
+  // margin-left: 10.5px;
+  font-size: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-top: 10%;
+}
+
+.account, .word {
+  font-size: 30px;
+}
+
+.mat-fab .mat-button-wrapper {
+  padding: 0px;
+  display: inline-block;
+  line-height: 24px;
+}
+
+.printlabel {
+  @include margins(15px,0px,0px,5px);
+
+  // margin-left: 5px;
+  // margin-top: 15px;
+}
+
+.space {
+  @include margins(0px,20px,0px,0px);
+
+  // margin-right: 20px;
+}
+
+.displayname {
+  color: black;
+  font-family: Bookman, URW Bookman L, serif;
+  // margin-left: 10px;
+  @include margins(0px,0px,0px,10px);
+
+}
+
+.menuicon {
+  color: black;
+}
+
+.searchicon {
+  @include margins(20px,0px,0px,0px);
+
+  // margin-top: 20px;
+  color: black;
+  position: fixed;
+  top: 0px;
+}
+
+.sideicon {
+  @include margins(10px,0px,0px,0px);
+
+  // margin-top: 10px;
+  color: black;
+}
+
+.profileicon {
+  float: right;
+  // margin-left: 30%;
+  @include margins(0%,0%,0%,30%);
+
+}
+
+.image {
+  width: 15%;
+  float: left;
+}
+
+.buttonimage {
+  @include margins(0%,15%,0%,0%);
+
+  // margin-right: 15%;
+}
+
+.logoutButton {
+  float: right;
+  @include margins(0px,10px,0px,0px);
+
+  // margin-right: 10px;
+}
+
+.style {
+  @include margins(30px,0px,0px,10px);
+
+//   margin-left: 10px;
+//   margin-top: 30px;
+}
+
+.routename {
+  color: black;
+  font-size: 16px;
+  @include labelDisplay();
+   width: 70%;
+}
+
+.line {
+  @include margins(10px,0px,0px,0px);
+
+  // margin-top: 10px;
+}
+
+.change {
+  color: black;
+  @include margins(20px,0px,0px,0px);
+
+  // margin-top: 20px;
+}
+
+.display {
+  @include labelDisplay();
+}

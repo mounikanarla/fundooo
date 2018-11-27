@@ -1,0 +1,68 @@
+@import "../../../SCSS/ _variables.scss";
+@import "../../../SCSS/_mixins.scss";
+
+.box {
+  min-height: 100vh;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 80%;
+  @include margins(0%,20%,0%,0%);
+
+  // margin-right: 20%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.button-row {
+  button, a {
+    @include margins(0px,100px,0px,0px);
+
+    // margin-right: 100px;
+  }
+}
+
+.next {
+  @include margins(0px,50px,0px,0px);
+
+  // margin-right: 50px;
+  background-color: lightskyblue;
+}
+
+.card {
+  width: 40%;
+}
+
+.select {
+  background-color: lightcoral;
+  text-align: center;
+  margin-left: 7%;
+  margin-right: 5%;
+  @include margins(0%,5%,0%,7%);
+
+}
+
+.notselect {
+  background-color: lightgoldenrodyellow;
+  text-align: center;
+  // margin-left: 5%;
+  // margin-right: 7%;
+  @include margins(0%,7%,0%,5%);
+
+}
+
+.colorsign1 {
+  color:$brand-color;
+}
+
+.colorsign2 {
+  color:$brand-color2;
+}
+
+.colorsign3 {
+  color:$brand-color1;
+}

@@ -1,0 +1,77 @@
+@import "../../../SCSS/ _variables.scss";
+@import "../../../SCSS/_mixins.scss";
+
+.collab{
+    // width:300px;
+    // // margin:10px 10px 15px 20px;
+    // font-weight: bold;
+    // font-family:cursive;
+    // font-size:1.2em;
+    height: auto;
+    width: 500px;
+    @include margins(30%,0%,0%,0%);
+  
+    // margin-top: 30%;
+    /* right: 300px;  */
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    height: min-content;
+    border-radius: 10px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+::ng-deep .mat-dialog-container {
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+    display: block;
+    padding: 0px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow: auto;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    max-height: inherit;
+    /* padding:10px 10px 10px 10px; */
+    @include margins(10px,0px,0px,0px);
+}  
+.collaborator{
+    border-radius:60px 20px 20px 20px;
+
+}
+.content{
+    font-weight: bold;
+}
+.contentNew{
+    font-weight:lighter;
+    font-family:cursive;
+    margin-left:58px;
+    margin-top:-20px;
+}
+.person{
+    margin-top:20px;
+}
+.buttons{
+    float:right;
+
+}
+.place{
+    margin-left:20px;
+    width:85%;
+    @include border;
+}
+.menu{
+    width:500px;
+}
+::ng-deep .mat-menu-panel.colabwidth-dropdown {
+    // max-width:none;
+    width: 100vw; 
+    margin-left: -8px;
+    margin-top: 24px;
+    overflow: visible;
+  }
+  .colabwidth-row{
+      width:500px;
+  }

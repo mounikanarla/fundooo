@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
     // Getting the item from the local storage and storing in a variable token
     var token = localStorage.getItem('id')
     console.log(token);
-    // call jQuery's $ function, passing to it the document Inside the function passed to the ready method
+    try{
+   // call jQuery's $ function, passing to it the document Inside the function passed to the ready method
     $(document).ready(function () {
       // $.get() method to retrieve data from a file on the server to get the services
       $.ajax({
@@ -75,7 +76,7 @@ export class DashboardComponent implements OnInit {
             columnDefs: [ {
               targets: 5,
               render: function () {
-                return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">USERLIST</button>'
+                return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">USERDATA</button>'
               }
             }]
            });
@@ -91,10 +92,6 @@ export class DashboardComponent implements OnInit {
              $('#service').text("Service :"+response.data.data[rowData].service);
              $('#createdDate').text("CreatedDate :"+response.data.data[rowData].createdDate);
              $('#FullName').text([response.data.data[rowData].firstName+response.data.data[rowData].lastName]);
-
-            // $('#LastName').text('response.data.data[rowData].lastName');
-            // $('#email').text('response.data.data[rowData].email');
-
           });
 
           console.log(array)
@@ -130,10 +127,27 @@ export class DashboardComponent implements OnInit {
           }
         }).fail(function (xhr, status, error) {
           // error handling
+          if(error){
           console.log("Something bad is happened in posting logout data: "+error)
+          }
+          else if(status){
+            console.log("Something bad is happened in posting logout data: "+status)
+          }
+          else{
+            console.log("Something bad is happened in posting logout data: "+xhr)
+
+          }
         });
         return false;
       })
     })
+  }catch(e)
+  {
+    console.log(e);
+        if (e instanceof ReferenceError
+            || e instanceof SyntaxError || e instanceof TypeError || e instanceof RangeError) {
+                console.log("Something bad happened. Please contact system administrator")
+        } 
+    }
   }
 }

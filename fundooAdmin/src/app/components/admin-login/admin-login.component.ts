@@ -15,10 +15,11 @@ export class AdminLoginComponent implements OnInit {
 
   ngOnInit() {
     // Checking Wheather the token is present or not and redirecting to dashboard
-    if (localStorage.getItem('id') != null) {
+    if (localStorage.getItem('id')) {
       window.location.href = "/dashboard";
     }
     // call jQuery's $ function, passing to it the document Inside the function passed to the ready method
+    try{
     $(document).ready(function () {
       // Attach a function to the button click event:
       $('#button').click(function () {
@@ -82,6 +83,14 @@ export class AdminLoginComponent implements OnInit {
     });
 
   });
+    }catch(e){
+      console.log(e);
+      if (e instanceof ReferenceError
+          || e instanceof SyntaxError || e instanceof TypeError || e instanceof RangeError) {
+              console.log("Something bad happened. Please contact system administrator")
+      } 
+
+    }
 
   }
 

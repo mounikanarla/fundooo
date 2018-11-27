@@ -1,28 +1,113 @@
-<!-- <a routerLink='/signup'></a>
-<div class="box"
-      fxLayout="coloumn"
-      fxLayout.xs="coloumn"
-      fxLayoutAlign="center">
-    <div class="one" fxFlex="0 1 80px">one</div>
-    <div class="two" fxLayout.xs=coloumn fxFlex></div>
-    <div class="A" fxFlex="33%">A</div>
-    <div class="B" fxFlex="">B</div>
-    <div class="C" fxFlex="33%">C</div>
-<div class="three" fxFlex="0 1 80px">three</div>
-    </div> -->
-    <div class="container"
-    fxLayout="column"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutGap="0px"
-    fxLayoutGap.xs="0">
- <div class=" item-1" fxFlex="0 1 80px">Item 1</div>
- <div class=" item-2" fxLayout.xs="column" fxFlex>
+<div class="box" fxLayout="column" fxLayoutGap="5px">
+    <div fxFlex="20%"></div>
+    <div fxLayout="row">
 
-     <div class=" item-a" fxFlex="33%">Item a</div>
-     <div class=" item-b" fxFlex></div>
-     <div class=" item-c" fxFlex="33%" fxFlexOrder="3">Item c</div>
- </div>
- <div class="item item-3" fxFlex="0 1 80px" fxFlexOrder="3">Item 3</div>
+        <div fxFlex="30%"></div>
+        <div fxFlex.lg="40%" fxFlex.md="60%" fxFlex.sm="70%" fxFlex.xs="100%">
+            <mat-card>
+                <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+                    <p>
+                        <span class="colorsign1">F</span>
+                        <span class="colorsign2">U</span>
+                        <span class="colorsign3">N</span>
+                        <span class="colorsign1">D</span>
+                        <span class="colorsign2">O</span>
+                        <span class="colorsign3">O</span>
+                    </p>
+                    <h4>Create Your Gmail Account</h4>
+                    <div>Continue to Gmail</div>
+                    <div class="example-container">
+                        <mat-form-field>
+                            <input name="firstName" #firstName="ngModel" matInput placeholder="First Name" [(ngModel)]="model.firstName" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }"
+                                pattern="^[a-z0-9_-]{4,15}$" required>
+                            <mat-error *ngIf="f.submitted && firstName.invalid">
+                                <mat-error *ngIf="firstName.errors.required">
+                                    <mat-error>FirstName is required</mat-error>
+                                </mat-error>
+                                <mat-error *ngIf="firstName.errors.pattern">
+                                    <mat-error>FirstName is not valid</mat-error>
+                                </mat-error>
+                            </mat-error>
+                        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                        <mat-form-field>
+                            <input name="lastName" #lastName="ngModel" matInput placeholder="Last Name" [(ngModel)]="model.lastName" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }"
+                                pattern="^[a-z0-9_-]{4,15}$" required>
+                            <mat-error *ngIf="f.submitted && lastName.invalid">
+                                <mat-error *ngIf="lastName.errors.required">
+                                    LastName is required
+                                </mat-error>
+                                <mat-error *ngIf="lastName.errors.pattern">
+                                    lastName is not valid
+                                </mat-error>
+
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input name=email #email="ngModel" matInput placeholder="Email Id" [(ngModel)]="model.email" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                                pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$" required>
+
+                            <mat-error *ngIf="f.submitted && email.invalid">
+                                <mat-error *ngIf="email.errors.required">
+                                    Email is required
+                                </mat-error>
+                                <mat-error *ngIf="email.errors.pattern">
+                                    Email is not valid
+                                </mat-error>
+                            </mat-error>
+                            <mat-hint><strong>You can use Letters,Numbers and Periods</strong> </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="example-container">
+                        <mat-form-field>
+                            <input name=password #password="ngModel" [(ngModel)]="model.password" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+                                matInput placeholder="Password" [type]="hide ? 'password' : 'text'" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,12}$"
+                                required>
+                            <mat-error *ngIf="f.submitted && password.invalid">
+                                <mat-error *ngIf="password.errors.required">
+                                    Password is required
+                                </mat-error>
+                                <mat-error *ngIf="password.errors.pattern">
+                                </mat-error>
+                            </mat-error>
+
+                        </mat-form-field>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+
+                        <mat-form-field>
+                            <input matInput placeholder="Confirm password" name="confirmpassword" #confirmpassword="ngModel" [(ngModel)]="model.confirmpassword" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+                                [type]="hide ? 'password' : 'text'" required>
+
+                            <mat-error *ngIf="f.submitted && password.invalid">
+                                <mat-error *ngIf="password.errors.required">
+                                    confirmPassword is required
+                                </mat-error>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </div>
+                    <mat-hint><small> <b>8 or more characters with a mix of upper and lowercase, numbers & symbols</b>
+                        </small></mat-hint><br><br>
+                    <div flexLayout="row" fxLayoutAlign="center">
+                        <mat-card [style.minHeight]="'20%'" [style.minWidth]="'25%'" fxFlex.lg="50%" *ngFor="let data of card" mat-button (click)="display(data)"
+                            [ngClass]="data.select ? 'select' : 'notselect'">
+                            <mat-card-title>{{data.name}}</mat-card-title>
+                            <mat-card-content>{{data.description}}</mat-card-content>
+                        </mat-card>
+                    </div>
+                    <br>
+                    <div class="button-row">
+                        <a mat-button routerLink="/login">Signin if you are registered</a>
+
+                    </div><br>
+                    <div>
+                        <button mat-button type="submit" class="next" (click)=signup()>SignUp</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+        <div fxFlex="30%" fxFlexOrder="3"></div>
+    </div>
+    <div fxFlex="20%" fxFlexOrder="3"></div>
 </div>
-

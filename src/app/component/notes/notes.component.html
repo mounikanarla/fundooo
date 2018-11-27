@@ -3,7 +3,7 @@
         <!-- <div fxLayout fxFlex=100%> -->
         <div fxFlex=100% fxLayout="row" fxLayoutAlign="space-around center">
             <!-- <div fxFlex=25%></div> -->
-            <div fxFlex.lg=100% fxFlex.md="100%" fxFlex.sm="90%" fxFlex.xs="70%" fxLayoutAlign="center center" *ngIf="!press">
+            <div fxFlex.lg=100% fxFlex.md="100%" fxFlex.sm="80%" fxFlex.xs="70%" fxLayoutAlign="center center" *ngIf="!press">
                 <mat-card class="card">
                     <div fxFlex="70%" (click)="press=true">
                         Take a note...
@@ -26,7 +26,7 @@
     </div>
     <!-- </div> -->
     <div *ngIf="press && !collab">
-        <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div  fxLayout="row" fxLayoutAlign="space-around center">
             <div fxFlex.lg=100% fxFlex.md="100%" fxFlex.sm="90%" fxFlex.xs="70%" fxLayoutAlign="center center">
                 <mat-card class="notecard" [ngStyle]="{'background-color':bgcolor}">
                     <div fxLayout="column" fxFlex="100%">
@@ -116,7 +116,7 @@
                         <div fxFlex=15%>
                             <mat-card-actions>
                                 <div fxLayout="row" fxFlex="100%" class="icons">
-                                    <div fxFlex="80%" fxFlex.xs="80%">
+                                    <div fxFlex="80%" fxFlex.xs="75%">
                                         <div fxFlex>
                                             <app-reminder (eventEmitReminder)="eventEmitReminder($event)"></app-reminder>
                                         </div>
@@ -140,7 +140,7 @@
                                             <app-more (eventEmit)="emit($event)" (eventEmitLabel)="eventEmitLabel($event)"></app-more>
                                         </div>
                                     </div>
-                                    <div fxFlex="20%" fxFlex.xs="20%" class="button">
+                                    <div fxFlex="20%" fxFlex.xs="25%" class="button">
                                         <!-- <div> -->
                                         <button mat-button (click)="notes();check=false">CLOSE</button>
                                         <!-- </div> -->
@@ -158,8 +158,8 @@
     </div>
     <div *ngIf="collab">
         <div fxLayout="row" fxLayoutAlign="space-around center">
-            <div fxFlex.lg=100% fxFlex.md="100%" fxFlex.sm="90%" fxFlex.xs="70%" fxLayoutAlign="center center">
-                <mat-card class="notecard">
+            <div fxFlex.lg=100% fxFlex.md="100%" fxFlex.sm="90%" fxFlex.xs="65%" fxLayoutAlign="center center">
+                <mat-card class="collabcard">
                     <mat-card-header>
                         <div class="collab">Collaborators</div>
                     </mat-card-header>

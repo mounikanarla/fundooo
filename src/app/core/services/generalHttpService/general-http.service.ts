@@ -6,6 +6,9 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class GeneralHttpService {
+  notify(arg0: string): any {
+    throw new Error("Method not implemented.");
+  }
   URL=environment.apiUrl
   constructor(private http: HttpClient) { }
    httpPost(url,body){

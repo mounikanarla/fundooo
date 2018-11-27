@@ -5,11 +5,24 @@
 }
 
 .sidenav {
-  @include margins(56px,0px,0px,-15px);
+  // @include margins(56px,0px,0px,-15px);
   width: 270px;
   background-color:$background-color14;
   position: fixed;
 }
+@media screen and (max-device-width : 768px)
+{
+  .sidenav  {
+    margin-top:64px;
+  }
+}
+@media screen and (max-device-width : 425px)
+{
+  .sidenav  {
+    margin-top:56px;
+  }
+}
+
 
 .mat-toolbar.mat-primary {
   position: sticky;
@@ -20,7 +33,7 @@
 .mat-drawer.mat-drawer-side {
   top: 0;
   height: 100%;
-  @include margins(65px,0px,0px,0px);
+  @include margins(64px,0px,0px,0px);
   z-index: 1;
 }
 
@@ -205,3 +218,6 @@ input:focus {
     font-size:20px;
   }
 }
+// .active{
+
+// }

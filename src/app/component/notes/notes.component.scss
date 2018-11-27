@@ -4,10 +4,15 @@
     width: 500px;
     @include margins(15%,0%,0%,0%);
     border-radius:5px;
-    position: relative;
+    // position: relative;
   }
-  
+
   .notecard {
+    width: 500px;
+    // border-radius:10px;
+    @include margins(9%,0%,0%,0%);
+  }
+  .collabcard{
     width: 500px;
     // border-radius:10px;
     @include margins(9%,0%,0%,0%);
@@ -115,4 +120,45 @@
 .tick{
   @include border;
   margin-left:19px;
+}
+@media only screen and (max-width:320px){
+  .card{
+    width:430px;
+  }
+}
+
+@media only screen and (min-width:300px) and (max-width:406){
+  .card{
+    width:460px;
+  }
+}
+@media only screen and (min-width:410px) and (max-width:500px){
+  .card{
+    width:580px;
+  }
+}
+@media only screen and (max-width:320px){
+  .notecard{
+    width:300px;
+  }
+}
+@media only screen and (min-width:300px) and (max-width:406){
+  .notecard{
+    width:460px;
+  }
+}
+@media only screen and (min-width:410px) and (max-width:500px){
+  .notecard{
+    width:580px;
+  }
+}
+@media only screen and (max-width:320px){
+  .collabcard{
+    width:430px;
+  }
+}
+@media only screen and (min-width:410px) and (max-width:500px){
+  .collabcard{
+    width:600px;
+  }
 }

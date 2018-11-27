@@ -11,14 +11,14 @@
     <mat-card-content>
       <div fxLayout="column" fxLayoutGap="20px">
         <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
-          <div fxFlex="8" fxLayoutAlign="center"><button mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+          <div fxFlex="8" fxLayoutAlign="center"><button mat-mini-fab [ngStyle]="{'background-image':'url(' +ownerimage+ ')','background-size':'cover'}">
             </button></div>
           <div fxFlex="88">
             <mat-content class="content" fxLayoutAlign="space-between center">
               <div fxLayout="column" fxFlex="100">
-                <div fxFlex>{{firstName | titlecase}} {{lastName | titlecase}} (Owner)</div>
+                <div fxFlex>{{owner.firstName | titlecase}} {{owner.lastName | titlecase}} (Owner)</div>
                 <div class="contentNew">
-                  <mat-content fxFlex>{{email}}</mat-content>
+                  <mat-content fxFlex>{{owner.email}}</mat-content>
                 </div>
               </div>
             </mat-content>

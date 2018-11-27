@@ -54,6 +54,7 @@ export class UpdateComponent implements OnInit,OnDestroy {
       }
     }
 update(){
+  try{
     this.title = document.getElementById("title").innerHTML;
     this.description = document.getElementById("description").innerHTML;
     this.id=this.data.id;
@@ -92,6 +93,9 @@ update(){
 (error)=>{
   LoggerService.log('failed');
 })
+}
+}catch(error){
+throw new Error("Something bad happened in update")
 }
 }
 editing(editedList,event){
@@ -188,15 +192,13 @@ eventEmitLabel(event) {
 }
 public array=[]
   eventEmitRemainder(event){
-    var flag=false,index;
+    var index;
     this.array=[];
     if(event)
     {
-      flag=true;
-      index=1;
     this.array.push(event);
     }
-    if(flag=true){
+    {
       this.array.splice(index,1)
     }
   }

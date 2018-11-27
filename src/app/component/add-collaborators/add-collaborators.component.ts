@@ -19,8 +19,11 @@ export class AddCollaboratorsComponent implements OnInit {
     for(let i=0;i<this.data['collaborators'].length;i++){
       this.searcharray.push(this.data['collaborators'][i])
     }
+    // console.log(this.data.user)
   }
   private usersData
+  private owner=this.data['user']
+  private ownerimage=environment.imageUrl+this.owner.imageUrl
   private image=localStorage.getItem('imageUrl');
   img=environment.imageUrl+this.image;
   email=localStorage.getItem('email');
